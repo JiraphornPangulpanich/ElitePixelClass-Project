@@ -183,49 +183,69 @@
     <!-- Navbar End -->
 
 
-   <!-- Hero Start -->
-   <div class="container-fluid bg-primary py-5 mb-5 hero-header"
-   style="background-image: url('img/vr2.jpg'); background-size: cover; background-position: center;">
-   <div class="container py-5">
-       <div class="row justify-content-start">
-           <div class="col-lg-8 text-center text-lg-start">
-               <h1 class="display-1 text-uppercase text-primary mb-lg-4">ElitePixel</h1>
-               <h1 class="text-uppercase text-white mb-lg-4">Make Yourself Happy</h1>
-               <p class="fs-4 text-white mb-lg-4">Get ready! More awesome gaming gear products are coming!  Whether it's a mouse, keyboard, headphones, gamepad, and more.</p>
-               <div class="d-flex align-items-center justify-content-center justify-content-lg-start pt-5">
-                   <a href="" class="btn btn-outline-primary border-2 py-md-3 px-md-5 me-5">Read More</a>
-                   <button type="button" class="btn-play" data-bs-toggle="modal"
-                       data-src="https://www.youtube.com/embed/oBS5Z9H5HhY?si=tX4ZBzIbyM9APeJm" data-bs-target="#videoModal">
-                       <span></span>
-                   </button>
-                   <h5 class="font-weight-normal text-white m-0 ms-4 d-none d-sm-block">Play Video</h5>
-               </div>
-           </div>
-       </div>
-   </div>
-</div>
-<!-- Hero End -->
-
-
-<!-- Video Modal Start -->
-<div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content rounded-0">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Youtube Video</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- 16:9 aspect ratio -->
-                <div class="ratio ratio-16x9">
-                    <iframe class="embed-responsive-item" src="" id="video" allowfullscreen allowscriptaccess="always"
-                        allow="autoplay"></iframe>
+  <!-- Hero Start -->
+<div class="container-fluid bg-primary py-5 mb-5 hero-header" style="background-image: url('img/vr2.jpg'); background-size: cover; background-position: center;">
+    <div class="container py-5">
+        <div class="row justify-content-start">
+            <div class="col-lg-8 text-center text-lg-start">
+                <h1 class="display-1 text-uppercase text-primary mb-lg-4">ElitePixel</h1>
+                <h1 class="text-uppercase text-white mb-lg-4">Make Yourself Happy</h1>
+                <p class="fs-4 text-white mb-lg-4">Get ready! More awesome gaming gear products are coming!  Whether it's a mouse, keyboard, headphones, gamepad, and more.</p>
+                <div class="d-flex align-items-center justify-content-center justify-content-lg-start pt-5">
+                    <a href="" class="btn btn-outline-primary border-2 py-md-3 px-md-5 me-5">Read More</a>
+                    <button type="button" class="btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/oBS5Z9H5HhY?si=tX4ZBzIbyM9APeJm" data-bs-target="#videoModal">
+                        <i class="fas fa-play"></i> <!-- เพิ่มไอคอน Play -->
+                    </button>
+                    <h5 class="font-weight-normal text-white m-0 ms-4 d-none d-sm-block">Play Video</h5>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Video Modal End -->
+ </div>
+ <!-- Hero End -->
+ 
+ <!-- Video Modal Start -->
+ <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal-dialog">
+         <div class="modal-content rounded-0">
+             <div class="modal-header">
+                 <h5 class="modal-title" id="exampleModalLabel">Youtube Video</h5>
+                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+             </div>
+             <div class="modal-body">
+                 <!-- 16:9 aspect ratio -->
+                 <div class="ratio ratio-16x9">
+                     <iframe class="embed-responsive-item" src="" id="video" allowfullscreen allowscriptaccess="always" allow="autoplay"></iframe>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
+ <!-- Video Modal End -->
+ 
+ <!-- Add Bootstrap & Font Awesome links -->
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+ 
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+ 
+ <script>
+     // เมื่อคลิกปุ่ม play
+     var playButton = document.querySelector('.btn-play');
+     var videoModal = document.getElementById('videoModal');
+     var videoIframe = document.getElementById('video');
+     
+     playButton.addEventListener('click', function() {
+         var videoSrc = playButton.getAttribute('data-src');
+         videoIframe.src = videoSrc; // ตั้งค่า URL ของวิดีโอที่ต้องการแสดง
+     });
+ 
+     // เมื่อปิดโมดัล จะทำการหยุดวิดีโอ
+     videoModal.addEventListener('hidden.bs.modal', function() {
+         videoIframe.src = ''; // ล้าง src ของ iframe เมื่อปิดโมดัล
+     });
+ </script>
 
 
 
