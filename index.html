@@ -180,42 +180,42 @@
 
 
    <!-- Hero Start -->
-<div class="container-fluid bg-primary py-5 mb-5 vr-header"
-    style="background-image: url('images/vr: 1jpg;'); background-size: cover; background-position: center;">
-    <div class="container py-5">
-        <div class="row justify-content-center text-center">
-            <div class="col-lg-8">
-                <h1 class="display-1 text-uppercase text-dark mb-lg-4">ElitePixel</h1>
-                <h1 class="text-uppercase text-white mb-lg-4">MAKE YOURSELF HAPPY</h1>
-                <p class="fs-4 text-white mb-lg-4">Get ready for the latest gaming gear from "ElitePixel". Our products will definitely take your gaming experience to the next level.</p>
-                <div class="d-flex align-items-center justify-content-center pt-5">
-                    <a href="#" class="btn btn-outline-light border-2 py-md-3 px-md-5 me-5">Read More</a>
-                    
-                    <!-- ปุ่มกดเปิดวิดีโอ -->
-                    <button type="button" class="btn-play" data-bs-toggle="modal" data-bs-target="#videoModal" data-src="https://www.youtube.com/embed/goWpE8eRMnU">
-                        <span></span>
-                    </button>
-                    <h5 class="font-weight-normal text-white m-0 ms-4 d-none d-sm-block">Play Video</h5>
+   <div class="container-fluid bg-primary py-5 mb-5 hero-header"
+        style="background-image: url('img/vr.jpg'); background-size: cover; background-position: center;">
+        <div class="container py-5">
+            <div class="row justify-content-start">
+                <div class="col-lg-8 text-center text-lg-start">
+                    <h1 class="display-1 text-uppercase text-primary mb-lg-4">ElitePixel</h1>
+                    <h1 class="text-uppercase text-white mb-lg-4">Make Yourself Happy</h1>
+                    <p class="fs-4 text-white mb-lg-4">Get ready! More awesome gaming gear products are coming!  Whether it's a mouse, keyboard, headphones, gamepad, and more.</p>
+                    <div class="d-flex align-items-center justify-content-center justify-content-lg-start pt-5">
+                        <a href="" class="btn btn-outline-primary border-2 py-md-3 px-md-5 me-5">Read More</a>
+                        <button type="button" class="btn-play" data-bs-toggle="modal"
+                            data-src="https://www.youtube.com/embed/oBS5Z9H5HhY?si=tX4ZBzIbyM9APeJm" data-bs-target="#videoModal">
+                            <span></span>
+                        </button>
+                        <h5 class="font-weight-normal text-white m-0 ms-4 d-none d-sm-block">Play Video</h5>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 <!-- Hero End -->
 
 
 <!-- Video Modal Start -->
-<div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+<div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content rounded-0">
             <div class="modal-header">
-                <h5 class="modal-title" id="videoModalLabel">YouTube Video</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Youtube Video</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-
+                <!-- 16:9 aspect ratio -->
                 <div class="ratio ratio-16x9">
-                    <iframe class="embed-responsive-item" src="" id="video" allowfullscreen></iframe>
+                    <iframe class="embed-responsive-item" src="" id="video" allowfullscreen allowscriptaccess="always"
+                        allow="autoplay"></iframe>
                 </div>
             </div>
         </div>
