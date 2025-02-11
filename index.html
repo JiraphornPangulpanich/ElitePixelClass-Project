@@ -9,7 +9,7 @@
     
      <!-- Favicon -->
      <link href="img/favicon.ico" rel="icon">
-     
+
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -183,7 +183,7 @@
 
    <!-- Hero Start -->
    <div class="container-fluid bg-primary py-5 mb-5 hero-header"
-        style="background-image: url('img/vr.jpg'); background-size: cover; background-position: center;">
+        style="background-image: url('img/vr2.jpg'); background-size: cover; background-position: center;">
         <div class="container py-5">
             <div class="row justify-content-start">
                 <div class="col-lg-8 text-center text-lg-start">
@@ -215,9 +215,15 @@
             </div>
             <div class="modal-body">
                 <!-- 16:9 aspect ratio -->
-                <div class="ratio ratio-16x9">
+                <div class="video-wrapper">
                     <iframe class="embed-responsive-item" src="" id="video" allowfullscreen allowscriptaccess="always"
                         allow="autoplay"></iframe>
+                    <button class="play-button" data-bs-toggle="modal" data-bs-target="#videoModal">
+                        <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="10" fill="rgba(0,0,0,0.6)"/>
+                            <polygon points="10,8 16,12 10,16" fill="white"/>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
