@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>OoOoOoOoOoOoOoO ElitePixel OoOoOoOoOoOoOoO</title>
+    <title> ElitePixel </title>
     
    
 
@@ -188,7 +188,7 @@
     <div class="container py-5">
         <div class="row justify-content-start">
             <div class="col-lg-8 text-center text-lg-start">
-                <h1 class="display-1 text-uppercase text-primary mb-lg-4">ElitePixel</h1>
+                <h1 class="display-1 text-uppercase text-primary mb-lg-4">OoOoOoOoOoO ElitePixel OoOoOoOoOoO</h1>
                 <h1 class="text-uppercase text-white mb-lg-4">Make Yourself Happy</h1>
                 <p class="fs-4 text-white mb-lg-4">Get ready! More awesome gaming gear products are coming!  Whether it's a mouse, keyboard, headphones, gamepad, and more.</p>
                 <div class="d-flex align-items-center justify-content-center justify-content-lg-start pt-5">
