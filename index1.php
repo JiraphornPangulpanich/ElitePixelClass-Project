@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>ElitePixel</title>
+    <title>OoOoOoOoOoOoOoO ElitePixel OoOoOoOoOoOoOoO</title>
     
    
 
