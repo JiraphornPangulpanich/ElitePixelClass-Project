@@ -7,6 +7,25 @@
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .team-member {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid #007bff;
+        }
+        .team-member h5 {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
@@ -146,7 +165,7 @@
         </div>
     </div>
     <!-- Navbar End -->
-     
+
 
  <div class="container py-5">
         <h2 class="text-center mb-5">Meet Our Team</h2>
