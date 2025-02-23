@@ -132,8 +132,6 @@
                         <a href="" class="nav-item nav-link">Earphones</a>
                         <a href="" class="nav-item nav-link">Gaming chair</a>
                         <a href="" class="nav-item nav-link">Webcam</a>
-                        <a href="" class="nav-item nav-link">Capture Card & Streamdeck</a>
-                        <a href="" class="nav-item nav-link">Streaming Accessories</a>
                         <a href="" class="nav-item nav-link">Gaming mic</a>
                     </div>
                 </nav>
@@ -314,7 +312,7 @@
                         </div>
                         <div class="flex-fill pl-3">
                             <h6>Joy stick & Console</h6>
-                            <small class="text-body">5 Products</small>
+                            <small class="text-body">3 Products</small>
                         </div>
                     </div>
                 </a>
@@ -327,7 +325,7 @@
                         </div>
                         <div class="flex-fill pl-3">
                             <h6>Gaming laptop</h6>
-                            <small class="text-body">5 Products</small>
+                            <small class="text-body">3 Products</small>
                         </div>
                     </div>
                 </a>
@@ -340,7 +338,7 @@
                         </div>
                         <div class="flex-fill pl-3">
                             <h6>speaker</h6>
-                            <small class="text-body">5 Products</small>
+                            <small class="text-body">3 Products</small>
                         </div>
                     </div>
                 </a>
@@ -353,7 +351,7 @@
                         </div>
                         <div class="flex-fill pl-3">
                             <h6>keyboard</h6>
-                            <small class="text-body">5 Products</small>
+                            <small class="text-body">3 Products</small>
                         </div>
                     </div>
                 </a>
@@ -366,7 +364,7 @@
                         </div>
                         <div class="flex-fill pl-3">
                             <h6>Mouse</h6>
-                            <small class="text-body">5 Products</small>
+                            <small class="text-body">3 Products</small>
                         </div>
                     </div>
                 </a>
@@ -379,7 +377,7 @@
                         </div>
                         <div class="flex-fill pl-3">
                             <h6>Screen</h6>
-                            <small class="text-body">5 Products</small>
+                            <small class="text-body">3 Products</small>
                         </div>
                     </div>
                 </a>
@@ -392,7 +390,7 @@
                         </div>
                         <div class="flex-fill pl-3">
                             <h6>Earphones</h6>
-                            <small class="text-body">5 Products</small>
+                            <small class="text-body">3 Products</small>
                         </div>
                     </div>
                 </a>
@@ -405,7 +403,7 @@
                         </div>
                         <div class="flex-fill pl-3">
                             <h6>Gaming chair</h6>
-                            <small class="text-body">5 Products</small>
+                            <small class="text-body">3 Products</small>
                         </div>
                     </div>
                 </a>
@@ -418,33 +416,7 @@
                         </div>
                         <div class="flex-fill pl-3">
                             <h6>Webcam</h6>
-                            <small class="text-body">5 Products</small>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                <a class="text-decoration-none" href="">
-                    <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                        <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                            <img class="img-fluid" src="img/st.jpg" alt="">
-                        </div>
-                        <div class="flex-fill pl-3">
-                            <h6>Capture Card & Streamdeck</h6>
-                            <small class="text-body">5 Products</small>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                <a class="text-decoration-none" href="">
-                    <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                        <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                            <img class="img-fluid" src="img/gr.jpg" alt="">
-                        </div>
-                        <div class="flex-fill pl-3">
-                            <h6>Streaming Accessories</h6>
-                            <small class="text-body">5 Products</small>
+                            <small class="text-body">3 Products</small>
                         </div>
                     </div>
                 </a>
@@ -457,7 +429,7 @@
                         </div>
                         <div class="flex-fill pl-3">
                             <h6>Gaming mic</h6>
-                            <small class="text-body">5 Products</small>
+                            <small class="text-body">3 Products</small>
                         </div>
                     </div>
                 </a>
