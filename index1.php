@@ -178,7 +178,7 @@
 
 
   <!-- Hero Start -->
-<div class="container-fluid bg-primary py-5 mb-5 hero-header" style="background-image: url('img/EP1.jpg'); background-size: cover; background-position: center;">
+<div class="container-fluid bg-primary py-5 mb-5 hero-header" style="background-image: url('img/EP2.jpg'); background-size: cover; background-position: center;">
     <div class="container py-5">
         <div class="row justify-content-start">
             <div class="col-lg-8 text-center text-lg-start">
