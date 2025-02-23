@@ -47,8 +47,23 @@
                             <button class="dropdown-item" type="button">Sign up</button>
                         </div>
                     </div>
-                    
-                    
+                    <div class="btn-group mx-2">
+                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">USD</button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <button class="dropdown-item" type="button">EUR</button>
+                            <button class="dropdown-item" type="button">GBP</button>
+                            <button class="dropdown-item" type="button">CAD</button>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">EN</button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <button class="dropdown-item" type="button">FR</button>
+                            <button class="dropdown-item" type="button">AR</button>
+                            <button class="dropdown-item" type="button">RU</button>
+                        </div>
+                    </div>
+                </div>
                 <div class="d-inline-flex align-items-center d-block d-lg-none">
                     <a href="" class="btn px-0 ml-2">
                         <i class="fas fa-heart text-dark"></i>
@@ -64,8 +79,8 @@
         <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
             <div class="col-lg-4">
                 <a href="" class="text-decoration-none">
-                    <span class="h1 text-uppercase text-primary bg-dark px-2">Elite</span>
-                    <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Pixel</span>
+                    <span class="h1 text-uppercase text-primary bg-dark px-2">Multi</span>
+                    <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Shop</span>
                 </a>
             </div>
             <div class="col-lg-4 col-6 text-left">
@@ -201,12 +216,12 @@
             <div class="col-lg-5 mb-5">
                 <div class="bg-light p-30 mb-30">
                     <iframe style="width: 100%; height: 250px;"
-                    src="https://www.google.com/maps/place/%E0%B8%A1%E0%B8%AB%E0%B8%B2%E0%B8%A7%E0%B8%B4%E0%B8%97%E0%B8%A2%E0%B8%B2%E0%B8%A5%E0%B8%B1%E0%B8%A2%E0%B8%A1%E0%B8%AB%E0%B8%B2%E0%B8%AA%E0%B8%B2%E0%B8%A3%E0%B8%84%E0%B8%B2%E0%B8%A1/@16.2439983,103.246472,17z/data=!3m1!4b1!4m6!3m5!1s0x3122a6a4f3069f8b:0xf02b541f28931c0!8m2!3d16.2439983!4d103.2490469!16zL20vMDVzbHp4?entry=ttu&g_ep=EgoyMDI1MDIxOS4xIKXMDSoASAFQAw%3D%3D"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
                     frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                 </div>
                 <div class="bg-light p-30 mb-3">
-                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, Mahasarakham, moja</p>
-                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>ElitePixel@example.com</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
+                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
                     <p class="mb-2"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
                 </div>
             </div>
