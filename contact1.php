@@ -201,7 +201,7 @@
             <div class="col-lg-5 mb-5">
                 <div class="bg-light p-30 mb-30">
                     <iframe style="width: 100%; height: 250px;"
-                    src="https://www.google.com/maps/place/%E0%B8%A1%E0%B8%AB%E0%B8%B2%E0%B8%A7%E0%B8%B4%E0%B8%97%E0%B8%A2%E0%B8%B2%E0%B8%A5%E0%B8%B1%E0%B8%A2%E0%B8%A1%E0%B8%AB%E0%B8%B2%E0%B8%AA%E0%B8%B2%E0%B8%A3%E0%B8%84%E0%B8%B2%E0%B8%A1/@16.2439983,103.246472,17z/data=!4m14!1m7!3m6!1s0x3122a6a4f3069f8b:0xf02b541f28931c0!2z4Lih4Lir4Liy4Lin4Li04LiX4Lii4Liy4Lil4Lix4Lii4Lih4Lir4Liy4Liq4Liy4Lij4LiE4Liy4Lih!8m2!3d16.2439983!4d103.2490469!16zL20vMDVzbHp4!3m5!1s0x3122a6a4f3069f8b:0xf02b541f28931c0!8m2!3d16.2439983!4d103.2490469!16zL20vMDVzbHp4?entry=ttu&g_ep=EgoyMDI1MDIxOS4xIKXMDSoASAFQAw%3D%3D"
+                    src="https://maps.app.goo.gl/nAWPaR44EmPiq5BK6?g_st=com.google.maps.preview.copy"
                     frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                 </div>
                 <div class="bg-light p-30 mb-3">
