@@ -178,9 +178,9 @@
                             <th>Remove</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="align-middle">
                         <tr>
-                            <td><img src="img/m1-1.jpg" alt="" style="width: 50px;"> Onikuma Hoko M630</td>
+                            <td class="align-middle"><img src="img/m1-1.jpg" alt="" style="width: 50px;"> Onikuma Hoko M630</td>
                             <td class="align-middle">$990</td>
                             <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px;">
