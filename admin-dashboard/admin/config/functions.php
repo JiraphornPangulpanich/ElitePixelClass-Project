@@ -3,7 +3,7 @@
 $host = '45.154.26.121/phpmyadmin/'; // or your database host
 $dbname = 'ElitePixel';
 $username = 'root';
-$password = 'd7IC#z!Y2DM#';
+$password = 'qq123456';
 
 try {
     // Create a PDO instance (connect to the database)
