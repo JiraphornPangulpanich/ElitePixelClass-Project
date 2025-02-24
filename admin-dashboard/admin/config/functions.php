@@ -1,9 +1,9 @@
 <?php
 // Database configuration
-$host = 'localhost'; // or your database host
+$host = 'http://45.154.26.121/phpmyadmin/'; // or your database host
 $dbname = 'adminsystem';
 $username = 'root';
-$password = '';
+$password = 'uu123456';
 
 try {
     // Create a PDO instance (connect to the database)
