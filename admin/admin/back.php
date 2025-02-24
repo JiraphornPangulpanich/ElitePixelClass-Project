@@ -101,9 +101,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
-                                <?php 
+                    <?php 
                                     $adminId = $_SESSION['adminid'];
                                     // Fetch admin data from the database using the admin ID
                                     $stmt = $con->prepare("SELECT * FROM users WHERE id = :adminid");
@@ -113,7 +111,10 @@
                                     // Fetch the admin data
                                     $adminData = $stmt->fetch();
                                                 
-                                ?>
+                    ?>
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Logged in as:</div>
+                             
                         <h1>Hello, <?= $adminData['username'] ?></h1>
                         Start Bootstrap
                     </div>
