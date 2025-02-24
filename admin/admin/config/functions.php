@@ -5,36 +5,20 @@ $dbname = 'ElitePixel';
 $username = 'root';
 $password = 'qq123456';
 
-$conn = new mysqli($host, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+try {
+    // Create a PDO instance (connect to the database)
+    $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4"; // DSN (Data Source Name)
+    $con = new PDO($dsn, $username, $password);
+     
+    // Set PDO attributes
+     $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Enable exceptions on errors
+     $con->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // Set default fetch mode to associative array
+     $con->setAttribute(PDO::ATTR_EMULATE_PREPARES, false); // Disable emulation of prepared statements.
+     
+    // echo "Connected successfully!";
+
+} catch (PDOException $e) {
+    // Handle connection error
+    echo "Connection failed: " . $e->getMessage();
 }
-
-// รับค่าจากฟอร์ม
-$user_input = $_POST['username'];
-$pass_input = $_POST['password'];
-
-// ดึงข้อมูลจากฐานข้อมูล
-$sql = "SELECT * FROM users WHERE username = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $user_input);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows == 1) {
-    $row = $result->fetch_assoc();
-    
-    // ตรวจสอบรหัสผ่าน
-    if (password_verify($pass_input, $row['password'])) {
-        echo "Login Successful!";
-        // ทำการ redirect หรือสร้าง session ได้ตามต้องการ
-    } else {
-        echo "Invalid password.";
-    }
-} else {
-    echo "User not found.";
-}
-
-$stmt->close();
-$conn->close();
 ?>
