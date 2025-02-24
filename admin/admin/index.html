@@ -103,18 +103,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        <?php 
-                            $adminId = $_SESSION['adminid'];
-                            // Fetch admin data from the database using the admin ID
-                            $stmt = $con->prepare("SELECT * FROM users WHERE id = :adminid");
-                            $stmt->bindParam(':adminid', $adminId);
-                            $stmt->execute();
-                            
-                            // Fetch the admin data
-                            $adminData = $stmt->fetch();
-                                        
-                    ?>
-            
+                        
                     </div>
                 </nav>
             </div>
