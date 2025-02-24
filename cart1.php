@@ -178,9 +178,9 @@
                             <th>Remove</th>
                         </tr>
                     </thead>
-                    <tbody class="align-middle">
+                    <tbody>
                         <tr>
-                            <td class="align-middle"><img src="img/m1-1.jpg" alt="" style="width: 50px;"> Onikuma Hoko M630</td>
+                            <td><img src="img/m1-1.jpg" alt="" style="width: 50px;"> Onikuma Hoko M630</td>
                             <td class="align-middle">$990</td>
                             <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px;">
@@ -222,7 +222,7 @@
                             <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
                         </tr>
                         <tr>
-                            <td class><img src="img/m3-1.jpg" alt="" style="width: 50px;"> HyperX Quadcast S Standalone USB</td>
+                            <td class="align-middle"><img src="img/m3-1.jpg" alt="" style="width: 50px;"> HyperX Quadcast S Standalone USB</td>
                             <td class="align-middle">$4,790</td>
                             <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px;">
