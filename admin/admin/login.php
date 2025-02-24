@@ -1,3 +1,7 @@
+<?php
+    include_once "config/functions.php";
+?>
+
 <!doctype html>
 <html lang="en">
     <head>

@@ -15,7 +15,7 @@ try {
      $con->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // Set default fetch mode to associative array
      $con->setAttribute(PDO::ATTR_EMULATE_PREPARES, false); // Disable emulation of prepared statements.
      
-    // echo "Connected successfully!";
+    echo "Connected successfully!";
 
 } catch (PDOException $e) {
     // Handle connection error
