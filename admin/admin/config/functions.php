@@ -1,6 +1,6 @@
 <?php
 // Database configuration
-$host = '45.154.26.121'; // or your database host
+$host = 'http://45.154.26.121/phpmyadmin/'; // or your database host
 $dbname = 'ElitePixel';
 $username = 'root';
 $password = 'qq123456';
