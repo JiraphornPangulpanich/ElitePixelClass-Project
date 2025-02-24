@@ -1,7 +1,7 @@
 <?php
 // Database configuration
 $host = '45.154.26.121/phpmyadmin/'; // or your database host
-$dbname = 'adminsystem';
+$dbname = 'ElitePixel';
 $username = 'root';
 $password = 'd7IC#z!Y2DM#';
 
