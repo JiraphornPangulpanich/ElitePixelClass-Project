@@ -2,7 +2,7 @@
 // Database configuration
 $host = 'http://45.154.26.121/phpmyadmin/index.php'; // or your database host
 $dbname = 'ElitePixel';
-$username = 'root';
+$username = 'admin_user';
 $password = 'qq123456';
 
 try {
