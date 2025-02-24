@@ -3,7 +3,7 @@
 $host = 'http://45.154.26.121/phpmyadmin/'; // or your database host
 $dbname = 'adminsystem';
 $username = 'root';
-$password = 'uu123456';
+$password = 'd7IC#z!Y2DM#';
 
 try {
     // Create a PDO instance (connect to the database)
