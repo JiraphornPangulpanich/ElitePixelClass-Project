@@ -51,7 +51,7 @@
 
     <div class="login-container">
         <h2 class="mb-4 text-primary">Login</h2>
-        <form action="index.html" method="POST">
+        <form action="index1.php" method="POST">
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" id="username" class="form-control" placeholder="Enter your username" required>
