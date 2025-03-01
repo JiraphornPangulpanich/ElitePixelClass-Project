@@ -78,7 +78,7 @@
 
     <div class="register-container">
         <div class="logo mb-3">📝 Sign Up</div>
-        <form action="index.html" method="POST">
+        <form action="index.php" method="POST">
             <div class="mb-3">
                 <input type="text" class="form-control" placeholder="Full Name" required>
             </div>
