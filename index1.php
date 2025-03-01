@@ -457,6 +457,7 @@ while ($data = mysqli_fetch_array($rs)){
                     </div>
                 </div>
             </div>
+            <?php } ?>   
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
