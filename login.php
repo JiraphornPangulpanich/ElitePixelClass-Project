@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -91,6 +95,38 @@
             </div>
         </form>
     </div>
+
+    <?php
+include_once("../connectdb.php");
+
+if (isset($_POST['Submit'])) {
+    $usr = mysqli_real_escape_string($conn, $_POST['usr']);
+    $pwd = $_POST['pwd'];
+    
+    // ดึงข้อมูลจากฐานข้อมูลโดยใช้ prepared statement
+    $sql = "SELECT * FROM admin WHERE a_usr = ?";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "s", $usr);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    
+    if ($row = mysqli_fetch_assoc($result)) {
+        // ตรวจสอบรหัสผ่าน
+        if (password_verify($pwd, $row['a_pwd'])) {
+            $_SESSION['s_id'] = $row['a_id'];
+            $_SESSION['s_name'] = $row['a_name'];
+            echo "<script>window.location='index1.php';</script>";
+            exit();
+        } else {
+            echo "Username or Password incorrect";
+            exit();
+        }
+    } else {
+        echo "Username or Password incorrect";
+        exit();
+    }
+}
+?>
 
 </body>
 </html>
