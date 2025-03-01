@@ -416,7 +416,15 @@
         </div>
     </div>
     <!-- Categories End -->
+<?php
+include_once("connectdb.php"); //เชื่อมต่อฐานข้อมูล
 
+$sql = "SELECT * FROM `Product` ORDER BY `Product`.`Iditem` ASC";
+$rs = mysqli_query($conn, $sql);
+
+while ($data = mysqli_fetch_array($rs)){
+?>   
+      
 
     <!-- Products Start -->
     <div class="container-fluid pt-5 pb-3">
