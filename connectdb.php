@@ -1,10 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 
+</head>
+<body>
 <?php
-$host = "localhost";
-$user = "root";
-$pwd = "qq123456";
-$db = "ElitelPixel";
-$conn = mysqli_connect($host, $user, $pwd) or die ("No connect");
-mysqli_select_db($conn, $db) or die ("No select database");
-mysqli_query($conn, "set names utf8");
+$servername = "localhost";
+$username = "root";
+$password = "qq123456";
 
+// Create connection
+$conn = new mysqli($servername, $username, $password);
+
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+echo "Connected successfully";
 ?>
+</body>
+</html>
