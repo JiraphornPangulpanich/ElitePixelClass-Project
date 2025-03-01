@@ -53,12 +53,12 @@
         <h2 class="mb-4 text-primary">Login</h2>
         <form action="index1.php" method="POST">
             <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" id="username" class="form-control" placeholder="Enter your username" required>
+                <label for="username" class="">Username</label>
+                <input type="text" id="username" class="form-control" placeholder=" username" required>
             </div>
             <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+                <label for="password" class="">Password</label>
+                <input type="password" id="password" class="form-control" placeholder=" password" required>
             </div>
             <button type="submit" class="btn btn-login">Login</button>
         </form>
