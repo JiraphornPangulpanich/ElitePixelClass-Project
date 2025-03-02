@@ -8,7 +8,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "qq123456";
-$dbname = "Iditem";
+$dbname = "Product_Iditem_Name";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
