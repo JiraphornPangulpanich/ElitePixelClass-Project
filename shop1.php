@@ -229,7 +229,6 @@ $rs = mysqli_query($conn, $sql);
         </div>
 
         <?php while ($data = mysqli_fetch_assoc($rs)) { 
-            echo "ID: " . $data['Iditem'] . " | Ext: " . $data['Ext'] . "<br>";
             ?>
             <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
