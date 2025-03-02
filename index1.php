@@ -416,7 +416,13 @@
         </div>
     </div>
     <!-- Categories End -->
+<?php
+include_once("connectdb.php");
 
+$sql = "SELECT * FROM `Product` ORDER BY `Iditem` ASC";
+$rs = mysqli_query($conn , $sql);
+
+?>
 
     <!-- Products Start -->
     <div class="container-fluid pt-5 pb-3">
@@ -434,7 +440,10 @@
                         </div>
                     </div>
                     <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">Gconic A98 Ultra</a>
+                        <a class="h6 text-decoration-none text-truncate" href="">
+                            <?php echo $data['Iditem = 101']; ?>
+                            <?php echo $data['Name']; ?>
+                        </a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
                             <h5>$3,990.00</h5><h6 class="text-muted ml-2"><del>$4,500.00</del></h6>
                         </div>
