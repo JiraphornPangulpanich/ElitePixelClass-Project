@@ -212,7 +212,7 @@
             <?php
 include_once("connectdb.php");
 
-$sql = "SELECT Categories, Name FROM Product ORDER BY Categoryies
+$sql = "SELECT Categories, Name FROM Product ORDER BY Categoryies"
 
 if (!$result) {
     die("Query failed: " . mysqli_error($conn));
