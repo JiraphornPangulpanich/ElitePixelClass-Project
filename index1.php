@@ -424,6 +424,26 @@ $rs = mysqli_query($conn , $sql);
 
 ?>
 
+<?php
+include_once("connectdb.php");
+
+$product_name = "Gconic A98 Ultra"; // ระบุชื่อสินค้าที่ต้องการ
+
+$sql = "SELECT Name FROM Product WHERE Name = '$product_name'";
+$rs = mysqli_query($conn, $sql);
+
+if ($rs) {
+    $data = mysqli_fetch_assoc($rs);
+    if ($data) {
+        echo "<h2>" . htmlspecialchars($data['Name']) . "</h2>";
+    } else {
+        echo "<h2>ไม่พบสินค้าที่ต้องการ</h2>";
+    }
+} else {
+    echo "<h2>เกิดข้อผิดพลาดในการดึงข้อมูล</h2>";
+}
+?>
+
     <!-- Products Start -->
     <div class="container-fluid pt-5 pb-3">
         <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Featured Products</span></h2>
@@ -441,11 +461,7 @@ $rs = mysqli_query($conn , $sql);
                     </div>
                     <div class="text-center py-4">
                         <a class="h6 text-decoration-none text-truncate" href="">
-                        <?php $product_name = " Gconic A98 Ultra"; // ระบุชื่อสินค้าที่ต้องการ
-                            $sql = "SELECT Name FROM Product WHERE Name = '$Product_Name'";
-                            $rs = mysqli_query($conn, $sql);
-                            echo "<h2>" . htmlspecialchars($data['Name']) . "</h2>";
-                        ?>
+                        item
                         </a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
                             <h5>$3,990.00</h5><h6 class="text-muted ml-2"><del>$4,500.00</del></h6>
