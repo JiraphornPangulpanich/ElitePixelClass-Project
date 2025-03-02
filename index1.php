@@ -508,7 +508,7 @@ $rs = mysqli_query($conn , $sql);
                     <div class="text-center py-4">
                         <a class="h6 text-decoration-none text-truncate" href="">
                             <?php
-                                $sql = "SELECT Iditem, Name FROM Product WHERE Name = ' Asus Zenbook S 14 '";
+                                $sql = "SELECT Iditem, Name FROM Product WHERE Name = 'Asus Zenbook S 14 '";
                                 $result = $conn->query($sql);
 
                                 if ($result->num_rows > 0) {
@@ -522,7 +522,7 @@ $rs = mysqli_query($conn , $sql);
                         </a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
                             <h5><?php
-                                $sql = "SELECT Iditem, Price FROM Product WHERE Name = ' Gconic A98 Ultra'";
+                                $sql = "SELECT Iditem, Price FROM Product WHERE Name = ' Asus Zenbook S 14'";
                                 $result = $conn->query($sql);
 
                                 if ($result->num_rows > 0) {
