@@ -216,7 +216,7 @@ include_once("connectdb.php");
 $categoryToShow = "Electronics"; // เปลี่ยนชื่อหมวดหมู่ที่ต้องการ
 
 // คำสั่ง SQL ดึงข้อมูลหมวดหมู่ ชื่อสินค้า และรูปภาพ
-$sql = "SELECT Categories, Name, Price FROM Product WHERE Categories = '$categoryToShow' ORDER BY Name";
+$sql = "SELECT Categories, Name, Image, Price FROM Product WHERE Categories = '$categoryToShow' ORDER BY Name";
 
 // รันคำสั่ง SQL
 $result = mysqli_query($conn, $sql);
@@ -226,42 +226,53 @@ if (!$result) {
     die("คำสั่งล้มเหลว: " . mysqli_error($conn));
 }
 
-// เริ่มแสดงผลข้อมูล
-while ($row = mysqli_fetch_assoc($result)) {
-    // แสดงสินค้าในหมวดหมู่ที่เลือก
-    echo '<div class="col-lg-4 col-md-6 col-sm-6 pb-1">';
-    echo '    <div class="product-item bg-light mb-4">';
-    echo '        <div class="product-img position-relative overflow-hidden">';
-    echo '            <img class="img-fluid w-100" src="img/' . $row['Image'] . '" alt="' . $row['Name'] . '">';
-    echo '            <div class="product-action">';
-    echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>';
-    echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>';
-    echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>';
-    echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>';
-    echo '            </div>';
-    echo '        </div>';
-    echo '        <div class="text-center py-4">';
-    echo '            <a class="h6 text-decoration-none text-truncate" href="">' . $row['Name'] . '</a>';
-    echo '            <div class="d-flex align-items-center justify-content-center mt-2">';
-    echo '                <h5>' . $row['Price'] . '</h5><h6 class="text-muted ml-2"><del>$' . $row['Price'] . '</del></h6>';
-    echo '            </div>';
-    echo '            <div class="d-flex align-items-center justify-content-center mb-1">';
-    echo '                <small class="fa fa-star text-primary mr-1"></small>';
-    echo '                <small class="fa fa-star text-primary mr-1"></small>';
-    echo '                <small class="fa fa-star text-primary mr-1"></small>';
-    echo '                <small class="fa fa-star text-primary mr-1"></small>';
-    echo '                <small class="fa fa-star text-primary mr-1"></small>';
-    echo '                <small>(99)</small>';
-    echo '            </div>';
-    echo '        </div>';
-    echo '    </div>';
-    echo '</div>';
+// ตรวจสอบว่ามีข้อมูลที่ได้จากการ query หรือไม่
+if (mysqli_num_rows($result) == 0) {
+    echo "ไม่มีสินค้าที่ตรงกับหมวดหมู่นี้";
+} else {
+    // เริ่มแสดงผลข้อมูล
+    while ($row = mysqli_fetch_assoc($result)) {
+        // แสดงข้อมูลเพื่อตรวจสอบค่าที่ได้จากฐานข้อมูล
+        echo "<pre>";
+        print_r($row); // ดูข้อมูลที่ดึงมาจากฐานข้อมูล
+        echo "</pre>";
+
+        // แสดงสินค้าในหมวดหมู่ที่เลือก
+        echo '<div class="col-lg-4 col-md-6 col-sm-6 pb-1">';
+        echo '    <div class="product-item bg-light mb-4">';
+        echo '        <div class="product-img position-relative overflow-hidden">';
+        echo '            <img class="img-fluid w-100" src="img/' . $row['Image'] . '" alt="' . $row['Name'] . '">';
+        echo '            <div class="product-action">';
+        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>';
+        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>';
+        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>';
+        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>';
+        echo '            </div>';
+        echo '        </div>';
+        echo '        <div class="text-center py-4">';
+        echo '            <a class="h6 text-decoration-none text-truncate" href="">' . $row['Name'] . '</a>';
+        echo '            <div class="d-flex align-items-center justify-content-center mt-2">';
+        echo '                <h5>' . $row['Price'] . '</h5><h6 class="text-muted ml-2"><del>$' . $row['Price'] . '</del></h6>';
+        echo '            </div>';
+        echo '            <div class="d-flex align-items-center justify-content-center mb-1">';
+        echo '                <small class="fa fa-star text-primary mr-1"></small>';
+        echo '                <small class="fa fa-star text-primary mr-1"></small>';
+        echo '                <small class="fa fa-star text-primary mr-1"></small>';
+        echo '                <small class="fa fa-star text-primary mr-1"></small>';
+        echo '                <small class="fa fa-star text-primary mr-1"></small>';
+        echo '                <small>(99)</small>';
+        echo '            </div>';
+        echo '        </div>';
+        echo '    </div>';
+        echo '</div>';
+    }
 }
 
 // ปิดการเชื่อมต่อฐานข้อมูล
 mysqli_free_result($result);
 mysqli_close($conn);
 ?>
+
 
     <!-- Shop End -->
 
