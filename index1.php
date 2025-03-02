@@ -455,7 +455,7 @@ $rs = mysqli_query($conn , $sql);
                             ?>
                         </a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5 class="text-muted ml-2"><?php
+                            <h5 class="text-muted ml-2">$<?php
                                 $sql = "SELECT Iditem, Price FROM Product WHERE Iditem = '101'";
                                 $result = $conn->query($sql);
 
@@ -521,7 +521,7 @@ $rs = mysqli_query($conn , $sql);
                             ?>
                         </a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5 class="text-muted ml-2"><?php
+                            <h5 class="text-muted ml-2">$<?php
                                 $sql = "SELECT Iditem, Price FROM Product WHERE Iditem = '201'";
                                 $result = $conn->query($sql);
 
@@ -588,7 +588,7 @@ $rs = mysqli_query($conn , $sql);
                             ?>
                         </a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5><?php
+                            <h5 class="text-muted ml-2">$<?php
                                 $sql = "SELECT Iditem, Price FROM Product WHERE Iditem = '301'";
                                 $result = $conn->query($sql);
 
@@ -655,7 +655,7 @@ $rs = mysqli_query($conn , $sql);
                             ?>
                         </a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5><?php
+                            <h5 class="text-muted ml-2">$<?php
                                 $sql = "SELECT Iditem, Price FROM Product WHERE Iditem = '401'";
                                 $result = $conn->query($sql);
 
