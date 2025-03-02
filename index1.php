@@ -535,6 +535,23 @@ $rs = mysqli_query($conn , $sql);
                                 ?>
                             </h5><h6 class="text-muted ml-2"><del>$65,500.00</del></h6>
                         </div>
+                        <div class="d-flex align-items-center justify-content-center mt-2">
+                            <h6 style="font-size: 12px; ">เหลือ &nbsp <h6>
+                            <h6 style="font-size: 12px; ">
+                                <?php
+                                    $sql = "SELECT Iditem, Num FROM Product WHERE Iditem = '201'";
+                                    $result = $conn->query($sql);
+
+                                    if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                    echo $row["Num"] . "<br>";
+                                    }
+                                    } else {
+                                        echo "ไม่พบข้อมูล";
+                                    }
+                                ?></h6>
+                            <h6 style="font-size: 12px; ">&nbsp  ชิ้น</h6>
+                        </div>
                         <div class="d-flex align-items-center justify-content-center mb-1">
                             <small class="fa fa-star text-primary mr-1"></small>
                             <small class="fa fa-star text-primary mr-1"></small>
@@ -585,6 +602,23 @@ $rs = mysqli_query($conn , $sql);
                                 ?>
                             </h5><h6 class="text-muted ml-2"><del>$1,800.00</del></h6>
                         </div>
+                        <div class="d-flex align-items-center justify-content-center mt-2">
+                            <h6 style="font-size: 12px; ">เหลือ &nbsp <h6>
+                            <h6 style="font-size: 12px; ">
+                                <?php
+                                    $sql = "SELECT Iditem, Num FROM Product WHERE Iditem = '301'";
+                                    $result = $conn->query($sql);
+
+                                    if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                    echo $row["Num"] . "<br>";
+                                    }
+                                    } else {
+                                        echo "ไม่พบข้อมูล";
+                                    }
+                                ?></h6>
+                            <h6 style="font-size: 12px; ">&nbsp  ชิ้น</h6>
+                        </div>
                         <div class="d-flex align-items-center justify-content-center mb-1">
                             <small class="fa fa-star text-primary mr-1"></small>
                             <small class="fa fa-star text-primary mr-1"></small>
@@ -602,13 +636,24 @@ $rs = mysqli_query($conn , $sql);
                         <img class="img-fluid w-100" src="img/j1-1.jpg" alt="">
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
                         </div>
                     </div>
                     <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">Sony DualSense Edge Controller</a>
+                    <a class="h6 text-decoration-none text-truncate" href="">
+                            <?php
+                                $sql = "SELECT Iditem , Name FROM Product WHERE Iditem = '401'";
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                echo $row["Name"] . "<br>";
+                                }
+                                } else {
+                                    echo "ไม่พบข้อมูล";
+                                }
+                            ?>
+                        </a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
                             <h5>$7,790.00</h5><h6 class="text-muted ml-2"><del>$8,000.00</del></h6>
                         </div>
