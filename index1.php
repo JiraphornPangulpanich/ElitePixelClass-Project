@@ -552,15 +552,38 @@ $rs = mysqli_query($conn , $sql);
                         <img class="img-fluid w-100" src="img/mu1-1.jpg" alt="">
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
                         </div>
                     </div>
                     <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">HyperX Pulsefire Haste</a>
+                        <a class="h6 text-decoration-none text-truncate" href="">
+                            <?php
+                                $sql = "SELECT Iditem, Name FROM Product WHERE Name = 'HyperX Pulsefire Haste '";
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                echo $row["Name"] . "<br>";
+                                }
+                                } else {
+                                    echo "ไม่พบข้อมูล";
+                                }
+                            ?>
+                        </a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>$1,490.00</h5><h6 class="text-muted ml-2"><del>$1,600.00</del></h6>
+                            <h5><?php
+                                $sql = "SELECT Iditem, Price FROM Product WHERE Name = 'HyperX Pulsefire Haste '";
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                echo $row["Price"] . "<br>";
+                                }
+                                } else {
+                                    echo "ไม่พบข้อมูล";
+                                }
+                                ?>
+                            </h5><h6 class="text-muted ml-2"><del>$1,800.00</del></h6>
                         </div>
                         <div class="d-flex align-items-center justify-content-center mb-1">
                             <small class="fa fa-star text-primary mr-1"></small>
