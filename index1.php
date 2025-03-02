@@ -569,7 +569,7 @@ $rs = mysqli_query($conn , $sql);
                         <img class="img-fluid w-100" src="img/301.1.jpg" alt="">
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=301"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
                     <div class="text-center py-4">
