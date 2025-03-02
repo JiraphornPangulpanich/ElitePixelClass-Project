@@ -435,7 +435,7 @@ $rs = mysqli_query($conn , $sql);
                     <div class="product-img position-relative overflow-hidden">
                         <img class="img-fluid w-100" src="img/101.1.jpg" alt="">
                         <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=<?php echo $data['101']; ?>"><i class="fa fa-shopping-cart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=101"><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
                         </div>
                     </div>
