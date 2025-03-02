@@ -208,8 +208,8 @@
                    
             </div>
             <!-- Shop Sidebar End -->
-
-            <?php
+       
+       <?php
 // แสดงค่าพารามิเตอร์ที่รับมาใน URL
 if (isset($_GET['Categories'])) {
     echo "หมวดหมู่ที่รับจาก URL: " . $_GET['Categories'];
@@ -217,8 +217,6 @@ if (isset($_GET['Categories'])) {
     echo "ไม่มีหมวดหมู่ใน URL";
 }
 ?>
-
-
 
 
 
