@@ -168,15 +168,15 @@
     include_once("connectdb.php");
 
     // รับ p_id จาก URL
-    if (isset($_GET['p_id'])) {
-        $p_id = $_GET['p_id'];
-        $sql = "SELECT * FROM trendy WHERE p_id = $p_id";
+    if (isset($_GET['Iditem'])) {
+        $Iitem = $_GET['Iditem'];
+        $sql = "SELECT * FROM Product WHERE Iditem = $Iditem";
         $result = mysqli_query($conn, $sql);
         $product = mysqli_fetch_array($result);
 
         // ตรวจสอบว่าเจอข้อมูลหรือไม่
         if ($product) {
-            $image_pattern = "img/trendy/{$p_id}*.*"; // ค้นหารูปภาพที่มีรูปแบบ 1.jpg, 1.1.jpg, 1.2.jpg
+            $image_pattern = "img/{$Iditem}*.*"; // ค้นหารูปภาพที่มีรูปแบบ 1.jpg, 1.1.jpg, 1.2.jpg
             $product_images = glob($image_pattern); // ดึงรายการไฟล์ที่ตรงกับ pattern
         } else {
             echo "Product not found!";
