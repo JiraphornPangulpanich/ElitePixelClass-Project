@@ -209,64 +209,66 @@
             </div>
             <!-- Shop Sidebar End -->
 
-<?php
+            <?php
 include_once("connectdb.php");
 
-$sql = "SELECT * FROM 'Product' ORDER BY 'Iditem' ASC";
-$rs = mysqli_query($conn , $sql);
+$sql = "SELECT * FROM Product ORDER BY Iditem ASC";
+$rs = mysqli_query($conn, $sql);
 ?>
 
-            <!-- Shop Product Start -->
-            <div class="col-lg-9 col-md-8">
-                <div class="row pb-3">
-                    <div class="col-12 pb-1">
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <div>
-                                <button class="btn btn-sm btn-light"><i class="fa fa-th-large"></i></button>
-                                <button class="btn btn-sm btn-light ml-2"><i class="fa fa-bars"></i></button>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
-                        <div class="product-item bg-light mb-4">
-                            <div class="product-img position-relative overflow-hidden">
-                                <img 
-                                    src="img<?php echo $data['Iditem'];?>.<?php echo $data['Ext'];?>"
-                                    alt="<?php echo $data['Name'];?>"
-                                    class="img-fluid w-100"
-                                    style="max-height: 300px; object-fit: cover; border-radius: 5px;"
-                                >
-                                <div class="product-action">
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-center py-4">
-                                <a class="h6 text-decoration-none text-truncate" href=""> <?php echo $data['Name'];?>
-                                </a>
-                                <div class="d-flex align-items-center justify-content-center mt-2">
-                                    <h5>$<?php echo $data['Price'];?></h5>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-center mb-1">
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small>(99)</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
+<!-- Shop Product Start -->
+<div class="col-lg-9 col-md-8">
+    <div class="row pb-3">
+        <div class="col-12 pb-1">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <div>
+                    <button class="btn btn-sm btn-light"><i class="fa fa-th-large"></i></button>
+                    <button class="btn btn-sm btn-light ml-2"><i class="fa fa-bars"></i></button>
                 </div>
             </div>
-            <!-- Shop Product End -->
         </div>
+
+        <?php while ($data = mysqli_fetch_assoc($rs)) { ?>
+            <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
+                <div class="product-item bg-light mb-4">
+                    <div class="product-img position-relative overflow-hidden">
+                        <img 
+                            src="img/<?php echo $data['Iditem']; ?>.<?php echo $data['Ext']; ?>" 
+                            alt="<?php echo $data['Name']; ?>" 
+                            class="img-fluid w-100" 
+                            style="max-height: 300px; object-fit: cover; border-radius: 5px;"
+                        >
+                        <div class="product-action">
+                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                        </div>
+                    </div>
+                    <div class="text-center py-4">
+                        <a class="h6 text-decoration-none text-truncate" href=""><?php echo $data['Name']; ?></a>
+                        <div class="d-flex align-items-center justify-content-center mt-2">
+                            <h5>$<?php echo number_format($data['Price'], 2); ?></h5>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center mb-1">
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small>(99)</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+
     </div>
+</div>
+<!-- Shop Product End -->
+
+<?php mysqli_close($conn); ?>
+
     <!-- Shop End -->
 
 
