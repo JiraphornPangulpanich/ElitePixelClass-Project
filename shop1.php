@@ -208,6 +208,20 @@
                    
             </div>
             <!-- Shop Sidebar End -->
+
+            <?php
+// แสดงค่าพารามิเตอร์ที่รับมาใน URL
+if (isset($_GET['Categories'])) {
+    echo "หมวดหมู่ที่รับจาก URL: " . $_GET['Categories'];
+} else {
+    echo "ไม่มีหมวดหมู่ใน URL";
+}
+?>
+
+
+
+
+
             <?php
 include_once("connectdb.php");
 
