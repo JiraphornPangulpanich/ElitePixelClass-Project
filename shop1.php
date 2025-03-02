@@ -213,10 +213,10 @@
 include_once("connectdb.php");
 
 // กำหนดหมวดหมู่ที่ต้องการแสดง
-$categoryToShow = "1"; // เปลี่ยนชื่อหมวดหมู่ที่ต้องการ
+$categoryToShow = "Electronics"; // เปลี่ยนชื่อหมวดหมู่ที่ต้องการ
 
 // คำสั่ง SQL ดึงข้อมูลหมวดหมู่ ชื่อสินค้า และรูปภาพ
-$sql = "SELECT Categories, Name, Price FROM Product WHERE Categories = '$categoryToShow' ORDER BY Name";
+$sql = "SELECT Categories, Name, Image, Price FROM Product WHERE Categories = '$categoryToShow' ORDER BY Name";
 
 // รันคำสั่ง SQL
 $result = mysqli_query($conn, $sql);
@@ -230,14 +230,16 @@ if (!$result) {
 if (mysqli_num_rows($result) == 0) {
     echo "ไม่มีสินค้าที่ตรงกับหมวดหมู่นี้";
 } else {
+    echo '<div class="row">';  // เริ่มแถวใหม่สำหรับการแสดงสินค้า
+    
     // เริ่มแสดงผลข้อมูล
     while ($row = mysqli_fetch_assoc($result)) {
         // ตรวจสอบว่ามีข้อมูลภาพหรือไม่
         $imageSrc = isset($row['Image']) && !empty($row['Image']) ? 'img/' . $row['Image'] : 'img/default-image.jpg';
 
         // แสดงสินค้าในหมวดหมู่ที่เลือก
-        echo '<div class="col-lg-4 col-md-6 col-sm-6 pb-1">';
-        echo '    <div class="product-item bg-light mb-4">';
+        echo '<div class="col-lg-4 col-md-6 col-sm-12 pb-4">';  // แบ่งเป็นคอลัมน์ให้แสดงต่อกัน
+        echo '    <div class="product-item bg-light mb-4 p-3">';
         echo '        <div class="product-img position-relative overflow-hidden">';
         echo '            <img class="img-fluid w-100" src="' . $imageSrc . '" alt="' . $row['Name'] . '">';
         echo '            <div class="product-action">';
@@ -250,7 +252,7 @@ if (mysqli_num_rows($result) == 0) {
         echo '        <div class="text-center py-4">';
         echo '            <a class="h6 text-decoration-none text-truncate" href="">' . $row['Name'] . '</a>';
         echo '            <div class="d-flex align-items-center justify-content-center mt-2">';
-        echo '                <h5>' . $row['Price'] . '</h5><h6 class="text-muted ml-2"><del>$' . $row['Price'] . '</del></h6>';
+        echo '                <h5>$' . $row['Price'] . '</h5>';
         echo '            </div>';
         echo '            <div class="d-flex align-items-center justify-content-center mb-1">';
         echo '                <small class="fa fa-star text-primary mr-1"></small>';
@@ -264,12 +266,15 @@ if (mysqli_num_rows($result) == 0) {
         echo '    </div>';
         echo '</div>';
     }
+
+    echo '</div>';  // ปิดแถว
 }
 
 // ปิดการเชื่อมต่อฐานข้อมูล
 mysqli_free_result($result);
 mysqli_close($conn);
 ?>
+
 
 
 
