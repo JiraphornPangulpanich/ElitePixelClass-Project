@@ -287,10 +287,10 @@
                 <a class="text-decoration-none" href="shop1.php?Categories=1">
                     <div class="cat-item d-flex align-items-center mb-4">
                         <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                            <img class="img-fluid" src="img/j1.jpg" alt="">
+                            <img class="img-fluid" src="img/k.jpg" alt="">
                         </div>
                         <div class="flex-fill pl-3">
-                            <h6>Joy stick & Console</h6>
+                            <h6>keyboard</h6>
                             <small class="text-body">3 Products</small>
                         </div>
                     </div>
@@ -310,33 +310,7 @@
                 </a>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                <a class="text-decoration-none" href="">
-                    <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                        <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                            <img class="img-fluid" src="img/sp.jpg" alt="">
-                        </div>
-                        <div class="flex-fill pl-3">
-                            <h6>speaker</h6>
-                            <small class="text-body">3 Products</small>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                <a class="text-decoration-none" href="">
-                    <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                        <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                            <img class="img-fluid" src="img/k.jpg" alt="">
-                        </div>
-                        <div class="flex-fill pl-3">
-                            <h6>keyboard</h6>
-                            <small class="text-body">3 Products</small>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                <a class="text-decoration-none" href="">
+                <a class="text-decoration-none" href="shop1.php?Categories=3">
                     <div class="cat-item img-zoom d-flex align-items-center mb-4">
                         <div class="overflow-hidden" style="width: 100px; height: 100px;">
                             <img class="img-fluid" src="img/m.jpg" alt="">
@@ -349,33 +323,7 @@
                 </a>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                <a class="text-decoration-none" href="">
-                    <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                        <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                            <img class="img-fluid" src="img/s.jpg" alt="">
-                        </div>
-                        <div class="flex-fill pl-3">
-                            <h6>Screen</h6>
-                            <small class="text-body">3 Products</small>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                <a class="text-decoration-none" href="">
-                    <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                        <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                            <img class="img-fluid" src="img/e.jpg" alt="">
-                        </div>
-                        <div class="flex-fill pl-3">
-                            <h6>Earphones</h6>
-                            <small class="text-body">3 Products</small>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                <a class="text-decoration-none" href="">
+                <a class="text-decoration-none" href="shop1.php?Categories=4">
                     <div class="cat-item img-zoom d-flex align-items-center mb-4">
                         <div class="overflow-hidden" style="width: 100px; height: 100px;">
                             <img class="img-fluid" src="img/gs.jpg" alt="">
@@ -388,20 +336,7 @@
                 </a>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                <a class="text-decoration-none" href="">
-                    <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                        <div class="overflow-hidden" style="width: 100px; height: 100px;">
-                            <img class="img-fluid" src="img/w.jpg" alt="">
-                        </div>
-                        <div class="flex-fill pl-3">
-                            <h6>Webcam</h6>
-                            <small class="text-body">3 Products</small>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                <a class="text-decoration-none" href="">
+                <a class="text-decoration-none" href="shop1.php?Categories=5">
                     <div class="cat-item img-zoom d-flex align-items-center mb-4">
                         <div class="overflow-hidden" style="width: 100px; height: 100px;">
                             <img class="img-fluid" src="img/mi.jpg" alt="">
@@ -413,6 +348,60 @@
                     </div>
                 </a>
             </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <a class="text-decoration-none" href="shop1.php?Categories=6">
+                    <div class="cat-item d-flex align-items-center mb-4">
+                        <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                            <img class="img-fluid" src="img/j1.jpg" alt="">
+                        </div>
+                        <div class="flex-fill pl-3">
+                            <h6>Joy stick & Console</h6>
+                            <small class="text-body">3 Products</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <a class="text-decoration-none" href="shop1.php?Categories=7">
+                    <div class="cat-item img-zoom d-flex align-items-center mb-4">
+                        <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                            <img class="img-fluid" src="img/sp.jpg" alt="">
+                        </div>
+                        <div class="flex-fill pl-3">
+                            <h6>speaker</h6>
+                            <small class="text-body">3 Products</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <a class="text-decoration-none" href="shop1.php?Categories=8">
+                    <div class="cat-item img-zoom d-flex align-items-center mb-4">
+                        <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                            <img class="img-fluid" src="img/s.jpg" alt="">
+                        </div>
+                        <div class="flex-fill pl-3">
+                            <h6>Screen</h6>
+                            <small class="text-body">3 Products</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <a class="text-decoration-none" href="shop1.php?Categories=9">
+                    <div class="cat-item img-zoom d-flex align-items-center mb-4">
+                        <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                            <img class="img-fluid" src="img/e.jpg" alt="">
+                        </div>
+                        <div class="flex-fill pl-3">
+                            <h6>Earphones</h6>
+                            <small class="text-body">3 Products</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            
         </div>
     </div>
     <!-- Categories End -->
