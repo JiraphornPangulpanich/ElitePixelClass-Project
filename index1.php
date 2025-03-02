@@ -484,8 +484,7 @@ $rs = mysqli_query($conn , $sql);
                                     } else {
                                         echo "ไม่พบข้อมูล";
                                     }
-                                ?>
-                            ชิ้น</h6>
+                                ?></h6>
                         </div>
                         <div class="d-flex align-items-center justify-content-center mb-1">
                             <small class="fa fa-star text-primary mr-1"></small>
