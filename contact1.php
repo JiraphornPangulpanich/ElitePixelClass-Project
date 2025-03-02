@@ -100,16 +100,15 @@
                 <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
                     <div class="navbar-nav w-100">
                         
-                        <a href="" class="nav-item nav-link">Joy stick & Console</a>
-                        <a href="" class="nav-item nav-link">Gaming laptop</a>
-                        <a href="" class="nav-item nav-link">speaker</a>
-                        <a href="" class="nav-item nav-link">keyboard</a>
-                        <a href="" class="nav-item nav-link">Mouse</a>
-                        <a href="" class="nav-item nav-link">Screen</a>
-                        <a href="" class="nav-item nav-link">Earphones</a>
-                        <a href="" class="nav-item nav-link">Gaming chair</a>
-                        <a href="" class="nav-item nav-link">Webcam</a>
-                        <a href="" class="nav-item nav-link">Gaming mic</a>
+                        <a href="shop1.php?Categories=1" class="nav-item nav-link">keyboard</a>
+                        <a href="shop1.php?Categories=2" class="nav-item nav-link">Gaming laptop</a>
+                        <a href="shop1.php?Categories=3" class="nav-item nav-link">mouse</a>
+                        <a href="shop1.php?Categories=4" class="nav-item nav-link">Gaming chair</a>
+                        <a href="shop1.php?Categories=5" class="nav-item nav-link">Gaming mic</a>
+                        <a href="shop1.php?Categories=6" class="nav-item nav-link">Joy stick & Console</a>
+                        <a href="shop1.php?Categories=7" class="nav-item nav-link">speaker</a>
+                        <a href="shop1.php?Categories=8" class="nav-item nav-link">Screen</a>
+                        <a href="shop1.php?Categories=9" class="nav-item nav-link">Earphones</a>
                     </div>
                 </nav>
             </div>
