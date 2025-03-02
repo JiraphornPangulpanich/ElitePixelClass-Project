@@ -636,7 +636,7 @@ $rs = mysqli_query($conn , $sql);
                         <img class="img-fluid w-100" src="img/401.1.jpg" alt="">
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=401"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
                     <div class="text-center py-4">
@@ -740,7 +740,7 @@ $rs = mysqli_query($conn , $sql);
                         <img class="img-fluid w-100" src="img/802.1.jpg" alt="">
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=802"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
                     <div class="text-center py-4">
@@ -807,7 +807,7 @@ $rs = mysqli_query($conn , $sql);
                         <img class="img-fluid w-100" src="img/402.1.jpg" alt="">
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=402"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
                     <div class="text-center py-4">
@@ -874,7 +874,7 @@ $rs = mysqli_query($conn , $sql);
                         <img class="img-fluid w-100" src="img/401.1.jpg" alt="">
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=401"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
                     <div class="text-center py-4">
@@ -941,7 +941,7 @@ $rs = mysqli_query($conn , $sql);
                         <img class="img-fluid w-100" src="img/701.1.jpg" alt="">
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=701"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
                     <div class="text-center py-4">
@@ -1008,7 +1008,7 @@ $rs = mysqli_query($conn , $sql);
                         <img class="img-fluid w-100" src="img/702.1.jpg" alt="">
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=702"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
                     <div class="text-center py-4">
@@ -1075,7 +1075,7 @@ $rs = mysqli_query($conn , $sql);
                         <img class="img-fluid w-100" src="img/602.1.jpg" alt="">
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=602"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
                     <div class="text-center py-4">
@@ -1142,7 +1142,7 @@ $rs = mysqli_query($conn , $sql);
                         <img class="img-fluid w-100" src="img/601.1.jpg" alt="">
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=601"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
                     <div class="text-center py-4">
@@ -1209,7 +1209,7 @@ $rs = mysqli_query($conn , $sql);
                         <img class="img-fluid w-100" src="img/901.1.jpg" alt="">
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=901"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
                     <div class="text-center py-4">
