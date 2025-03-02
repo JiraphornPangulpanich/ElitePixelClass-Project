@@ -161,6 +161,76 @@
     </div>
     <!-- Breadcrumb End -->
 
+    <?php
+include_once("connectdb.php");
+
+// รับค่าหมวดหมู่จาก URL หรือใช้ค่า default
+$categoryToShow = isset($_GET['Categories']) ? $_GET['Categories'] : 'default_value';
+
+// คำสั่ง SQL ดึงข้อมูลหมวดหมู่ ชื่อสินค้า, ราคาสินค้า, iditem และรูปภาพ
+$sql = "SELECT iditem, Categories, Name, Price FROM Product WHERE Categories = '$categoryToShow' ORDER BY Name";
+
+// รันคำสั่ง SQL
+$result = mysqli_query($conn, $sql);
+
+// ตรวจสอบว่ารันคำสั่ง SQL สำเร็จหรือไม่
+if (!$result) {
+    die("คำสั่งล้มเหลว: " . mysqli_error($conn));
+}
+
+// ตรวจสอบว่ามีข้อมูลที่ได้จากการ query หรือไม่
+if (mysqli_num_rows($result) == 0) {
+    echo "ไม่มีสินค้าที่ตรงกับหมวดหมู่นี้";
+} else {
+    // เริ่มแสดงผลในกริด
+    echo '<div class="container mt-4">';
+    echo '<div class="row">';  // เริ่มแถวใหม่สำหรับการแสดงสินค้า
+
+    // เริ่มแสดงผลข้อมูลสินค้า
+    while ($row = mysqli_fetch_assoc($result)) {
+        // สร้างรูปภาพที่สัมพันธ์กับ iditem
+        $imageSrc = 'img/' . $row['iditem'] . '.jpg';
+
+        // แสดงสินค้าในรูปแบบของกริด
+        echo '<div class="col-lg-4 col-md-6 col-sm-12 pb-4">';  // จัดเป็นคอลัมน์
+        echo '    <div class="product-item bg-light mb-4 p-3">';
+        echo '        <div class="product-img position-relative overflow-hidden">';
+        echo '            <img class="img-fluid w-100" src="' . $imageSrc . '" alt="' . $row['Name'] . '">';
+        echo '            <div class="product-action">';
+        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>';
+        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>';
+        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>';
+        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>';
+        echo '            </div>';
+        echo '        </div>';
+        echo '        <div class="text-center py-4">';
+        echo '            <a class="h6 text-decoration-none text-truncate" href="">' . $row['Name'] . '</a>';
+        echo '            <div class="d-flex align-items-center justify-content-center mt-2">';
+        echo '                <h5>$' . $row['Price'] . '</h5>';
+        echo '            </div>';
+        echo '            <div class="d-flex align-items-center justify-content-center mb-1">';
+        echo '                <small class="fa fa-star text-primary mr-1"></small>';
+        echo '                <small class="fa fa-star text-primary mr-1"></small>';
+        echo '                <small class="fa fa-star text-primary mr-1"></small>';
+        echo '                <small class="fa fa-star text-primary mr-1"></small>';
+        echo '                <small class="fa fa-star text-primary mr-1"></small>';
+        echo '                <small>(99)</small>';
+        echo '            </div>';
+        echo '        </div>';
+        echo '    </div>';
+        echo '</div>';
+    }
+
+    // ปิดแถว
+    echo '</div>';
+    echo '</div>';
+}
+
+// ปิดการเชื่อมต่อฐานข้อมูล
+mysqli_free_result($result);
+mysqli_close($conn);
+?>
+
 
     <!-- Shop Start -->
     <div class="container-fluid">
