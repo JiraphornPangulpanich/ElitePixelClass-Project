@@ -234,10 +234,26 @@ if (mysqli_num_rows($result) == 0) {
     
     // เริ่มแสดงผลข้อมูล
     while ($row = mysqli_fetch_assoc($result)) {
-        // ตรวจสอบว่ามีข้อมูลภาพหรือไม่ และใช้ iditem เป็นชื่อไฟล์
-        $imageSrc = isset($row['Iditem']) && !empty($row['Iditem']) 
-            ? 'img/' . $row['Iditem'] . '.jpg' // ใช้ iditem เป็นชื่อไฟล์รูปภาพ
-            : 'img/default-image.jpg';  // ถ้าไม่มีภาพให้ใช้ภาพ default
+        if (isset($_GET['Iditem'])) {
+            // แก้ไขตัวแปรที่ใช้เป็น $Iitem ไม่ใช่ $Iditem
+            $Iditem = $_GET['Iditem'];  // แก้ไขเป็นตัวแปรเดียวกับที่ใช้ใน SQL
+            $sql = "SELECT * FROM Product WHERE Iditem = $Iditem";
+            $result = mysqli_query($conn, $sql);
+            $product = mysqli_fetch_array($result);
+    
+            // ตรวจสอบว่าเจอข้อมูลหรือไม่
+            if ($product) {
+                // ตรวจสอบรูปภาพจากชื่อไฟล์ที่ตรงกับ pattern
+                $image_pattern = "img/{$Iditem}*.*"; // ค้นหารูปภาพที่มีรูปแบบ 1.jpg, 1.1.jpg, 1.2.jpg
+                $product_images = glob($image_pattern); // ดึงรายการไฟล์ที่ตรงกับ pattern
+            } else {
+                echo "Product not found!";
+                exit;
+            }
+        } else {
+            echo "Invalid product ID!";
+            exit;
+        }
 
         // แสดงสินค้าในหมวดหมู่ที่เลือก
         echo '<div class="col-lg-4 col-md-6 col-sm-12 pb-4">';  // แบ่งเป็นคอลัมน์ให้แสดงต่อกัน
