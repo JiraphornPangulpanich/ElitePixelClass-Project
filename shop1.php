@@ -212,15 +212,14 @@
             <?php
 include_once("connectdb.php");
 
-$sql = "SELECT Category, Name FROM Product ORDER BY Category ASC";
-$result = mysqli_query($conn, $sql);
+$sql = "SELECT Categories, Name FROM Product ORDER BY Categoryies
 
 if (!$result) {
     die("Query failed: " . mysqli_error($conn));
 }
 
 while ($row = mysqli_fetch_assoc($result)) {
-    echo "รหัสหมวดหมู่: " . $row['Category'] . " - " . $row['Name'] . "<br>";
+    echo "รหัสหมวดหมู่: " . $row['Categories'] . " - " . $row['Name'] . "<br>";
 }
 ?>
 
