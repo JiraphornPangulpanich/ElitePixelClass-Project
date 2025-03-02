@@ -216,7 +216,7 @@ include_once("connectdb.php");
 $categoryToShow = "Electronics"; // เปลี่ยนชื่อหมวดหมู่ที่ต้องการ
 
 // คำสั่ง SQL ดึงข้อมูลหมวดหมู่ ชื่อสินค้า และรูปภาพ
-$sql = "SELECT Categories, Name, Image, Price FROM Product WHERE Categories = '$categoryToShow' ORDER BY Name";
+$sql = "SELECT Categories, Name , Price FROM Product WHERE Categories = '$categoryToShow' ORDER BY Name";
 
 // รันคำสั่ง SQL
 $result = mysqli_query($conn, $sql);
