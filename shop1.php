@@ -212,40 +212,62 @@
             <?php
 include_once("connectdb.php");
 
-// คำสั่ง SQL ดึงข้อมูลหมวดหมู่ ชื่อสินค้า และไฟล์รูปภาพ
-$sql = "SELECT Categories, Name FROM Product ORDER BY Categories";
+// คำสั่ง SQL ดึงข้อมูลหมวดหมู่ ชื่อสินค้า และรูปภาพ
+$sql = "SELECT Categories, Name, Image, Price FROM Product ORDER BY Categories";
+
+// รันคำสั่ง SQL
+$result = mysqli_query($conn, $sql);
+
+// ตรวจสอบว่ารันคำสั่ง SQL สำเร็จหรือไม่
+if (!$result) {
+    die("คำสั่งล้มเหลว: " . mysqli_error($conn));
+}
+
+// ตัวแปรเก็บหมวดหมู่ที่กำลังแสดง
+$currentCategory = "";
+
+// เริ่มแสดงผลข้อมูล
+while ($row = mysqli_fetch_assoc($result)) {
+    // ถ้าหมวดหมู่เปลี่ยน แสดงหัวข้อหมวดหมู่ใหม่
+    if ($currentCategory != $row['Categories']) {
+        $currentCategory = $row['Categories'];
+        echo "<h2>หมวดหมู่: " . $currentCategory . "</h2>";
+    }
+
+    // แสดงสินค้าในหมวดหมู่
+    echo '<div class="col-lg-4 col-md-6 col-sm-6 pb-1">';
+    echo '    <div class="product-item bg-light mb-4">';
+    echo '        <div class="product-img position-relative overflow-hidden">';
+    echo '            <img class="img-fluid w-100" src="img/' . $row['Image'] . '" alt="' . $row['Name'] . '">';
+    echo '            <div class="product-action">';
+    echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>';
+    echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>';
+    echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>';
+    echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>';
+    echo '            </div>';
+    echo '        </div>';
+    echo '        <div class="text-center py-4">';
+    echo '            <a class="h6 text-decoration-none text-truncate" href="">' . $row['Name'] . '</a>';
+    echo '            <div class="d-flex align-items-center justify-content-center mt-2">';
+    echo '                <h5>' . $row['Price'] . '</h5><h6 class="text-muted ml-2"><del>$' . $row['Price'] . '</del></h6>';
+    echo '            </div>';
+    echo '            <div class="d-flex align-items-center justify-content-center mb-1">';
+    echo '                <small class="fa fa-star text-primary mr-1"></small>';
+    echo '                <small class="fa fa-star text-primary mr-1"></small>';
+    echo '                <small class="fa fa-star text-primary mr-1"></small>';
+    echo '                <small class="fa fa-star text-primary mr-1"></small>';
+    echo '                <small class="fa fa-star text-primary mr-1"></small>';
+    echo '                <small>(99)</small>';
+    echo '            </div>';
+    echo '        </div>';
+    echo '    </div>';
+    echo '</div>';
+}
+
+// ปิดการเชื่อมต่อฐานข้อมูล
+mysqli_free_result($result);
+mysqli_close($conn);
 ?>
-                <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
-                        <div class="product-item bg-light mb-4">
-                            <div class="product-img position-relative overflow-hidden">
-                                <img class="img-fluid w-100" src="img/product-1.jpg" alt="">
-                                <div class="product-action">
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-center py-4">
-                                <a class="h6 text-decoration-none text-truncate" href="">Product Name Goes Here</a>
-                                <div class="d-flex align-items-center justify-content-center mt-2">
-                                    <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-center mb-1">
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small>(99)</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
 
     <!-- Shop End -->
 
