@@ -242,7 +242,15 @@
             <h3 class="font-weight-semi-bold mb-4">฿<?php echo $product['Price']; ?></h3>
             <p class="mb-4"><?php echo $product['p_description']; ?></p>
 
-            <h3 class="font-weight-semi-bold"><?php echo $product['Detail']; ?></h3>
+            
+            <div class="row px-xl-5">
+            <div class="col">
+                <div class="bg-light p-30">
+                <h3 class="font-weight-semi-bold"><?php echo $product['Detail']; ?></h3>
+                </div>
+            </div>
+        </div>
+
 
             <div class="d-flex align-items-center mb-4 pt-2">
                 <div class="input-group quantity mr-3" style="width: 130px;">
