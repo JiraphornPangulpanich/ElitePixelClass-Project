@@ -444,7 +444,7 @@ $rs = mysqli_query($conn , $sql);
                     <div class="text-center py-4">
                         <a class="h6 text-decoration-none text-truncate" href="">
                             <?php
-                                $sql = "SELECT Iditem, Name FROM Product WHERE Name = ' Gconic A98 Ultra'";
+                                $sql = "SELECT Iditem FROM Product WHERE Iditem = '101'";
                                 $result = $conn->query($sql);
 
                                 if ($result->num_rows > 0) {
