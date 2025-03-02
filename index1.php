@@ -470,6 +470,22 @@ $rs = mysqli_query($conn , $sql);
                                 }
                             ?></h5><h6 class="text-muted ml-2"><del>$4,500.00</del></h6>
                         </div>
+                        <div>
+                            <h3>เหลือ</h3>
+                            <?php
+                                $sql = "SELECT Iditem, Num FROM Product WHERE Name = ' Gconic A98 Ultra'";
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                echo $row["Num"] . "<br>";
+                                }
+                                } else {
+                                    echo "ไม่พบข้อมูล";
+                                }
+                            ?>
+                            <h3>ชิ้น</h3>
+                        </div>
                         <div class="d-flex align-items-center justify-content-center mb-1">
                             <small class="fa fa-star text-primary mr-1"></small>
                             <small class="fa fa-star text-primary mr-1"></small>
