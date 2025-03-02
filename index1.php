@@ -471,7 +471,7 @@ $rs = mysqli_query($conn , $sql);
                             ?></h5><h6 class="text-muted ml-2"><del>$4,500.00</del></h6>
                         </div>
                         <div class="d-flex align-items-center justify-content-center mt-2">
-                            <p>เหลือ</p>
+                            <p>เหลือ</p><br>
                             <?php
                                 $sql = "SELECT Iditem, Num FROM Product WHERE Name = ' Gconic A98 Ultra'";
                                 $result = $conn->query($sql);
@@ -483,7 +483,7 @@ $rs = mysqli_query($conn , $sql);
                                 } else {
                                     echo "ไม่พบข้อมูล";
                                 }
-                            ?><p>ชิ้น</p>
+                            ?><br><p>ชิ้น</p>
                         </div>
                         <div class="d-flex align-items-center justify-content-center mb-1">
                             <small class="fa fa-star text-primary mr-1"></small>
