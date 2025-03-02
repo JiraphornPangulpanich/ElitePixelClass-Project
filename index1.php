@@ -440,7 +440,7 @@ $rs = mysqli_query($conn , $sql);
                         </div>
                     </div>
                     <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">
+                        <a class="h6 text-decoration-none text-truncate" href="detail1.php?Iditem=101">
                             <?php
                                 $sql = "SELECT Iditem, Name FROM Product WHERE Iditem = '101'";
                                 $result = $conn->query($sql);
@@ -506,7 +506,7 @@ $rs = mysqli_query($conn , $sql);
                         </div>
                     </div>
                     <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">
+                        <a class="h6 text-decoration-none text-truncate" href="detail1.php?Iditem=201">
                             <?php
                                 $sql = "SELECT Iditem, Name FROM Product WHERE Iditem = '201'";
                                 $result = $conn->query($sql);
@@ -573,7 +573,7 @@ $rs = mysqli_query($conn , $sql);
                         </div>
                     </div>
                     <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">
+                        <a class="h6 text-decoration-none text-truncate" href="detail1.php?Iditem=301">
                             <?php
                                 $sql = "SELECT Iditem , Name FROM Product WHERE Iditem = '301'";
                                 $result = $conn->query($sql);
@@ -640,7 +640,7 @@ $rs = mysqli_query($conn , $sql);
                         </div>
                     </div>
                     <div class="text-center py-4">
-                    <a class="h6 text-decoration-none text-truncate" href="">
+                    <a class="h6 text-decoration-none text-truncate" href="detail1.php?Iditem=401">
                             <?php
                                 $sql = "SELECT Iditem , Name FROM Product WHERE Iditem = '401'";
                                 $result = $conn->query($sql);
@@ -744,7 +744,7 @@ $rs = mysqli_query($conn , $sql);
                         </div>
                     </div>
                     <div class="text-center py-4">
-                    <a class="h6 text-decoration-none text-truncate" href="">
+                    <a class="h6 text-decoration-none text-truncate" href="detail1.php?Iditem=802">
                             <?php
                                 $sql = "SELECT Iditem , Name FROM Product WHERE Iditem = '802'";
                                 $result = $conn->query($sql);
@@ -811,7 +811,7 @@ $rs = mysqli_query($conn , $sql);
                         </div>
                     </div>
                     <div class="text-center py-4">
-                    <a class="h6 text-decoration-none text-truncate" href="">
+                    <a class="h6 text-decoration-none text-truncate" href="detail1.php?Iditem=402">
                             <?php
                                 $sql = "SELECT Iditem , Name FROM Product WHERE Iditem = '402'";
                                 $result = $conn->query($sql);
@@ -878,7 +878,7 @@ $rs = mysqli_query($conn , $sql);
                         </div>
                     </div>
                     <div class="text-center py-4">
-                    <a class="h6 text-decoration-none text-truncate" href="">
+                    <a class="h6 text-decoration-none text-truncate" href="detail1.php?Iditem=401">
                             <?php
                                 $sql = "SELECT Iditem , Name FROM Product WHERE Iditem = '401'";
                                 $result = $conn->query($sql);
@@ -945,7 +945,7 @@ $rs = mysqli_query($conn , $sql);
                         </div>
                     </div>
                     <div class="text-center py-4">
-                    <a class="h6 text-decoration-none text-truncate" href="">
+                    <a class="h6 text-decoration-none text-truncate" href="detail1.php?Iditem=701">
                             <?php
                                 $sql = "SELECT Iditem , Name FROM Product WHERE Iditem = '701'";
                                 $result = $conn->query($sql);
@@ -1012,7 +1012,7 @@ $rs = mysqli_query($conn , $sql);
                         </div>
                     </div>
                     <div class="text-center py-4">
-                    <a class="h6 text-decoration-none text-truncate" href="">
+                    <a class="h6 text-decoration-none text-truncate" href="detail1.php?Iditem=702">
                             <?php
                                 $sql = "SELECT Iditem , Name FROM Product WHERE Iditem = '702'";
                                 $result = $conn->query($sql);
@@ -1079,7 +1079,7 @@ $rs = mysqli_query($conn , $sql);
                         </div>
                     </div>
                     <div class="text-center py-4">
-                    <a class="h6 text-decoration-none text-truncate" href="">
+                    <a class="h6 text-decoration-none text-truncate" href="detail1.php?Iditem=602">
                             <?php
                                 $sql = "SELECT Iditem , Name FROM Product WHERE Iditem = '602'";
                                 $result = $conn->query($sql);
@@ -1146,7 +1146,7 @@ $rs = mysqli_query($conn , $sql);
                         </div>
                     </div>
                     <div class="text-center py-4">
-                    <a class="h6 text-decoration-none text-truncate" href="">
+                    <a class="h6 text-decoration-none text-truncate" href="detail1.php?Iditem=601">
                             <?php
                                 $sql = "SELECT Iditem , Name FROM Product WHERE Iditem = '601'";
                                 $result = $conn->query($sql);
@@ -1213,7 +1213,7 @@ $rs = mysqli_query($conn , $sql);
                         </div>
                     </div>
                     <div class="text-center py-4">
-                    <a class="h6 text-decoration-none text-truncate" href="">
+                    <a class="h6 text-decoration-none text-truncate" href="detail1.php?Iditem=901">
                             <?php
                                 $sql = "SELECT Iditem , Name FROM Product WHERE Iditem = '901'";
                                 $result = $conn->query($sql);
