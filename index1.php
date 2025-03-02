@@ -424,28 +424,6 @@ $rs = mysqli_query($conn , $sql);
 
 ?>
 
-<?php
-include_once("connectdb.php"); // เชื่อมต่อฐานข้อมูล
-
-$product_name = "Gconic A98 Ultra"; 
-$product_name = mysqli_real_escape_string($conn, $product_name); 
-
-$sql = "SELECT Iditem FROM Product WHERE Name = '$product_name'";
-$rs = mysqli_query($conn, $sql);
-
-if (!$rs) {
-    die("เกิดข้อผิดพลาด: " . mysqli_error($conn)); // แสดง error ถ้า query ผิดพลาด
-}
-
-$data = mysqli_fetch_assoc($rs);
-
-if ($data) {
-    echo "ID สินค้า: " . htmlspecialchars($data['Iditem']);
-} else {
-    echo "ไม่พบสินค้า";
-}
-?>
-?>
 
 
     <!-- Products Start -->
