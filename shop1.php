@@ -230,12 +230,19 @@ if (!$result) {
 if (mysqli_num_rows($result) == 0) {
     echo "ไม่มีสินค้าที่ตรงกับหมวดหมู่นี้";
 } else {
+    echo '<div class="container mt-4">';  // เปิด container สำหรับการจัดระเบียบสินค้า
+    echo '<div class="row">';  // เริ่มแถวใหม่สำหรับการแสดงสินค้า
+
     // เริ่มแสดงผลข้อมูล
     while ($row = mysqli_fetch_assoc($result)) {
+        // สร้างรูปภาพที่สัมพันธ์กับ iditem
+        $imageSrc = 'img/' . $row['iditem'] . '.jpg';
+
+        // แสดงสินค้าในหมวดหมู่ที่เลือก
         echo '<div class="col-lg-4 col-md-6 col-sm-12 pb-4">';
         echo '    <div class="product-item bg-light mb-4 p-3">';
         echo '        <div class="product-img position-relative overflow-hidden">';
-        echo '            <img class="img-fluid w-100" src="img/' . $row['iditem'] . '.jpg" alt="' . $row['Name'] . '">';
+        echo '            <img class="img-fluid w-100" src="' . $imageSrc . '" alt="' . $row['Name'] . '">';
         echo '            <div class="product-action">';
         echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>';
         echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>';
@@ -260,6 +267,9 @@ if (mysqli_num_rows($result) == 0) {
         echo '    </div>';
         echo '</div>';
     }
+
+    echo '</div>';  // ปิดแถว
+    echo '</div>';  // ปิด container
 }
 
 // ปิดการเชื่อมต่อฐานข้อมูล
