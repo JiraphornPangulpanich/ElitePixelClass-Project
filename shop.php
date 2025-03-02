@@ -165,7 +165,7 @@
 include_once("connectdb.php");
 
 // รับค่าหมวดหมู่จาก URL หรือใช้ค่า default
-$categoryToShow = isset($_GET['Categories']) ? $_GET['Categories'] : 'default_value';
+$categoryToShow = '1,2,3,4,5,6,7,8,9';
 
 // คำสั่ง SQL ดึงข้อมูลหมวดหมู่ ชื่อสินค้า, ราคาสินค้า, iditem และรูปภาพ
 $sql = "SELECT iditem, Categories, Name, Price FROM Product WHERE Categories = '$categoryToShow' ORDER BY Name";
