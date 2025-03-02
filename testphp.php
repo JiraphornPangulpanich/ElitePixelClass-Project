@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "qq123456";
-$dbname = "Product";
+$dbname = "ElitePixel";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
