@@ -209,11 +209,21 @@
             </div>
             <!-- Shop Sidebar End -->
 
-<?php
+            <?php
 include_once("connectdb.php");
 
-$sql = "SELECT * FROM Product WHERE CategoryId = $categoryId";
+$sql = "SELECT Category FROM Poduct ORDER BY Category ASC";
+$result = mysqli_query($conn, $sql);
+
+if (!$result) {
+    die("Query failed: " . mysqli_error($conn));
+}
+
+while ($row = mysqli_fetch_assoc($result)) {
+    echo "รหัสหมวดหมู่: " . $row['Category'] . " - " . $row['Name'] . "<br>";
+}
 ?>
+
 
 
     <!-- Shop End -->
