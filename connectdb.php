@@ -8,7 +8,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "qq123456";
-$dbname = "your_database_name";
+$dbname = "Name";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
