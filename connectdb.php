@@ -14,9 +14,9 @@ $conn = new mysqli($servername, $username, $password);
 
 // Check connection
 if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
+  die("เชื่อมต่อไม่สำเร็จ: " . $conn->connect_error);
 }
-echo "Connected successfully";
+echo "เชื่อมต่อสำเร็จ";
 ?>
 </body>
 </html>
