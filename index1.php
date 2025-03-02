@@ -484,8 +484,8 @@ $rs = mysqli_query($conn , $sql);
                                     } else {
                                         echo "ไม่พบข้อมูล";
                                     }
-                                ?></h6>&nbsp 
-                            <h6>บาท</h6>
+                                ?></h6>
+                            <h6 style="font-size: 14px;">&nbsp  บาท</h6>
                         </div>
                         <div class="d-flex align-items-center justify-content-center mb-1">
                             <small class="fa fa-star text-primary mr-1"></small>
