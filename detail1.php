@@ -248,9 +248,6 @@
                 <h3 class="font-weight-semi-bold" style="font-size: 12px;"><?php echo $product['Detail']; ?></h3>
                 </div>
             </div>
-        </div>
-
-
             <div class="d-flex align-items-center mb-4 pt-2">
                 <div class="input-group quantity mr-3" style="width: 130px;">
                     <div class="input-group-btn">
@@ -269,6 +266,10 @@
                     <i class="fa fa-shopping-cart mr-1"></i> Add To Cart
                 </button>
             </div>
+        </div>
+
+
+            
         </div>
     </div>
                     
