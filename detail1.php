@@ -164,20 +164,54 @@
 
 
     <!-- Shop Detail Start -->
-    <div class="container-fluid pb-5">
+    <?php
+    include_once("connectdb.php");
+
+    // รับ p_id จาก URL
+    if (isset($_GET['p_id'])) {
+        $p_id = $_GET['p_id'];
+        $sql = "SELECT * FROM trendy WHERE p_id = $p_id";
+        $result = mysqli_query($conn, $sql);
+        $product = mysqli_fetch_array($result);
+
+        // ตรวจสอบว่าเจอข้อมูลหรือไม่
+        if ($product) {
+            $image_pattern = "img/trendy/{$p_id}*.*"; // ค้นหารูปภาพที่มีรูปแบบ 1.jpg, 1.1.jpg, 1.2.jpg
+            $product_images = glob($image_pattern); // ดึงรายการไฟล์ที่ตรงกับ pattern
+        } else {
+            echo "Product not found!";
+            exit;
+        }
+    } else {
+        echo "Invalid product ID!";
+        exit;
+    }
+    ?>
+
+
+    <!-- Shop Detail Start -->
+    <div class="container-fluid py-5">
         <div class="row px-xl-5">
-            <div class="col-lg-5 mb-30">
+            <div class="col-lg-5 pb-5">
                 <div id="product-carousel" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner bg-light">
-                        <div class="carousel-item active">
-                            <img class="w-100 h-100" src="img/k1-1.jpg" alt="Image">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="w-100 h-100" src="img/k1-2.jpg" alt="Image">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="w-100 h-100" src="img/k1-3.jpg" alt="Image">
-                        </div>
+                    <div class="carousel-inner border">
+                    <?php
+                        if (!empty($product_images)) {
+                            foreach ($product_images as $key => $image) {
+                                $activeClass = ($key === 0) ? "active" : "";
+                                echo "
+                                <div class='carousel-item $activeClass'>
+                                    <img class='img-fluid w-100' src='$image' alt='Product Image'>
+                                </div>";
+                            }
+                        } else {
+                            echo "
+                            <div class='carousel-item active'>
+                                <img class='img-fluid w-100' src='img/no-image.jpg' alt='No Image Available'>
+                            </div>";
+                            echo "<p>No images found for product ID: $p_id</p>"; // แสดงข้อความดีบัก
+                        }
+                        ?>
                     </div>
                     <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
                         <i class="fa fa-2x fa-angle-left text-dark"></i>
@@ -187,24 +221,44 @@
                     </a>
                 </div>
             </div>
+    <!-- Shop Detail Start -->
 
-            <div class="col-lg-7 h-auto mb-30">
-                <div class="h-100 bg-light p-30">
-                    <h3>Neolution E-Sport Mandala</h3>
-                    <div class="d-flex mb-3">
-                        <div class="text-primary mr-2">
-                            <small class="fas fa-star"></small>
-                            <small class="fas fa-star"></small>
-                            <small class="fas fa-star"></small>
-                            <small class="fas fa-star-half-alt"></small>
-                            <small class="far fa-star"></small>
-                        </div>
-                        <small class="pt-1">(99 Reviews)</small>
+
+        <div class="col-lg-7 pb-5">
+            <!-- ดึงข้อมูลสินค้า -->
+            <h3 class="font-weight-semi-bold"><?php echo $product['p_name']; ?></h3>
+            <div class="d-flex mb-3">
+                <div class="text-primary mr-2">
+                    <small class="fas fa-star"></small>
+                    <small class="fas fa-star"></small>
+                    <small class="fas fa-star"></small>
+                    <small class="fas fa-star-half-alt"></small>
+                    <small class="far fa-star"></small>
+                </div>
+            </div>
+            <h3 class="font-weight-semi-bold mb-4">฿<?php echo $product['p_price']; ?></h3>
+            <p class="mb-4"><?php echo $product['p_description']; ?></p>
+
+            <div class="d-flex align-items-center mb-4 pt-2">
+                <div class="input-group quantity mr-3" style="width: 130px;">
+                    <div class="input-group-btn">
+                        <button class="btn btn-primary btn-minus">
+                            <i class="fa fa-minus"></i>
+                        </button>
                     </div>
-                    <h3 class="font-weight-semi-bold mb-4">$2,190.00</h3>
-                    <p class="mb-4">A healthy gaming chair that will make you play games more comfortably and without back pain.</p>
-                    
-                    
+                    <input type="text" class="form-control bg-secondary text-center" value="1">
+                    <div class="input-group-btn">
+                        <button class="btn btn-primary btn-plus">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <button class="btn btn-primary px-3">
+                    <i class="fa fa-shopping-cart mr-1"></i> Add To Cart
+                </button>
+            </div>
+        </div>
+    </div>
                     <div class="d-flex align-items-center mb-4 pt-2">
                         <div class="input-group quantity mr-3" style="width: 130px;">
                             <div class="input-group-btn">
