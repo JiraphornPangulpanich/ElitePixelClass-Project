@@ -246,7 +246,7 @@
             <div class="row px-xl-5">
             <div class="col">
                 <div class="bg-light p-30">
-                <h3 class="font-weight-semi-bold"><?php echo $product['Detail']; ?></h3>
+                <h3 class="font-weight-semi-bold" style="font-size: 12px;"><?php echo $product['Detail']; ?></h3>
                 </div>
             </div>
         </div>
