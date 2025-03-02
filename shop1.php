@@ -213,7 +213,7 @@
 include_once("connectdb.php");
 
 // คำสั่ง SQL ดึงข้อมูลหมวดหมู่ ชื่อสินค้า และรูปภาพ
-$sql = "SELECT Categories, Name, Image, Price FROM Product ORDER BY Categories";
+$sql = "SELECT Categories, Name , Price FROM Product ORDER BY Categories";
 
 // รันคำสั่ง SQL
 $result = mysqli_query($conn, $sql);
