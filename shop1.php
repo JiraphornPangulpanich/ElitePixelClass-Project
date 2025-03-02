@@ -212,16 +212,26 @@
             <?php
 include_once("connectdb.php");
 
-$sql = "SELECT Categories, Name FROM Product ORDER BY Categoryies"
+// แก้ไขคำสั่ง SQL (แก้ไขชื่อคอลัมน์ใน ORDER BY และเพิ่มเครื่องหมายเซมิโคลอน)
+$sql = "SELECT Categories, Name FROM Product ORDER BY Categories";
 
+$result = mysqli_query($conn, $sql); // รันคำสั่ง SQL
+
+// ตรวจสอบผลลัพธ์จากการรันคำสั่ง SQL
 if (!$result) {
-    die("Query failed: " . mysqli_error($conn));
+    die("คำสั่งล้มเหลว: " . mysqli_error($conn));
 }
 
+// ดึงข้อมูลจากผลลัพธ์และแสดงผล
 while ($row = mysqli_fetch_assoc($result)) {
     echo "รหัสหมวดหมู่: " . $row['Categories'] . " - " . $row['Name'] . "<br>";
 }
+
+// ล้างผลลัพธ์และปิดการเชื่อมต่อ (แนะนำให้ทำเพื่อการจัดการทรัพยากร)
+mysqli_free_result($result);
+mysqli_close($conn);
 ?>
+
 
 
 
