@@ -425,9 +425,10 @@ $rs = mysqli_query($conn , $sql);
 ?>
 
 <?php
-include_once("connectdb.php");
+include_once("connectdb.php"); // เชื่อมต่อฐานข้อมูล
 
-$product_name = "Gconic A98 Ultra"; // ระบุชื่อสินค้าที่ต้องการ
+$product_name = "Gconic A98 Ultra"; // กำหนดชื่อสินค้าที่ต้องการค้นหา
+$product_name = mysqli_real_escape_string($conn, $product_name); // ป้องกัน SQL Injection
 
 $sql = "SELECT Name FROM Product WHERE Name = '$product_name'";
 $rs = mysqli_query($conn, $sql);
@@ -435,14 +436,15 @@ $rs = mysqli_query($conn, $sql);
 if ($rs) {
     $data = mysqli_fetch_assoc($rs);
     if ($data) {
-        echo "<h2>" . htmlspecialchars($data['Name']) . "</h2>";
+        echo htmlspecialchars($data['Name']); // แสดงเฉพาะชื่อสินค้า
     } else {
-        echo "<h2>ไม่พบสินค้าที่ต้องการ</h2>";
+        echo "ไม่พบสินค้า";
     }
 } else {
-    echo "<h2>เกิดข้อผิดพลาดในการดึงข้อมูล</h2>";
+    echo "เกิดข้อผิดพลาด: " . mysqli_error($conn);
 }
 ?>
+
 
     <!-- Products Start -->
     <div class="container-fluid pt-5 pb-3">
