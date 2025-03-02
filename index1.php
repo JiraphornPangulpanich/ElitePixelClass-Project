@@ -449,7 +449,7 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        echo "Id: " . $row["Iditem"] . " - Name: " . $row["Name"] . "<br>";
+        echo $row["Name"] . "<br>";
     }
 } else {
     echo "ไม่พบข้อมูล";
