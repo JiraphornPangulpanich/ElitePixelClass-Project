@@ -427,22 +427,24 @@ $rs = mysqli_query($conn , $sql);
 <?php
 include_once("connectdb.php"); // เชื่อมต่อฐานข้อมูล
 
-$Product_Name = "Gconic A98 Ultra"; // ระบุชื่อสินค้าที่ต้องการค้นหา
-$Product_Name = mysqli_real_escape_string($conn, $Product_Name); // ป้องกัน SQL Injection
+$product_name = "Gconic A98 Ultra"; 
+$product_name = mysqli_real_escape_string($conn, $product_name); 
 
-$sql = "SELECT Iditem FROM Product WHERE Name = '$Product_Name'"; // ดึง iditem
+$sql = "SELECT Iditem FROM Product WHERE Name = '$product_name'";
 $rs = mysqli_query($conn, $sql);
 
-if ($rs) {
-    $data = mysqli_fetch_assoc($rs);
-    if ($data) {
-        echo "ID สินค้า: " . htmlspecialchars($data['Iditem']); // แสดงค่า iditem
-    } else {
-        echo "ไม่พบสินค้า";
-    }
-} else {
-    echo "เกิดข้อผิดพลาด: " . mysqli_error($conn);
+if (!$rs) {
+    die("เกิดข้อผิดพลาด: " . mysqli_error($conn)); // แสดง error ถ้า query ผิดพลาด
 }
+
+$data = mysqli_fetch_assoc($rs);
+
+if ($data) {
+    echo "ID สินค้า: " . htmlspecialchars($data['Iditem']);
+} else {
+    echo "ไม่พบสินค้า";
+}
+?>
 ?>
 
 
