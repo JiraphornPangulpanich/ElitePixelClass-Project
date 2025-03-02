@@ -215,8 +215,8 @@ include_once("connectdb.php");
 // กำหนดหมวดหมู่ที่ต้องการแสดง
 $categoryToShow = "1"; // เปลี่ยนชื่อหมวดหมู่ที่ต้องการ
 
-// คำสั่ง SQL ดึงข้อมูลหมวดหมู่ ชื่อสินค้า และรูปภาพ
-$sql = "SELECT Categories, Name, Price FROM Product WHERE Categories = '$categoryToShow' ORDER BY Name";
+// คำสั่ง SQL ดึงข้อมูลหมวดหมู่ ชื่อสินค้า, ราคาสินค้า และ iditem
+$sql = "SELECT iditem, Categories, Name, Price FROM Product WHERE Categories = '$categoryToShow' ORDER BY Name";
 
 // รันคำสั่ง SQL
 $result = mysqli_query($conn, $sql);
@@ -234,8 +234,10 @@ if (mysqli_num_rows($result) == 0) {
     
     // เริ่มแสดงผลข้อมูล
     while ($row = mysqli_fetch_assoc($result)) {
-        // ตรวจสอบว่ามีข้อมูลภาพหรือไม่
-        $imageSrc = isset($row['Image']) && !empty($row['Image']) ? 'img/' . $row['Image'] : 'img/default-image.jpg';
+        // ตรวจสอบว่ามีข้อมูลภาพหรือไม่ และใช้ iditem เป็นชื่อไฟล์
+        $imageSrc = isset($row['Iditem']) && !empty($row['Iditem']) 
+            ? 'img/' . $row['Iditem'] . '.jpg' // ใช้ iditem เป็นชื่อไฟล์รูปภาพ
+            : 'img/default-image.jpg';  // ถ้าไม่มีภาพให้ใช้ภาพ default
 
         // แสดงสินค้าในหมวดหมู่ที่เลือก
         echo '<div class="col-lg-4 col-md-6 col-sm-12 pb-4">';  // แบ่งเป็นคอลัมน์ให้แสดงต่อกัน
@@ -274,6 +276,7 @@ if (mysqli_num_rows($result) == 0) {
 mysqli_free_result($result);
 mysqli_close($conn);
 ?>
+
 
 
 
