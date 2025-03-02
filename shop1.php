@@ -216,7 +216,7 @@ include_once("connectdb.php");
 $categoryToShow = "1"; // เปลี่ยนชื่อหมวดหมู่ที่ต้องการ
 
 // คำสั่ง SQL ดึงข้อมูลหมวดหมู่ ชื่อสินค้า และรูปภาพ
-$sql = "SELECT Categories, Name , Price FROM Product WHERE Categories = '$categoryToShow' ORDER BY Name";
+$sql = "SELECT Categories, Name, Image, Price FROM Product WHERE Categories = '$categoryToShow' ORDER BY Name";
 
 // รันคำสั่ง SQL
 $result = mysqli_query($conn, $sql);
@@ -232,16 +232,14 @@ if (mysqli_num_rows($result) == 0) {
 } else {
     // เริ่มแสดงผลข้อมูล
     while ($row = mysqli_fetch_assoc($result)) {
-        // แสดงข้อมูลเพื่อตรวจสอบค่าที่ได้จากฐานข้อมูล
-        echo "<pre>";
-        print_r($row); // ดูข้อมูลที่ดึงมาจากฐานข้อมูล
-        echo "</pre>";
+        // ตรวจสอบว่ามีข้อมูลภาพหรือไม่
+        $imageSrc = isset($row['Image']) && !empty($row['Image']) ? 'img/' . $row['Image'] : 'img/default-image.jpg';
 
         // แสดงสินค้าในหมวดหมู่ที่เลือก
         echo '<div class="col-lg-4 col-md-6 col-sm-6 pb-1">';
         echo '    <div class="product-item bg-light mb-4">';
         echo '        <div class="product-img position-relative overflow-hidden">';
-        echo '            <img class="img-fluid w-100" src="img/' . $row['Image'] . '" alt="' . $row['Name'] . '">';
+        echo '            <img class="img-fluid w-100" src="' . $imageSrc . '" alt="' . $row['Name'] . '">';
         echo '            <div class="product-action">';
         echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>';
         echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>';
@@ -272,6 +270,7 @@ if (mysqli_num_rows($result) == 0) {
 mysqli_free_result($result);
 mysqli_close($conn);
 ?>
+
 
 
     <!-- Shop End -->
