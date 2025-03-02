@@ -472,18 +472,19 @@ $rs = mysqli_query($conn , $sql);
                         </div>
                         <div class="d-flex align-items-center justify-content-center mt-2">
                             <h6 style="font-size: 14px;">เหลือ<h6>
-                            <h6 style="font-size: 14px;" <?php
-                                $sql = "SELECT Iditem, Num FROM Product WHERE Name = ' Gconic A98 Ultra'";
-                                $result = $conn->query($sql);
+                            <h6 style="font-size: 14px;">
+                                <?php
+                                    $sql = "SELECT Iditem, Num FROM Product WHERE Name = ' Gconic A98 Ultra'";
+                                    $result = $conn->query($sql);
 
-                                if ($result->num_rows > 0) {
-                                while ($row = $result->fetch_assoc()) {
-                                echo $row["Num"] . "<br>";
-                                }
-                                } else {
-                                    echo "ไม่พบข้อมูล";
-                                }
-                            ?>>
+                                    if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                    echo $row["Num"] . "<br>";
+                                    }
+                                    } else {
+                                        echo "ไม่พบข้อมูล";
+                                    }
+                                ?>
                             ชิ้น</h6>
                         </div>
                         <div class="d-flex align-items-center justify-content-center mb-1">
