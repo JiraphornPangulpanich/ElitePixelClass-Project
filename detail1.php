@@ -243,11 +243,7 @@
             <p class="mb-4"><?php echo $product['p_description']; ?></p>
 
             
-            <div class="col">
-                <div class="bg-light p-30">
-                <h3 class="font-weight-semi-bold" style="font-size: 12px;"><?php echo $product['Detail']; ?></h3>
-                </div>
-            </div>
+            
             <div class="d-flex align-items-center mb-4 pt-2">
                 <div class="input-group quantity mr-3" style="width: 130px;">
                     <div class="input-group-btn">
@@ -283,11 +279,7 @@
                     </div>
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="tab-pane-1">
-                            <h4 class="mb-3">Product Description</h4>
-                            <p>เก้าอี้เกมมิ่ง Neolution E-Sport Mandala การออกแบบเอาใจชาวเกมมิ่ง เบาะอัดแน่นด้วย Original Foam ให้ความนุ่มสบายเวลานั่ง รับน้ำหนักได้ถึง 100-120 KG ปรับเอนได้ถึง 180 องศา นอนหลับได้สบาย</p>
-                            <p>- เบาะหุ้มด้วยหนัง PVC ทนทาน ใช้งานได้ยาวนาน</p>
-                            <p>- โครงสร้างหนาแน่น มีความแข็งแรง</p>
-                            <p>- ปรับระดับความสูง-ต่ำ ได้ 7-10 CM</p>
+                        <h3 class="font-weight-semi-bold" style="font-size: 12px;"><?php echo $product['Detail']; ?></h3>
                         </div>
                         
                         <div class="tab-pane fade" id="tab-pane-3">
