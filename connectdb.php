@@ -8,10 +8,10 @@
 $servername = "localhost";
 $username = "root";
 $password = "qq123456";
+$dbname = "ElitePixel";
 
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-// Create connection
-$conn = new mysqli($servername, $username, $password);
 
 // Check connection
 if ($conn->connect_error) {
