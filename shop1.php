@@ -212,8 +212,11 @@
             <?php
 include_once("connectdb.php");
 
+// กำหนดหมวดหมู่ที่ต้องการแสดง
+$categoryToShow = "Electronics"; // เปลี่ยนชื่อหมวดหมู่ที่ต้องการ
+
 // คำสั่ง SQL ดึงข้อมูลหมวดหมู่ ชื่อสินค้า และรูปภาพ
-$sql = "SELECT Categories, Name , Price FROM Product ORDER BY Categories";
+$sql = "SELECT Categories, Name, Image, Price FROM Product WHERE Categories = '$categoryToShow' ORDER BY Name";
 
 // รันคำสั่ง SQL
 $result = mysqli_query($conn, $sql);
@@ -223,18 +226,9 @@ if (!$result) {
     die("คำสั่งล้มเหลว: " . mysqli_error($conn));
 }
 
-// ตัวแปรเก็บหมวดหมู่ที่กำลังแสดง
-$currentCategory = "";
-
 // เริ่มแสดงผลข้อมูล
 while ($row = mysqli_fetch_assoc($result)) {
-    // ถ้าหมวดหมู่เปลี่ยน แสดงหัวข้อหมวดหมู่ใหม่
-    if ($currentCategory != $row['Categories']) {
-        $currentCategory = $row['Categories'];
-        echo "<h2>หมวดหมู่: " . $currentCategory . "</h2>";
-    }
-
-    // แสดงสินค้าในหมวดหมู่
+    // แสดงสินค้าในหมวดหมู่ที่เลือก
     echo '<div class="col-lg-4 col-md-6 col-sm-6 pb-1">';
     echo '    <div class="product-item bg-light mb-4">';
     echo '        <div class="product-img position-relative overflow-hidden">';
