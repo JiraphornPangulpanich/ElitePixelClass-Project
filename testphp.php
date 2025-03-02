@@ -33,7 +33,7 @@ if ($result->num_rows > 0) {
 }
 
 
-$sql = "SELECT Iditem, Name FROM items WHERE Name = ' Gconic A98 Ultra'";
+$sql = "SELECT Iditem, Name FROM Product WHERE Name = ' Gconic A98 Ultra'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
