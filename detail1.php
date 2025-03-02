@@ -242,6 +242,8 @@
             <h3 class="font-weight-semi-bold mb-4">฿<?php echo $product['Price']; ?></h3>
             <p class="mb-4"><?php echo $product['p_description']; ?></p>
 
+            <h3 class="font-weight-semi-bold"><?php echo $product['Detail']; ?></h3>
+
             <div class="d-flex align-items-center mb-4 pt-2">
                 <div class="input-group quantity mr-3" style="width: 130px;">
                     <div class="input-group-btn">
