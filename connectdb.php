@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
- 
-</head>
-<body>
 <?php
 $servername = "localhost";
 $username = "root";
@@ -19,5 +13,3 @@ if ($conn->connect_error) {
 }
 echo "เชื่อมต่อสำเร็จ";
 ?>
-</body>
-</html>
