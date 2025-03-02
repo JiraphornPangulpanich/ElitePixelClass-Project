@@ -442,7 +442,7 @@ $rs = mysqli_query($conn , $sql);
                     <div class="text-center py-4">
                         <a class="h6 text-decoration-none text-truncate" href="">
                             <?php
-                                $sql = "SELECT Iditem, Name FROM Product WHERE Name = ' Gconic A98 Ultra'";
+                                $sql = "SELECT Iditem, Name FROM Product WHERE Iditem = '101'";
                                 $result = $conn->query($sql);
 
                                 if ($result->num_rows > 0) {
@@ -455,8 +455,8 @@ $rs = mysqli_query($conn , $sql);
                             ?>
                         </a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5><?php
-                                $sql = "SELECT Iditem, Price FROM Product WHERE Name = ' Gconic A98 Ultra'";
+                            <h5 class="text-muted ml-2"><?php
+                                $sql = "SELECT Iditem, Price FROM Product WHERE Iditem = '101'";
                                 $result = $conn->query($sql);
 
                                 if ($result->num_rows > 0) {
@@ -472,7 +472,7 @@ $rs = mysqli_query($conn , $sql);
                             <h6 style="font-size: 12px; ">เหลือ &nbsp <h6>
                             <h6 style="font-size: 12px; ">
                                 <?php
-                                    $sql = "SELECT Iditem, Num FROM Product WHERE Name = ' Gconic A98 Ultra'";
+                                    $sql = "SELECT Iditem, Num FROM Product WHERE Iditem = '101'";
                                     $result = $conn->query($sql);
 
                                     if ($result->num_rows > 0) {
@@ -508,7 +508,7 @@ $rs = mysqli_query($conn , $sql);
                     <div class="text-center py-4">
                         <a class="h6 text-decoration-none text-truncate" href="">
                             <?php
-                                $sql = "SELECT Iditem, Name FROM Product WHERE Name = 'Asus Zenbook S 14 '";
+                                $sql = "SELECT Iditem, Name FROM Product WHERE Iditem = '201'";
                                 $result = $conn->query($sql);
 
                                 if ($result->num_rows > 0) {
@@ -521,8 +521,8 @@ $rs = mysqli_query($conn , $sql);
                             ?>
                         </a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5><?php
-                                $sql = "SELECT Iditem, Price FROM Product WHERE Name = 'Asus Zenbook S 14 '";
+                            <h5 class="text-muted ml-2"><?php
+                                $sql = "SELECT Iditem, Price FROM Product WHERE Iditem = '201'";
                                 $result = $conn->query($sql);
 
                                 if ($result->num_rows > 0) {
