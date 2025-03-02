@@ -216,10 +216,6 @@ $sql = "SELECT * FROM 'Product' ORDER BY 'Iditem' ASC";
 $rs = mysqli_query($conn , $sql);
 ?>
 
-        <?php
-        while ($data = mysqli_fetch_array($rs)){
-
-        ?>
             <!-- Shop Product Start -->
             <div class="col-lg-9 col-md-8">
                 <div class="row pb-3">
