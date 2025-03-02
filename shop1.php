@@ -209,13 +209,11 @@
             </div>
             <!-- Shop Sidebar End -->
        
-       <?php
-// แสดงค่าพารามิเตอร์ที่รับมาใน URL
-if (isset($_GET['Categories'])) {
-    echo "หมวดหมู่ที่รับจาก URL: " . $_GET['Categories'];
-} else {
-    echo "ไม่มีหมวดหมู่ใน URL";
-}
+            <?php
+// แสดงข้อมูลทั้งหมดของ $_GET
+echo '<pre>';
+print_r($_GET);
+echo '</pre>';
 ?>
 
 
