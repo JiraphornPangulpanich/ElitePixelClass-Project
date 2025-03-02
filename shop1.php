@@ -212,7 +212,7 @@
             <?php
 include_once("connectdb.php");
 
-$sql = "SELECT Category FROM Poduct ORDER BY Category ASC";
+$sql = "SELECT Category, Name FROM Product ORDER BY Category ASC";
 $result = mysqli_query($conn, $sql);
 
 if (!$result) {
