@@ -164,11 +164,8 @@
     <?php
 include_once("connectdb.php");
 
-// รับค่าหมวดหมู่จาก URL หรือใช้ค่า default
-$categoryToShow = '1,2,3,4,5,6,7,8,9';
-
-// คำสั่ง SQL ดึงข้อมูลหมวดหมู่ ชื่อสินค้า, ราคาสินค้า, iditem และรูปภาพ
-$sql = "SELECT iditem, Categories, Name, Price FROM Product WHERE Categories = '$categoryToShow' ORDER BY Name";
+// คำสั่ง SQL ดึงข้อมูลทั้งหมดจากตาราง Product
+$sql = "SELECT iditem, Categories, Name, Price FROM Product ORDER BY Name";
 
 // รันคำสั่ง SQL
 $result = mysqli_query($conn, $sql);
@@ -180,7 +177,7 @@ if (!$result) {
 
 // ตรวจสอบว่ามีข้อมูลที่ได้จากการ query หรือไม่
 if (mysqli_num_rows($result) == 0) {
-    echo "ไม่มีสินค้าที่ตรงกับหมวดหมู่นี้";
+    echo "ไม่มีสินค้าทั้งหมดในฐานข้อมูล";
 } else {
     // เริ่มแสดงผลในกริด
     echo '<div class="container mt-4">';
@@ -189,7 +186,7 @@ if (mysqli_num_rows($result) == 0) {
     // เริ่มแสดงผลข้อมูลสินค้า
     while ($row = mysqli_fetch_assoc($result)) {
         // สร้างรูปภาพที่สัมพันธ์กับ iditem
-        $imageSrc = 'img/' . $row['iditem'] . '.jpg';
+        $imageSrc = 'img/' . $row['iditem'] . '.jpg';  // รูปภาพที่มีชื่อเป็น iditem
 
         // แสดงสินค้าในรูปแบบของกริด
         echo '<div class="col-lg-4 col-md-6 col-sm-12 pb-4">';  // จัดเป็นคอลัมน์
