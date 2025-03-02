@@ -63,9 +63,9 @@
         </div>
         <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
             <div class="col-lg-4">
-                <a href="" class="text-decoration-none">
-                    <span class="h1 text-uppercase text-primary bg-dark px-2">Multi</span>
-                    <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Shop</span>
+                <a href="index1.php" class="text-decoration-none">
+                    <span class="h1 text-uppercase text-primary bg-dark px-2">Elite</span>
+                    <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Pixel</span>
                 </a>
             </div>
             <div class="col-lg-4 col-6 text-left">
@@ -90,7 +90,7 @@
 
 
     <!-- Navbar Start -->
-    div class="container-fluid bg-dark mb-30">
+    <div class="container-fluid bg-dark mb-30">
         <div class="row px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
                 <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
@@ -153,7 +153,8 @@
             <div class="col-12">
                 <nav class="breadcrumb bg-light mb-30">
                     <a class="breadcrumb-item text-dark" href="#">Home</a>
-                    <span class="breadcrumb-item active">Contact</span>
+                    <a class="breadcrumb-item text-dark" href="#">Shop</a>
+                    <span class="breadcrumb-item active">Shop List</span>
                 </nav>
             </div>
         </div>
@@ -161,57 +162,61 @@
     <!-- Breadcrumb End -->
 
 
-    <!-- Contact Start -->
+    <!-- Shop Start -->
     <div class="container-fluid">
-        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Contact Us</span></h2>
         <div class="row px-xl-5">
-            <div class="col-lg-7 mb-5">
-                <div class="contact-form bg-light p-30">
-                    <div id="success"></div>
-                    <form name="sentMessage" id="contactForm" novalidate="novalidate">
-                        <div class="control-group">
-                            <input type="text" class="form-control" id="name" placeholder="Your Name"
-                                required="required" data-validation-required-message="Please enter your name" />
-                            <p class="help-block text-danger"></p>
+            <!-- Shop Sidebar Start -->
+            <div class="col-lg-3 col-md-4">
+                <!-- Price Start -->
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by price</span></h5>
+                <div class="bg-light p-4 mb-30">
+                    <form>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" checked id="price-all">
+                            <label class="custom-control-label" for="price-all">All Price</label>
+                            <span class="badge border font-weight-normal">24</span>
                         </div>
-                        <div class="control-group">
-                            <input type="email" class="form-control" id="email" placeholder="Your Email"
-                                required="required" data-validation-required-message="Please enter your email" />
-                            <p class="help-block text-danger"></p>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="price-1">
+                            <label class="custom-control-label" for="price-1">$0 - $1000</label>
+                            <span class="badge border font-weight-normal">2</span>
                         </div>
-                        <div class="control-group">
-                            <input type="text" class="form-control" id="subject" placeholder="Subject"
-                                required="required" data-validation-required-message="Please enter a subject" />
-                            <p class="help-block text-danger"></p>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="price-2">
+                            <label class="custom-control-label" for="price-2">$1000 - $4000</label>
+                            <span class="badge border font-weight-normal">10</span>
                         </div>
-                        <div class="control-group">
-                            <textarea class="form-control" rows="8" id="message" placeholder="Message"
-                                required="required"
-                                data-validation-required-message="Please enter your message"></textarea>
-                            <p class="help-block text-danger"></p>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="price-3">
+                            <label class="custom-control-label" for="price-3">$4000 - $6000</label>
+                            <span class="badge border font-weight-normal">10</span>
                         </div>
-                        <div>
-                            <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Send
-                                Message</button>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="price-4">
+                            <label class="custom-control-label" for="price-4">$6000 - $8000</label>
+                            <span class="badge border font-weight-normal">5</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
+                            <input type="checkbox" class="custom-control-input" id="price-5">
+                            <label class="custom-control-label" for="price-5">$8000 <</label>
+                            <span class="badge border font-weight-normal">7</span>
                         </div>
                     </form>
                 </div>
+                <!-- Price End -->
+                   
             </div>
-            <div class="col-lg-5 mb-5">
-                <div class="bg-light p-30 mb-30">
-                    <iframe style="width: 100%; height: 250px;"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3830.5414260290718!2d103.24647197490806!3d16.243998284461114!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3122a6a4f3069f8b%3A0xf02b541f28931c0!2z4Lih4Lir4Liy4Lin4Li04LiX4Lii4Liy4Lil4Lix4Lii4Lih4Lir4Liy4Liq4Liy4Lij4LiE4Liy4Lih!5e0!3m2!1sth!2sth!4v1740337678500!5m2!1sth!2sth"
-                    frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-                </div>
-                <div class="bg-light p-30 mb-3">
-                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, Mahasarakham, moja</p>
-                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>ElitePixel@example.com</p>
-                    <p class="mb-2"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Contact End -->
+            <!-- Shop Sidebar End -->
+       
+
+
+
+
+
+
+
+
+    <!-- Shop End -->
 
 
     <!-- Footer Start -->
