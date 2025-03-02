@@ -32,6 +32,19 @@ if ($result->num_rows > 0) {
     echo "0 results";
 }
 
+
+$sql = "SELECT Iditem, Name FROM items WHERE Name = ' Gconic A98 Ultra'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo "Id: " . $row["Iditem"] . " - Name: " . $row["Name"] . "<br>";
+    }
+} else {
+    echo "ไม่พบข้อมูล";
+}
+
+$conn->close();
 // ปิดการเชื่อมต่อ
 $conn->close();
 ?>
