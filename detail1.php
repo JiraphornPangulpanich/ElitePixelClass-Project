@@ -243,7 +243,6 @@
             <p class="mb-4"><?php echo $product['p_description']; ?></p>
 
             
-            <div class="row px-xl-5">
             <div class="col">
                 <div class="bg-light p-30">
                 <h3 class="font-weight-semi-bold" style="font-size: 12px;"><?php echo $product['Detail']; ?></h3>
