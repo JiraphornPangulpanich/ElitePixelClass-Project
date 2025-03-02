@@ -558,7 +558,7 @@ $rs = mysqli_query($conn , $sql);
                     <div class="text-center py-4">
                         <a class="h6 text-decoration-none text-truncate" href="">
                             <?php
-                                $sql = "SELECT Iditem FROM Product WHERE Iditem = '301'";
+                                $sql = "SELECT Iditem , Name FROM Product WHERE Iditem = '301'";
                                 $result = $conn->query($sql);
 
                                 if ($result->num_rows > 0) {
