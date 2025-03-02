@@ -213,7 +213,7 @@
 include_once("connectdb.php");
 
 // กำหนดหมวดหมู่ที่ต้องการแสดง
-$categoryToShow = "Electronics"; // เปลี่ยนชื่อหมวดหมู่ที่ต้องการ
+$categoryToShow = "1"; // เปลี่ยนชื่อหมวดหมู่ที่ต้องการ
 
 // คำสั่ง SQL ดึงข้อมูลหมวดหมู่ ชื่อสินค้า และรูปภาพ
 $sql = "SELECT Categories, Name , Price FROM Product WHERE Categories = '$categoryToShow' ORDER BY Name";
