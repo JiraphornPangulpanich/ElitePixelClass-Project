@@ -216,8 +216,8 @@ include_once("connectdb.php");
 $categoryToShow = "1"; // เปลี่ยนชื่อหมวดหมู่ที่ต้องการ
 
 // ตรวจสอบว่าได้รับ Iditem จาก URL หรือไม่
-if (isset($_GET['Iditem'])) {
-    $Iditem = $_GET['Iditem'];  // ดึงค่า Iditem จาก URL
+if (isset($_GET['Categoies'])) {
+    $Iditem = $_GET['Categoies'];  // ดึงค่า Iditem จาก URL
     $sql = "SELECT iditem, Categories, Name, Price FROM Product WHERE iditem = '$Iditem' AND Categories = '$categoryToShow'"; // ค้นหาสินค้าเฉพาะตัวที่ตรงกับ Iditem
 
     // รันคำสั่ง SQL
