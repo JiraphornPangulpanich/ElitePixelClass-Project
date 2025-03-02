@@ -287,7 +287,8 @@ mysqli_close($conn);
 
 
     <!-- Footer Start -->
-    <div class="container-fluid bg-dark text-secondary mt-5 pt-5 w-100">
+  <!-- Footer Start -->
+<div class="bg-dark text-secondary mt-5 pt-5 w-100">
     <div class="row px-xl-5 pt-5">
         <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
             <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
@@ -318,6 +319,7 @@ mysqli_close($conn);
                     <h5 class="text-secondary text-uppercase mb-4">Newsletter</h5>
                     <p>Please contact us as soon as possible.</p>
                     <form action="">
+
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Your Email Address">
                             <div class="input-group-append">
@@ -337,6 +339,7 @@ mysqli_close($conn);
         </div>
     </div>
 </div>
+<!-- Footer End -->
 
     <!-- Footer End -->
 
