@@ -429,7 +429,7 @@ include_once("connectdb.php");
 
 $product_name = "Gconic A98 Ultra"; // ระบุชื่อสินค้าที่ต้องการ
 
-$sql = "SELECT Name FROM Product WHERE Name = '$product_name'";
+$sql = "SELECT Name FROM Product WHERE Name = '$Product_Name'";
 $rs = mysqli_query($conn, $sql);
 
 if ($rs) {
