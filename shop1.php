@@ -212,13 +212,13 @@
 <?php
 include_once("connectdb.php");
 
-mysqli_query($conn, $category_sql);
-$category_result = mysqli_query($conn, $category_sql);
+mysqli_query($conn, $Category_sql);
+$Category_result = mysqli_query($conn, $Category_sql);
 
-if (mysqli_num_rows($category_result) == 0) {
+if (mysqli_num_rows($Category_result) == 0) {
     die("ไม่มีข้อมูลหมวดหมู่ในฐานข้อมูล");
 } else {
-    echo "พบหมวดหมู่ " . mysqli_num_rows($category_result) . " รายการ<br>";
+    echo "พบหมวดหมู่ " . mysqli_num_rows($Category_result) . " รายการ<br>";
 }
 ?>
 
