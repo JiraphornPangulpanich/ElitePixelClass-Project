@@ -791,24 +791,64 @@ $rs = mysqli_query($conn , $sql);
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/gs1-1.jpg" alt="">
+                        <img class="img-fluid w-100" src="img/401.1.jpg" alt="">
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
                         </div>
                     </div>
                     <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">Neolution E-Sport Mandala</a>
+                    <a class="h6 text-decoration-none text-truncate" href="">
+                            <?php
+                                $sql = "SELECT Iditem , Name FROM Product WHERE Iditem = '401'";
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                echo $row["Name"] . "<br>";
+                                }
+                                } else {
+                                    echo "ไม่พบข้อมูล";
+                                }
+                            ?>
+                        </a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>$2,190.00</h5><h6 class="text-muted ml-2"><del>$2,200.00</del></h6>
+                            <h5 class="text-muted ml-2">$<?php
+                                $sql = "SELECT Iditem, Price FROM Product WHERE Iditem = '401'";
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                echo $row["Price"] . "<br>";
+                                }
+                                } else {
+                                    echo "ไม่พบข้อมูล";
+                                }
+                                ?>
+                            </h5><h6 class="text-muted ml-2"><del>$3,000.00</del></h6>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center mt-2">
+                            <h6 style="font-size: 12px; ">เหลือ &nbsp <h6>
+                            <h6 style="font-size: 12px; ">
+                                <?php
+                                    $sql = "SELECT Iditem, Num FROM Product WHERE Iditem = '401'";
+                                    $result = $conn->query($sql);
+
+                                    if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                    echo $row["Num"] . "<br>";
+                                    }
+                                    } else {
+                                        echo "ไม่พบข้อมูล";
+                                    }
+                                ?></h6>
+                            <h6 style="font-size: 12px; ">&nbsp  ชิ้น</h6>
                         </div>
                         <div class="d-flex align-items-center justify-content-center mb-1">
                             <small class="fa fa-star text-primary mr-1"></small>
                             <small class="fa fa-star text-primary mr-1"></small>
                             <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star-half-alt text-primary mr-1"></small>
+                            <small class="far fa-star text-primary mr-1"></small>
                             <small class="far fa-star text-primary mr-1"></small>
                             <small>(99)</small>
                         </div>
