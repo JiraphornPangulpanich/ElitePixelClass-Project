@@ -214,6 +214,27 @@ include_once("connectdb.php");
 
 $sql = "SELECT * FROM Product ORDER BY Iditem ASC";
 $rs = mysqli_query($conn, $sql);
+
+if (isset($_GET['Iditem'])) {
+    // แก้ไขตัวแปรที่ใช้เป็น $Iitem ไม่ใช่ $Iditem
+    $Iditem = $_GET['Iditem'];  // แก้ไขเป็นตัวแปรเดียวกับที่ใช้ใน SQL
+    $sql = "SELECT * FROM Product WHERE Iditem = $Iditem";
+    $result = mysqli_query($conn, $sql);
+    $product = mysqli_fetch_array($result);
+
+    // ตรวจสอบว่าเจอข้อมูลหรือไม่
+    if ($product) {
+        // ตรวจสอบรูปภาพจากชื่อไฟล์ที่ตรงกับ pattern
+        $image_pattern = "img/{$Iditem}*.*"; // ค้นหารูปภาพที่มีรูปแบบ 1.jpg, 1.1.jpg, 1.2.jpg
+        $product_images = glob($image_pattern); // ดึงรายการไฟล์ที่ตรงกับ pattern
+    } else {
+        echo "Product not found!";
+        exit;
+    }
+} else {
+    echo "Invalid product ID!";
+    exit;
+}
 ?>
 
 <!-- Shop Product Start -->
