@@ -443,7 +443,18 @@ $rs = mysqli_query($conn , $sql);
                     </div>
                     <div class="text-center py-4">
                         <a class="h6 text-decoration-none text-truncate" href="">
-                        item
+                            <?php
+                        $sql = "SELECT Iditem, Name FROM Product WHERE Name = ' Gconic A98 Ultra'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo "Id: " . $row["Iditem"] . " - Name: " . $row["Name"] . "<br>";
+    }
+} else {
+    echo "ไม่พบข้อมูล";
+}
+?>
                         </a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
                             <h5>$3,990.00</h5><h6 class="text-muted ml-2"><del>$4,500.00</del></h6>
