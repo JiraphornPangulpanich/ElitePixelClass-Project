@@ -471,8 +471,8 @@ $rs = mysqli_query($conn , $sql);
                             ?></h5><h6 class="text-muted ml-2"><del>$4,500.00</del></h6>
                         </div>
                         <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h6 style="font-size: 8px;">เหลือ &nbsp <h6>
-                            <h6 style="font-size: 8px;">
+                            <h6 style="font-size: 12px;">เหลือ &nbsp <h6>
+                            <h6 style="font-size: 12px;">
                                 <?php
                                     $sql = "SELECT Iditem, Num FROM Product WHERE Name = ' Gconic A98 Ultra'";
                                     $result = $conn->query($sql);
@@ -485,7 +485,7 @@ $rs = mysqli_query($conn , $sql);
                                         echo "ไม่พบข้อมูล";
                                     }
                                 ?></h6>
-                            <h6 style="font-size: 8px;">&nbsp  ชิ้น</h6>
+                            <h6 style="font-size: 12px;">&nbsp  ชิ้น</h6>
                         </div>
                         <div class="d-flex align-items-center justify-content-center mb-1">
                             <small class="fa fa-star text-primary mr-1"></small>
