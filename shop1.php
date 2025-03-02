@@ -228,16 +228,13 @@ $rs = mysqli_query($conn, $sql);
             </div>
         </div>
 
-        <?php while ($data = mysqli_fetch_assoc($rs)) { ?>
+        <?php while ($data = mysqli_fetch_assoc($rs)) { 
+            echo "ID: " . $data['Iditem'] . " | Ext: " . $data['Ext'] . "<br>";
+            ?>
             <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
-                        <img 
-                            src="img/<?php echo $data['Iditem']; ?>.<?php echo $data['Ext']; ?>" 
-                            alt="<?php echo $data['Name']; ?>" 
-                            class="img-fluid w-100" 
-                            style="max-height: 300px; object-fit: cover; border-radius: 5px;"
-                        >
+                         <img src="img/<?php echo $data['Iditem']; ?>.<?php echo $data['Ext']; ?>">
                         <div class="product-action">
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
