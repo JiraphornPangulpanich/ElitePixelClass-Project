@@ -229,7 +229,7 @@
 
         <div class="col-lg-7 pb-5">
             <!-- ดึงข้อมูลสินค้า -->
-            <h3 class="font-weight-semi-bold"><?php echo $product['p_name']; ?></h3>
+            <h3 class="font-weight-semi-bold"><?php echo $product['Iditem']; ?></h3>
             <div class="d-flex mb-3">
                 <div class="text-primary mr-2">
                     <small class="fas fa-star"></small>
@@ -239,7 +239,7 @@
                     <small class="far fa-star"></small>
                 </div>
             </div>
-            <h3 class="font-weight-semi-bold mb-4">฿<?php echo $product['p_price']; ?></h3>
+            <h3 class="font-weight-semi-bold mb-4">฿<?php echo $product['Price']; ?></h3>
             <p class="mb-4"><?php echo $product['p_description']; ?></p>
 
             <div class="d-flex align-items-center mb-4 pt-2">
