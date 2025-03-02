@@ -208,17 +208,16 @@
                    
             </div>
             <!-- Shop Sidebar End -->
-
             <?php
 include_once("connectdb.php");
 
 // กำหนดหมวดหมู่ที่ต้องการแสดง
-$categoryToShow = "1"; // เปลี่ยนชื่อหมวดหมู่ที่ต้องการ
+$categoryToShow = "1"; // หมวดหมู่ที่คุณต้องการแสดง
 
-// ตรวจสอบว่าได้รับ Iditem จาก URL หรือไม่
-if (isset($_GET['Categoies'])) {
-    $Iditem = $_GET['Categoies'];  // ดึงค่า Iditem จาก URL
-    $sql = "SELECT iditem, Categories, Name, Price FROM Product WHERE iditem = '$Iditem' AND Categories = '$categoryToShow'"; // ค้นหาสินค้าเฉพาะตัวที่ตรงกับ Iditem
+// ตรวจสอบว่าได้รับ Categories จาก URL หรือไม่
+if (isset($_GET['Categories'])) {
+    $categoryToShow = $_GET['Categories'];  // ดึงค่าหมวดหมู่จาก URL
+    $sql = "SELECT iditem, Categories, Name, Price FROM Product WHERE Categories = '$categoryToShow' ORDER BY Name"; // ดึงสินค้าจากหมวดหมู่ที่ต้องการ
 
     // รันคำสั่ง SQL
     $result = mysqli_query($conn, $sql);
@@ -230,53 +229,56 @@ if (isset($_GET['Categoies'])) {
 
     // ตรวจสอบว่ามีข้อมูลที่ได้จากการ query หรือไม่
     if (mysqli_num_rows($result) == 0) {
-        echo "ไม่มีสินค้าที่ตรงกับรหัสหรือหมวดหมู่นี้";
+        echo "ไม่มีสินค้าที่ตรงกับหมวดหมู่นี้";
     } else {
-        // แสดงสินค้าที่ตรงกับ Iditem ที่ได้รับมา
-        $row = mysqli_fetch_assoc($result);
-        
-        // ใช้ Iditem เป็นชื่อไฟล์รูปภาพ (เช่น 101.jpg)
-        $imageSrc = 'img/' . $row['iditem'] . '.jpg';
-        
         echo '<div class="row">';  // เริ่มแถวใหม่สำหรับการแสดงสินค้า
-        echo '    <div class="col-lg-4 col-md-6 col-sm-12 pb-4">';
-        echo '        <div class="product-item bg-light mb-4 p-3">';
-        echo '            <div class="product-img position-relative overflow-hidden">';
-        echo '                <img class="img-fluid w-100" src="' . $imageSrc . '" alt="' . $row['Name'] . '">';
-        echo '                <div class="product-action">';
-        echo '                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>';
-        echo '                    <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>';
-        echo '                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>';
-        echo '                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>';
-        echo '                </div>';
-        echo '            </div>';
-        echo '            <div class="text-center py-4">';
-        echo '                <a class="h6 text-decoration-none text-truncate" href="">' . $row['Name'] . '</a>';
-        echo '                <div class="d-flex align-items-center justify-content-center mt-2">';
-        echo '                    <h5>$' . $row['Price'] . '</h5>';
-        echo '                </div>';
-        echo '                <div class="d-flex align-items-center justify-content-center mb-1">';
-        echo '                    <small class="fa fa-star text-primary mr-1"></small>';
-        echo '                    <small class="fa fa-star text-primary mr-1"></small>';
-        echo '                    <small class="fa fa-star text-primary mr-1"></small>';
-        echo '                    <small class="fa fa-star text-primary mr-1"></small>';
-        echo '                    <small class="fa fa-star text-primary mr-1"></small>';
-        echo '                    <small>(99)</small>';
-        echo '                </div>';
-        echo '            </div>';
-        echo '        </div>';
-        echo '    </div>';
-        echo '</div>';
+        
+        // เริ่มแสดงผลข้อมูล
+        while ($row = mysqli_fetch_assoc($result)) {
+            // ใช้ iditem เป็นชื่อไฟล์รูปภาพ (เช่น 101.jpg)
+            $imageSrc = 'img/' . $row['iditem'] . '.jpg';  // กำหนดพาธไฟล์รูปภาพที่ใช้ชื่อเดียวกับ iditem
+            
+            echo '<div class="col-lg-4 col-md-6 col-sm-12 pb-4">';
+            echo '    <div class="product-item bg-light mb-4 p-3">';
+            echo '        <div class="product-img position-relative overflow-hidden">';
+            echo '            <img class="img-fluid w-100" src="' . $imageSrc . '" alt="' . $row['Name'] . '">';
+            echo '            <div class="product-action">';
+            echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>';
+            echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>';
+            echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>';
+            echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>';
+            echo '            </div>';
+            echo '        </div>';
+            echo '        <div class="text-center py-4">';
+            echo '            <a class="h6 text-decoration-none text-truncate" href="">' . $row['Name'] . '</a>';
+            echo '            <div class="d-flex align-items-center justify-content-center mt-2">';
+            echo '                <h5>$' . $row['Price'] . '</h5>';
+            echo '            </div>';
+            echo '            <div class="d-flex align-items-center justify-content-center mb-1">';
+            echo '                <small class="fa fa-star text-primary mr-1"></small>';
+            echo '                <small class="fa fa-star text-primary mr-1"></small>';
+            echo '                <small class="fa fa-star text-primary mr-1"></small>';
+            echo '                <small class="fa fa-star text-primary mr-1"></small>';
+            echo '                <small class="fa fa-star text-primary mr-1"></small>';
+            echo '                <small>(99)</small>';
+            echo '            </div>';
+            echo '        </div>';
+            echo '    </div>';
+            echo '</div>';
+        }
+
+        echo '</div>';  // ปิดแถว
     }
 
     // ปิดการเชื่อมต่อฐานข้อมูล
     mysqli_free_result($result);
 } else {
-    echo "ไม่มีรหัสสินค้าใน URL";
+    echo "ไม่มีหมวดหมู่ใน URL";
 }
 
 mysqli_close($conn);
 ?>
+
 
 
 
