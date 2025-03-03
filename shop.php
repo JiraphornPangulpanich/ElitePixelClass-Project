@@ -163,16 +163,17 @@
 
 
 
-    <div class="container">
-    <div class="row px-xl-5">
+    <div class="container-fluid">
+    <div class="row mx-0"> <!-- ลบการ padding และ margin ที่อาจจะทำให้มีช่องว่าง -->
         <!-- Shop Sidebar Start -->
-        <div class="col-lg-3 col-md-4">
+        <div class="col-lg-3 col-md-4 px-0"> <!-- ลบ padding ในคอลัมน์เพื่อให้พอดีกับหน้าจอ -->
             <!-- Price Filter Start -->
             <h5 class="section-title position-relative text-uppercase mb-3">
                 <span class="bg-secondary pr-3">Filter by price</span>
             </h5>
             <div class="bg-light p-4 mb-30">
                 <form>
+                    <!-- ฟิลเตอร์ราคาสินค้า -->
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input" checked id="price-all">
                         <label class="custom-control-label" for="price-all">All Price</label>
@@ -210,8 +211,8 @@
         <!-- Shop Sidebar End -->
 
         <!-- Shop Product Grid Start -->
-        <div class="col-lg-9 col-md-8">
-            <div class="row">
+        <div class="col-lg-9 col-md-8 px-0"> <!-- ลบ padding ในคอลัมน์เพื่อให้พอดีกับหน้าจอ -->
+            <div class="row mx-0"> <!-- ลบการ padding และ margin -->
                 <?php
                 include_once("connectdb.php");
 
@@ -239,7 +240,7 @@
                         $imageFiles = glob($imagePattern);
                         $imageSrc = !empty($imageFiles) ? $imageFiles[0] : 'img/default.jpg';
 
-                        echo '<div class="col-lg-4 col-md-6 col-sm-12 pb-4">';
+                        echo '<div class="col-lg-4 col-md-6 col-sm-12 pb-4 px-1">'; <!-- ลดช่องว่างระหว่างสินค้า -->
                         echo '    <div class="product-item bg-light mb-4 p-3">';
                         echo '        <div class="product-img position-relative overflow-hidden">';
                         echo '            <img class="img-fluid w-100" src="' . $imageSrc . '" alt="' . $row['Name'] . '">';
@@ -311,6 +312,7 @@
         <!-- Shop Product Grid End -->
     </div>
 </div>
+
 
 <!-- Footer Start -->
 <footer class="container-fluid bg-dark text-secondary mt-5 pt-5">
