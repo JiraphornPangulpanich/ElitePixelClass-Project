@@ -162,52 +162,57 @@
     <!-- Breadcrumb End -->
 
 
-    <!-- Shop Start -->
-    <div class="container-fluid">
-        <div class="row px-xl-5">
-            <!-- Shop Sidebar Start -->
-            <div class="col-lg-3 col-md-4">
-                <!-- Price Start -->
-                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by price</span></h5>
-                <div class="bg-light p-4 mb-30">
-                    <form>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" checked id="price-all">
-                            <label class="custom-control-label" for="price-all">All Price</label>
-                            <span class="badge border font-weight-normal">24</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-1">
-                            <label class="custom-control-label" for="price-1">$0 - $1000</label>
-                            <span class="badge border font-weight-normal">2</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-2">
-                            <label class="custom-control-label" for="price-2">$1000 - $4000</label>
-                            <span class="badge border font-weight-normal">10</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-3">
-                            <label class="custom-control-label" for="price-3">$4000 - $6000</label>
-                            <span class="badge border font-weight-normal">10</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-4">
-                            <label class="custom-control-label" for="price-4">$6000 - $8000</label>
-                            <span class="badge border font-weight-normal">5</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                            <input type="checkbox" class="custom-control-input" id="price-5">
-                            <label class="custom-control-label" for="price-5">$8000 <</label>
-                            <span class="badge border font-weight-normal">7</span>
-                        </div>
-                    </form>
-                </div>
-                <!-- Price End -->
-                   
+
+<!-- Shop Start -->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <!-- Shop Sidebar Start -->
+        <div class="col-lg-3 col-md-4">
+            <!-- Price Filter Start -->
+            <h5 class="section-title position-relative text-uppercase mb-3">
+                <span class="bg-secondary pr-3">Filter by price</span>
+            </h5>
+            <div class="bg-light p-4 mb-30">
+                <form>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" checked id="price-all">
+                        <label class="custom-control-label" for="price-all">All Price</label>
+                        <span class="badge border font-weight-normal">24</span>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" id="price-1">
+                        <label class="custom-control-label" for="price-1">$0 - $1000</label>
+                        <span class="badge border font-weight-normal">2</span>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" id="price-2">
+                        <label class="custom-control-label" for="price-2">$1000 - $4000</label>
+                        <span class="badge border font-weight-normal">10</span>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" id="price-3">
+                        <label class="custom-control-label" for="price-3">$4000 - $6000</label>
+                        <span class="badge border font-weight-normal">10</span>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" id="price-4">
+                        <label class="custom-control-label" for="price-4">$6000 - $8000</label>
+                        <span class="badge border font-weight-normal">5</span>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
+                        <input type="checkbox" class="custom-control-input" id="price-5">
+                        <label class="custom-control-label" for="price-5">$8000 <</label>
+                        <span class="badge border font-weight-normal">7</span>
+                    </div>
+                </form>
             </div>
-            <!-- Shop Sidebar End -->
-       
+            <!-- Price Filter End -->
+        </div>
+        <!-- Shop Sidebar End -->
+
+        <!-- Shop Product Grid Start -->
+        <div class="col-lg-9 col-md-8">
+            <div class="row">
             <?php
 include_once("connectdb.php");
 
@@ -283,20 +288,19 @@ if (mysqli_num_rows($result) == 0) {
 mysqli_free_result($result);
 mysqli_close($conn);
 ?>
-
-
-
-
-
-
+            </div>
+        </div>
+        <!-- Shop Product Grid End -->
+    </div>
+</div>
+<!-- Shop End -->
 
 
     <!-- Shop End -->
 
 
     <!-- Footer Start -->
-  <!-- Footer Start -->
-<div class="bg-dark text-secondary mt-5 pt-5 w-100">
+    <div class="container-fluid bg-dark text-secondary mt-5 pt-5 w-100">
     <div class="row px-xl-5 pt-5">
         <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
             <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
@@ -327,7 +331,6 @@ mysqli_close($conn);
                     <h5 class="text-secondary text-uppercase mb-4">Newsletter</h5>
                     <p>Please contact us as soon as possible.</p>
                     <form action="">
-
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Your Email Address">
                             <div class="input-group-append">
@@ -347,7 +350,6 @@ mysqli_close($conn);
         </div>
     </div>
 </div>
-<!-- Footer End -->
 
     <!-- Footer End -->
 
