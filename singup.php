@@ -3,117 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup</title>
-    <!-- Bootstrap 5 -->
+    <title>Login & Register</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* พื้นหลังหรูหรา Gradient น้ำเงินเข้ม -> ทอง */
         body {
-            background: linear-gradient(to right, #001f3f, #f1c40f);
+            background: linear-gradient(to right, #001f3f, #003366);
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Poppins', sans-serif;
         }
-
-        /* กล่อง Signup */
-        .signup-container {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            padding: 50px;
-            border-radius: 20px;
-            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
-            text-align: center;
-            max-width: 450px;
-            width: 100%;
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+        .card {
+            background: #f1c40f;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            width: 400px;
         }
-
-        /* โลโก้ */
-        .logo {
-            font-size: 32px;
-            font-weight: bold;
-            color: #f1c40f;
-        }
-
-        /* ช่องกรอกข้อมูล */
         .form-control {
-            background: rgba(255, 255, 255, 0.2);
+            background: #fdfdfd;
             border: none;
-            padding: 12px;
-            font-size: 14px;
-            border-radius: 50px;
-            color: white;
-            transition: 0.3s;
+            border-radius: 10px;
         }
-
-        .form-control::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .form-control:focus {
-            background: rgba(255, 255, 255, 0.3);
-            outline: none;
-            box-shadow: none;
-        }
-
-        /* ปุ่มสมัครสมาชิก */
-        .btn-signup {
-            background: linear-gradient(to right, #f1c40f, #ffdb58);
+        .btn-primary {
+            background: #001f3f;
             border: none;
+            border-radius: 10px;
+        }
+        .btn-primary:hover {
+            background: #003366;
+        }
+        .social-icons a {
+            font-size: 20px;
+            margin: 0 10px;
             color: #001f3f;
-            font-weight: bold;
-            padding: 12px;
-            width: 100%;
-            border-radius: 50px;
-            font-size: 16px;
-            transition: 0.3s;
         }
-
-        .btn-signup:hover {
-            background: linear-gradient(to right, #ffdb58, #f1c40f);
-            transform: scale(1.05);
-            box-shadow: 0px 5px 15px rgba(241, 196, 15, 0.5);
-        }
-
-        /* ลิงก์ไปหน้า Login */
-        .login-link {
-            text-decoration: none;
-            color: #f1c40f;
-            font-size: 14px;
-        }
-
-        .login-link:hover {
-            text-decoration: underline;
-        }
-
     </style>
 </head>
 <body>
-
-    <div class="signup-container">
-        <div class="logo mb-4">🌟 Elite Signup</div>
-        <form action="index.php" method="POST">
+    <div class="card p-4">
+        <h3 class="text-center text-dark">ElitePixel</h3>
+        <form action="index.php">
             <div class="mb-3">
-                <input type="text" class="form-control" name="name" placeholder="Full Name" required>
-            </div>
-            <div class="mb-3">
-                <input type="text" class="form-control" name="username" placeholder="Username" required>
+                <input type="text" class="form-control" placeholder="First Name" required>
             </div>
             <div class="mb-3">
-                <input type="password" class="form-control" name="password" placeholder="Password" required>
+                <input type="text" class="form-control" placeholder="Last Name" required>
             </div>
-            <button type="submit" class="btn btn-signup">Sign Up</button>
-            <div class="mt-3">
-                <a href="login.html" class="login-link">Already have an account? Login</a>
+            <div class="mb-3">
+                <input type="number" class="form-control" placeholder="Age" required>
             </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" placeholder="Username" required>
+            </div>
+            <div class="mb-3">
+                <input type="email" class="form-control" placeholder="Email" required>
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Sign Up</button>
         </form>
+        <div class="text-center mt-3">
+            <p>Or sign up with</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-google"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
     </div>
-
 </body>
 </html>
