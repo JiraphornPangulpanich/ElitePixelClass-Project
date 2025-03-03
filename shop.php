@@ -209,6 +209,7 @@
                 <?php
                 include_once("connectdb.php");
 
+                while ($data = mysqli_fetch_array($rs))
                 // กำหนดจำนวนสินค้าต่อหน้า
                 $items_per_page = 9;
 
@@ -239,7 +240,7 @@
                         echo '            <img class="img-fluid w-100" src="' . $imageSrc . '" alt="' . $row['Name'] . '">';
                         echo '            <div class="product-action">';
                         echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>';
-                        echo '                <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem="><i class="fa fa-search"></i></a>';
+                        echo '                <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=<?php echo $data['Iditem']; ?>"><i class="fa fa-search"></i></a>';
                         echo '            </div>';
                         echo '        </div>';
                         echo '        <div class="text-center py-4">';
