@@ -232,8 +232,16 @@ if (mysqli_num_rows($result) == 0) {
 
     // เริ่มแสดงผลข้อมูลสินค้า
     while ($row = mysqli_fetch_assoc($result)) {
-        // สร้างรูปภาพที่สัมพันธ์กับ iditem
-        $imageSrc = 'img/' . $row['iditem'] . '.jpg';  // รูปภาพที่มีชื่อเป็น iditem
+        // ค้นหารูปภาพที่ขึ้นต้นด้วย iditem
+        $imagePattern = 'img/' . $row['iditem'] . '.*'; // ค้นหาไฟล์ที่ขึ้นต้นด้วย iditem เช่น 101.*
+        $imageFiles = glob($imagePattern); // ดึงรายชื่อไฟล์ที่ตรงกับรูปแบบ
+
+        // ตรวจสอบว่าพบไฟล์หรือไม่
+        if (!empty($imageFiles)) {
+            $imageSrc = $imageFiles[0]; // ใช้ไฟล์แรกที่พบ
+        } else {
+            $imageSrc = 'img/default.jpg'; // ใช้รูปเริ่มต้นหากไม่พบไฟล์
+        }
 
         // แสดงสินค้าในรูปแบบของกริด
         echo '<div class="col-lg-4 col-md-6 col-sm-12 pb-4">';  // จัดเป็นคอลัมน์
@@ -274,6 +282,7 @@ if (mysqli_num_rows($result) == 0) {
 mysqli_free_result($result);
 mysqli_close($conn);
 ?>
+
 
 
 
