@@ -247,65 +247,52 @@
                 echo '            <div class="d-flex align-items-center justify-content-center mt-2">';
                 echo '                <h5>$' . $row['Price'] . '</h5>';
                 echo '            </div>';
-                echo '            <div class="d-flex align-items-center justify-content-center mb-1">';
-                echo '                <small class="fa fa-star text-primary mr-1"></small>';
-                echo '                <small class="fa fa-star text-primary mr-1"></small>';
-                echo '                <small class="fa fa-star text-primary mr-1"></small>';
-                echo '                <small class="fa fa-star text-primary mr-1"></small>';
-                echo '                <small class="fa fa-star text-primary mr-1"></small>';
-                echo '                <small>(99)</small>';
-                echo '            </div>';
                 echo '        </div>';
                 echo '    </div>';
                 echo '</div>';
             }
         }
+
         mysqli_free_result($result);
 
-                // คำนวณจำนวนหน้าทั้งหมด
-                $sql_total = "SELECT COUNT(*) AS total FROM Product";
-                $result_total = mysqli_query($conn, $sql_total);
-                $row_total = mysqli_fetch_assoc($result_total);
-                $total_pages = ceil($row_total['total'] / $items_per_page);
+        // คำนวณจำนวนหน้าทั้งหมด
+        $sql_total = "SELECT COUNT(*) AS total FROM Product";
+        $result_total = mysqli_query($conn, $sql_total);
+        $row_total = mysqli_fetch_assoc($result_total);
+        $total_pages = ceil($row_total['total'] / $items_per_page);
 
-                mysqli_free_result($result_total);
-                mysqli_close($conn);
-                ?>
-            </div>
-</div>
-
-
-                
-
-            <!-- Pagination -->
-            <nav>
-                <ul class="pagination justify-content-center">
-                    <!-- ปุ่มย้อนกลับ -->
-                    <li class="page-item <?= ($page <= 1) ? 'disabled' : ''; ?>">
-                        <a class="page-link" href="?page=<?= $page - 1; ?>">
-                            <i class="fa fa-angle-left"></i> ย้อนกลับ
-                        </a>
-                    </li>
-
-                    <!-- ตัวเลขหน้า -->
-                    <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
-                        <li class="page-item <?= ($i == $page) ? 'active' : ''; ?>">
-                            <a class="page-link" href="?page=<?= $i; ?>"><?= $i; ?></a>
-                        </li>
-                    <?php endfor; ?>
-
-                    <!-- ปุ่มหน้าถัดไป -->
-                    <li class="page-item <?= ($page >= $total_pages) ? 'disabled' : ''; ?>">
-                        <a class="page-link" href="?page=<?= $page + 1; ?>">
-                            ถัดไป <i class="fa fa-angle-right"></i>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-        <!-- Shop Product Grid End -->
+        mysqli_free_result($result_total);
+        mysqli_close($conn);
+        ?>
     </div>
+
+    <!-- Pagination -->
+    <nav>
+        <ul class="pagination justify-content-center">
+            <!-- ปุ่มย้อนกลับ -->
+            <li class="page-item <?= ($page <= 1) ? 'disabled' : ''; ?>">
+                <a class="page-link" href="?page=<?= $page - 1; ?>">
+                    <i class="fa fa-angle-left"></i> ย้อนกลับ
+                </a>
+            </li>
+
+            <!-- ตัวเลขหน้า -->
+            <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
+                <li class="page-item <?= ($i == $page) ? 'active' : ''; ?>">
+                    <a class="page-link" href="?page=<?= $i; ?>"><?= $i; ?></a>
+                </li>
+            <?php endfor; ?>
+
+            <!-- ปุ่มหน้าถัดไป -->
+            <li class="page-item <?= ($page >= $total_pages) ? 'disabled' : ''; ?>">
+                <a class="page-link" href="?page=<?= $page + 1; ?>">
+                    ถัดไป <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </div>
+
 
 
     
