@@ -163,127 +163,115 @@
 
 
 
-    <!-- Shop Start -->
-    <div class="container-fluid">
-        <div class="row px-xl-5">
-            <!-- Shop Sidebar Start -->
-            <div class="col-lg-3 col-md-4">
-                <!-- Price Start -->
-                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by price</span></h5>
-                <div class="bg-light p-4 mb-30">
-                    <form>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" checked id="price-all">
-                            <label class="custom-control-label" for="price-all">All Price</label>
-                            <span class="badge border font-weight-normal">24</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-1">
-                            <label class="custom-control-label" for="price-1">$0 - $1000</label>
-                            <span class="badge border font-weight-normal">2</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-2">
-                            <label class="custom-control-label" for="price-2">$1000 - $4000</label>
-                            <span class="badge border font-weight-normal">10</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-3">
-                            <label class="custom-control-label" for="price-3">$4000 - $6000</label>
-                            <span class="badge border font-weight-normal">10</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-4">
-                            <label class="custom-control-label" for="price-4">$6000 - $8000</label>
-                            <span class="badge border font-weight-normal">5</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                            <input type="checkbox" class="custom-control-input" id="price-5">
-                            <label class="custom-control-label" for="price-5">$8000 <</label>
-                            <span class="badge border font-weight-normal">7</span>
-                        </div>
-                    </form>
-                </div>
-                <!-- Price End -->
-                   
+<!-- Shop Start -->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <!-- Shop Sidebar Start -->
+        <div class="col-lg-3 col-md-4">
+            <!-- Price Filter Start -->
+            <h5 class="section-title position-relative text-uppercase mb-3">
+                <span class="bg-secondary pr-3">Filter by price</span>
+            </h5>
+            <div class="bg-light p-4 mb-30">
+                <form>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" checked id="price-all">
+                        <label class="custom-control-label" for="price-all">All Price</label>
+                        <span class="badge border font-weight-normal">24</span>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" id="price-1">
+                        <label class="custom-control-label" for="price-1">$0 - $1000</label>
+                        <span class="badge border font-weight-normal">2</span>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" id="price-2">
+                        <label class="custom-control-label" for="price-2">$1000 - $4000</label>
+                        <span class="badge border font-weight-normal">10</span>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" id="price-3">
+                        <label class="custom-control-label" for="price-3">$4000 - $6000</label>
+                        <span class="badge border font-weight-normal">10</span>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" id="price-4">
+                        <label class="custom-control-label" for="price-4">$6000 - $8000</label>
+                        <span class="badge border font-weight-normal">5</span>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
+                        <input type="checkbox" class="custom-control-input" id="price-5">
+                        <label class="custom-control-label" for="price-5">$8000 <</label>
+                        <span class="badge border font-weight-normal">7</span>
+                    </div>
+                </form>
             </div>
-            <!-- Shop Sidebar End -->
-            
-            <?php
-include_once("connectdb.php");
+            <!-- Price Filter End -->
+        </div>
+        <!-- Shop Sidebar End -->
 
-// คำสั่ง SQL ดึงข้อมูลทั้งหมดจากตาราง Product
-$sql = "SELECT iditem, Categories, Name, Price FROM Product ORDER BY Name";
+        <!-- Shop Product Grid Start -->
+        <div class="col-lg-9 col-md-8">
+            <div class="row">
+                <?php
+                include_once("connectdb.php");
 
-// รันคำสั่ง SQL
-$result = mysqli_query($conn, $sql);
+                // คำสั่ง SQL ดึงข้อมูลทั้งหมดจากตาราง Product
+                $sql = "SELECT iditem, Categories, Name, Price FROM Product ORDER BY Name";
+                $result = mysqli_query($conn, $sql);
 
-// ตรวจสอบว่ารันคำสั่ง SQL สำเร็จหรือไม่
-if (!$result) {
-    die("คำสั่งล้มเหลว: " . mysqli_error($conn));
-}
+                if (!$result) {
+                    die("คำสั่งล้มเหลว: " . mysqli_error($conn));
+                }
 
-// ตรวจสอบว่ามีข้อมูลที่ได้จากการ query หรือไม่
-if (mysqli_num_rows($result) == 0) {
-    echo "ไม่มีสินค้าทั้งหมดในฐานข้อมูล";
-} else {
-    // เริ่มแสดงผลในกริด
-    echo '<div class="container mt-4">';
-    echo '<div class="row">';  // เริ่มแถวใหม่สำหรับการแสดงสินค้า
+                if (mysqli_num_rows($result) == 0) {
+                    echo "<p class='text-center'>ไม่มีสินค้าทั้งหมดในฐานข้อมูล</p>";
+                } else {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        // ค้นหารูปภาพที่ขึ้นต้นด้วย iditem
+                        $imagePattern = 'img/' . $row['iditem'] . '.*';
+                        $imageFiles = glob($imagePattern);
+                        $imageSrc = !empty($imageFiles) ? $imageFiles[0] : 'img/default.jpg';
 
-    // เริ่มแสดงผลข้อมูลสินค้า
-    while ($row = mysqli_fetch_assoc($result)) {
-        // ค้นหารูปภาพที่ขึ้นต้นด้วย iditem
-        $imagePattern = 'img/' . $row['iditem'] . '.*'; // ค้นหาไฟล์ที่ขึ้นต้นด้วย iditem เช่น 101.*
-        $imageFiles = glob($imagePattern); // ดึงรายชื่อไฟล์ที่ตรงกับรูปแบบ
+                        echo '<div class="col-lg-4 col-md-6 col-sm-12 pb-4">';
+                        echo '    <div class="product-item bg-light mb-4 p-3">';
+                        echo '        <div class="product-img position-relative overflow-hidden">';
+                        echo '            <img class="img-fluid w-100" src="' . $imageSrc . '" alt="' . $row['Name'] . '">';
+                        echo '            <div class="product-action">';
+                        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>';
+                        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>';
+                        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>';
+                        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>';
+                        echo '            </div>';
+                        echo '        </div>';
+                        echo '        <div class="text-center py-4">';
+                        echo '            <a class="h6 text-decoration-none text-truncate" href="">' . $row['Name'] . '</a>';
+                        echo '            <div class="d-flex align-items-center justify-content-center mt-2">';
+                        echo '                <h5>$' . $row['Price'] . '</h5>';
+                        echo '            </div>';
+                        echo '            <div class="d-flex align-items-center justify-content-center mb-1">';
+                        echo '                <small class="fa fa-star text-primary mr-1"></small>';
+                        echo '                <small class="fa fa-star text-primary mr-1"></small>';
+                        echo '                <small class="fa fa-star text-primary mr-1"></small>';
+                        echo '                <small class="fa fa-star text-primary mr-1"></small>';
+                        echo '                <small class="fa fa-star text-primary mr-1"></small>';
+                        echo '                <small>(99)</small>';
+                        echo '            </div>';
+                        echo '        </div>';
+                        echo '    </div>';
+                        echo '</div>';
+                    }
+                }
 
-        // ตรวจสอบว่าพบไฟล์หรือไม่
-        if (!empty($imageFiles)) {
-            $imageSrc = $imageFiles[0]; // ใช้ไฟล์แรกที่พบ
-        } else {
-            $imageSrc = 'img/default.jpg'; // ใช้รูปเริ่มต้นหากไม่พบไฟล์
-        }
-
-        // แสดงสินค้าในรูปแบบของกริด
-        echo '<div class="col-lg-4 col-md-6 col-sm-12 pb-4">';  // จัดเป็นคอลัมน์
-        echo '    <div class="product-item bg-light mb-4 p-3">';
-        echo '        <div class="product-img position-relative overflow-hidden">';
-        echo '            <img class="img-fluid w-100" src="' . $imageSrc . '" alt="' . $row['Name'] . '">';
-        echo '            <div class="product-action">';
-        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>';
-        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>';
-        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>';
-        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>';
-        echo '            </div>';
-        echo '        </div>';
-        echo '        <div class="text-center py-4">';
-        echo '            <a class="h6 text-decoration-none text-truncate" href="">' . $row['Name'] . '</a>';
-        echo '            <div class="d-flex align-items-center justify-content-center mt-2">';
-        echo '                <h5>$' . $row['Price'] . '</h5>';
-        echo '            </div>';
-        echo '            <div class="d-flex align-items-center justify-content-center mb-1">';
-        echo '                <small class="fa fa-star text-primary mr-1"></small>';
-        echo '                <small class="fa fa-star text-primary mr-1"></small>';
-        echo '                <small class="fa fa-star text-primary mr-1"></small>';
-        echo '                <small class="fa fa-star text-primary mr-1"></small>';
-        echo '                <small class="fa fa-star text-primary mr-1"></small>';
-        echo '                <small>(99)</small>';
-        echo '            </div>';
-        echo '        </div>';
-        echo '    </div>';
-        echo '</div>';
-    }
-
-    // ปิดแถว
-    echo '</div>';
-    echo '</div>';
-}
-
-// ปิดการเชื่อมต่อฐานข้อมูล
-mysqli_free_result($result);
-mysqli_close($conn);
-?>
-
+                mysqli_free_result($result);
+                mysqli_close($conn);
+                ?>
+            </div>
+        </div>
+        <!-- Shop Product Grid End -->
+    </div>
+</div>
+<!-- Shop End -->
 
 
     <!-- Shop End -->
