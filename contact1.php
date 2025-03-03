@@ -27,8 +27,8 @@
 </head>
 
 <body>
-    <!-- Topbar Start -->
-    <div class="container-fluid">
+   <!-- Topbar Start -->
+   <div class="container-fluid">
         <div class="row bg-secondary py-1 px-xl-5">
             <div class="col-lg-6 d-none d-lg-block">
                 
@@ -86,7 +86,7 @@
 
 
     <!-- Navbar Start -->
-    div class="container-fluid bg-dark mb-30">
+    
         <div class="row px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
                 <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
