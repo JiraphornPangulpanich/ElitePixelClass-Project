@@ -1,98 +1,81 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-    <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
     <style>
-        /* พื้นหลังไล่เฉดสี น้ำเงิน -> เหลือง */
         body {
-            background: linear-gradient(to right, #002855, #ffcc00);
-            height: 100vh;
+            background: linear-gradient(135deg, #001f3f, #00509e);
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Poppins', sans-serif;
+            height: 100vh;
         }
-        
-        /* กล่องล็อกอิน */
-        .login-container {
-            background: white;
-            padding: 50px;
-            border-radius: 15px;
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            max-width: 400px;
+        .card {
+            background: #fdd835;
+            border-radius: 10px;
+            padding: 30px;
+            width: 350px;
+            position: relative;
+            box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.2);
+        }
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 10px;
             width: 100%;
+            height: 100%;
+            background: #ffc107;
+            border-radius: 10px;
+            z-index: -1;
         }
-
-        /* โลโก้ */
-        .logo {
-            font-size: 30px;
-            font-weight: bold;
-            color: #002855;
-        }
-
-        /* ปุ่มล็อกอิน */
-        .btn-login {
-            background-color: #ffcc00;
-            border: none;
-            color: #002855;
-            font-weight: bold;
-            padding: 12px;
-            width: 100%;
-            border-radius: 50px;
-            transition: 0.3s;
-            font-size: 16px;
-        }
-
-        .btn-login:hover {
-            background-color: #ffd633;
-        }
-
-        /* ช่องกรอกข้อมูล */
         .form-control {
-            border-radius: 50px;
-            border: 1.5px solid #002855;
-            padding: 12px;
-            font-size: 14px;
+            border-radius: 5px;
+            border: 2px solid #001f3f;
         }
-
-        /* ลิงก์ Forgot Password */
-        .forgot-password {
-            text-decoration: none;
-            color: #002855;
-            font-size: 14px;
+        .btn-primary {
+            background: #001f3f;
+            border: none;
+            transition: 0.3s;
         }
-
-        .forgot-password:hover {
-            text-decoration: underline;
+        .btn-primary:hover {
+            background: #003366;
         }
-
+        .social-icons a {
+            margin: 5px;
+            color: #001f3f;
+            font-size: 20px;
+        }
     </style>
 </head>
 <body>
-
-    <div class="login-container">
-        <div class="logo mb-3">🔒 Login</div>
-        <form action="index1.php" method="POST">
-            <div class="mb-3">
-                <input type="text" class="form-control" placeholder="Username" required>
+    <div class="card text-center">
+        <h2 class="mb-3">Log In</h2>
+        <form action="index.html">
+            <input type="text" class="form-control mb-3" placeholder="Username" required>
+            <input type="password" class="form-control mb-3" placeholder="Password" required>
+            <div class="d-flex justify-content-between mb-3">
+                <div>
+                    <input type="checkbox" id="remember">
+                    <label for="remember">Remember me</label>
+                </div>
+                <a href="#" style="color: #001f3f;">Need Help?</a>
             </div>
-            <div class="mb-3">
-                <input type="password" class="form-control" placeholder="Password" required>
-            </div>
-            <button type="submit" class="btn btn-login">Login</button>
-            <div class="mt-3">
-                <a href="#" class="forgot-password">Forgot Password?</a>
-            </div>
+            <button type="submit" class="btn btn-primary w-100">Log In</button>
         </form>
+        <p class="mt-3">Or</p>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-google"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-envelope"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p class="mt-3">I have an account <a href="#" style="color: #001f3f;">Sign In</a></p>
     </div>
-
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>
