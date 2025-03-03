@@ -205,64 +205,62 @@
 
         <!-- Shop Product Grid Start -->
         <div class="col-lg-9 col-md-8">
-            <div class="row">
-                <?php
-                include_once("connectdb.php");
+    <div class="row">
+        <?php
+        include_once("connectdb.php");
 
-                while ($data = mysqli_fetch_array($rs))
-                // กำหนดจำนวนสินค้าต่อหน้า
-                $items_per_page = 9;
+        // กำหนดจำนวนสินค้าต่อหน้า
+        $items_per_page = 9;
 
-                // ตรวจสอบหน้าปัจจุบันจาก query string
-                $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-                $offset = ($page - 1) * $items_per_page;
+        // ตรวจสอบหน้าปัจจุบันจาก query string
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $offset = ($page - 1) * $items_per_page;
 
-                // ดึงสินค้าตามหน้าปัจจุบัน
-                $sql = "SELECT iditem, Categories, Name, Price FROM Product ORDER BY Name LIMIT $items_per_page OFFSET $offset";
-                $result = mysqli_query($conn, $sql);
+        // ดึงสินค้าตามหน้าปัจจุบัน
+        $sql = "SELECT iditem, Categories, Name, Price FROM Product ORDER BY Name LIMIT $items_per_page OFFSET $offset";
+        $result = mysqli_query($conn, $sql);
 
-                if (!$result) {
-                    die("คำสั่งล้มเหลว: " . mysqli_error($conn));
-                }
+        if (!$result) {
+            die("คำสั่งล้มเหลว: " . mysqli_error($conn));
+        }
 
-                if (mysqli_num_rows($result) == 0) {
-                    echo "<p class='text-center'>ไม่มีสินค้าในฐานข้อมูล</p>";
-                } else {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        // ค้นหารูปภาพของสินค้า
-                        $imagePattern = 'img/' . $row['iditem'] . '.*';
-                        $imageFiles = glob($imagePattern);
-                        $imageSrc = !empty($imageFiles) ? $imageFiles[0] : 'img/default.jpg';
+        if (mysqli_num_rows($result) == 0) {
+            echo "<p class='text-center'>ไม่มีสินค้าในฐานข้อมูล</p>";
+        } else {
+            while ($row = mysqli_fetch_assoc($result)) {
+                // ค้นหารูปภาพของสินค้า
+                $imagePattern = 'img/' . $row['iditem'] . '.*';
+                $imageFiles = glob($imagePattern);
+                $imageSrc = !empty($imageFiles) ? $imageFiles[0] : 'img/default.jpg';
 
-                        echo '<div class="col-lg-4 col-md-6 col-sm-12 pb-4">';
-                        echo '    <div class="product-item bg-light mb-4 p-3">';
-                        echo '        <div class="product-img position-relative overflow-hidden">';
-                        echo '            <img class="img-fluid w-100" src="' . $imageSrc . '" alt="' . $row['Name'] . '">';
-                        echo '            <div class="product-action">';
-                        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>';
-                        echo '                <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=<?php echo $data['Iditem']; ?>"><i class="fa fa-search"></i></a>';
-                        echo '            </div>';
-                        echo '        </div>';
-                        echo '        <div class="text-center py-4">';
-                        echo '            <a class="h6 text-decoration-none text-truncate" href="">' . $row['Name'] . '</a>';
-                        echo '            <div class="d-flex align-items-center justify-content-center mt-2">';
-                        echo '                <h5>$' . $row['Price'] . '</h5>';
-                        echo '            </div>';
-                        echo '            <div class="d-flex align-items-center justify-content-center mb-1">';
-                        echo '                <small class="fa fa-star text-primary mr-1"></small>';
-                        echo '                <small class="fa fa-star text-primary mr-1"></small>';
-                        echo '                <small class="fa fa-star text-primary mr-1"></small>';
-                        echo '                <small class="fa fa-star text-primary mr-1"></small>';
-                        echo '                <small class="fa fa-star text-primary mr-1"></small>';
-                        echo '                <small>(99)</small>';
-                        echo '            </div>';
-                        echo '        </div>';
-                        echo '    </div>';
-                        echo '</div>';
-                    }
-                }
-
-                mysqli_free_result($result);
+                echo '<div class="col-lg-4 col-md-6 col-sm-12 pb-4">';
+                echo '    <div class="product-item bg-light mb-4 p-3">';
+                echo '        <div class="product-img position-relative overflow-hidden">';
+                echo '            <img class="img-fluid w-100" src="' . $imageSrc . '" alt="' . $row['Name'] . '">';
+                echo '            <div class="product-action">';
+                echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>';
+                echo '                <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=' . $row['iditem'] . '"><i class="fa fa-search"></i></a>';
+                echo '            </div>';
+                echo '        </div>';
+                echo '        <div class="text-center py-4">';
+                echo '            <a class="h6 text-decoration-none text-truncate" href="">' . $row['Name'] . '</a>';
+                echo '            <div class="d-flex align-items-center justify-content-center mt-2">';
+                echo '                <h5>$' . $row['Price'] . '</h5>';
+                echo '            </div>';
+                echo '            <div class="d-flex align-items-center justify-content-center mb-1">';
+                echo '                <small class="fa fa-star text-primary mr-1"></small>';
+                echo '                <small class="fa fa-star text-primary mr-1"></small>';
+                echo '                <small class="fa fa-star text-primary mr-1"></small>';
+                echo '                <small class="fa fa-star text-primary mr-1"></small>';
+                echo '                <small class="fa fa-star text-primary mr-1"></small>';
+                echo '                <small>(99)</small>';
+                echo '            </div>';
+                echo '        </div>';
+                echo '    </div>';
+                echo '</div>';
+            }
+        }
+        mysqli_free_result($result);
 
                 // คำนวณจำนวนหน้าทั้งหมด
                 $sql_total = "SELECT COUNT(*) AS total FROM Product";
@@ -274,6 +272,10 @@
                 mysqli_close($conn);
                 ?>
             </div>
+</div>
+
+
+                
 
             <!-- Pagination -->
             <nav>
