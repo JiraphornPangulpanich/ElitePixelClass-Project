@@ -331,7 +331,9 @@
     </nav>
 </div>
 
-
+        <!-- Shop Product Grid End -->
+    </div>
+</div>
 <!-- Shop End -->
 
 
