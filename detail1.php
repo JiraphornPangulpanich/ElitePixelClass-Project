@@ -295,28 +295,67 @@
             <div class="col">
                 <div class="owl-carousel related-carousel">
                     <div class="product-item bg-light">
-                        <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/k2-1.jpg" alt="">
-                            <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                            </div>
+                    <div class="product-img position-relative overflow-hidden">
+                        <img class="img-fluid w-100" src="img/802.1.jpg" alt="">
+                        <div class="product-action">
+                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=802"><i class="fa fa-search"></i></a>
                         </div>
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">Anda Seat Gaming Chair Phantom 3</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>$8,900.00</h5><h6 class="text-muted ml-2"><del>$9,000.00</del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small>(99)</small>
-                            </div>
+                    </div>
+                    <div class="text-center py-4">
+                    <a class="h6 text-decoration-none text-truncate" href="detail1.php?Iditem=802">
+                            <?php
+                                $sql = "SELECT Iditem , Name FROM Product WHERE Iditem = '802'";
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                echo $row["Name"] . "<br>";
+                                }
+                                } else {
+                                    echo "ไม่พบข้อมูล";
+                                }
+                            ?>
+                        </a>
+                        <div class="d-flex align-items-center justify-content-center mt-2">
+                            <h5 class="text-muted ml-2">$<?php
+                                $sql = "SELECT Iditem, Price FROM Product WHERE Iditem = '802'";
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                echo $row["Price"] . "<br>";
+                                }
+                                } else {
+                                    echo "ไม่พบข้อมูล";
+                                }
+                                ?>
+                            </h5><h6 class="text-muted ml-2"><del>$3,000.00</del></h6>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center mt-2">
+                            <h6 style="font-size: 12px; ">เหลือ &nbsp <h6>
+                            <h6 style="font-size: 12px; ">
+                                <?php
+                                    $sql = "SELECT Iditem, Num FROM Product WHERE Iditem = '802'";
+                                    $result = $conn->query($sql);
+
+                                    if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                    echo $row["Num"] . "<br>";
+                                    }
+                                    } else {
+                                        echo "ไม่พบข้อมูล";
+                                    }
+                                ?></h6>
+                            <h6 style="font-size: 12px; ">&nbsp  ชิ้น</h6>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center mb-1">
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="far fa-star text-primary mr-1"></small>
+                            <small>(99)</small>
                         </div>
                     </div>
                     <div class="product-item bg-light">
