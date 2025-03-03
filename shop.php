@@ -243,7 +243,7 @@
                 echo '            </div>';
                 echo '        </div>';
                 echo '        <div class="text-center py-4">';
-                echo '            <a class="h6 text-decoration-none text-truncate" href="">' . $row['Name'] . '</a>';
+                echo '            <a class="h6 text-decoration-none text-truncate" href="detail1.php?Iditem=' . $row['iditem'] . '">' . $row['Name'] . '</a>';
                 echo '            <div class="d-flex align-items-center justify-content-center mt-2">';
                 echo '                <h5>$' . $row['Price'] . '</h5>';
                 echo '            </div>';
