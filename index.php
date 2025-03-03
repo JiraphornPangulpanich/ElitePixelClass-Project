@@ -54,7 +54,7 @@
 <body>
     <div class="card text-center">
         <h2 class="mb-3">Log In</h2>
-        <form action="index.html">
+        <form action="index1.php">
             <input type="text" class="form-control mb-3" placeholder="Username" required>
             <input type="password" class="form-control mb-3" placeholder="Password" required>
             <div class="d-flex justify-content-between mb-3">
