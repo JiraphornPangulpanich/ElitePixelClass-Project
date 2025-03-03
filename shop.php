@@ -161,9 +161,7 @@
     </div>
     <!-- Breadcrumb End -->
 
-
-
-    <div class="container">
+    <div class="container-fluid">
     <div class="row px-xl-5">
         <!-- Shop Sidebar Start -->
         <div class="col-lg-3 col-md-4">
@@ -210,7 +208,7 @@
         <!-- Shop Sidebar End -->
 
         <!-- Shop Product Grid Start -->
-        <div class="col-lg-9 col-md-8">
+        <<div class="col-lg-9 col-md-8">
             <div class="row">
                 <?php
                 include_once("connectdb.php");
@@ -311,6 +309,8 @@
         <!-- Shop Product Grid End -->
     </div>
 </div>
+
+    
 
 <!-- Footer Start -->
 <footer class="container-fluid bg-dark text-secondary mt-5 pt-5">
