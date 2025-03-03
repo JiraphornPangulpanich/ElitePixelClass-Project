@@ -193,7 +193,7 @@
                         <label class="custom-control-label" for="price-3">$4000 - $6000</label>
                         <span class="badge border font-weight-normal">10</span>
                     </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
                         <input type="checkbox" class="custom-control-input" id="price-4">
                         <label class="custom-control-label" for="price-4">$6000 - $8000</label>
                         <span class="badge border font-weight-normal">5</span>
@@ -212,7 +212,7 @@
         <!-- Shop Product Grid Start -->
         <div class="col-lg-9 col-md-8">
             <div class="container">
-                <div class="row">
+                <div class="row" style="margin-left: 0; margin-right: 0;">
                     <?php
                     include_once("connectdb.php");
 
@@ -240,8 +240,8 @@
                             $imageFiles = glob($imagePattern);
                             $imageSrc = !empty($imageFiles) ? $imageFiles[0] : 'img/default.jpg';
 
-                            echo '<div class="col-lg-4 col-md-6 col-sm-12 pb-4">';
-                            echo '    <div class="product-item bg-light mb-4 p-3">';
+                            echo '<div class="col-lg-4 col-md-6 col-sm-12 pb-4" style="padding-left: 0; padding-right: 0;">';
+                            echo '    <div class="product-item bg-light mb-4 p-3" style="margin-bottom: 0;">';
                             echo '        <div class="product-img position-relative overflow-hidden">';
                             echo '            <img class="img-fluid w-100" src="' . $imageSrc . '" alt="' . $row['Name'] . '">';
                             echo '            <div class="product-action">';
@@ -313,6 +313,7 @@
         <!-- Shop Product Grid End -->
     </div>
 </div>
+
 
 
 
