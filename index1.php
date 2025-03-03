@@ -164,7 +164,7 @@
                 <h1 class="text-uppercase text-white mb-lg-4">Make Yourself Happy</h1>
                 <p class="fs-4 text-white mb-lg-4">Get ready! More awesome gaming gear products are coming!  Whether it's a mouse, keyboard, headphones, gamepad, and more.</p>
                 <div class="d-flex align-items-center justify-content-center justify-content-lg-start pt-5">
-                    <a href="" class="btn btn-outline-primary border-2 py-md-3 px-md-5 me-5">Read More</a>
+                    
                     <button type="button" class="btn-play" data-bs-toggle="modal"
                        data-src="https://www.youtube.com/embed/oBS5Z9H5HhY?si=tX4ZBzIbyM9APeJm" data-bs-target="#videoModal">
                        <i class="fas fa-play-circle fa-3x text-warning glow"></i> <!-- ไอคอน Play Circle ที่มีแสงเรือง -->
