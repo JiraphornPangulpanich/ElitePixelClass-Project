@@ -173,36 +173,14 @@
             </h5>
             <div class="bg-light p-4 mb-30">
                 <form>
+                    <!-- Price Filters -->
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input" checked id="price-all">
                         <label class="custom-control-label" for="price-all">All Price</label>
                         <span class="badge border font-weight-normal">24</span>
                     </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="price-1">
-                        <label class="custom-control-label" for="price-1">$0 - $1000</label>
-                        <span class="badge border font-weight-normal">2</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="price-2">
-                        <label class="custom-control-label" for="price-2">$1000 - $4000</label>
-                        <span class="badge border font-weight-normal">10</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="price-3">
-                        <label class="custom-control-label" for="price-3">$4000 - $6000</label>
-                        <span class="badge border font-weight-normal">10</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="price-4">
-                        <label class="custom-control-label" for="price-4">$6000 - $8000</label>
-                        <span class="badge border font-weight-normal">5</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                        <input type="checkbox" class="custom-control-input" id="price-5">
-                        <label class="custom-control-label" for="price-5">$8000 <</label>
-                        <span class="badge border font-weight-normal">7</span>
-                    </div>
+                    <!-- Additional Price Filters -->
+                    <!-- Add more here -->
                 </form>
             </div>
             <!-- Price Filter End -->
@@ -215,14 +193,10 @@
                 <?php
                 include_once("connectdb.php");
 
-                // กำหนดจำนวนสินค้าต่อหน้า
                 $items_per_page = 9;
-
-                // ตรวจสอบหน้าปัจจุบันจาก query string
                 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
                 $offset = ($page - 1) * $items_per_page;
 
-                // ดึงสินค้าตามหน้าปัจจุบัน
                 $sql = "SELECT iditem, Categories, Name, Price FROM Product ORDER BY Name LIMIT $items_per_page OFFSET $offset";
                 $result = mysqli_query($conn, $sql);
 
@@ -239,33 +213,33 @@
                         $imageFiles = glob($imagePattern);
                         $imageSrc = !empty($imageFiles) ? $imageFiles[0] : 'img/default.jpg';
 
-                        echo '<div class="col-lg-4 col-md-6 col-sm-12 pb-4">';
-                        echo '    <div class="product-item bg-light mb-4 p-3">';
-                        echo '        <div class="product-img position-relative overflow-hidden">';
-                        echo '            <img class="img-fluid w-100" src="' . $imageSrc . '" alt="' . $row['Name'] . '">';
-                        echo '            <div class="product-action">';
-                        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>';
-                        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>';
-                        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>';
-                        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>';
-                        echo '            </div>';
-                        echo '        </div>';
-                        echo '        <div class="text-center py-4">';
-                        echo '            <a class="h6 text-decoration-none text-truncate" href="">' . $row['Name'] . '</a>';
-                        echo '            <div class="d-flex align-items-center justify-content-center mt-2">';
-                        echo '                <h5>$' . $row['Price'] . '</h5>';
-                        echo '            </div>';
-                        echo '            <div class="d-flex align-items-center justify-content-center mb-1">';
-                        echo '                <small class="fa fa-star text-primary mr-1"></small>';
-                        echo '                <small class="fa fa-star text-primary mr-1"></small>';
-                        echo '                <small class="fa fa-star text-primary mr-1"></small>';
-                        echo '                <small class="fa fa-star text-primary mr-1"></small>';
-                        echo '                <small class="fa fa-star text-primary mr-1"></small>';
-                        echo '                <small>(99)</small>';
-                        echo '            </div>';
-                        echo '        </div>';
-                        echo '    </div>';
-                        echo '</div>';
+                        echo '<div class="col-lg-4 col-md-6 col-sm-12 pb-4">'; 
+                        echo '    <div class="product-item bg-light mb-4 p-3">'; 
+                        echo '        <div class="product-img position-relative overflow-hidden">'; 
+                        echo '            <img class="img-fluid w-100" style="max-height: 300px; object-fit: cover;" src="' . $imageSrc . '" alt="' . $row['Name'] . '">'; 
+                        echo '            <div class="product-action">'; 
+                        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>'; 
+                        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>'; 
+                        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>'; 
+                        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>'; 
+                        echo '            </div>'; 
+                        echo '        </div>'; 
+                        echo '        <div class="text-center py-4">'; 
+                        echo '            <a class="h6 text-decoration-none text-truncate" href="">' . $row['Name'] . '</a>'; 
+                        echo '            <div class="d-flex align-items-center justify-content-center mt-2">'; 
+                        echo '                <h5>$' . $row['Price'] . '</h5>'; 
+                        echo '            </div>'; 
+                        echo '            <div class="d-flex align-items-center justify-content-center mb-1">'; 
+                        echo '                <small class="fa fa-star text-primary mr-1"></small>'; 
+                        echo '                <small class="fa fa-star text-primary mr-1"></small>'; 
+                        echo '                <small class="fa fa-star text-primary mr-1"></small>'; 
+                        echo '                <small class="fa fa-star text-primary mr-1"></small>'; 
+                        echo '                <small class="fa fa-star text-primary mr-1"></small>'; 
+                        echo '                <small>(99)</small>'; 
+                        echo '            </div>'; 
+                        echo '        </div>'; 
+                        echo '    </div>'; 
+                        echo '</div>'; 
                     }
                 }
 
@@ -285,21 +259,21 @@
             <!-- Pagination -->
             <nav>
                 <ul class="pagination justify-content-center">
-                    <!-- ปุ่มย้อนกลับ -->
+                    <!-- Previous Button -->
                     <li class="page-item <?= ($page <= 1) ? 'disabled' : ''; ?>">
                         <a class="page-link" href="?page=<?= $page - 1; ?>">
                             <i class="fa fa-angle-left"></i> ย้อนกลับ
                         </a>
                     </li>
 
-                    <!-- ตัวเลขหน้า -->
+                    <!-- Page Numbers -->
                     <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
                         <li class="page-item <?= ($i == $page) ? 'active' : ''; ?>">
                             <a class="page-link" href="?page=<?= $i; ?>"><?= $i; ?></a>
                         </li>
                     <?php endfor; ?>
 
-                    <!-- ปุ่มหน้าถัดไป -->
+                    <!-- Next Button -->
                     <li class="page-item <?= ($page >= $total_pages) ? 'disabled' : ''; ?>">
                         <a class="page-link" href="?page=<?= $page + 1; ?>">
                             ถัดไป <i class="fa fa-angle-right"></i>
@@ -311,6 +285,7 @@
         <!-- Shop Product Grid End -->
     </div>
 </div>
+
 
 <!-- Footer Start -->
 <footer class="container-fluid bg-dark text-secondary mt-5 pt-5">
