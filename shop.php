@@ -216,6 +216,12 @@
                 <?php
                 include_once("connectdb.php");
 
+                // กำหนดจำนวนสินค้าที่แสดงในแต่ละหน้า
+                    $items_per_page = 9;
+
+                // คำนวณหน้าปัจจุบันจาก query string
+                    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+                    $offset = ($page - 1) * $items_per_page; // คำนวณ offset สำหรับการดึงข้อมูล
                 // คำสั่ง SQL ดึงข้อมูลทั้งหมดจากตาราง Product
                 $sql = "SELECT iditem, Categories, Name, Price FROM Product ORDER BY Name";
                 $result = mysqli_query($conn, $sql);
