@@ -223,7 +223,7 @@
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $offset = ($page - 1) * $items_per_page;
 
-        // คำสั่ง SQL ดึงสินค้าตามหน้าปัจจุบัน
+        // ดึงสินค้าตามหน้าปัจจุบัน
         $sql = "SELECT iditem, Categories, Name, Price FROM Product ORDER BY Name LIMIT $items_per_page OFFSET $offset";
         $result = mysqli_query($conn, $sql);
 
@@ -276,24 +276,7 @@
         $sql_total = "SELECT COUNT(*) AS total FROM Product";
         $result_total = mysqli_query($conn, $sql_total);
         $row_total = mysqli_fetch_assoc($result_total);
-        $total_pages = ceil($row_total['total'] / $items_per_page);
-
-        mysqli_free_result($result_total);
-        mysqli_close($conn);
-        ?>
-    </div>
-
-    <!-- Pagination -->
-    <nav>
-        <ul class="pagination justify-content-center">
-            <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
-                <li class="page-item <?= ($i == $page) ? 'active' : ''; ?>">
-                    <a class="page-link" href="?page=<?= $i; ?>"><?= $i; ?></a>
-                </li>
-            <?php endfor; ?>
-        </ul>
-    </nav>
-</div>
+        $
 
 <!-- Shop End -->
 
