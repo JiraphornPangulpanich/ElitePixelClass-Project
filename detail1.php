@@ -242,7 +242,7 @@
                         <small class="pt-1">(99 Reviews)</small>
                     </div>
                 <h3 class="font-weight-semi-bold mb-4">฿<?php echo $product['Price']; ?></h3>
-                <p class="mb-4" style="font-size: 18px;"><?php echo $product['Detail']; ?></p>
+                <p class="mb-4" style="font-size: 16px;"><?php echo $product['Detail']; ?></p>
 
             
             
