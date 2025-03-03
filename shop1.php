@@ -216,6 +216,13 @@
             <?php
 include_once("connectdb.php");
 
+// กำหนดจำนวนสินค้าต่อหน้า
+$items_per_page = 9;
+
+// ตรวจสอบหน้าปัจจุบันจาก query string
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$offset = ($page - 1) * $items_per_page;
+
 // รับค่าหมวดหมู่จาก URL หรือใช้ค่า default
 $categoryToShow = isset($_GET['Categories']) ? $_GET['Categories'] : 'default_value';
 
@@ -284,11 +291,44 @@ if (mysqli_num_rows($result) == 0) {
     echo '</div>';  // ปิด container
 }
 
-// ปิดการเชื่อมต่อฐานข้อมูล
 mysqli_free_result($result);
-mysqli_close($conn);
-?>
+
+                // คำนวณจำนวนหน้าทั้งหมด
+                $sql_total = "SELECT COUNT(*) AS total FROM Product";
+                $result_total = mysqli_query($conn, $sql_total);
+                $row_total = mysqli_fetch_assoc($result_total);
+                $total_pages = ceil($row_total['total'] / $items_per_page);
+
+                mysqli_free_result($result_total);
+                mysqli_close($conn);
+                ?>
             </div>
+
+            <!-- Pagination -->
+            <nav>
+                <ul class="pagination justify-content-center">
+                    <!-- ปุ่มย้อนกลับ -->
+                    <li class="page-item <?= ($page <= 1) ? 'disabled' : ''; ?>">
+                        <a class="page-link" href="?page=<?= $page - 1; ?>">
+                            <i class="fa fa-angle-left"></i> ย้อนกลับ
+                        </a>
+                    </li>
+
+                    <!-- ตัวเลขหน้า -->
+                    <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
+                        <li class="page-item <?= ($i == $page) ? 'active' : ''; ?>">
+                            <a class="page-link" href="?page=<?= $i; ?>"><?= $i; ?></a>
+                        </li>
+                    <?php endfor; ?>
+
+                    <!-- ปุ่มหน้าถัดไป -->
+                    <li class="page-item <?= ($page >= $total_pages) ? 'disabled' : ''; ?>">
+                        <a class="page-link" href="?page=<?= $page + 1; ?>">
+                            ถัดไป <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
         <!-- Shop Product Grid End -->
     </div>
