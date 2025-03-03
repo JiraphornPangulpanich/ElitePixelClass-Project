@@ -163,8 +163,8 @@
 
 
 
-    <div class="container-fluid">
-    <div class="row">
+    <div class="container">
+    <div class="row px-xl-5">
         <!-- Shop Sidebar Start -->
         <div class="col-lg-3 col-md-4">
             <!-- Price Filter Start -->
@@ -193,7 +193,7 @@
                         <label class="custom-control-label" for="price-3">$4000 - $6000</label>
                         <span class="badge border font-weight-normal">10</span>
                     </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input" id="price-4">
                         <label class="custom-control-label" for="price-4">$6000 - $8000</label>
                         <span class="badge border font-weight-normal">5</span>
@@ -211,111 +211,106 @@
 
         <!-- Shop Product Grid Start -->
         <div class="col-lg-9 col-md-8">
-            <div class="container">
-                <div class="row" style="margin-left: 0; margin-right: 0;">
-                    <?php
-                    include_once("connectdb.php");
+            <div class="row">
+                <?php
+                include_once("connectdb.php");
 
-                    // กำหนดจำนวนสินค้าต่อหน้า
-                    $items_per_page = 9;
+                // กำหนดจำนวนสินค้าต่อหน้า
+                $items_per_page = 9;
 
-                    // ตรวจสอบหน้าปัจจุบันจาก query string
-                    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-                    $offset = ($page - 1) * $items_per_page;
+                // ตรวจสอบหน้าปัจจุบันจาก query string
+                $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+                $offset = ($page - 1) * $items_per_page;
 
-                    // ดึงสินค้าตามหน้าปัจจุบัน
-                    $sql = "SELECT iditem, Categories, Name, Price FROM Product ORDER BY Name LIMIT $items_per_page OFFSET $offset";
-                    $result = mysqli_query($conn, $sql);
+                // ดึงสินค้าตามหน้าปัจจุบัน
+                $sql = "SELECT iditem, Categories, Name, Price FROM Product ORDER BY Name LIMIT $items_per_page OFFSET $offset";
+                $result = mysqli_query($conn, $sql);
 
-                    if (!$result) {
-                        die("คำสั่งล้มเหลว: " . mysqli_error($conn));
+                if (!$result) {
+                    die("คำสั่งล้มเหลว: " . mysqli_error($conn));
+                }
+
+                if (mysqli_num_rows($result) == 0) {
+                    echo "<p class='text-center'>ไม่มีสินค้าในฐานข้อมูล</p>";
+                } else {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        // ค้นหารูปภาพของสินค้า
+                        $imagePattern = 'img/' . $row['iditem'] . '.*';
+                        $imageFiles = glob($imagePattern);
+                        $imageSrc = !empty($imageFiles) ? $imageFiles[0] : 'img/default.jpg';
+
+                        echo '<div class="col-lg-4 col-md-6 col-sm-12 pb-4">';
+                        echo '    <div class="product-item bg-light mb-4 p-3">';
+                        echo '        <div class="product-img position-relative overflow-hidden">';
+                        echo '            <img class="img-fluid w-100" src="' . $imageSrc . '" alt="' . $row['Name'] . '">';
+                        echo '            <div class="product-action">';
+                        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>';
+                        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>';
+                        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>';
+                        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>';
+                        echo '            </div>';
+                        echo '        </div>';
+                        echo '        <div class="text-center py-4">';
+                        echo '            <a class="h6 text-decoration-none text-truncate" href="">' . $row['Name'] . '</a>';
+                        echo '            <div class="d-flex align-items-center justify-content-center mt-2">';
+                        echo '                <h5>$' . $row['Price'] . '</h5>';
+                        echo '            </div>';
+                        echo '            <div class="d-flex align-items-center justify-content-center mb-1">';
+                        echo '                <small class="fa fa-star text-primary mr-1"></small>';
+                        echo '                <small class="fa fa-star text-primary mr-1"></small>';
+                        echo '                <small class="fa fa-star text-primary mr-1"></small>';
+                        echo '                <small class="fa fa-star text-primary mr-1"></small>';
+                        echo '                <small class="fa fa-star text-primary mr-1"></small>';
+                        echo '                <small>(99)</small>';
+                        echo '            </div>';
+                        echo '        </div>';
+                        echo '    </div>';
+                        echo '</div>';
                     }
+                }
 
-                    if (mysqli_num_rows($result) == 0) {
-                        echo "<p class='text-center'>ไม่มีสินค้าในฐานข้อมูล</p>";
-                    } else {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            // ค้นหารูปภาพของสินค้า
-                            $imagePattern = 'img/' . $row['iditem'] . '.*';
-                            $imageFiles = glob($imagePattern);
-                            $imageSrc = !empty($imageFiles) ? $imageFiles[0] : 'img/default.jpg';
+                mysqli_free_result($result);
 
-                            echo '<div class="col-lg-4 col-md-6 col-sm-12 pb-4" style="padding-left: 0; padding-right: 0;">';
-                            echo '    <div class="product-item bg-light mb-4 p-3" style="margin-bottom: 0;">';
-                            echo '        <div class="product-img position-relative overflow-hidden">';
-                            echo '            <img class="img-fluid w-100" src="' . $imageSrc . '" alt="' . $row['Name'] . '">';
-                            echo '            <div class="product-action">';
-                            echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>';
-                            echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>';
-                            echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>';
-                            echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>';
-                            echo '            </div>';
-                            echo '        </div>';
-                            echo '        <div class="text-center py-4">';
-                            echo '            <a class="h6 text-decoration-none text-truncate" href="">' . $row['Name'] . '</a>';
-                            echo '            <div class="d-flex align-items-center justify-content-center mt-2">';
-                            echo '                <h5>$' . $row['Price'] . '</h5>';
-                            echo '            </div>';
-                            echo '            <div class="d-flex align-items-center justify-content-center mb-1">';
-                            echo '                <small class="fa fa-star text-primary mr-1"></small>';
-                            echo '                <small class="fa fa-star text-primary mr-1"></small>';
-                            echo '                <small class="fa fa-star text-primary mr-1"></small>';
-                            echo '                <small class="fa fa-star text-primary mr-1"></small>';
-                            echo '                <small class="fa fa-star text-primary mr-1"></small>';
-                            echo '                <small>(99)</small>';
-                            echo '            </div>';
-                            echo '        </div>';
-                            echo '    </div>';
-                            echo '</div>';
-                        }
-                    }
+                // คำนวณจำนวนหน้าทั้งหมด
+                $sql_total = "SELECT COUNT(*) AS total FROM Product";
+                $result_total = mysqli_query($conn, $sql_total);
+                $row_total = mysqli_fetch_assoc($result_total);
+                $total_pages = ceil($row_total['total'] / $items_per_page);
 
-                    mysqli_free_result($result);
-
-                    // คำนวณจำนวนหน้าทั้งหมด
-                    $sql_total = "SELECT COUNT(*) AS total FROM Product";
-                    $result_total = mysqli_query($conn, $sql_total);
-                    $row_total = mysqli_fetch_assoc($result_total);
-                    $total_pages = ceil($row_total['total'] / $items_per_page);
-
-                    mysqli_free_result($result_total);
-                    mysqli_close($conn);
-                    ?>
-                </div>
-
-                <!-- Pagination -->
-                <nav>
-                    <ul class="pagination justify-content-center">
-                        <!-- ปุ่มย้อนกลับ -->
-                        <li class="page-item <?= ($page <= 1) ? 'disabled' : ''; ?>">
-                            <a class="page-link" href="?page=<?= $page - 1; ?>">
-                                <i class="fa fa-angle-left"></i> ย้อนกลับ
-                            </a>
-                        </li>
-
-                        <!-- ตัวเลขหน้า -->
-                        <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
-                            <li class="page-item <?= ($i == $page) ? 'active' : ''; ?>">
-                                <a class="page-link" href="?page=<?= $i; ?>"><?= $i; ?></a>
-                            </li>
-                        <?php endfor; ?>
-
-                        <!-- ปุ่มหน้าถัดไป -->
-                        <li class="page-item <?= ($page >= $total_pages) ? 'disabled' : ''; ?>">
-                            <a class="page-link" href="?page=<?= $page + 1; ?>">
-                                ถัดไป <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+                mysqli_free_result($result_total);
+                mysqli_close($conn);
+                ?>
             </div>
+
+            <!-- Pagination -->
+            <nav>
+                <ul class="pagination justify-content-center">
+                    <!-- ปุ่มย้อนกลับ -->
+                    <li class="page-item <?= ($page <= 1) ? 'disabled' : ''; ?>">
+                        <a class="page-link" href="?page=<?= $page - 1; ?>">
+                            <i class="fa fa-angle-left"></i> ย้อนกลับ
+                        </a>
+                    </li>
+
+                    <!-- ตัวเลขหน้า -->
+                    <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
+                        <li class="page-item <?= ($i == $page) ? 'active' : ''; ?>">
+                            <a class="page-link" href="?page=<?= $i; ?>"><?= $i; ?></a>
+                        </li>
+                    <?php endfor; ?>
+
+                    <!-- ปุ่มหน้าถัดไป -->
+                    <li class="page-item <?= ($page >= $total_pages) ? 'disabled' : ''; ?>">
+                        <a class="page-link" href="?page=<?= $page + 1; ?>">
+                            ถัดไป <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
         <!-- Shop Product Grid End -->
     </div>
 </div>
-
-
-
 
 <!-- Footer Start -->
 <footer class="container-fluid bg-dark text-secondary mt-5 pt-5">
