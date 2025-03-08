@@ -3,79 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #001f3f, #00509e);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background: linear-gradient(to right, #1E3A5F, #FFC107);
             height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .card {
-            background: #fdd835;
+        .login-container {
+            background: #F8F9FA;
+            padding: 40px;
             border-radius: 10px;
-            padding: 30px;
-            width: 350px;
-            position: relative;
-            box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.2);
-        }
-        .card::before {
-            content: "";
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            width: 100%;
-            height: 100%;
-            background: #ffc107;
-            border-radius: 10px;
-            z-index: -1;
-        }
-        .form-control {
-            border-radius: 5px;
-            border: 2px solid #001f3f;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 400px;
         }
         .btn-primary {
-            background: #001f3f;
+            background-color: #002855;
             border: none;
-            transition: 0.3s;
         }
         .btn-primary:hover {
-            background: #003366;
-        }
-        .social-icons a {
-            margin: 5px;
-            color: #001f3f;
-            font-size: 20px;
+            background-color: #001f3f;
         }
     </style>
 </head>
 <body>
-    <div class="card text-center">
-        <h2 class="mb-3">Log In</h2>
-        <form action="index1.php">
-            <input type="text" class="form-control mb-3" placeholder="Username" required>
-            <input type="password" class="form-control mb-3" placeholder="Password" required>
-            <div class="d-flex justify-content-between mb-3">
-                <div>
-                    <input type="checkbox" id="remember">
-                    <label for="remember">Remember me</label>
-                </div>
-                
+
+    <div class="login-container">
+        <h3 class="text-center">Log In</h3>
+        <form onsubmit="return loginUser()">
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" required>
             </div>
-            <button type="submit" class="btn btn-primary w-100">Log In</button>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Login</button>
         </form>
-        <p class="mt-3">Or</p>
-        <div class="social-icons">
-            <a href="#"><i class="fab fa-google"></i></a>
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
-            <a href="#"><i class="fab fa-envelope"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-        </div>
-        <p class="mt-3">I have an account <a href="singup.php" style="color: #001f3f;">Sign In</a></p>
+        <p class="text-center mt-3">Don't have an account? <a href="singup.php">Sign Up</a></p>
     </div>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <script>
+        function loginUser() {
+            // เมื่อกด login ให้เปลี่ยนไปหน้า index.html
+            window.location.href = "index1.php";
+            return false; // ป้องกัน form รีเฟรชหน้า
+        }
+    </script>
+
 </body>
 </html>
