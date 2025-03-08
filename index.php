@@ -62,7 +62,7 @@
                     <input type="checkbox" id="remember">
                     <label for="remember">Remember me</label>
                 </div>
-                <a href="#" style="color: #001f3f;">Need Help?</a>
+                
             </div>
             <button type="submit" class="btn btn-primary w-100">Log In</button>
         </form>
