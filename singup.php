@@ -41,7 +41,7 @@
 <body>
     <div class="container">
         <h2 class="text-center mb-4">Sign Up</h2>
-        <form action="insert_singup.php" method="POST">
+        <form action="singup1.php" method="POST">
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label class="form-label">First Name</label>
