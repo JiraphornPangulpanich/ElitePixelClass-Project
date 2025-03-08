@@ -4,11 +4,11 @@ error_reporting(E_ALL);
 
 include 'condb.php';
 //รับค่าตัวแปลจากไฟล์ singup 
-&name = $_POST['firstname']
-&lastname = $_POST['lastname']
-&phone = $_POST['phone']
-&username = $_POST['username']
-&password = $_POST['password']
+$name = $_POST['firstname']
+$lastname = $_POST['lastname']
+$phone = $_POST['phone']
+$username = $_POST['username']
+$password = $_POST['password']
 
 //คำสั่งเพิ่มข้อมูลลงตาราง member
 $sql = "INSERT INTO member(name, lastname, telephone, username, password) 
