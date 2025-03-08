@@ -44,6 +44,13 @@
             <div class="col-lg-6 text-center text-lg-right">
                 <div class="d-inline-flex align-items-center">
                     <div class="btn-group">
+                    <?php
+                    if(!isset($_SESSION["firstname"])){
+                        echo "<div class='text-body'>";
+                        echo $_SESSION["firstname"] . " " . $_SESSION["lastname"];
+                        echo "</div>";
+                    }
+                    ?>
                     <a class="text-body mr-3" href="Team1.php">Team</a>
                     <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
                         <div class="dropdown-menu dropdown-menu-right">
