@@ -44,11 +44,11 @@
         <form action="insert_singup.php" method="POST">
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label class="form-label">First Name</label>
+                    <label class="form-label">FirstName</label>
                     <input type="text" class="form-control" name="first_name" required>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label class="form-label">Last Name</label>
+                    <label class="form-label">LastName</label>
                     <input type="text" class="form-control" name="last_name" required>
                 </div>
             </div>
