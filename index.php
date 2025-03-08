@@ -31,6 +31,14 @@
 </head>
 <body>
 
+<?php
+session_start();
+if (isset($_SESSION["Error"])) {
+    echo '<div class="alert alert-danger text-center">' . $_SESSION["Error"] . '</div>';
+    unset($_SESSION["Error"]); // ลบข้อความแจ้งเตือนหลังจากแสดงแล้ว
+}
+?>
+
     <div class="login-container">
         <h3 class="text-center">Log In</h3>
         <form method="POST" action="checklogin.php">
@@ -46,6 +54,18 @@
         </form>
         <p class="text-center mt-3">Don't have an account? <a href="singup.php">Sign Up</a></p>
     </div>
+
+    <script>
+    setTimeout(function () {
+        let alert = document.querySelector(".alert");
+        if (alert) {
+            alert.style.transition = "opacity 0.5s";
+            alert.style.opacity = "0";
+            setTimeout(() => alert.remove(), 500);
+        }
+    }, 3000); // 3 วินาที
+    </script>
+
 
 </body>
 </html>

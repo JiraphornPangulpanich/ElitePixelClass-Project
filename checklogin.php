@@ -22,8 +22,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: index1.php");
         exit();
     } else {
-        $_SESSION["Error"] = "<p> Your username or password is invalid </p>";
-        header("Location: index.php");
+        $_SESSION["Error"] = "❌ Username or Password is incorrect.";
+        header("Location: index.php?error=1");
         exit();
     }
 }
