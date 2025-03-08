@@ -2,8 +2,7 @@
 include 'condb.php';
 //รับค่าตัวแปลจากไฟล์ singup 
 &name = $_POST['firstname']
-&lastname = $_POST['lasttname']
-&lastname = $_POST['lasttname']
+&lastname = $_POST['lastname']
 &phone = $_POST['phone']
 &username = $_POST['username']
 &password = $_POST['password']
