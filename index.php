@@ -33,7 +33,7 @@
 
     <div class="login-container">
         <h3 class="text-center">Log In</h3>
-        <form onsubmit="return loginUser()">
+        <form method="POST" action="checklogin.php">
             <div class="mb-3">
                 <label class="form-label">Username</label>
                 <input type="text" class="form-control" id="username" required>
