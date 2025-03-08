@@ -45,11 +45,12 @@
                 <div class="d-inline-flex align-items-center">
                     <div class="btn-group">
                     <a class="text-body mr-3" href="Team1.php">Team</a>
-                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
+                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <button class="dropdown-item" type="button" >Sign in</button>
-                            <button class="dropdown-item" type="button" >Logout</button>
+                            <a class="dropdown-item" href="index.php">Sign in</a>
+                            <a class="dropdown-item" href="logout.php">Logout</a>
                         </div>
+
                     </div>
                     
                 </div>
