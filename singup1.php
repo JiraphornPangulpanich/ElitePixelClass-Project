@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // เข้ารหัสรหัสผ่าน
 
     // ตรวจสอบว่าชื่อผู้ใช้ซ้ำหรือไม่
-    $checkUser = "SELECT * FROM users WHERE username = ?";
+    $checkUser = "SELECT * FROM member WHERE username = ?";
     $stmt = mysqli_prepare($conn, $checkUser);
     mysqli_stmt_bind_param($stmt, "s", $username);
     mysqli_stmt_execute($stmt);
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // บันทึกข้อมูลลงฐานข้อมูล
-    $sql = "INSERT INTO users (firstname, lastname, phone, username, password) VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO member (firstname, lastname, phone, username, password) VALUES (?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, "sssss", $firstname, $lastname, $phone, $username, $password);
 
