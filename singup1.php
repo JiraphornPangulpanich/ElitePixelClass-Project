@@ -10,8 +10,8 @@ include 'condb.php';
 //คำสั่งเพิ่มข้อมูลลงตาราง member
 $sql = "INSERT INTO member(name, lastname, telephone, username, password)
 Values('$name', '&lastname','$telephone', '$username', '$password')";
-$resul = mysqli_query($conn,$sql);
-if($resul){
+$result = mysqli_query($conn,$sql);
+if($result){
     echo "<script> alert('บันทึกข้อมูลเรียบร้อย')</script>";
     echo "<script> window.location='singup.php'; </script>";
 }else {
