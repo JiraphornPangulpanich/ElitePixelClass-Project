@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // บันทึกข้อมูลลงฐานข้อมูล
     $sql = "INSERT INTO member (firstname, lastname, telephone, username, password) VALUES (?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "sssss", $firstname, $lastname, $phone, $username, $password);
+    mysqli_stmt_bind_param($stmt, "sssss", $firstname, $lastname, $telephone, $username, $password);
 
     if (mysqli_stmt_execute($stmt)) {
         echo "<script>alert('Sign up successful!'); window.location='index.php';</script>";
