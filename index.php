@@ -36,24 +36,16 @@
         <form method="POST" action="checklogin.php">
             <div class="mb-3">
                 <label class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" required>
+                <input type="text" class="form-control" name="username" id="username" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" required>
+                <input type="password" class="form-control" name="password" id="password" required>
             </div>
             <button type="submit" class="btn btn-primary w-100">Login</button>
         </form>
-        <p class="text-center mt-3">Don't have an account? <a href="singup.php">Sign Up</a></p>
+        <p class="text-center mt-3">Don't have an account? <a href="signup.php">Sign Up</a></p>
     </div>
-
-    <script>
-        function loginUser() {
-            // เมื่อกด login ให้เปลี่ยนไปหน้า index.html
-            window.location.href = "index1.php";
-            return false; // ป้องกัน form รีเฟรชหน้า
-        }
-    </script>
 
 </body>
 </html>
