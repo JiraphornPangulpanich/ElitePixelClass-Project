@@ -72,7 +72,7 @@
             <a href="#"><i class="fab fa-facebook"></i></a>
             <a href="#"><i class="fab fa-twitter"></i></a>
         </div>
-        <p class="text-center mt-3">Already have an account? <a href="login.html">Log In</a></p>
+        <p class="text-center mt-3">Already have an account? <a href="index.php">Log In</a></p>
     </div>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
