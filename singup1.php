@@ -4,7 +4,7 @@ include 'condb.php'; // เชื่อมต่อฐานข้อมูล
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
-    $phone = $_POST['phone'];
+    $phone = $_POST['telephone']; 
     $username = $_POST['username'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // เข้ารหัสรหัสผ่าน
 
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // บันทึกข้อมูลลงฐานข้อมูล
-    $sql = "INSERT INTO member (firstname, lastname, phone, username, password) VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO member (firstname, lastname, telephone, username, password) VALUES (?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, "sssss", $firstname, $lastname, $phone, $username, $password);
 
