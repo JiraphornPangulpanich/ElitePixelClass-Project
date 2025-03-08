@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 include 'condb.php';
 //รับค่าตัวแปลจากไฟล์ singup 
 &name = $_POST['firstname']
@@ -8,8 +11,8 @@ include 'condb.php';
 &password = $_POST['password']
 
 //คำสั่งเพิ่มข้อมูลลงตาราง member
-$sql = "INSERT INTO member(name, lastname, telephone, username, password)
-Values('$name', '&lastname','$telephone', '$username', '$password')";
+$sql = "INSERT INTO member(name, lastname, telephone, username, password) 
+VALUES ('$name', '$lastname', '$phone', '$username', '$password')";
 $result = mysqli_query($conn,$sql);
 if($result){
     echo "<script> alert('บันทึกข้อมูลเรียบร้อย')</script>";
