@@ -74,7 +74,7 @@
             <a href="#"><i class="fab fa-envelope"></i></a>
             <a href="#"><i class="fab fa-instagram"></i></a>
         </div>
-        <p class="mt-3">I have an account <a href="#" style="color: #001f3f;">Sign In</a></p>
+        <p class="mt-3">I have an account <a href="singup.php" style="color: #001f3f;">Sign In</a></p>
     </div>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
