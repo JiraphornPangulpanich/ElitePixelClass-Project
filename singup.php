@@ -53,6 +53,10 @@
                 </div>
             </div>
             <div class="mb-3">
+                <label class="form-label">Phone Number</label>
+                <input type="tel" class="form-control" name="phone" required>
+            </div>
+            <div class="mb-3">
                 <label class="form-label">Username</label>
                 <input type="text" class="form-control" name="username" required>
             </div>
