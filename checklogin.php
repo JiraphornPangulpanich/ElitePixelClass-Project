@@ -2,33 +2,29 @@
 include 'condb.php';
 session_start();
 
-$username = $_POST['username'];
-$password = $_POST['password'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-// เข้ารหัส password ด้วย sha512
-$password = hash('sha512', $password);
+    // ใช้ Prepared Statement เพื่อป้องกัน SQL Injection
+    $stmt = $conn->prepare("SELECT * FROM member WHERE username=?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
 
-// แก้ไข SQL (FROM แทน FORM)
-$sql = "SELECT * FROM member WHERE username='$username' AND password='$password' ";
-$result = mysqli_query($conn, $sql);
+    // ตรวจสอบว่าพบ username และตรวจสอบ password
+    if ($row && password_verify($password, $row['password'])) {
+        $_SESSION["username"] = $row['username'];
+        $_SESSION["firstname"] = $row['firstname'];
+        $_SESSION["lastname"] = $row['lastname'];
 
-// แก้ไข mysqli_fetch_array()
-$row = mysqli_fetch_array($result);
-
-if ($row) {
-    $_SESSION["username"] = $row['username'];
-    $_SESSION["pw"] = $row['password'];
-    $_SESSION["firstname"] = $row['firstname'];
-    $_SESSION["lastname"] = $row['lastname'];
-    
-    // ใช้ header() และ exit เพื่อป้องกันปัญหา
-    header("Location: index1.php");
-    exit();
-} else {
-    $_SESSION["Error"] = "<p> Your username or password is invalid </p>";
-    
-    // ใช้ header() และ exit เพื่อป้องกันปัญหา
-    header("Location: index.php");
-    exit();
+        header("Location: index1.php");
+        exit();
+    } else {
+        $_SESSION["Error"] = "<p> Your username or password is invalid </p>";
+        header("Location: index.php");
+        exit();
+    }
 }
 ?>
