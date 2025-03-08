@@ -1,25 +1,40 @@
 <?php
+include 'condb.php'; // เชื่อมต่อฐานข้อมูล
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $phone = $_POST['phone'];
+    $username = $_POST['username'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // เข้ารหัสรหัสผ่าน
 
-include 'condb.php';
-//รับค่าตัวแปลจากไฟล์ singup 
-$name = $_POST['firstname']
-$lastname = $_POST['lastname']
-$phone = $_POST['phone']
-$username = $_POST['username']
-$password = $_POST['password']
+    // ตรวจสอบว่าชื่อผู้ใช้ซ้ำหรือไม่
+    $checkUser = "SELECT * FROM users WHERE username = ?";
+    $stmt = mysqli_prepare($conn, $checkUser);
+    mysqli_stmt_bind_param($stmt, "s", $username);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
 
-//คำสั่งเพิ่มข้อมูลลงตาราง member
-$sql = "INSERT INTO member(name, lastname, telephone, username, password) 
-VALUES ('$name', '$lastname', '$phone', '$username', '$password')";
-$result = mysqli_query($conn,$sql);
-if($result){
-    echo "<script> alert('บันทึกข้อมูลเรียบร้อย')</script>";
-    echo "<script> window.location='singup.php'; </script>";
-}else {
-    echo "Error:".$sql ."<br>" . mysqli_error($conn);
-    echo "<script> alert('บันทึกข้อมูลไม่สำเร็จ')</script>";
+    if (mysqli_num_rows($result) > 0) {
+        echo "<script>alert('Username already exists!'); window.location='singup.php';</script>";
+        exit();
+    }
+
+    // บันทึกข้อมูลลงฐานข้อมูล
+    $sql = "INSERT INTO users (firstname, lastname, phone, username, password) VALUES (?, ?, ?, ?, ?)";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "sssss", $firstname, $lastname, $phone, $username, $password);
+
+    if (mysqli_stmt_execute($stmt)) {
+        echo "<script>alert('Sign up successful!'); window.location='index.php';</script>";
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
+
+    mysqli_stmt_close($stmt);
+    mysqli_close($conn);
+} else {
+    header("Location: singup.php");
+    exit();
 }
-mysql_close($conn);
-
 ?>
