@@ -374,6 +374,19 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
         <h4 class="text-center text-danger">ตะกร้าของคุณยังว่างอยู่</h4>
     <?php endif; ?>
 </div>
+<script>
+    document.getElementById('checkoutBtn').addEventListener('click', function() {
+        document.getElementById('paymentOptions').style.display = 'block';
+    });
+    
+    document.getElementById('codPayment').addEventListener('click', function() {
+        alert('เลือกชำระเงินปลายทางเรียบร้อย!');
+    });
+    
+    document.getElementById('creditPayment').addEventListener('click', function() {
+        document.getElementById('creditForm').style.display = 'block';
+    });
+</script>
 
     <!-- Cart End -->
 
