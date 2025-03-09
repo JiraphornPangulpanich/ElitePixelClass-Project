@@ -254,52 +254,7 @@
          </div>
      </div>
  </div>
- <!-- Video Modal End -->
  
- <style>
-    .btn-play {
-        border: none; /* ลบกรอบ */
-        padding: 15px;
-        border-radius: 50%;
-        background-color: transparent; /* กำหนดพื้นหลังโปร่งใส */
-        transition: transform 0.3s ease, background-color 0.3s ease;
-    }
- 
-    .btn-play:hover {
-        background-color: #ff5722; /* เปลี่ยนสีพื้นหลังเมื่อโฮเวอร์ */
-        transform: scale(1.1);
-    }
- 
-    .btn-play i {
-        transition: transform 0.2s ease;
-    }
- 
-    .btn-play:hover i {
-        transform: scale(1.2); /* ขยายไอคอนเมื่อโฮเวอร์ */
-    }
- 
-    .glow {
-        text-shadow: 0 0 10px rgba(255, 193, 7, 0.8), 0 0 20px rgba(255, 193, 7, 0.6);
-    }
- </style>
- <script>
-     // เมื่อคลิกปุ่ม play
-     var playButton = document.querySelector('.btn-play');
-     var videoModal = document.getElementById('videoModal');
-     var videoIframe = document.getElementById('video');
-     
-     playButton.addEventListener('click', function() {
-         var videoSrc = playButton.getAttribute('data-src');
-         videoIframe.src = videoSrc; // ตั้งค่า URL ของวิดีโอที่ต้องการแสดง
-     });
- 
-     // เมื่อปิดโมดัล จะทำการหยุดวิดีโอ
-     videoModal.addEventListener('hidden.bs.modal', function() {
-         videoIframe.src = ''; // ล้าง src ของ iframe เมื่อปิดโมดัล
-     });
- </script>
- 
-
     <!-- Offer End -->
 
 
