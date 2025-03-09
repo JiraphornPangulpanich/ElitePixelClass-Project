@@ -115,10 +115,11 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                 echo " <a href='cart1.php?action=remove&id=$itemId' class='btn btn-danger'>ลบ</a>";
 
                 // เช็คจำนวนที่เหลือในคลัง, ไม่ให้เพิ่มเกินจำนวนที่มีในคลัง
-                if ($quantity < $availableQuantity) {
+                if ($remainingQuantity > 0) {
                     echo " <a href='cart1.php?action=add&id=$itemId' class='btn btn-success'>เพิ่ม</a>";
+                    echo " <span>จำนวนสินค้าที่เหลือในคลัง: " . $remainingQuantity . " ชิ้น</span>";
                 } else {
-                    echo " <span>จำนวนสินค้าในคลังเหลือ: " . $availableQuantity . " ชิ้น</span>";
+                    echo " <span>สินค้าหมด</span>";
                 }
 
                 echo "</li>";
