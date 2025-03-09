@@ -355,7 +355,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
         <!-- ตัวเลือกการชำระเงิน -->
         <div id="paymentOptions" class="mt-4 text-center" style="display: none;">
             <h4>เลือกวิธีการชำระเงิน</h4>
-            <button id="codPayment" class="btn btn-outline-success" href="address.php">ชำระเงินปลายทาง</button>
+            <button id="codPayment" class="btn btn-outline-success" ><a href="address.php">ชำระเงินปลายทาง</a></button>
             <button id="creditPayment" class="btn btn-outline-info">ชำระผ่านบัตรเครดิต</button>
         </div>
 
@@ -367,7 +367,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                 <input type="text" name="card_name" placeholder="ชื่อบนบัตร" class="form-control mb-2" required>
                 <input type="text" name="expiry" placeholder="วันหมดอายุ (MM/YY)" class="form-control mb-2" required>
                 <input type="text" name="cvv" placeholder="CVV" class="form-control mb-2" required>
-                <button type="submit" class="btn btn-success" hraf="address.php">ชำระเงิน</button>
+                <button type="submit" class="btn btn-success" ><a href="address.php">ชำระเงิน</a></button>
             </form>
         </div>
     <?php else: ?>
