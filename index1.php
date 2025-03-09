@@ -89,18 +89,17 @@ $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
                     <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Pixel</span>
                 </a>
             </div>
-            <div class="col-lg-4 col-6 text-left">
-                <form action="">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for products">
-                        <div class="input-group-append">
-                            <span class="input-group-text bg-transparent text-primary">
-                                <i class="fa fa-search"></i>
-                            </span>
-                        </div>
+            <form action="search.php" method="POST">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="search_query" placeholder="ค้นหาสินค้า...">
+                    <div class="input-group-append">
+                        <button type="submit" class="input-group-text bg-transparent text-primary">
+                        <i class="fa fa-search"></i>
+                        </button>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
+
             <div class="col-lg-4 col-6 text-right">
                 <p class="m-0">Customer Service</p>
                 <h5 class="m-0">+012 345 6789</h5>
