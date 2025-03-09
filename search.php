@@ -1,20 +1,6 @@
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "qq123456";
-$dbname = "ElitePixel";
-
-// สร้างการเชื่อมต่อ
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// ตรวจสอบการเชื่อมต่อ
-if ($conn->connect_error) {
-    die("เชื่อมต่อฐานข้อมูลไม่สำเร็จ: " . $conn->connect_error);
-}
-echo "เชื่อมต่อฐานข้อมูลสำเร็จ!";
-
-
+include 'db_connect.php'; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $search_query = $_POST['search_query'];
