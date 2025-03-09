@@ -2,6 +2,16 @@
 session_start();
 include('connectdb.php'); // เชื่อมต่อฐานข้อมูล
 
+
+// ตรวจสอบว่าผู้ใช้ล็อกอินหรือไม่
+if (!isset($_SESSION['username'])) {
+    echo "กรุณาล็อกอินก่อนทำการซื้อสินค้า";
+    exit;
+}
+
+$username = $_SESSION['username']; // ดึง username จาก session
+
+
 // ตรวจสอบการทำงานของการเพิ่ม ลด หรือ ลบสินค้า
 if (isset($_GET['action']) && isset($_GET['id'])) {
     $itemId = $_GET['id'];
