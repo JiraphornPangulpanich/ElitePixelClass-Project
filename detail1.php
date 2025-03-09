@@ -203,10 +203,27 @@ $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                             
-                            <a href="" class="btn px-0 ml-3">
+                        <a href="cart1.php" class="btn px-0 ml-3">
                                 <i class="fas fa-shopping-cart text-primary"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
                             </a>
+                        <?php
+session_start();
+include('connectdb.php'); // เชื่อมต่อฐานข้อมูล
+
+// คำนวณจำนวนสินค้าทั้งหมดในตะกร้า
+$totalItems = 0;
+if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+    foreach ($_SESSION['cart'] as $itemId => $quantity) {
+        $totalItems += $quantity; // เพิ่มจำนวนสินค้าทั้งหมดในตะกร้า
+    }
+}
+?>
+
+<!-- ที่ส่วนของการแสดงผลบนหน้า HTML -->
+<span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">
+    <?php echo $totalItems; ?>
+</span>
+
                         </div>
                     </div>
                 </nav>
@@ -223,7 +240,7 @@ $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
                 <nav class="breadcrumb bg-light mb-30">
                     <a class="breadcrumb-item text-dark" href="index1.php">Home</a>
                     <a class="breadcrumb-item text-dark" href="shop.php">Shop</a>
-                    <span class="breadcrumb-item active">Shop List</span>
+                    <span class="breadcrumb-item active">Detail</span>
                 </nav>
             </div>
         </div>
@@ -297,64 +314,82 @@ $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
 
         
             <!-- ดึงข้อมูลสินค้า -->
-    <div class="col-lg-7 h-auto mb-30">
-            <div class="h-100 bg-light p-30">
-                <h3 class="font-weight-semi-bold"><?php echo $product['Name']; ?></h3>
-                <div class="d-flex mb-3">
-                        <div class="text-primary mr-2">
-                            <small class="fas fa-star"></small>
-                            <small class="fas fa-star"></small>
-                            <small class="fas fa-star"></small>
-                            <small class="fas fa-star-half-alt"></small>
-                            <small class="far fa-star"></small>
-                        </div>
-                        <small class="pt-1">(99 Reviews)</small>
-                    </div>
-                <h3 class="font-weight-semi-bold mb-4">฿<?php echo $product['Price']; ?></h3>
-                <p class="mb-4" style="font-size: 16px;"><?php echo $product['Detail']; ?></p>
+            <div class="col-lg-7 h-auto mb-30">
+    <div class="h-100 bg-light p-30">
+        <h3 class="font-weight-semi-bold"><?php echo $product['Name']; ?></h3>
+        <div class="d-flex mb-3">
+            <div class="text-primary mr-2">
+                <small class="fas fa-star"></small>
+                <small class="fas fa-star"></small>
+                <small class="fas fa-star"></small>
+                <small class="fas fa-star-half-alt"></small>
+                <small class="far fa-star"></small>
+            </div>
+            <small class="pt-1">(99 Reviews)</small>
+        </div>
+        <h3 class="font-weight-semi-bold mb-4">฿<?php echo $product['Price']; ?></h3>
+        <p class="mb-4" style="font-size: 16px;"><?php echo $product['Detail']; ?></p>
 
-            
-            
-                <div class="d-flex align-items-center mb-4 pt-2">
-                        <div class="input-group quantity mr-3" style="width: 130px;">
-                            <div class="input-group-btn">
-                                <button class="btn btn-primary btn-minus">
-                                    <i class="fa fa-minus"></i>
-                                </button>
-                            </div>
-                            <input type="text" class="form-control bg-secondary border-0 text-center" value="1">
-                            <div class="input-group-btn">
-                                <button class="btn btn-primary btn-plus">
-                                    <i class="fa fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
-                            Cart</button>
-                    </div>
-                    <div class="d-flex pt-2">
-                        <strong class="text-dark mr-2">Share on:</strong>
-                        <div class="d-inline-flex">
-                            <a class="text-dark px-2" href="">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a class="text-dark px-2" href="">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a class="text-dark px-2" href="">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a class="text-dark px-2" href="">
-                                <i class="fab fa-pinterest"></i>
-                            </a>
-                        </div>
-                    </div>
+        <div class="d-flex align-items-center mb-4 pt-2">
+            <div class="input-group quantity mr-3" style="width: 130px;">
+                <div class="input-group-btn">
+                    <button class="btn btn-primary btn-minus">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+                <input id="quantityInput" type="text" class="form-control bg-secondary border-0 text-center" value="1">
+                <div class="input-group-btn">
+                    <button class="btn btn-primary btn-plus">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+            <button class="btn btn-primary px-3" onclick="addToCart(<?php echo $product['Iditem']; ?>)">
+                <i class="fa fa-shopping-cart mr-1"></i> Add To Cart
+            </button>
         </div>
 
-
-            
+        <div class="d-flex pt-2">
+            <strong class="text-dark mr-2">Share on:</strong>
+            <div class="d-inline-flex">
+                <a class="text-dark px-2" href="">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a class="text-dark px-2" href="">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a class="text-dark px-2" href="">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a class="text-dark px-2" href="">
+                    <i class="fab fa-pinterest"></i>
+                </a>
+            </div>
         </div>
     </div>
+</div>
+
+<script>
+    // เพิ่มลดจำนวนสินค้า
+    document.querySelector('.btn-plus').addEventListener('click', function() {
+        var quantityInput = document.getElementById('quantityInput');
+        quantityInput.value = parseInt(quantityInput.value) + 1;
+    });
+
+    document.querySelector('.btn-minus').addEventListener('click', function() {
+        var quantityInput = document.getElementById('quantityInput');
+        if (parseInt(quantityInput.value) > 1) {
+            quantityInput.value = parseInt(quantityInput.value) - 1;
+        }
+    });
+
+    // เพิ่มสินค้าไปยังตะกร้า
+    function addToCart(productId) {
+        var quantity = document.getElementById('quantityInput').value;
+        window.location.href = 'add_to_cart.php?add=' + productId + '&quantity=' + quantity;
+    }
+</script>
+
                     
 
     </div>
