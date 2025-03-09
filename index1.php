@@ -469,15 +469,7 @@ include_once("connectdb.php");
 $sql = "SELECT * FROM `Product` ORDER BY `Iditem` ASC";
 $rs = mysqli_query($conn , $sql);
 
-session_start();
 
-// ตรวจสอบว่ามีตะกร้าใน session หรือไม่
-if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-    // แสดงข้อมูลตะกร้า
-    echo "<h3>สินค้าของคุณอยู่ในตะกร้าแล้ว</h3>";
-} else {
-    echo "<h3>ตะกร้าของคุณยังว่างอยู่</h3>";
-}
 ?>
 
 
@@ -559,7 +551,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                     <div class="product-img position-relative overflow-hidden">
                         <img class="img-fluid w-100" src="img/201.1.jpg" alt="">
                         <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="add_to_cart.php?Iditem=201"><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=201"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
@@ -626,7 +618,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                     <div class="product-img position-relative overflow-hidden">
                         <img class="img-fluid w-100" src="img/301.1.jpg" alt="">
                         <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="add_to_cart.php?Iditem=301"><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=301"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
@@ -693,7 +685,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                     <div class="product-img position-relative overflow-hidden">
                         <img class="img-fluid w-100" src="img/401.1.jpg" alt="">
                         <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="add_to_cart.php?Iditem=401"><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=401"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
@@ -797,7 +789,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                     <div class="product-img position-relative overflow-hidden">
                         <img class="img-fluid w-100" src="img/802.1.jpg" alt="">
                         <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="add_to_cart.php?Iditem=802"><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=802"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
@@ -864,7 +856,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                     <div class="product-img position-relative overflow-hidden">
                         <img class="img-fluid w-100" src="img/402.1.jpg" alt="">
                         <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="add_to_cart.php?Iditem=402"><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=402"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
@@ -931,7 +923,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                     <div class="product-img position-relative overflow-hidden">
                         <img class="img-fluid w-100" src="img/401.1.jpg" alt="">
                         <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="add_to_cart.php?Iditem=401"><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=401"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
@@ -998,7 +990,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                     <div class="product-img position-relative overflow-hidden">
                         <img class="img-fluid w-100" src="img/701.1.jpg" alt="">
                         <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="add_to_cart.php?Iditem=701"><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=701"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
@@ -1065,7 +1057,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                     <div class="product-img position-relative overflow-hidden">
                         <img class="img-fluid w-100" src="img/702.1.jpg" alt="">
                         <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="add_to_cart.php?Iditem=702"><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=702"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
@@ -1103,7 +1095,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                             <h6 style="font-size: 12px; ">เหลือ &nbsp <h6>
                             <h6 style="font-size: 12px; ">
                                 <?php
-                                    $sql = "SELECT Iditem, Num FROM Product WHERE Iditem = '401'";
+                                    $sql = "SELECT Iditem, Num FROM Product WHERE Iditem = '702'";
                                     $result = $conn->query($sql);
 
                                     if ($result->num_rows > 0) {
@@ -1132,7 +1124,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                     <div class="product-img position-relative overflow-hidden">
                         <img class="img-fluid w-100" src="img/602.1.jpg" alt="">
                         <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="add_to_cart.php?Iditem=602"><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=602"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
@@ -1199,7 +1191,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                     <div class="product-img position-relative overflow-hidden">
                         <img class="img-fluid w-100" src="img/601.1.jpg" alt="">
                         <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="add_to_cart.php?Iditem=601"><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=601"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
@@ -1266,7 +1258,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                     <div class="product-img position-relative overflow-hidden">
                         <img class="img-fluid w-100" src="img/901.1.jpg" alt="">
                         <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="add_to_cart.php?Iditem=901"><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=901"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
