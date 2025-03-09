@@ -1,8 +1,15 @@
 <?php
-session_start();
+session_start();  // เริ่ม session
 
-
-$fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
+// ตรวจสอบว่า session ที่เก็บข้อมูลผู้ใช้มีค่าไหม (คือผู้ใช้เข้าสู่ระบบหรือยัง)
+if (isset($_SESSION["firstname"]) && isset($_SESSION["lastname"])) {
+    // ถ้ามีค่าใน session แสดงชื่อเต็ม
+    $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
+    echo "ยินดีต้อนรับ, " . $fullname . "!";
+} else {
+    // ถ้าไม่มี session หรือผู้ใช้ยังไม่ได้เข้าสู่ระบบ แสดงข้อความ "โปรดเข้าสู่ระบบ"
+    echo "โปรดเข้าสู่ระบบ";
+}
 ?>
 
 
