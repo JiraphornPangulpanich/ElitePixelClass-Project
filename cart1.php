@@ -52,6 +52,9 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
 echo "<h3>สินค้าของคุณในตะกร้า</h3>";
 
 if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+    $totalQuantity = 0; // ตัวแปรสำหรับเก็บผลรวมจำนวนสินค้า
+    $totalPrice = 0; // ตัวแปรสำหรับเก็บผลรวมราคา
+
     echo "<ul>"; // เริ่มต้นรายการสินค้า
 
     // Loop ผ่านสินค้าในตะกร้า
@@ -64,7 +67,14 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
             // ถ้ามีสินค้าตรงกับ $itemId ให้แสดงข้อมูล
             while ($row = $result->fetch_assoc()) {
                 $availableQuantity = $row["Num"]; // จำนวนสินค้าที่มีในฐานข้อมูล
-                echo "<li>" . $row["Name"] . " - " . $quantity . " ชิ้น - ราคา: " . number_format($row["Price"], 2) . " บาท";
+                $price = $row["Price"]; // ราคาสินค้า
+
+                // คำนวณราคาทั้งหมดของสินค้าตัวนี้
+                $totalPrice += $price * $quantity;
+                // คำนวณผลรวมจำนวนสินค้าทั้งหมด
+                $totalQuantity += $quantity;
+
+                echo "<li>" . $row["Name"] . " - " . $quantity . " ชิ้น - ราคา: " . number_format($price, 2) . " บาท";
                 echo " <a href='cart1.php?action=decrease&id=$itemId' class='btn btn-warning'>ลด</a>";
                 echo " <a href='cart1.php?action=remove&id=$itemId' class='btn btn-danger'>ลบ</a>";
 
@@ -83,6 +93,11 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
         }
     }
     echo "</ul>"; // ปิดรายการสินค้า
+
+    // แสดงผลรวม
+    echo "<h4>จำนวนสินค้าทั้งหมด: " . $totalQuantity . " ชิ้น</h4>";
+    echo "<h4>ราคาทั้งหมด: " . number_format($totalPrice, 2) . " บาท</h4>";
+
 } else {
     echo "<h3>ตะกร้าของคุณยังว่างอยู่</h3>";
 }
