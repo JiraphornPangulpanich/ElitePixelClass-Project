@@ -90,8 +90,8 @@
                     <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Pixel</span>
                 </a>
             </div>
-        
-            <form action="search.php" method="POST" class="search-form">
+            <div class="col-lg-4 col-6 text-left">
+                <form action="search.php" method="POST" class="search-form">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search for products">
                         <div class="input-group-append">
@@ -100,8 +100,8 @@
                             </span>
                         </div>
                     </div>
-            </form>
-
+                </form>
+            </div>
 
 
             <div class="col-lg-4 col-6 text-right">
