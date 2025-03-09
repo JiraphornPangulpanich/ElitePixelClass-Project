@@ -33,16 +33,6 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 
-<style>
- .bn1 {
-  transition-duration: 0.4s;
-}
-
-.bn1:hover {
-  background-color: #04AA6D; /* Green */
-  color: white;
-}
-</style>
    
     
 </head>
@@ -108,58 +98,7 @@
     </div>
 </form>
 
-<!--สำหรับฟอร์มค้นหา -->
-<style>
-    .search-form {
-        max-width: 500px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
 
-    .input-group {
-        display: flex;
-        width: 100%;
-        border: 1px solid #ccc;
-        border-radius: 30px;
-    }
-
-    .search-input {
-        flex: 1;
-        padding: 10px 15px;
-        font-size: 16px;
-        border: 2px solid yellow;  /* เปลี่ยนสีขอบเป็นสีเหลือง */
-        border-radius: 30px 0 0 30px;
-        outline: none;
-    }
-
-    .search-btn {
-        background-color: #FFD700; /* ปุ่มสีเหลือง */
-        color: black;
-        border: none;
-        padding: 10px 15px;
-        font-size: 16px;
-        border-radius: 0 30px 30px 0;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-
-    .search-btn:hover {
-        background-color: #ffcc00; /* สีเหลืองเข้มเมื่อ hover */
-    }
-
-    /* สำหรับมือถือ */
-    @media (max-width: 768px) {
-        .search-form {
-            width: 90%;
-        }
-    }
-</style>
-
-
-
-        
 
             <div class="col-lg-4 col-6 text-right">
                 <p class="m-0">Customer Service</p>
