@@ -263,20 +263,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <a class="h6 text-decoration-none text-truncate" href="detail1.php?Iditem=' . $iditem . '">' . $name . '</a>
                                     <div class="d-flex align-items-center justify-content-center mt-2">
                                         <h5 class="text-muted ml-2">$' . number_format($price, 2) . '</h5>
-                                        <h6 class="text-muted ml-2"><del>$4,500.00</del></h6>
+
                                     </div>
                                     <div class="d-flex align-items-center justify-content-center mt-2">
                                         <h6 style="font-size: 12px; ">เหลือ ' . $num . ' ชิ้น</h6>
                                     </div>
-                                    <div class="d-flex align-items-center justify-content-center mb-1">
-                                        <!-- แสดงดาวตามจำนวน -->
-                                        <small class="fa fa-star text-primary mr-1"></small>
-                                        <small class="fa fa-star text-primary mr-1"></small>
-                                        <small class="fa fa-star text-primary mr-1"></small>
-                                        <small class="fa fa-star text-primary mr-1"></small>
-                                        <small class="fa fa-star text-primary mr-1"></small>
-                                        <small>(99)</small>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>';
