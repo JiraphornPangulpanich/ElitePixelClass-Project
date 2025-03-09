@@ -108,7 +108,7 @@ $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
     </div>
 </form>
 
-<!-- ตัวอย่าง CSS สำหรับฟอร์มค้นหา -->
+<!--สำหรับฟอร์มค้นหา -->
 <style>
     .search-form {
         max-width: 500px;
@@ -132,11 +132,6 @@ $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
         border: 2px solid yellow;  /* เปลี่ยนสีขอบเป็นสีเหลือง */
         border-radius: 30px 0 0 30px;
         outline: none;
-        transition: all 0.3s;
-    }
-
-    .search-input:focus {
-        border: 2px solid #FFD700; /* ขอบเหลืองเมื่อโฟกัส */
     }
 
     .search-btn {
@@ -161,6 +156,7 @@ $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
         }
     }
 </style>
+
 
 
         
