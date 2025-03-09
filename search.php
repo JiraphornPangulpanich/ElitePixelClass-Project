@@ -228,7 +228,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Navbar End -->
 
     <!-- Featured Start -->
-<<div class="container-fluid pt-5">
+    <div class="container-fluid pt-5">
     <div class="row px-xl-5 pb-3">
         <!-- search -->
         <div class="container-fluid pt-5 pb-3">
@@ -242,12 +242,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     if ($result->num_rows > 0) {
                         // วนลูปแสดงสินค้าทุกตัว
                         while ($row = $result->fetch_assoc()) {
-                            // ดึงรูปจากชื่อ Iditem
+                            // ดึงรูปจากโฟลเดอร์ img/ โดยใช้ Iditem + ".1.jpg"
                             echo '
                             <div class="col-md-3 mb-4">
                                 <div class="product-item">
-                                    <!-- ดึงรูปจากโฟลเดอร์ img/ โดยใช้ Iditem เป็นชื่อไฟล์ -->
-                                    <img src="img/' . $row["Iditem"] . '.jpg" class="product-img w-100">
+                                    <!-- ดึงรูปจากโฟลเดอร์ img/ โดยใช้ Iditem + ".1.jpg" -->
+                                    <img src="img/' . $row["Iditem"] . '.1.jpg" class="product-img w-100">
                                     <h5>' . $row["Name"] . '</h5>
                                     <p>ราคา: ฿' . number_format($row["Price"], 2) . '</p>
                                     <a href="detail1.php?Iditem=' . $row["Iditem"] . '" class="btn btn-primary">ดูรายละเอียด</a>
@@ -264,6 +264,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 </div>
+
 
 
 
