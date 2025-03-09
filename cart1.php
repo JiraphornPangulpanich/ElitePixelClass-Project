@@ -305,6 +305,18 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     $username = $_SESSION['username']; // ดึง username จาก session
 
 ?>
+
+<style>
+    /* ป้องกันไม่ให้มีขีดเส้นใต้ในลิงก์ */
+    #codPayment a, #creditPayment a {
+        text-decoration: none;
+    }
+
+    /* เพิ่มการเปลี่ยนสีเมื่อ hover */
+    #codPayment a:hover, #creditPayment a:hover {
+        text-decoration: none;
+    }
+</style>
     <!-- Cart Start -->
     <div class="container mt-5">
     <h3 class="text-center">สินค้าของคุณในตะกร้า</h3>
@@ -355,8 +367,11 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
         <!-- ตัวเลือกการชำระเงิน -->
         <div id="paymentOptions" class="mt-4 text-center" style="display: none;">
             <h4>เลือกวิธีการชำระเงิน</h4>
-            <button id="codPayment" class="btn btn-outline-success" ><a href="address.php">ชำระเงินปลายทาง</a></button>
+            <button id="codPayment" class="btn btn-outline-success">
+            <a href="address.php">ชำระเงินปลายทาง</a>
+            </button>
             <button id="creditPayment" class="btn btn-outline-info">ชำระผ่านบัตรเครดิต</button>
+
         </div>
 
         <!-- ฟอร์มกรอกข้อมูลบัตรเครดิต -->
