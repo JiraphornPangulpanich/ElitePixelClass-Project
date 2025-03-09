@@ -108,6 +108,7 @@ $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
     </div>
 </form>
 
+<!-- ตัวอย่าง CSS สำหรับฟอร์มค้นหา -->
 <style>
     .search-form {
         max-width: 500px;
@@ -128,19 +129,19 @@ $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
         flex: 1;
         padding: 10px 15px;
         font-size: 16px;
-        border: none;
+        border: 2px solid yellow;  /* เปลี่ยนสีขอบเป็นสีเหลือง */
         border-radius: 30px 0 0 30px;
         outline: none;
         transition: all 0.3s;
     }
 
     .search-input:focus {
-        border: 1px solid #007bff;
+        border: 2px solid #FFD700; /* ขอบเหลืองเมื่อโฟกัส */
     }
 
     .search-btn {
-        background-color: #007bff;
-        color: white;
+        background-color: #FFD700; /* ปุ่มสีเหลือง */
+        color: black;
         border: none;
         padding: 10px 15px;
         font-size: 16px;
@@ -150,7 +151,7 @@ $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
     }
 
     .search-btn:hover {
-        background-color: #0056b3;
+        background-color: #ffcc00; /* สีเหลืองเข้มเมื่อ hover */
     }
 
     /* สำหรับมือถือ */
@@ -160,6 +161,7 @@ $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
         }
     }
 </style>
+
 
         
 
