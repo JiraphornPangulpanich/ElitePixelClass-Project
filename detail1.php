@@ -382,27 +382,6 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     </div>
 </div>
 
-<script>
-    // เพิ่มลดจำนวนสินค้า
-    document.querySelector('.btn-plus').addEventListener('click', function() {
-        var quantityInput = document.getElementById('quantityInput');
-        quantityInput.value = parseInt(quantityInput.value) + 1;
-    });
-
-    document.querySelector('.btn-minus').addEventListener('click', function() {
-        var quantityInput = document.getElementById('quantityInput');
-        if (parseInt(quantityInput.value) > 1) {
-            quantityInput.value = parseInt(quantityInput.value) - 1;
-        }
-    });
-
-    // เพิ่มสินค้าไปยังตะกร้า
-    function addToCart(productId) {
-        var quantity = document.getElementById('quantityInput').value;
-        window.location.href = 'add_to_cart.php?add=' + productId + '&quantity=' + quantity;
-    }
-</script>
-
 
                     
 
