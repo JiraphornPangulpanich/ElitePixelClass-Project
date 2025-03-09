@@ -2,6 +2,23 @@
 session_start(); // เริ่มต้น session
 include('db_connect.php'); // เชื่อมต่อฐานข้อมูล
 
+session_start(); // เริ่มต้น session
+include('db_connect.php'); // เชื่อมต่อฐานข้อมูล
+
+// ตรวจสอบค่าของ session
+echo '<pre>';
+print_r($_SESSION['cart']);
+echo '</pre>';
+
+if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
+    echo "<h2>ตะกร้าของคุณยังว่างอยู่</h2>";
+} else {
+    echo "<h2>สินค้าที่อยู่ในตะกร้าของคุณ</h2>";
+    // ส่วนแสดงข้อมูลสินค้าจากตะกร้า
+}
+
+
+
 // ตรวจสอบว่ามีสินค้าที่ถูกเพิ่มในตะกร้าหรือไม่
 if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
     echo "<h2>ตะกร้าของคุณยังว่างอยู่</h2>";
