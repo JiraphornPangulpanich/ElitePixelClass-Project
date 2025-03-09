@@ -1,9 +1,17 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>MultiShop - Online Shop Website Template</title>
+    <title> ElitePixel </title>
+    
+   
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -24,84 +32,131 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+   
+    
 </head>
 
 <body>
-    <!-- Topbar Start -->
-    <div class="container-fluid">
-        <div class="row bg-secondary py-1 px-xl-5">
-            <div class="col-lg-6 d-none d-lg-block">
-                <div class="d-inline-flex align-items-center h-100">
-                    <a class="text-body mr-3" href="">About</a>
-                    <a class="text-body mr-3" href="">Contact</a>
-                    <a class="text-body mr-3" href="">Help</a>
-                    <a class="text-body mr-3" href="">FAQs</a>
-                </div>
-            </div>
-            <div class="col-lg-6 text-center text-lg-right">
-                <div class="d-inline-flex align-items-center">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <button class="dropdown-item" type="button">Sign in</button>
-                            <button class="dropdown-item" type="button">Sign up</button>
-                        </div>
+ <!-- Topbar Start -->
+<div class="container-fluid">
+    <div class="row bg-secondary py-1 px-xl-5">
+        <div class="col-lg-6 d-none d-lg-block">
+            <div class="d-inline-flex align-items-center h-100">
+                <?php 
+                session_start(); // เริ่ม session
+
+                // ตรวจสอบว่า session มีข้อมูลของผู้ใช้หรือไม่
+                if (isset($_SESSION["firstname"]) && isset($_SESSION["lastname"])) {
+                    // ถ้ามีข้อมูลใน session แสดงชื่อเต็ม
+                    $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
+                    echo '<span class="navbar-text text-body">👤 ' . $fullname . '!</span>';
+                } else {
+                    // ถ้าไม่มีข้อมูลใน session แสดงข้อความ "โปรดเข้าสู่ระบบ"
+                    echo '<span class="navbar-text text-body">โปรดเข้าสู่ระบบ</span>';
+                }
+                ?>
+            </div>    
+        </div>
+
+        <div class="col-lg-6 text-center text-lg-right">
+            <div class="d-inline-flex align-items-center">
+                <a class="dropdown-item" href="Team1.php">Team</a>
+                <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="index.php">Sign in</a>
+                        <a class="dropdown-item" href="logout.php">Logout</a>
                     </div>
-                    <div class="btn-group mx-2">
-                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">USD</button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <button class="dropdown-item" type="button">EUR</button>
-                            <button class="dropdown-item" type="button">GBP</button>
-                            <button class="dropdown-item" type="button">CAD</button>
-                        </div>
-                    </div>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">EN</button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <button class="dropdown-item" type="button">FR</button>
-                            <button class="dropdown-item" type="button">AR</button>
-                            <button class="dropdown-item" type="button">RU</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="d-inline-flex align-items-center d-block d-lg-none">
-                    <a href="" class="btn px-0 ml-2">
-                        <i class="fas fa-heart text-dark"></i>
-                        <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
-                    </a>
-                    <a href="" class="btn px-0 ml-2">
-                        <i class="fas fa-shopping-cart text-dark"></i>
-                        <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
-                    </a>
-                </div>
             </div>
         </div>
-        <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
-            <div class="col-lg-4">
-                <a href="" class="text-decoration-none">
-                    <span class="h1 text-uppercase text-primary bg-dark px-2">Multi</span>
-                    <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Shop</span>
-                </a>
-            </div>
-            <div class="col-lg-4 col-6 text-left">
-                <form action="">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for products">
-                        <div class="input-group-append">
-                            <span class="input-group-text bg-transparent text-primary">
-                                <i class="fa fa-search"></i>
-                            </span>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="col-lg-4 col-6 text-right">
-                <p class="m-0">Customer Service</p>
-                <h5 class="m-0">+012 345 6789</h5>
-            </div>
+
+        <div class="d-inline-flex align-items-center d-block d-lg-none">
+            <a href="" class="btn px-0 ml-2">
+                <i class="fas fa-heart text-dark"></i>
+                <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
+            </a>
+            <a href="" class="btn px-0 ml-2">
+                <i class="fas fa-shopping-cart text-dark"></i>
+                <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
+            </a>
         </div>
     </div>
-    <!-- Topbar End -->
+    
+    <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
+        <div class="col-lg-4">
+            <a href="index1.php" class="text-decoration-none">
+                <span class="h1 text-uppercase text-primary bg-dark px-2">Elite</span>
+                <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Pixel</span>
+            </a>
+        </div>
+
+        <div class="col-lg-4 col-6 text-left">
+        <form action="search.php" method="POST" class="search-form">
+    <div class="input-group">
+        <input type="text" name="search_query" placeholder="ค้นหาสินค้า..." class="search-input" required>
+        <button type="submit" class="search-btn">🔍 ค้นหา</button>
+    </div>
+</form>
+
+<!--สำหรับฟอร์มค้นหา -->
+<style>
+    .search-form {
+        max-width: 500px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .input-group {
+        display: flex;
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 30px;
+    }
+
+    .search-input {
+        flex: 1;
+        padding: 10px 15px;
+        font-size: 16px;
+        border: 2px solid yellow;  /* เปลี่ยนสีขอบเป็นสีเหลือง */
+        border-radius: 30px 0 0 30px;
+        outline: none;
+    }
+
+    .search-btn {
+        background-color: #FFD700; /* ปุ่มสีเหลือง */
+        color: black;
+        border: none;
+        padding: 10px 15px;
+        font-size: 16px;
+        border-radius: 0 30px 30px 0;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .search-btn:hover {
+        background-color: #ffcc00; /* สีเหลืองเข้มเมื่อ hover */
+    }
+
+    /* สำหรับมือถือ */
+    @media (max-width: 768px) {
+        .search-form {
+            width: 90%;
+        }
+    }
+</style>
+
+        </div>
+
+        <div class="col-lg-4 col-6 text-right">
+            <p class="m-0">Customer Service</p>
+            <h5 class="m-0">+012 345 6789</h5>
+        </div>
+    </div>
+</div>
+<!-- Topbar End -->
+
 
 
     <!-- Navbar Start -->
@@ -114,54 +169,38 @@
                 </a>
                 <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
                     <div class="navbar-nav w-100">
-                        <div class="nav-item dropdown dropright">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dresses <i class="fa fa-angle-right float-right mt-1"></i></a>
-                            <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
-                                <a href="" class="dropdown-item">Men's Dresses</a>
-                                <a href="" class="dropdown-item">Women's Dresses</a>
-                                <a href="" class="dropdown-item">Baby's Dresses</a>
-                            </div>
-                        </div>
-                        <a href="" class="nav-item nav-link">Shirts</a>
-                        <a href="" class="nav-item nav-link">Jeans</a>
-                        <a href="" class="nav-item nav-link">Swimwear</a>
-                        <a href="" class="nav-item nav-link">Sleepwear</a>
-                        <a href="" class="nav-item nav-link">Sportswear</a>
-                        <a href="" class="nav-item nav-link">Jumpsuits</a>
-                        <a href="" class="nav-item nav-link">Blazers</a>
-                        <a href="" class="nav-item nav-link">Jackets</a>
-                        <a href="" class="nav-item nav-link">Shoes</a>
+                        
+                        <a href="shop1.php?Categories=1" class="nav-item nav-link">keyboard</a>
+                        <a href="shop1.php?Categories=2" class="nav-item nav-link">Gaming laptop</a>
+                        <a href="shop1.php?Categories=3" class="nav-item nav-link">mouse</a>
+                        <a href="shop1.php?Categories=4" class="nav-item nav-link">Gaming chair</a>
+                        <a href="shop1.php?Categories=5" class="nav-item nav-link">Gaming mic</a>
+                        <a href="shop1.php?Categories=6" class="nav-item nav-link">Joy stick & Console</a>
+                        <a href="shop1.php?Categories=7" class="nav-item nav-link">speaker</a>
+                        <a href="shop1.php?Categories=8" class="nav-item nav-link">Screen</a>
+                        <a href="shop1.php?Categories=9" class="nav-item nav-link">Earphones</a>
                     </div>
                 </nav>
             </div>
             <div class="col-lg-9">
                 <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
                     <a href="" class="text-decoration-none d-block d-lg-none">
-                        <span class="h1 text-uppercase text-dark bg-light px-2">Multi</span>
-                        <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Shop</span>
+                        <span class="h1 text-uppercase text-dark bg-light px-2">Elite</span>
+                        <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Pixel</span>
                     </a>
                     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="index.html" class="nav-item nav-link">Home</a>
-                            <a href="shop.html" class="nav-item nav-link active">Shop</a>
-                            <a href="detail.html" class="nav-item nav-link">Shop Detail</a>
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
-                                <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                    <a href="cart.html" class="dropdown-item">Shopping Cart</a>
-                                    <a href="checkout.html" class="dropdown-item">Checkout</a>
-                                </div>
-                            </div>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                            <a href="index1.php" class="nav-item nav-link active">Home</a>
+                            <a href="shop.php" class="nav-item nav-link">Shop</a>
+                            
+                            
+                            <a href="contact1.php" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-                            <a href="" class="btn px-0">
-                                <i class="fas fa-heart text-primary"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                            </a>
+                            
                             <a href="" class="btn px-0 ml-3">
                                 <i class="fas fa-shopping-cart text-primary"></i>
                                 <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
@@ -175,95 +214,105 @@
     <!-- Navbar End -->
 
 
-    <!-- Breadcrumb Start -->
-    <div class="container-fluid">
-        <div class="row px-xl-5">
-            <div class="col-12">
-                <nav class="breadcrumb bg-light mb-30">
-                    <a class="breadcrumb-item text-dark" href="#">Home</a>
-                    <a class="breadcrumb-item text-dark" href="#">Shop</a>
-                    <span class="breadcrumb-item active">Shop List</span>
-                </nav>
+  <!-- Hero Start -->
+<div class="container-fluid bg-primary py-5 mb-5 hero-header" style="background-image: url('img/EP2.jpg'); background-size: cover; background-position: center;">
+    <div class="container py-5">
+        <div class="row justify-content-start">
+            <div class="col-lg-8 text-center text-lg-start">
+                <h1 class="display-1 text-uppercase text-primary mb-lg-4">ElitePixel</h1>
+                <h1 class="text-uppercase text-white mb-lg-4">Make Yourself Happy</h1>
+                <p class="fs-4 text-white mb-lg-4">Get ready! More awesome gaming gear products are coming!  Whether it's a mouse, keyboard, headphones, gamepad, and more.</p>
+                <div class="d-flex align-items-center justify-content-center justify-content-lg-start pt-5">
+                    
+                    <button type="button" class="btn-play" data-bs-toggle="modal"
+                       data-src="https://www.youtube.com/embed/oBS5Z9H5HhY?si=tX4ZBzIbyM9APeJm" data-bs-target="#videoModal">
+                       <i class="fas fa-play-circle fa-3x text-warning glow"></i> <!-- ไอคอน Play Circle ที่มีแสงเรือง -->
+                   </button>
+                    <h5 class="font-weight-normal text-white m-0 ms-4 d-none d-sm-block">Play Video</h5>
+                </div>
             </div>
         </div>
     </div>
-    <!-- Breadcrumb End -->
-
-
-    <!-- Shop Start -->
-    <?php
-include_once("connectdb.php");
-
-// รับค่าหมวดหมู่จาก URL หรือใช้ค่า default
-$categoryToShow = isset($_GET['Categories']) ? $_GET['Categories'] : 'default_value';
-
-// คำสั่ง SQL ดึงข้อมูลหมวดหมู่ ชื่อสินค้า, ราคาสินค้า และ iditem
-$sql = "SELECT iditem, Categories, Name, Price FROM Product WHERE Categories = '$categoryToShow' ORDER BY Name";
-
-// รันคำสั่ง SQL
-$result = mysqli_query($conn, $sql);
-
-// ตรวจสอบว่ารันคำสั่ง SQL สำเร็จหรือไม่
-if (!$result) {
-    die("คำสั่งล้มเหลว: " . mysqli_error($conn));
-}
-
-// ตรวจสอบว่ามีข้อมูลที่ได้จากการ query หรือไม่
-if (mysqli_num_rows($result) == 0) {
-    echo "ไม่มีสินค้าที่ตรงกับหมวดหมู่นี้";
-} else {
-    echo '<div class="container mt-4">';  // เปิด container สำหรับการจัดระเบียบสินค้า
-    echo '<div class="row">';  // เริ่มแถวใหม่สำหรับการแสดงสินค้า
-
-    // เริ่มแสดงผลข้อมูล
-    while ($row = mysqli_fetch_assoc($result)) {
-        // สร้างรูปภาพที่สัมพันธ์กับ iditem
-        $imageSrc = 'img/' . $row['iditem'] . '.jpg';
-
-        // แสดงสินค้าในหมวดหมู่ที่เลือก
-        echo '<div class="col-lg-4 col-md-6 col-sm-12 pb-4">';
-        echo '    <div class="product-item bg-light mb-4 p-3">';
-        echo '        <div class="product-img position-relative overflow-hidden">';
-        echo '            <img class="img-fluid w-100" src="' . $imageSrc . '" alt="' . $row['Name'] . '">';
-        echo '            <div class="product-action">';
-        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>';
-        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>';
-        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>';
-        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>';
-        echo '            </div>';
-        echo '        </div>';
-        echo '        <div class="text-center py-4">';
-        echo '            <a class="h6 text-decoration-none text-truncate" href="">' . $row['Name'] . '</a>';
-        echo '            <div class="d-flex align-items-center justify-content-center mt-2">';
-        echo '                <h5>$' . $row['Price'] . '</h5>';
-        echo '            </div>';
-        echo '            <div class="d-flex align-items-center justify-content-center mb-1">';
-        echo '                <small class="fa fa-star text-primary mr-1"></small>';
-        echo '                <small class="fa fa-star text-primary mr-1"></small>';
-        echo '                <small class="fa fa-star text-primary mr-1"></small>';
-        echo '                <small class="fa fa-star text-primary mr-1"></small>';
-        echo '                <small class="fa fa-star text-primary mr-1"></small>';
-        echo '                <small>(99)</small>';
-        echo '            </div>';
-        echo '        </div>';
-        echo '    </div>';
-        echo '</div>';
+ </div>
+ <!-- Hero End -->
+ 
+ <!-- Video Modal Start -->
+ <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal-dialog">
+         <div class="modal-content rounded-0">
+             <div class="modal-header">
+                 <h5 class="modal-title" id="exampleModalLabel">Youtube Video</h5>
+                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+             </div>
+             <div class="modal-body">
+                 <!-- 16:9 aspect ratio -->
+                 <div class="ratio ratio-16x9">
+                     <iframe class="embed-responsive-item" src="" id="video" allowfullscreen allowscriptaccess="always" allow="autoplay"></iframe>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
+ <!-- Video Modal End -->
+ 
+ <style>
+    .btn-play {
+        border: none; /* ลบกรอบ */
+        padding: 15px;
+        border-radius: 50%;
+        background-color: transparent; /* กำหนดพื้นหลังโปร่งใส */
+        transition: transform 0.3s ease, background-color 0.3s ease;
     }
+ 
+    .btn-play:hover {
+        background-color: #ff5722; /* เปลี่ยนสีพื้นหลังเมื่อโฮเวอร์ */
+        transform: scale(1.1);
+    }
+ 
+    .btn-play i {
+        transition: transform 0.2s ease;
+    }
+ 
+    .btn-play:hover i {
+        transform: scale(1.2); /* ขยายไอคอนเมื่อโฮเวอร์ */
+    }
+ 
+    .glow {
+        text-shadow: 0 0 10px rgba(255, 193, 7, 0.8), 0 0 20px rgba(255, 193, 7, 0.6);
+    }
+ </style>
+ <script>
+     // เมื่อคลิกปุ่ม play
+     var playButton = document.querySelector('.btn-play');
+     var videoModal = document.getElementById('videoModal');
+     var videoIframe = document.getElementById('video');
+     
+     playButton.addEventListener('click', function() {
+         var videoSrc = playButton.getAttribute('data-src');
+         videoIframe.src = videoSrc; // ตั้งค่า URL ของวิดีโอที่ต้องการแสดง
+     });
+ 
+     // เมื่อปิดโมดัล จะทำการหยุดวิดีโอ
+     videoModal.addEventListener('hidden.bs.modal', function() {
+         videoIframe.src = ''; // ล้าง src ของ iframe เมื่อปิดโมดัล
+     });
+ </script>
+ 
 
-    echo '</div>';  // ปิดแถว
-    echo '</div>';  // ปิด container
-}
-
-// ปิดการเชื่อมต่อฐานข้อมูล
-mysqli_free_result($result);
-mysqli_close($conn);
-?>
 
 
 
 
 
-    <!-- Shop End -->
+
+    <!-- Featured Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5 pb-3">
+        </div>
+    </div>
+
+
+  
 
 
     <!-- Footer Start -->
@@ -271,9 +320,9 @@ mysqli_close($conn);
         <div class="row px-xl-5 pt-5">
             <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
                 <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
-                <p class="mb-4">No dolore ipsum accusam no lorem. Invidunt sed clita kasd clita et et dolor sed dolor. Rebum tempor no vero est magna amet no</p>
-                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
-                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
+                <p class="mb-4">If you have any questions or if your product has any problems, please contact us immediately within 48 hours.</p>
+                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, Mahasarakham, moja</p>
+                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>ElitePixel@example.com</p>
                 <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
             </div>
             <div class="col-lg-8 col-md-12">
@@ -283,9 +332,6 @@ mysqli_close($conn);
                         <div class="d-flex flex-column justify-content-start">
                             <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
                             <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
                             <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                         </div>
                     </div>
@@ -294,15 +340,12 @@ mysqli_close($conn);
                         <div class="d-flex flex-column justify-content-start">
                             <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
                             <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
                             <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                         </div>
                     </div>
                     <div class="col-md-4 mb-5">
                         <h5 class="text-secondary text-uppercase mb-4">Newsletter</h5>
-                        <p>Duo stet tempor ipsum sit amet magna ipsum tempor est</p>
+                        <p>Please contact us as soon as possible.</p>
                         <form action="">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Your Email Address">
@@ -322,18 +365,7 @@ mysqli_close($conn);
                 </div>
             </div>
         </div>
-        <div class="row border-top mx-xl-5 py-4" style="border-color: rgba(256, 256, 256, .1) !important;">
-            <div class="col-md-6 px-xl-0">
-                <p class="mb-md-0 text-center text-md-left text-secondary">
-                    &copy; <a class="text-primary" href="#">Domain</a>. All Rights Reserved. Designed
-                    by
-                    <a class="text-primary" href="https://htmlcodex.com">HTML Codex</a>
-                </p>
-            </div>
-            <div class="col-md-6 px-xl-0 text-center text-md-right">
-                <img class="img-fluid" src="img/payments.png" alt="">
-            </div>
-        </div>
+        
     </div>
     <!-- Footer End -->
 
@@ -354,6 +386,9 @@ mysqli_close($conn);
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    
+    
 </body>
 
 </html>
