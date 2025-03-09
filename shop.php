@@ -229,7 +229,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                 <nav class="breadcrumb bg-light mb-30">
                     <a class="breadcrumb-item text-dark" href="index1.php">Home</a>
                     <a class="breadcrumb-item text-dark" href="shop.php">Shop</a>
-                    <span class="breadcrumb-item active">Shop List</span>
+                    
                 </nav>
             </div>
         </div>
