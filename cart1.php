@@ -1,25 +1,23 @@
 <?php
-session_start(); // เริ่ม session
+session_start();  // เริ่มต้น session
 
-// ตรวจสอบว่า $_SESSION['cart'] มีข้อมูลหรือไม่
+// ตรวจสอบว่ามีการเพิ่มสินค้าไปยังตะกร้าหรือไม่
 if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-    echo "<h2>สินค้าที่อยู่ในตะกร้าของคุณ</h2>";
+    echo "<h3>สินค้าของคุณอยู่ในตะกร้าแล้ว</h3>";
+    echo "<ul>";
     foreach ($_SESSION['cart'] as $itemId => $quantity) {
-        // ดึงข้อมูลสินค้า เช่น ชื่อ, ราคา, และจำนวนจากฐานข้อมูล
+        // ตัวอย่างการดึงข้อมูลสินค้าจากฐานข้อมูลตาม id
         $sql = "SELECT Name, Price FROM Product WHERE Iditem = '$itemId'";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                echo "<p>ชื่อสินค้า: " . $row['Name'] . "<br>";
-                echo "ราคา: $" . $row['Price'] . "<br>";
-                echo "จำนวน: " . $quantity . "<br><br>";
+                echo "<li>" . $row["Name"] . " - " . $quantity . " ชิ้น - ราคา: " . $row["Price"] . " บาท</li>";
             }
-        } else {
-            echo "ไม่พบข้อมูลสินค้า";
         }
     }
+    echo "</ul>";
 } else {
-    echo "<h2>ตะกร้าของคุณยังว่างอยู่</h2>";
+    echo "<h3>ตะกร้าของคุณยังว่างอยู่</h3>";
 }
 ?>
