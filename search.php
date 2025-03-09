@@ -173,7 +173,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-    <!-- Navbar Start -->
+<!-- Navbar Start -->
 <div class="container-fluid bg-dark mb-30">
     <div class="row px-xl-5">
         <div class="col-lg-3 d-none d-lg-block">
@@ -245,7 +245,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $imageSrc = "img/" . $iditem . ".1.jpg"; // กำหนดที่อยู่ไฟล์รูปตาม iditem
 
                         echo '
-                        <div class="col-lg-3 col-md-4 col-sm-6 mb-3"> <!-- ปรับระยะห่างระหว่างสินค้า -->
+                        <div class="col-lg-3 col-md-4 col-sm-6 pb-4"> <!-- ปรับระยะห่างระหว่างสินค้า -->
                             <div class="product-item bg-light mb-4">
                                 <div class="product-img position-relative overflow-hidden">
                                     <!-- แสดงรูปตาม iditem -->
