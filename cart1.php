@@ -92,7 +92,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                 if ($quantity < $availableQuantity) {
                     echo " <a href='cart1.php?action=add&id=$itemId' class='btn btn-success'>เพิ่ม</a>";
                 } else {
-                    echo " <span>จำนวนสินค้าในตะกร้าหมดแล้ว</span>";
+                    echo " <span>จำนวนสินค้าในคลังหมดแล้ว</span>";
                 }
 
                 echo "</li>";
