@@ -74,7 +74,7 @@
                     <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="index.php">Sign in</a>
-                            <a class="text-body mr-3" href="Team1.php">Team</a>
+                            <a class="dropdown-item" href="Team1.php">Team</a>
                             <a class="dropdown-item" href="logout.php">Logout</a>
                         </div>
 
