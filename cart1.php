@@ -2,9 +2,41 @@
 session_start();
 include('connectdb.php'); // เชื่อมต่อฐานข้อมูล
 
-// ตรวจสอบว่า $_SESSION['cart'] มีสินค้าหรือไม่
+// ตรวจสอบการทำงานของการเพิ่ม ลด หรือ ลบสินค้า
+if (isset($_GET['action']) && isset($_GET['id'])) {
+    $itemId = $_GET['id'];
+    $action = $_GET['action'];
+    
+    // ตรวจสอบว่ามีตะกร้าหรือไม่
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+    }
+    
+    // เพิ่มสินค้า
+    if ($action == 'add') {
+        if (isset($_SESSION['cart'][$itemId])) {
+            $_SESSION['cart'][$itemId]++; // เพิ่มจำนวนสินค้าในตะกร้า
+        } else {
+            $_SESSION['cart'][$itemId] = 1; // เพิ่มสินค้าใหม่เข้าไปในตะกร้า
+        }
+    }
+
+    // ลดจำนวนสินค้า
+    if ($action == 'decrease') {
+        if (isset($_SESSION['cart'][$itemId]) && $_SESSION['cart'][$itemId] > 1) {
+            $_SESSION['cart'][$itemId]--; // ลดจำนวนสินค้าในตะกร้า
+        }
+    }
+
+    // ลบสินค้าออกจากตะกร้า
+    if ($action == 'remove') {
+        unset($_SESSION['cart'][$itemId]); // ลบสินค้าออกจากตะกร้า
+    }
+}
+
+echo "<h3>สินค้าของคุณในตะกร้า</h3>";
+
 if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-    echo "<h3>สินค้าของคุณอยู่ในตะกร้าแล้ว</h3>";
     echo "<ul>"; // เริ่มต้นรายการสินค้า
 
     // Loop ผ่านสินค้าในตะกร้า
@@ -16,7 +48,10 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
         if ($result->num_rows > 0) {
             // ถ้ามีสินค้าตรงกับ $itemId ให้แสดงข้อมูล
             while ($row = $result->fetch_assoc()) {
-                echo "<li>" . $row["Name"] . " - " . $quantity . " ชิ้น - ราคา: " . $row["Price"] . " บาท</li>";
+                echo "<li>" . $row["Name"] . " - " . $quantity . " ชิ้น - ราคา: " . number_format($row["Price"], 2) . " บาท";
+                echo " <a href='cart1.php?action=decrease&id=$itemId' class='btn btn-warning'>ลด</a>";
+                echo " <a href='cart1.php?action=remove&id=$itemId' class='btn btn-danger'>ลบ</a>";
+                echo "</li>";
             }
         } else {
             // ถ้าไม่มีสินค้าตรงกับ Iditem
