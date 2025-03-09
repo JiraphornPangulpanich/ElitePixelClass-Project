@@ -234,28 +234,42 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     <!-- Breadcrumb End -->
 
 
-<div class="container">
+    <div class="container">
     <h2>แบบฟอร์มการจัดส่งสินค้า</h2>
     <form action="#" method="post">
-        <label for="name">ชื่อผู้รับ:</label>
-        <input type="text" id="name" name="name" required>
+        <!-- ชื่อผู้รับ -->
+        <div class="form-group">
+            <label for="name">ชื่อผู้รับ:</label>
+            <input type="text" id="name" name="name" class="form-control" required>
+        </div>
 
-        <label for="address">ที่อยู่:</label>
-        <textarea id="address" name="address" rows="3" required></textarea>
+        <!-- ที่อยู่ -->
+        <div class="form-group">
+            <label for="address">ที่อยู่:</label>
+            <textarea id="address" name="address" rows="3" class="form-control" required></textarea>
+        </div>
 
-        <label for="phone">เบอร์โทรศัพท์:</label>
-        <input type="tel" id="phone" name="phone" required>
+        <!-- เบอร์โทรศัพท์ -->
+        <div class="form-group">
+            <label for="phone">เบอร์โทรศัพท์:</label>
+            <input type="tel" id="phone" name="phone" class="form-control" required>
+        </div>
 
-        <label for="shipping-method">วิธีการจัดส่ง:</label>
-        <select id="shipping-method" name="shipping-method" required>
-            <option value="standard">จัดส่งแบบปกติ (3-5 วัน)</option>
-            <option value="express">จัดส่งด่วน (1-2 วัน)</option>
-            <option value="pickup">รับสินค้าด้วยตนเอง</option>
-        </select>
+        <!-- วิธีการจัดส่ง -->
+        <div class="form-group">
+            <label for="shipping-method">วิธีการจัดส่ง:</label>
+            <select id="shipping-method" name="shipping-method" class="form-control" required>
+                <option value="standard">จัดส่งแบบปกติ (3-5 วัน)</option>
+                <option value="express">จัดส่งด่วน (1-2 วัน)</option>
+                <option value="pickup">รับสินค้าด้วยตนเอง</option>
+            </select>
+        </div>
 
-        <button type="submit">ยืนยันการจัดส่ง</button>
+        <!-- ปุ่มยืนยัน -->
+        <button type="submit" class="btn btn-primary">ยืนยันการจัดส่ง</button>
     </form>
 </div>
+
 
 
 
