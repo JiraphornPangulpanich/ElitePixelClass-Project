@@ -2,16 +2,14 @@
 session_start();
 include('connectdb.php'); // เชื่อมต่อฐานข้อมูล
 
-
 // ตรวจสอบว่าผู้ใช้ล็อกอินหรือไม่
 if (!isset($_SESSION['username'])) {
-    header('Location: index.php');;
+    header('Location: index.php');
     echo "<script>alert('โปรดเข้าสู่ระบบเพื่อสั่งสินค้า');</script>";
     exit;
 }
 
 $username = $_SESSION['username']; // ดึง username จาก session
-
 
 // ตรวจสอบการทำงานของการเพิ่ม ลด หรือ ลบสินค้า
 if (isset($_GET['action']) && isset($_GET['id'])) {
@@ -42,7 +40,8 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
                     $availableQuantity--;
                     $conn->query("UPDATE Product SET Num = '$availableQuantity' WHERE Iditem = '$itemId'");
                 } else {
-                    
+                    // ถ้าจำนวนสินค้าที่สั่งเกินกว่าในคลัง
+                    echo "<script>alert('สินค้ามีจำนวนไม่เพียงพอในคลัง');</script>";
                 }
             } else {
                 $_SESSION['cart'][$itemId] = 1; // เพิ่มสินค้าใหม่เข้าไปในตะกร้า
@@ -121,6 +120,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                     echo " <span>จำนวนสินค้าในคลังเหลือ: " . $availableQuantity . " ชิ้น</span>";
                 }
                 
+
 
                 echo "</li>";
             }
