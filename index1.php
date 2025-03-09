@@ -54,6 +54,11 @@ $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
             <div class="col-lg-6 d-none d-lg-block">
                 
             </div>
+            
+            <div class="ml-auto">
+                <span class="navbar-text text-white">👤 Welcome, <?php echo $fullname; ?>!</span>
+            </div>
+        
             <div class="col-lg-6 text-center text-lg-right">
                 <div class="d-inline-flex align-items-center">
                     <div class="btn-group">
