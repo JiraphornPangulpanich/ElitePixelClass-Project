@@ -1,4 +1,18 @@
+<?php
+include 'connectdb.php'; // เชื่อมต่อฐานข้อมูล
 
+// ตรวจสอบว่าเป็นการส่งฟอร์มหรือไม่
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $search_query = $_POST['search_query'];
+
+    // ป้องกัน SQL Injection
+    $search_query = $conn->real_escape_string($search_query);
+
+    // ค้นหาสินค้า
+    $sql = "SELECT * FROM Product WHERE Name LIKE '%$search_query%'";
+    $result = $conn->query($sql);
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
