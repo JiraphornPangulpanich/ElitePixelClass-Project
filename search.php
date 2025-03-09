@@ -228,77 +228,68 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Navbar End -->
 
     <!-- Featured Start -->
-<div class="container-fluid pt-5">
-    <div class="row px-xl-5 pb-3">
-    <div class="container-fluid pt-5 pb-3">
-    <h2>ผลลัพธ์การค้นหา: "<?php echo htmlspecialchars($search_query); ?>"</h2>
-    <div class="row px-xl-5">
-        <?php
-        // ดึงสินค้าตามคำค้น
-        $sql = "SELECT Iditem, Name, Price, Num FROM Product WHERE Name LIKE '%$search_query%'";
-        $result = $conn->query($sql);
+    <div class="container-fluid pt-5">
+    <div class="row px-xl-5 pb-3 justify-content-center">
+        <div class="container-fluid pt-5 pb-3">
+            <h2>ผลลัพธ์การค้นหา: "<?php echo htmlspecialchars($search_query); ?>"</h2>
+            <div class="row px-xl-5 justify-content-center">
+                <?php
+                // ดึงสินค้าตามคำค้น
+                $sql = "SELECT Iditem, Name, Price, Num FROM Product WHERE Name LIKE '%$search_query%'";
+                $result = $conn->query($sql);
 
-        // ตรวจสอบว่ามีสินค้า
-        if ($result->num_rows > 0) {
-            // วนลูปแสดงผลสินค้าที่ค้นพบ
-            while ($row = $result->fetch_assoc()) {
-                $iditem = $row["Iditem"];
-                $name = $row["Name"];
-                $price = $row["Price"];
-                $num = $row["Num"];
-                $imageSrc = "img/" . $iditem . ".1.jpg"; // กำหนดที่อยู่ไฟล์รูปตาม iditem
+                // ตรวจสอบว่ามีสินค้า
+                if ($result->num_rows > 0) {
+                    // วนลูปแสดงผลสินค้าที่ค้นพบ
+                    while ($row = $result->fetch_assoc()) {
+                        $iditem = $row["Iditem"];
+                        $name = $row["Name"];
+                        $price = $row["Price"];
+                        $num = $row["Num"];
+                        $imageSrc = "img/" . $iditem . ".1.jpg"; // กำหนดที่อยู่ไฟล์รูปตาม iditem
 
-                echo '
-                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <div class="product-item bg-light mb-4">
-                        <div class="product-img position-relative overflow-hidden">
-                            <!-- แสดงรูปตาม iditem -->
-                            <img class="img-fluid w-100" src="' . $imageSrc . '" alt="">
-                            <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=' . $iditem . '"><i class="fa fa-search"></i></a>
+                        echo '
+                        <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                            <div class="product-item bg-light mb-4">
+                                <div class="product-img position-relative overflow-hidden">
+                                    <!-- แสดงรูปตาม iditem -->
+                                    <img class="img-fluid w-100" src="' . $imageSrc . '" alt="">
+                                    <div class="product-action">
+                                        <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                        <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=' . $iditem . '"><i class="fa fa-search"></i></a>
+                                    </div>
+                                </div>
+                                <div class="text-center py-4">
+                                    <a class="h6 text-decoration-none text-truncate" href="detail1.php?Iditem=' . $iditem . '">' . $name . '</a>
+                                    <div class="d-flex align-items-center justify-content-center mt-2">
+                                        <h5 class="text-muted ml-2">$' . number_format($price, 2) . '</h5>
+                                        <h6 class="text-muted ml-2"><del>$4,500.00</del></h6>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-center mt-2">
+                                        <h6 style="font-size: 12px; ">เหลือ ' . $num . ' ชิ้น</h6>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-center mb-1">
+                                        <!-- แสดงดาวตามจำนวน -->
+                                        <small class="fa fa-star text-primary mr-1"></small>
+                                        <small class="fa fa-star text-primary mr-1"></small>
+                                        <small class="fa fa-star text-primary mr-1"></small>
+                                        <small class="fa fa-star text-primary mr-1"></small>
+                                        <small class="fa fa-star text-primary mr-1"></small>
+                                        <small>(99)</small>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="detail1.php?Iditem=' . $iditem . '">' . $name . '</a>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5 class="text-muted ml-2">$' . number_format($price, 2) . '</h5>
-                                <h6 class="text-muted ml-2"><del>$4,500.00</del></h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h6 style="font-size: 12px; ">เหลือ ' . $num . ' ชิ้น</h6>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1">
-                                <!-- แสดงดาวตามจำนวน -->
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small>(99)</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>';
-            }
-        } else {
-            echo "<p>ไม่พบสินค้า</p>";
-        }
-        ?>
+                        </div>';
+                    }
+                } else {
+                    echo "<p>ไม่พบสินค้า</p>";
+                }
+                ?>
+            </div>
+        </div>
     </div>
 </div>
 
-    </div>
-</div>
-
-
-
-
-        </div>
-    </div>
-    <!-- Products End -->
-        </div>
-    </div>
 
 
   
