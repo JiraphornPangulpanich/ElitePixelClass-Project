@@ -221,8 +221,8 @@ $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
         <div class="row px-xl-5">
             <div class="col-12">
                 <nav class="breadcrumb bg-light mb-30">
-                    <a class="breadcrumb-item text-dark" href="#">Home</a>
-                    <a class="breadcrumb-item text-dark" href="#">Shop</a>
+                    <a class="breadcrumb-item text-dark" href="index1.php">Home</a>
+                    <a class="breadcrumb-item text-dark" href="shop.php">Shop</a>
                     <span class="breadcrumb-item active">Shop List</span>
                 </nav>
             </div>
