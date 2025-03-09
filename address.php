@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>การจัดส่งสินค้า</title>
+    <meta charset="utf-8">
+    <title>ที่อยู่</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
@@ -20,9 +23,10 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
-    <style>
 </head>
+
 <body>
+    <!-- Topbar Start -->
 <div class="container-fluid">
     <div class="row bg-secondary py-1 px-xl-5">
         <div class="col-lg-6 d-none d-lg-block">
@@ -228,6 +232,8 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
         </div>
     </div>
     <!-- Breadcrumb End -->
+
+
 <div class="container">
     <h2>แบบฟอร์มการจัดส่งสินค้า</h2>
     <form action="#" method="post">
