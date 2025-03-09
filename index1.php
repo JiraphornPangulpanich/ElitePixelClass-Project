@@ -91,16 +91,62 @@
         </div>
 
         <div class="col-lg-4 col-6 text-left">
-            <form action="search.php" method="POST" class="search-form">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for products">
-                    <div class="input-group-append">
-                        <span class="input-group-text bg-transparent text-primary">
-                            <i class="fa fa-search"></i>
-                        </span>
-                    </div>
-                </div>
-            </form>
+        <form action="search.php" method="POST" class="search-form">
+    <div class="input-group">
+        <input type="text" name="search_query" placeholder="ค้นหาสินค้า..." class="search-input" required>
+        <button type="submit" class="search-btn">🔍 ค้นหา</button>
+    </div>
+</form>
+
+<!--สำหรับฟอร์มค้นหา -->
+<style>
+    .search-form {
+        max-width: 500px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .input-group {
+        display: flex;
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 30px;
+    }
+
+    .search-input {
+        flex: 1;
+        padding: 10px 15px;
+        font-size: 16px;
+        border: 2px solid yellow;  /* เปลี่ยนสีขอบเป็นสีเหลือง */
+        border-radius: 30px 0 0 30px;
+        outline: none;
+    }
+
+    .search-btn {
+        background-color: #FFD700; /* ปุ่มสีเหลือง */
+        color: black;
+        border: none;
+        padding: 10px 15px;
+        font-size: 16px;
+        border-radius: 0 30px 30px 0;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .search-btn:hover {
+        background-color: #ffcc00; /* สีเหลืองเข้มเมื่อ hover */
+    }
+
+    /* สำหรับมือถือ */
+    @media (max-width: 768px) {
+        .search-form {
+            width: 90%;
+        }
+    }
+</style>
+
         </div>
 
         <div class="col-lg-4 col-6 text-right">
