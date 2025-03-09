@@ -14,10 +14,25 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
     
     // เพิ่มสินค้า
     if ($action == 'add') {
-        if (isset($_SESSION['cart'][$itemId])) {
-            $_SESSION['cart'][$itemId]++; // เพิ่มจำนวนสินค้าในตะกร้า
-        } else {
-            $_SESSION['cart'][$itemId] = 1; // เพิ่มสินค้าใหม่เข้าไปในตะกร้า
+        // ตรวจสอบจำนวนสินค้าที่มีในฐานข้อมูล
+        $sql = "SELECT Num FROM Product WHERE Iditem = '$itemId'";
+        $result = $conn->query($sql);
+        
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $availableQuantity = $row['Num']; // จำนวนสินค้าที่มีในฐานข้อมูล
+            
+            // ตรวจสอบว่ามีสินค้าที่เหลือพอหรือไม่
+            if (isset($_SESSION['cart'][$itemId])) {
+                // ถ้ามีสินค้าในตะกร้าแล้ว, ตรวจสอบว่าจำนวนสินค้าที่จะเพิ่มไม่เกินจำนวนที่มีในฐานข้อมูล
+                if ($_SESSION['cart'][$itemId] < $availableQuantity) {
+                    $_SESSION['cart'][$itemId]++; // เพิ่มจำนวนสินค้าในตะกร้า
+                } else {
+                    echo "<script>alert('จำนวนสินค้าที่มีในตะกร้ามีมากที่สุดแล้ว');</script>";
+                }
+            } else {
+                $_SESSION['cart'][$itemId] = 1; // เพิ่มสินค้าใหม่เข้าไปในตะกร้า
+            }
         }
     }
 
@@ -42,15 +57,24 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     // Loop ผ่านสินค้าในตะกร้า
     foreach ($_SESSION['cart'] as $itemId => $quantity) {
         // ดึงข้อมูลสินค้าจากฐานข้อมูล
-        $sql = "SELECT Name, Price FROM Product WHERE Iditem = '$itemId'";
+        $sql = "SELECT Name, Price, Num FROM Product WHERE Iditem = '$itemId'";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             // ถ้ามีสินค้าตรงกับ $itemId ให้แสดงข้อมูล
             while ($row = $result->fetch_assoc()) {
+                $availableQuantity = $row["Num"]; // จำนวนสินค้าที่มีในฐานข้อมูล
                 echo "<li>" . $row["Name"] . " - " . $quantity . " ชิ้น - ราคา: " . number_format($row["Price"], 2) . " บาท";
                 echo " <a href='cart1.php?action=decrease&id=$itemId' class='btn btn-warning'>ลด</a>";
                 echo " <a href='cart1.php?action=remove&id=$itemId' class='btn btn-danger'>ลบ</a>";
+
+                // เช็คจำนวนที่เหลือในฐานข้อมูล, ไม่ให้เพิ่มเกินจำนวนที่มี
+                if ($quantity < $availableQuantity) {
+                    echo " <a href='cart1.php?action=add&id=$itemId' class='btn btn-success'>เพิ่ม</a>";
+                } else {
+                    echo " <span>จำนวนสินค้าในตะกร้าหมดแล้ว</span>";
+                }
+
                 echo "</li>";
             }
         } else {
