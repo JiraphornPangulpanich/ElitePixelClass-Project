@@ -94,11 +94,8 @@ $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
                 <form action="search.php" method="POST">
                     <div class="input-group">
                         <input type="text" class="form-control" name="seach_query" placeholder="Search for products">
-                        <div class="input-group-append">
-                            <span class="input-group-text bg-transparent text-primary">
-                                <i class="fa fa-search" type="submit"></i>
-                            </span>
-                        </div>
+                        <i class="fa fa-search" type="submit"></i>
+                        
                     </div>
                 </form>
             </div>
