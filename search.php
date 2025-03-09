@@ -228,39 +228,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Navbar End -->
 
     <!-- Featured Start -->
-   <div class="container-fluid pt-5">
-    <div class="row px-xl-5 pb-3">
-        <!-- ค้นหาสินค้า -->
-        <div class="container-fluid pt-5 pb-3">
-            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Recent Products</span></h2>
-            <div class="row px-xl-5">
-                <h2>ผลลัพธ์การค้นหา: "<?php echo htmlspecialchars($search_query); ?>"</h2>
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5 pb-3">
+     <!-- search -->
+     <div class="container-fluid pt-5 pb-3">
+        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Recent Products</span></h2>
+        <div div class="row px-xl-5">
+        <h2>ผลลัพธ์การค้นหา: "<?php echo htmlspecialchars($search_query); ?>"</h2>
 
-                <div class="row">
-                    <?php
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            echo '
-                            <div class="col-md-3 mb-4">
-                                <div class="product-item">
-                                    <!-- ดึงรูปจาก Iditem เช่น 101.jpg -->
-                                    <img src="img/' . $row["Iditem"] . '.jpg" class="product-img w-100">
-                                    <h5>' . $row["Name"] . '</h5>
-                                    <p>ราคา: ฿' . number_format($row["Price"], 2) . '</p>
-                                    <a href="detail1.php?Iditem=' . $row["Iditem"] . '" class="btn btn-primary">ดูรายละเอียด</a>
-                                </div>
-                            </div>';
-                        }
-                    } else {
-                        echo "<p>ไม่พบสินค้า</p>";
-                    }
-                    ?>
-                </div>
-            </div>
+        <div class="row">
+            <?php
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo '
+                    <div class="col-md-3 mb-4">
+                        <div class="product-item">
+                            <img src="img/' . $row["Iditem"] . '.jpg" class="product-img w-100">
+                            <h5>' . $row["Name"] . '</h5>
+                            <p>ราคา: $' . $row["Price"] . '</p>
+                            <a href="detail1.php?Iditem=' . $row["Iditem"] . '" class="btn btn-primary">ดูรายละเอียด</a>
+                        </div>
+                    </div>';
+                }
+            } else {
+                echo "<p>ไม่พบสินค้า</p>";
+            }
+            ?>
         </div>
     </div>
-</div>
-
 
         </div>
     </div>
