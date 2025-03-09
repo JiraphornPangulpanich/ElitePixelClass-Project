@@ -192,10 +192,27 @@
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                             
-                            <a href="" class="btn px-0 ml-3">
+                        <a href="cart1.php" class="btn px-0 ml-3">
                                 <i class="fas fa-shopping-cart text-primary"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
                             </a>
+                        <?php
+session_start();
+include('connectdb.php'); // เชื่อมต่อฐานข้อมูล
+
+// คำนวณจำนวนสินค้าทั้งหมดในตะกร้า
+$totalItems = 0;
+if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+    foreach ($_SESSION['cart'] as $itemId => $quantity) {
+        $totalItems += $quantity; // เพิ่มจำนวนสินค้าทั้งหมดในตะกร้า
+    }
+}
+?>
+
+<!-- ที่ส่วนของการแสดงผลบนหน้า HTML -->
+<span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">
+    <?php echo $totalItems; ?>
+</span>
+
                         </div>
                     </div>
                 </nav>
@@ -273,7 +290,7 @@
             echo '        <div class="product-img position-relative overflow-hidden">';
             echo '            <img class="img-fluid w-100" src="' . $imageSrc . '" alt="' . $row['Name'] . '">';
             echo '            <div class="product-action">';
-            echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>';
+            echo '                <a class="btn btn-outline-dark btn-square" href="add_to_cart.php?add=' . $row['iditem'] . '"><i class="fa fa-shopping-cart"></i></a>';
             echo '                <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=' . $row['iditem'] . '"><i class="fa fa-search"></i></a>';
             echo '            </div>';
             echo '        </div>';

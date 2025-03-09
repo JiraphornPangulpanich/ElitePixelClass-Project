@@ -192,10 +192,27 @@
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                             
-                            <a href="" class="btn px-0 ml-3">
+                        <a href="cart1.php" class="btn px-0 ml-3">
                                 <i class="fas fa-shopping-cart text-primary"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
                             </a>
+                        <?php
+session_start();
+include('connectdb.php'); // เชื่อมต่อฐานข้อมูล
+
+// คำนวณจำนวนสินค้าทั้งหมดในตะกร้า
+$totalItems = 0;
+if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+    foreach ($_SESSION['cart'] as $itemId => $quantity) {
+        $totalItems += $quantity; // เพิ่มจำนวนสินค้าทั้งหมดในตะกร้า
+    }
+}
+?>
+
+<!-- ที่ส่วนของการแสดงผลบนหน้า HTML -->
+<span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">
+    <?php echo $totalItems; ?>
+</span>
+
                         </div>
                     </div>
                 </nav>
