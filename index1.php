@@ -469,6 +469,15 @@ include_once("connectdb.php");
 $sql = "SELECT * FROM `Product` ORDER BY `Iditem` ASC";
 $rs = mysqli_query($conn , $sql);
 
+session_start();
+
+// ตรวจสอบว่ามีตะกร้าใน session หรือไม่
+if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+    // แสดงข้อมูลตะกร้า
+    echo "<h3>สินค้าของคุณอยู่ในตะกร้าแล้ว</h3>";
+} else {
+    echo "<h3>ตะกร้าของคุณยังว่างอยู่</h3>";
+}
 ?>
 
 

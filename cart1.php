@@ -28,3 +28,6 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     echo "<h3>ตะกร้าของคุณยังว่างอยู่</h3>";
 }
 ?>
+
+<!-- ปุ่มกลับไปหน้า index1.php -->
+<a href="index1.php" class="btn btn-primary">กลับไปหน้าหลัก</a>
