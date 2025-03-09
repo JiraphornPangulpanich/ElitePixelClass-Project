@@ -42,7 +42,7 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
                     $availableQuantity--;
                     $conn->query("UPDATE Product SET Num = '$availableQuantity' WHERE Iditem = '$itemId'");
                 } else {
-                    echo "<script>alert('จำนวนสินค้าที่มีในตะกร้ามีมากที่สุดแล้ว');</script>";
+                    
                 }
             } else {
                 $_SESSION['cart'][$itemId] = 1; // เพิ่มสินค้าใหม่เข้าไปในตะกร้า
