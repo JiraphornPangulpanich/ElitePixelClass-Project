@@ -1,3 +1,64 @@
+<?php
+session_start();
+include('connectdb.php'); // เชื่อมต่อฐานข้อมูล
+
+// ตรวจสอบว่าผู้ใช้ล็อกอินหรือไม่
+if (!isset($_SESSION['username'])) {
+    echo "<script>alert('โปรดเข้าสู่ระบบเพื่อสั่งสินค้า'); window.location='index.php';</script>";
+    exit;
+}
+
+$username = $_SESSION['username']; // ดึง username จาก session
+
+// ตรวจสอบการทำงานของการเพิ่ม ลด หรือ ลบสินค้า
+if (isset($_GET['action']) && isset($_GET['id'])) {
+    $itemId = $_GET['id'];
+    $action = $_GET['action'];
+
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+    }
+
+    // คำสั่ง SQL สำหรับดึงจำนวนสินค้าที่มีในฐานข้อมูล
+    $sql = "SELECT Num FROM Product WHERE Iditem = '$itemId'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $availableQuantity = $row['Num'];
+
+        switch ($action) {
+            case 'add':
+                if (!isset($_SESSION['cart'][$itemId])) {
+                    $_SESSION['cart'][$itemId] = 1;
+                    $availableQuantity--;
+                } elseif ($_SESSION['cart'][$itemId] < $availableQuantity) {
+                    $_SESSION['cart'][$itemId]++;
+                    $availableQuantity--;
+                } else {
+                    echo "<script>alert('สินค้ามีจำนวนไม่เพียงพอในคลัง');</script>";
+                }
+                break;
+            
+            case 'decrease':
+                if (isset($_SESSION['cart'][$itemId]) && $_SESSION['cart'][$itemId] > 1) {
+                    $_SESSION['cart'][$itemId]--;
+                    $availableQuantity++;
+                }
+                break;
+            
+            case 'remove':
+                unset($_SESSION['cart'][$itemId]);
+                $availableQuantity++;
+                break;
+        }
+        $conn->query("UPDATE Product SET Num = '$availableQuantity' WHERE Iditem = '$itemId'");
+    }
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -193,32 +254,7 @@
                                 <i class="fas fa-shopping-cart text-primary"></i>
                             </a>
                         <?php
-session_start();
-include('connectdb.php'); // เชื่อมต่อฐานข้อมูล
 
-// คำนวณจำนวนสินค้าทั้งหมดในตะกร้า
-$totalItems = 0;
-if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-    foreach ($_SESSION['cart'] as $itemId => $quantity) {
-        $totalItems += $quantity; // เพิ่มจำนวนสินค้าทั้งหมดในตะกร้า
-    }
-}
-?>
-
-<!-- ที่ส่วนของการแสดงผลบนหน้า HTML -->
-<span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">
-    <?php echo $totalItems; ?>
-</span>
-
-                        
-                           
-                        </div>
-                    </div>
-                </nav>
-            </div>
-        </div>
-    </div>
-    <!-- Navbar End -->
 
     <!-- Breadcrumb Start -->
     <div class="container-fluid">
@@ -233,127 +269,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
         </div>
     </div>
     <!-- Breadcrumb End -->
-<?php
-    session_start();
-    include('connectdb.php'); // เชื่อมต่อฐานข้อมูล
 
-    // ตรวจสอบว่าผู้ใช้ล็อกอินหรือไม่
-    if (!isset($_SESSION['username'])) {
-    header('Location: index.php');
-    echo "<script>alert('โปรดเข้าสู่ระบบเพื่อสั่งสินค้า');</script>";
-    exit;
-    }
-
-    $username = $_SESSION['username']; // ดึง username จาก session
-
-?>
-    <!-- Cart Start -->
-    <div class="container-fluid">
-    <?php
-session_start();
-include "config.php"; // ไฟล์เชื่อมต่อฐานข้อมูล
-
-if (isset($_GET['action']) && isset($_GET['id'])) {
-    $itemId = $_GET['id'];
-    $action = $_GET['action'];
-
-    if (!isset($_SESSION['cart'])) {
-        $_SESSION['cart'] = [];
-    }
-
-    $sql = "SELECT Num FROM Product WHERE Iditem = '$itemId'";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $availableQuantity = $row['Num'];
-
-        if ($action == 'add') {
-            if (isset($_SESSION['cart'][$itemId])) {
-                if ($_SESSION['cart'][$itemId] < $availableQuantity) {
-                    $_SESSION['cart'][$itemId]++;
-                    $conn->query("UPDATE Product SET Num = Num - 1 WHERE Iditem = '$itemId'");
-                } else {
-                    echo "<script>alert('สินค้ามีจำนวนไม่เพียงพอในคลัง');</script>";
-                }
-            } else {
-                $_SESSION['cart'][$itemId] = 1;
-                $conn->query("UPDATE Product SET Num = Num - 1 WHERE Iditem = '$itemId'");
-            }
-        }
-
-        if ($action == 'decrease' && isset($_SESSION['cart'][$itemId])) {
-            if ($_SESSION['cart'][$itemId] > 1) {
-                $_SESSION['cart'][$itemId]--;
-                $conn->query("UPDATE Product SET Num = Num + 1 WHERE Iditem = '$itemId'");
-            } else {
-                unset($_SESSION['cart'][$itemId]);
-            }
-        }
-
-        if ($action == 'remove' && isset($_SESSION['cart'][$itemId])) {
-            $conn->query("UPDATE Product SET Num = Num + {$_SESSION['cart'][$itemId]} WHERE Iditem = '$itemId'");
-            unset($_SESSION['cart'][$itemId]);
-        }
-    }
-}
-
-// แสดงสินค้าในตะกร้า
-echo '<div class="row px-xl-5">';
-echo '<div class="col-lg-8 table-responsive mb-5">';
-echo '<table class="table table-light table-borderless table-hover text-center mb-0">';
-echo '<thead class="thead-dark"><tr><th>Products</th><th>Price</th><th>Quantity</th><th>Total</th><th>Remove</th></tr></thead>';
-echo '<tbody class="align-middle">';
-
-$totalPrice = 0;
-
-if (!empty($_SESSION['cart'])) {
-    foreach ($_SESSION['cart'] as $itemId => $quantity) {
-        $sql = "SELECT Name, Price, Image FROM Product WHERE Iditem = '$itemId'";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            $price = $row['Price'];
-            $total = $price * $quantity;
-            $totalPrice += $total;
-            
-            echo '<tr>';
-            echo '<td class="align-middle"><img src="' . $row['Image'] . '" style="width: 50px;"> ' . $row['Name'] . '</td>';
-            echo '<td class="align-middle">$' . number_format($price, 2) . '</td>';
-            echo '<td class="align-middle">';
-            echo '<div class="input-group quantity mx-auto" style="width: 100px;">';
-            echo '<div class="input-group-btn">';
-            echo '<a href="cart1.php?action=decrease&id=' . $itemId . '" class="btn btn-sm btn-primary btn-minus"><i class="fa fa-minus"></i></a>';
-            echo '</div>';
-            echo '<input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="' . $quantity . '" readonly>';
-            echo '<div class="input-group-btn">';
-            echo '<a href="cart1.php?action=add&id=' . $itemId . '" class="btn btn-sm btn-primary btn-plus"><i class="fa fa-plus"></i></a>';
-            echo '</div>';
-            echo '</div>';
-            echo '</td>';
-            echo '<td class="align-middle">$' . number_format($total, 2) . '</td>';
-            echo '<td class="align-middle"><a href="cart1.php?action=remove&id=' . $itemId . '" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a></td>';
-            echo '</tr>';
-        }
-    }
-} else {
-    echo '<tr><td colspan="5">ตะกร้าของคุณยังว่างอยู่</td></tr>';
-}
-
-echo '</tbody></table></div>';
-
-echo '<div class="col-lg-4">';
-echo '<h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart Summary</span></h5>';
-echo '<div class="bg-light p-30 mb-5">';
-echo '<div class="d-flex justify-content-between mb-3"><h6>Subtotal</h6><h6>$' . number_format($totalPrice, 2) . '</h6></div>';
-echo '<div class="d-flex justify-content-between"><h6 class="font-weight-medium">Shipping</h6><h6 class="font-weight-medium">$10</h6></div>';
-echo '<div class="d-flex justify-content-between mt-2"><h5>Total</h5><h5>$' . number_format($totalPrice + 10, 2) . '</h5></div>';
-echo '<button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>';
-echo '</div></div></div>';
-?>
-
-    </div>
 
     <!-- Cart End -->
 
