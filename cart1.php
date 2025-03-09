@@ -110,7 +110,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                 // คำนวณผลรวมจำนวนสินค้าทั้งหมด
                 $totalQuantity += $quantity;
 
-                echo "<li>" . $row["Name"] . " - " . $quantity . " ชิ้น - ราคา: " . number_format($price, 2) . " บาท" " <span>จำนวนสินค้าในคลังเหลือ: " . $availableQuantity . " ชิ้น</span>";
+                echo "<li>" . $row["Name"] . " - " . $quantity . " ชิ้น - ราคา: " . number_format($price, 2) . " บาท" ;
                 echo " <a href='cart1.php?action=decrease&id=$itemId' class='btn btn-warning'>ลด</a>";
                 echo " <a href='cart1.php?action=remove&id=$itemId' class='btn btn-danger'>ลบ</a>";
 
@@ -118,7 +118,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                 if ($quantity < $availableQuantity) {
                     echo " <a href='cart1.php?action=add&id=$itemId' class='btn btn-success'>เพิ่ม</a>";
                 } else {
-                    
+                    echo " <span>จำนวนสินค้าในคลังเหลือ: " . $availableQuantity . " ชิ้น</span>";
                 }
 
                 echo "</li>";
