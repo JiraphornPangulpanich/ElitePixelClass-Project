@@ -1,3 +1,17 @@
+<?php
+session_start();
+
+// ถ้าไม่มี session username ให้ redirect กลับไปหน้า login
+if (!isset($_SESSION["username"])) {
+    header("Location: index.php");
+    exit();
+}
+
+$fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
