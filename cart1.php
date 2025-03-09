@@ -6,6 +6,7 @@ include('connectdb.php'); // เชื่อมต่อฐานข้อมู
 // ตรวจสอบว่าผู้ใช้ล็อกอินหรือไม่
 if (!isset($_SESSION['username'])) {
     header('Location: index.php');;
+    echo "<script>alert('โปรดเข้าสู่ระบบเพื่อสั่งสินค้า');</script>";
     exit;
 }
 
@@ -38,7 +39,7 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
                 if ($_SESSION['cart'][$itemId] < $availableQuantity) {
                     $_SESSION['cart'][$itemId]++; // เพิ่มจำนวนสินค้าในตะกร้า
                 } else {
-                    echo "<script>alert('จำนวนสินค้าที่มีในตะกร้ามีมากที่สุดแล้ว');</script>";
+                    
                 }
             } else {
                 $_SESSION['cart'][$itemId] = 1; // เพิ่มสินค้าใหม่เข้าไปในตะกร้า
