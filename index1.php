@@ -101,15 +101,66 @@ $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
                 </a>
             </div>
         
-            <div class="col-lg-4 col-6 text-left">
-                <form action="search.php" method="POST">
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="seach_query" placeholder="Search for products">
-                        
-                        
-                    </div>
-                </form>
-            </div>
+            <form action="search.php" method="POST" class="search-form">
+    <div class="input-group">
+        <input type="text" name="search_query" placeholder="ค้นหาสินค้า..." class="search-input" required>
+        <button type="submit" class="search-btn">🔍 ค้นหา</button>
+    </div>
+</form>
+
+<style>
+    .search-form {
+        max-width: 500px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .input-group {
+        display: flex;
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 30px;
+    }
+
+    .search-input {
+        flex: 1;
+        padding: 10px 15px;
+        font-size: 16px;
+        border: none;
+        border-radius: 30px 0 0 30px;
+        outline: none;
+        transition: all 0.3s;
+    }
+
+    .search-input:focus {
+        border: 1px solid #007bff;
+    }
+
+    .search-btn {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        font-size: 16px;
+        border-radius: 0 30px 30px 0;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .search-btn:hover {
+        background-color: #0056b3;
+    }
+
+    /* สำหรับมือถือ */
+    @media (max-width: 768px) {
+        .search-form {
+            width: 90%;
+        }
+    }
+</style>
+
         
 
             <div class="col-lg-4 col-6 text-right">
