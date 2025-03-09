@@ -347,7 +347,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                 </div>
 
                 <?php if ($availableQuantity > 0): ?>
-                    <button class="btn btn-primary px-3" onclick="addToCart(<?php echo $product['Iditem']; ?>)">
+                    <button class="btn btn-primary px-3" onclick="add_To_Cart(<?php echo $product['Iditem']; ?>)">
                         <i class="fa fa-shopping-cart mr-1"></i> Add To Cart
                     </button>
                 <?php else: ?>
