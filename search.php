@@ -228,7 +228,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Navbar End -->
 
     <!-- Featured Start -->
-    <div class="container-fluid pt-5">
+   <div class="container-fluid pt-5">
     <div class="row px-xl-5 pb-3">
         <!-- ค้นหาสินค้า -->
         <div class="container-fluid pt-5 pb-3">
