@@ -2,6 +2,12 @@
 session_start();
 include 'db_connect.php'; // เชื่อมต่อฐานข้อมูล
 
+include 'db_connect.php';
+
+if (!$conn) {
+    die("เชื่อมต่อฐานข้อมูลไม่สำเร็จ: " . mysqli_connect_error());
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $search_query = $_POST['search_query'];
 
