@@ -325,7 +325,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                 <th>สินค้า</th>
                 <th>ราคา</th>
                 <th>จำนวน</th>
-                <th>จำนวนสินค้าในคลัง</th> <!-- New column for available stock -->
+                <th>จำนวนสินค้าในคลัง</th> <!-- จำนวนสินค้าในคลัง -->
                 <th>รวม</th>
                 <th>จัดการ</th>
             </tr>
@@ -339,19 +339,21 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                 if ($row = $result->fetch_assoc()):
                     $subtotal = $row['Price'] * $quantity;
                     $totalPrice += $subtotal;
-                    $availableQuantity = $row['Num']; // Available quantity in the stock
+                    $availableQuantity = $row['Num']; // จำนวนสินค้าในคลัง
             ?>
             <tr>
                 <td><?= $row['Name'] ?></td>
                 <td><?= number_format($row['Price'], 2) ?> บาท</td>
                 <td>
+                    <!-- ปุ่มลดจำนวนสินค้า -->
                     <a href="cart1.php?action=decrease&id=<?= $itemId ?>" class="btn btn-warning btn-sm" 
                         <?= $quantity <= 1 ? 'disabled' : '' ?>>-</a>
                     <?= $quantity ?>
+                    <!-- ปุ่มเพิ่มจำนวนสินค้า -->
                     <a href="cart1.php?action=add&id=<?= $itemId ?>" class="btn btn-success btn-sm" 
                         <?= $quantity >= $availableQuantity ? 'disabled' : '' ?>>+</a>
                 </td>
-                <td><?= $availableQuantity ?> ชิ้น</td> <!-- Display the available stock -->
+                <td><?= $availableQuantity ?> ชิ้น</td> <!-- จำนวนสินค้าในคลัง -->
                 <td><?= number_format($subtotal, 2) ?> บาท</td>
                 <td>
                     <a href="cart1.php?action=remove&id=<?= $itemId ?>" class="btn btn-danger btn-sm">ลบ</a>
