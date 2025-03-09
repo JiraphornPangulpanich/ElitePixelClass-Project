@@ -1,16 +1,3 @@
-<?php
-session_start();  // เริ่ม session
-
-// ตรวจสอบว่า session ที่เก็บข้อมูลผู้ใช้มีค่าไหม (คือผู้ใช้เข้าสู่ระบบหรือยัง)
-if (isset($_SESSION["firstname"]) && isset($_SESSION["lastname"])) {
-    // ถ้ามีค่าใน session แสดงชื่อเต็ม
-    $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
-    echo "ยินดีต้อนรับ, " . $fullname . "!";
-} else {
-    // ถ้าไม่มี session หรือผู้ใช้ยังไม่ได้เข้าสู่ระบบ แสดงข้อความ "โปรดเข้าสู่ระบบ"
-    echo "โปรดเข้าสู่ระบบ";
-}
-?>
 
 
 <!DOCTYPE html>
@@ -65,9 +52,21 @@ if (isset($_SESSION["firstname"]) && isset($_SESSION["lastname"])) {
     <div class="container-fluid">
         <div class="row bg-secondary py-1 px-xl-5">
             <div class="col-lg-6 d-none d-lg-block">
-                <div class="d-inline-flex align-items-center h-100">
-                    <span class="navbar-text text-body">👤 <?php echo $fullname; ?>!</span>
-                </div>     
+            <div class="d-inline-flex align-items-center h-100">
+    <?php 
+    session_start(); // เริ่ม session
+
+    // ตรวจสอบว่า session มีข้อมูลของผู้ใช้หรือไม่
+    if (isset($_SESSION["firstname"]) && isset($_SESSION["lastname"])) {
+        // ถ้ามีข้อมูลใน session แสดงชื่อเต็ม
+        $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
+        echo '<span class="navbar-text text-body">👤 ' . $fullname . '!</span>';
+    } else {
+        // ถ้าไม่มีข้อมูลใน session แสดงข้อความ "โปรดเข้าสู่ระบบ"
+        echo '<span class="navbar-text text-body">โปรดเข้าสู่ระบบ</span>';
+    }
+    ?>
+</div>    
             </div>
         
             <div class="col-lg-6 text-center text-lg-right">
