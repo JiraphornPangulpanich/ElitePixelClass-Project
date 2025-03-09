@@ -312,73 +312,59 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
         
         <!-- Shop Detail Start -->
         <div class="col-lg-7 h-auto mb-30">
-            <div class="h-100 bg-light p-30">
-                <h3 class="font-weight-semi-bold"><?php echo $product['Name']; ?></h3>
-                <div class="d-flex mb-3">
-                    <div class="text-primary mr-2">
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star-half-alt"></small>
-                        <small class="far fa-star"></small>
-                    </div>
-                    <small class="pt-1">(99 Reviews)</small>
+        <div class="h-100 bg-light p-30">
+            <h3 class="font-weight-semi-bold"><?php echo $product['Name']; ?></h3>
+            <div class="d-flex mb-3">
+                <div class="text-primary mr-2">
+                    <small class="fas fa-star"></small>
+                    <small class="fas fa-star"></small>
+                    <small class="fas fa-star"></small>
+                    <small class="fas fa-star-half-alt"></small>
+                    <small class="far fa-star"></small>
                 </div>
-                <h3 class="font-weight-semi-bold mb-4">฿<?php echo $product['Price']; ?></h3>
-                <p class="mb-4" style="font-size: 16px;"><?php echo $product['Detail']; ?></p>
+                <small class="pt-1">(99 Reviews)</small>
+            </div>
+            <h3 class="font-weight-semi-bold mb-4">฿<?php echo $product['Price']; ?></h3>
+            <p class="mb-4" style="font-size: 16px;"><?php echo $product['Detail']; ?></p>
 
-                <?php
-                // ตรวจสอบจำนวนสินค้าคงเหลือในคลัง
-                $availableQuantity = $product['Num']; // จำนวนสินค้าที่มีในฐานข้อมูล
-                ?>
+            <?php
+            $availableQuantity = $product['Num']; // จำนวนสินค้าที่มีในคลัง
+            ?>
 
-                <div class="d-flex align-items-center mb-4 pt-2">
-                    <div class="input-group quantity mr-3" style="width: 130px;">
-                        <div class="input-group-btn">
-                            <button class="btn btn-primary btn-minus">
-                                <i class="fa fa-minus"></i>
-                            </button>
-                        </div>
-                        <input id="quantityInput" type="text" class="form-control bg-secondary border-0 text-center" value="1">
-                        <div class="input-group-btn">
-                            <button class="btn btn-primary btn-plus">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <?php if ($availableQuantity > 0): ?>
-                        <!-- ถ้าสินค้ามีในคลัง -->
-                        <button class="btn btn-primary px-3" onclick="addToCart(<?php echo $product['Iditem']; ?>)">
-                            <i class="fa fa-shopping-cart mr-1"></i> Add To Cart
+            <div class="d-flex align-items-center mb-4 pt-2">
+                <div class="input-group quantity mr-3" style="width: 130px;">
+                    <div class="input-group-btn">
+                        <button class="btn btn-primary btn-minus">
+                            <i class="fa fa-minus"></i>
                         </button>
-                    <?php else: ?>
-                        <!-- ถ้าสินค้าหมด -->
-                        <button class="btn btn-secondary px-3" disabled>
-                            <i class="fa fa-shopping-cart mr-1"></i> สินค้าหมด
+                    </div>
+                    <input id="quantityInput" type="text" class="form-control bg-secondary border-0 text-center" value="1">
+                    <div class="input-group-btn">
+                        <button class="btn btn-primary btn-plus">
+                            <i class="fa fa-plus"></i>
                         </button>
-                    <?php endif; ?>
-                </div>
-
-                <div class="d-flex pt-2">
-                    <strong class="text-dark mr-2">Share on:</strong>
-                    <div class="d-inline-flex">
-                        <a class="text-dark px-2" href="">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a class="text-dark px-2" href="">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a class="text-dark px-2" href="">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a class="text-dark px-2" href="">
-                            <i class="fab fa-pinterest"></i>
-                        </a>
                     </div>
                 </div>
+
+                <?php if ($availableQuantity > 0): ?>
+                    <button class="btn btn-primary px-3" onclick="addToCart(<?php echo $product['Iditem']; ?>)">
+                        <i class="fa fa-shopping-cart mr-1"></i> Add To Cart
+                    </button>
+                <?php else: ?>
+                    <button class="btn btn-secondary px-3" disabled>
+                        <i class="fa fa-shopping-cart mr-1"></i> สินค้าหมด
+                    </button>
+                <?php endif; ?>
             </div>
         </div>
+    </div>
+
+    <script>
+        function addToCart(itemId) {
+            // ส่งคำขอไปยัง PHP เพื่อเพิ่มสินค้าในตะกร้า
+            window.location.href = "cart.php?add=" + itemId;
+        }
+    </script>
     </div>
 </div>
 
