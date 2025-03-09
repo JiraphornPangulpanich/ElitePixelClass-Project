@@ -234,7 +234,7 @@ $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
     <div class="container-fluid">
     <div class="row px-xl-5">
         <div class="col-lg-9 col-md-8">
-    <div class="row">
+    <div class="col-lg-3 d-none d-lg-block">
         <?php
         include_once("connectdb.php");
 
