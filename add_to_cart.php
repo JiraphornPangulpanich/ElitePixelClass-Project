@@ -18,6 +18,11 @@ if (isset($_GET['add'])) {
         $_SESSION['cart'][$itemId] = 1; // ถ้ายังไม่มีให้เพิ่มสินค้าใหม่
     }
 
+    // แสดงค่าของ $_SESSION['cart'] สำหรับการทดสอบ
+    echo '<pre>';
+    print_r($_SESSION['cart']);
+    echo '</pre>';
+
     // รีไดเร็คไปยังหน้า cart1.php
     header('Location: cart1.php');
     exit; // อย่าลืมใส่ exit เพื่อหยุดการทำงานของสคริปต์หลังจาก redirect
