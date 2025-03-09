@@ -19,33 +19,38 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
         $_SESSION['cart'] = [];
     }
 
-    // คำสั่ง SQL สำหรับดึงจำนวนสินค้าที่มีในฐานข้อมูล
-    $sql = "SELECT Num FROM Product WHERE Iditem = '$itemId'";
+    // คำสั่ง SQL สำหรับดึงข้อมูลสินค้าและจำนวนที่มีในฐานข้อมูล
+    $sql = "SELECT Num, Name, Price FROM Product WHERE Iditem = '$itemId'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $availableQuantity = $row['Num']; // จำนวนสินค้าที่มีในคลัง
 
+        // ตรวจสอบการทำงานของแต่ละ action
         switch ($action) {
             case 'add':
+                // ถ้ายังไม่มีสินค้าในตะกร้า เพิ่มสินค้า 1 ชิ้น
                 if (!isset($_SESSION['cart'][$itemId])) {
-                    // ถ้ายังไม่มีสินค้าในตะกร้า, เพิ่ม 1 ชิ้น
-                    $_SESSION['cart'][$itemId] = 1;
-                    $availableQuantity--; // ลดจำนวนสินค้าคงคลัง
-                } elseif ($_SESSION['cart'][$itemId] < $availableQuantity) {
-                    // ถ้ามีสินค้าในตะกร้าแล้ว และยังมีสินค้าในคลังเพียงพอ
+                    if ($availableQuantity > 0) {
+                        $_SESSION['cart'][$itemId] = 1;
+                        $availableQuantity--; // ลดจำนวนสินค้าคงคลัง
+                    } else {
+                        echo "<script>alert('สินค้ามีจำนวนไม่เพียงพอในคลัง');</script>";
+                    }
+                } 
+                // ถ้ามีสินค้าในตะกร้าแล้ว และยังมีสินค้าในคลังเพียงพอ
+                elseif ($_SESSION['cart'][$itemId] < $availableQuantity) {
                     $_SESSION['cart'][$itemId]++;
                     $availableQuantity--; // ลดจำนวนสินค้าคงคลัง
                 } else {
-                    // ถ้าสินค้าในคลังไม่พอ
                     echo "<script>alert('สินค้ามีจำนวนไม่เพียงพอในคลัง');</script>";
                 }
                 break;
             
             case 'decrease':
+                // ถ้ามีสินค้าในตะกร้าและจำนวนมากกว่า 1 ลดจำนวนสินค้า
                 if (isset($_SESSION['cart'][$itemId]) && $_SESSION['cart'][$itemId] > 1) {
-                    // ลดจำนวนสินค้าในตะกร้า ถ้ามีมากกว่า 1
                     $_SESSION['cart'][$itemId]--;
                     $availableQuantity++; // เพิ่มจำนวนสินค้าคงคลัง
                 }
@@ -61,10 +66,20 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
         }
 
         // อัปเดตจำนวนสินค้าในคลังในฐานข้อมูลหลังจากการเพิ่ม ลด หรือ ลบสินค้า
-        $conn->query("UPDATE Product SET Num = '$availableQuantity' WHERE Iditem = '$itemId'");
+        $updateSql = "UPDATE Product SET Num = '$availableQuantity' WHERE Iditem = '$itemId'";
+        if ($conn->query($updateSql) === TRUE) {
+            // หลังจากอัปเดตแล้ว ให้กลับไปที่หน้าตะกร้า
+            header("Location: cart1.php");
+            exit();
+        } else {
+            echo "Error updating record: " . $conn->error;
+        }
+    } else {
+        echo "<script>alert('ไม่พบสินค้านี้ในระบบ');</script>";
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
