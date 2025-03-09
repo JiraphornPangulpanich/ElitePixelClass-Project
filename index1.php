@@ -56,19 +56,19 @@ $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
             </div>
         
             <div class="col-lg-6 text-center text-lg-right">
-                <div class="d-inline-flex align-items-center">
-                    <div class="btn-group">
-                    <span class="navbar-text text-body">👤 Welcome, <?php echo $fullname; ?>!</span>
-                    <a class="text-body mr-3" href="Team1.php">Team</a>
-                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="index.php">Sign in</a>
-                            <a class="dropdown-item" href="logout.php">Logout</a>
-                        </div>
-
-                    </div>
-                    
-                </div>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <span class="navbar-text text-white me-auto">👤 Welcome, <?php echo $fullname; ?>!</span> 
+        <a class="text-white me-3" href="Team1.php">Team</a>
+        <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown">My Account</button>
+            <div class="dropdown-menu dropdown-menu-end">
+                <a class="dropdown-item" href="index.php">Sign in</a>
+                <a class="dropdown-item" href="logout.php">Logout</a>
+            </div>
+        </div>
+    </div>
+</nav>
                 <div class="d-inline-flex align-items-center d-block d-lg-none">
                     <a href="" class="btn px-0 ml-2">
                         <i class="fas fa-heart text-dark"></i>
