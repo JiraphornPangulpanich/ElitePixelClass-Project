@@ -318,9 +318,6 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     }
 </style>
     <!-- Cart Start -->
-    <div class="container mt-5">
-    <h3 class="text-center">สินค้าของคุณในตะกร้า</h3>
-    
     <?php if (!empty($_SESSION['cart'])): ?>
     <table class="table table-bordered text-center">
         <thead class="thead-dark">
@@ -328,6 +325,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                 <th>สินค้า</th>
                 <th>ราคา</th>
                 <th>จำนวน</th>
+                <th>จำนวนสินค้าในคลัง</th> <!-- New column for available stock -->
                 <th>รวม</th>
                 <th>จัดการ</th>
             </tr>
@@ -353,6 +351,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                     <a href="cart1.php?action=add&id=<?= $itemId ?>" class="btn btn-success btn-sm" 
                         <?= $quantity >= $availableQuantity ? 'disabled' : '' ?>>+</a>
                 </td>
+                <td><?= $availableQuantity ?> ชิ้น</td> <!-- Display the available stock -->
                 <td><?= number_format($subtotal, 2) ?> บาท</td>
                 <td>
                     <a href="cart1.php?action=remove&id=<?= $itemId ?>" class="btn btn-danger btn-sm">ลบ</a>
@@ -390,6 +389,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
 <?php else: ?>
     <h4 class="text-center text-danger">ตะกร้าของคุณยังว่างอยู่</h4>
 <?php endif; ?>
+
 </div>
 <script>
     document.getElementById('checkoutBtn').addEventListener('click', function() {
