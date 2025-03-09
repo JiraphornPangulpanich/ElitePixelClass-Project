@@ -347,14 +347,15 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                 </div>
 
                 <?php if ($availableQuantity > 0): ?>
-                    <button class="btn btn-primary px-3" onclick="add_To_Cart(<?php echo $product['Iditem']; ?>)">
-                        <i class="fa fa-shopping-cart mr-1"></i> Add To Cart
-                    </button>
-                <?php else: ?>
-                    <button class="btn btn-secondary px-3" disabled>
-                        <i class="fa fa-shopping-cart mr-1"></i> สินค้าหมด
-                    </button>
-                <?php endif; ?>
+    <a href="add_to_cart.php?add=<?php echo $product['Iditem']; ?>" class="btn btn-primary px-3">
+        <i class="fa fa-shopping-cart mr-1"></i> Add To Cart
+    </a>
+<?php else: ?>
+    <button class="btn btn-secondary px-3" disabled>
+        <i class="fa fa-shopping-cart mr-1"></i> สินค้าหมด
+    </button>
+<?php endif; ?>
+
             </div>
         </div>
     </div>
