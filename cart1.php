@@ -336,17 +336,9 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                 <?php
                 $totalPrice = 0;
                 foreach ($_SESSION['cart'] as $itemId => $quantity):
-                    // ดึงข้อมูลสินค้า
                     $sql = "SELECT Name, Price FROM Product WHERE Iditem = '$itemId'";
                     $result = $conn->query($sql);
                     if ($row = $result->fetch_assoc()):
-                        // ตรวจสอบจำนวนสินค้าคงเหลือ
-                        $sql_stock = "SELECT Stock FROM Product WHERE Iditem = '$itemId'";
-                        $result_stock = $conn->query($sql_stock);
-                        if ($row_stock = $result_stock->fetch_assoc()) {
-                            $stock = $row_stock['Stock'];
-                        }
-                        // คำนวณราคา
                         $subtotal = $row['Price'] * $quantity;
                         $totalPrice += $subtotal;
                 ?>
@@ -356,11 +348,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                     <td>
                         <a href="cart1.php?action=decrease&id=<?= $itemId ?>" class="btn btn-warning btn-sm">-</a>
                         <?= $quantity ?>
-                        <?php if ($quantity < $stock): ?>
-                            <a href="cart1.php?action=add&id=<?= $itemId ?>" class="btn btn-success btn-sm">+</a>
-                        <?php else: ?>
-                            <button class="btn btn-success btn-sm" disabled>+</button>
-                        <?php endif; ?>
+                        <a href="cart1.php?action=add&id=<?= $itemId ?>" class="btn btn-success btn-sm">+</a>
                     </td>
                     <td><?= number_format($subtotal, 2) ?> บาท</td>
                     <td>
@@ -380,9 +368,10 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
         <div id="paymentOptions" class="mt-4 text-center" style="display: none;">
             <h4>เลือกวิธีการชำระเงิน</h4>
             <button id="codPayment" class="btn btn-outline-success">
-                <a href="address.php">ชำระเงินปลายทาง</a>
+            <a href="address.php">ชำระเงินปลายทาง</a>
             </button>
             <button id="creditPayment" class="btn btn-outline-info">ชำระผ่านบัตรเครดิต</button>
+
         </div>
 
         <!-- ฟอร์มกรอกข้อมูลบัตรเครดิต -->
@@ -393,14 +382,13 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                 <input type="text" name="card_name" placeholder="ชื่อบนบัตร" class="form-control mb-2" required>
                 <input type="text" name="expiry" placeholder="วันหมดอายุ (MM/YY)" class="form-control mb-2" required>
                 <input type="text" name="cvv" placeholder="CVV" class="form-control mb-2" required>
-                <button type="submit" class="btn btn-success"><a href="address.php">ชำระเงิน</a></button>
+                <button type="submit" class="btn btn-success" ><a href="address.php">ชำระเงิน</a></button>
             </form>
         </div>
     <?php else: ?>
         <h4 class="text-center text-danger">ตะกร้าของคุณยังว่างอยู่</h4>
     <?php endif; ?>
 </div>
-
 <script>
     document.getElementById('checkoutBtn').addEventListener('click', function() {
         document.getElementById('paymentOptions').style.display = 'block';
@@ -410,7 +398,6 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
         document.getElementById('creditForm').style.display = 'block';
     });
 </script>
-
 
     <!-- Cart End -->
 
