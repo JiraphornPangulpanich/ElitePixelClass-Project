@@ -1,4 +1,18 @@
+<?php
+include 'connectdb.php'; // เชื่อมต่อฐานข้อมูล
 
+// ตรวจสอบว่าเป็นการส่งฟอร์มหรือไม่
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $search_query = $_POST['search_query'];
+
+    // ป้องกัน SQL Injection
+    $search_query = $conn->real_escape_string($search_query);
+
+    // ค้นหาสินค้า
+    $sql = "SELECT * FROM Product WHERE Name LIKE '%$search_query%'";
+    $result = $conn->query($sql);
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -236,78 +250,41 @@
  </div>
  <!-- Hero End -->
  
- <!-- Video Modal Start -->
- <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-     <div class="modal-dialog">
-         <div class="modal-content rounded-0">
-             <div class="modal-header">
-                 <h5 class="modal-title" id="exampleModalLabel">Youtube Video</h5>
-                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-             </div>
-             <div class="modal-body">
-                 <!-- 16:9 aspect ratio -->
-                 <div class="ratio ratio-16x9">
-                     <iframe class="embed-responsive-item" src="" id="video" allowfullscreen allowscriptaccess="always" allow="autoplay"></iframe>
-                 </div>
-             </div>
-         </div>
-     </div>
- </div>
- <!-- Video Modal End -->
- 
- <style>
-    .btn-play {
-        border: none; /* ลบกรอบ */
-        padding: 15px;
-        border-radius: 50%;
-        background-color: transparent; /* กำหนดพื้นหลังโปร่งใส */
-        transition: transform 0.3s ease, background-color 0.3s ease;
-    }
- 
-    .btn-play:hover {
-        background-color: #ff5722; /* เปลี่ยนสีพื้นหลังเมื่อโฮเวอร์ */
-        transform: scale(1.1);
-    }
- 
-    .btn-play i {
-        transition: transform 0.2s ease;
-    }
- 
-    .btn-play:hover i {
-        transform: scale(1.2); /* ขยายไอคอนเมื่อโฮเวอร์ */
-    }
- 
-    .glow {
-        text-shadow: 0 0 10px rgba(255, 193, 7, 0.8), 0 0 20px rgba(255, 193, 7, 0.6);
-    }
- </style>
- <script>
-     // เมื่อคลิกปุ่ม play
-     var playButton = document.querySelector('.btn-play');
-     var videoModal = document.getElementById('videoModal');
-     var videoIframe = document.getElementById('video');
-     
-     playButton.addEventListener('click', function() {
-         var videoSrc = playButton.getAttribute('data-src');
-         videoIframe.src = videoSrc; // ตั้งค่า URL ของวิดีโอที่ต้องการแสดง
-     });
- 
-     // เมื่อปิดโมดัล จะทำการหยุดวิดีโอ
-     videoModal.addEventListener('hidden.bs.modal', function() {
-         videoIframe.src = ''; // ล้าง src ของ iframe เมื่อปิดโมดัล
-     });
- </script>
- 
-
-
-
-
-
 
 
     <!-- Featured Start -->
     <div class="container-fluid pt-5">
         <div class="row px-xl-5 pb-3">
+     <!-- search -->
+     <div class="container-fluid pt-5 pb-3">
+        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Recent Products</span></h2>
+        <div div class="row px-xl-5">
+        <h2>ผลลัพธ์การค้นหา: "<?php echo htmlspecialchars($search_query); ?>"</h2>
+
+        <div class="row">
+            <?php
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo '
+                    <div class="col-md-3 mb-4">
+                        <div class="product-item">
+                            <img src="img/' . $row["Iditem"] . '.jpg" class="product-img w-100">
+                            <h5>' . $row["Name"] . '</h5>
+                            <p>ราคา: $' . $row["Price"] . '</p>
+                            <a href="detail1.php?Iditem=' . $row["Iditem"] . '" class="btn btn-primary">ดูรายละเอียด</a>
+                        </div>
+                    </div>';
+                }
+            } else {
+                echo "<p>ไม่พบสินค้า</p>";
+            }
+            ?>
+        </div>
+    </div>
+
+        </div>
+    </div>
+    <!-- Products End -->
         </div>
     </div>
 

@@ -52,60 +52,60 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-    <!-- Topbar Start -->
-    <div class="container-fluid">
-        <div class="row bg-secondary py-1 px-xl-5">
-            <div class="col-lg-6 d-none d-lg-block">
+ <!-- Topbar Start -->
+<div class="container-fluid">
+    <div class="row bg-secondary py-1 px-xl-5">
+        <div class="col-lg-6 d-none d-lg-block">
             <div class="d-inline-flex align-items-center h-100">
-    <?php 
-    session_start(); // เริ่ม session
+                <?php 
+                session_start(); // เริ่ม session
 
-    // ตรวจสอบว่า session มีข้อมูลของผู้ใช้หรือไม่
-    if (isset($_SESSION["firstname"]) && isset($_SESSION["lastname"])) {
-        // ถ้ามีข้อมูลใน session แสดงชื่อเต็ม
-        $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
-        echo '<span class="navbar-text text-body">👤 ' . $fullname . '!</span>';
-    } else {
-        // ถ้าไม่มีข้อมูลใน session แสดงข้อความ "โปรดเข้าสู่ระบบ"
-        echo '<span class="navbar-text text-body">โปรดเข้าสู่ระบบ</span>';
-    }
-    ?>
-</div>    
-            </div>
-        
-            <div class="col-lg-6 text-center text-lg-right">
-                <div class="d-inline-flex align-items-center">
-                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="index.php">Sign in</a>
-                            <a class="dropdown-item" href="Team1.php">Team</a>
-                            <a class="dropdown-item" href="logout.php">Logout</a>
-                        </div>
+                // ตรวจสอบว่า session มีข้อมูลของผู้ใช้หรือไม่
+                if (isset($_SESSION["firstname"]) && isset($_SESSION["lastname"])) {
+                    // ถ้ามีข้อมูลใน session แสดงชื่อเต็ม
+                    $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
+                    echo '<span class="navbar-text text-body">👤 ' . $fullname . '!</span>';
+                } else {
+                    // ถ้าไม่มีข้อมูลใน session แสดงข้อความ "โปรดเข้าสู่ระบบ"
+                    echo '<span class="navbar-text text-body">โปรดเข้าสู่ระบบ</span>';
+                }
+                ?>
+            </div>    
+        </div>
 
+        <div class="col-lg-6 text-center text-lg-right">
+            <div class="d-inline-flex align-items-center">
+                <a class="dropdown-item" href="Team1.php">Team</a>
+                <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="index.php">Sign in</a>
+                        <a class="dropdown-item" href="logout.php">Logout</a>
                     </div>
-                    
-                </div>
-                <div class="d-inline-flex align-items-center d-block d-lg-none">
-                    <a href="" class="btn px-0 ml-2">
-                        <i class="fas fa-heart text-dark"></i>
-                        <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
-                    </a>
-                    <a href="" class="btn px-0 ml-2">
-                        <i class="fas fa-shopping-cart text-dark"></i>
-                        <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
-                    </a>
-                </div>
             </div>
         </div>
-        <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
-            <div class="col-lg-4">
-                <a href="index1.php" class="text-decoration-none">
-                    <span class="h1 text-uppercase text-primary bg-dark px-2">Elite</span>
-                    <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Pixel</span>
-                </a>
-            </div>
-        
-            <form action="search.php" method="POST" class="search-form">
+
+        <div class="d-inline-flex align-items-center d-block d-lg-none">
+            <a href="" class="btn px-0 ml-2">
+                <i class="fas fa-heart text-dark"></i>
+                <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
+            </a>
+            <a href="" class="btn px-0 ml-2">
+                <i class="fas fa-shopping-cart text-dark"></i>
+                <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
+            </a>
+        </div>
+    </div>
+    
+    <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
+        <div class="col-lg-4">
+            <a href="index1.php" class="text-decoration-none">
+                <span class="h1 text-uppercase text-primary bg-dark px-2">Elite</span>
+                <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Pixel</span>
+            </a>
+        </div>
+
+        <div class="col-lg-4 col-6 text-left">
+        <form action="search.php" method="POST" class="search-form">
     <div class="input-group">
         <input type="text" name="search_query" placeholder="ค้นหาสินค้า..." class="search-input" required>
         <button type="submit" class="search-btn">🔍 ค้นหา</button>
@@ -161,17 +161,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 </style>
 
+        </div>
 
-
-        
-
-            <div class="col-lg-4 col-6 text-right">
-                <p class="m-0">Customer Service</p>
-                <h5 class="m-0">+012 345 6789</h5>
-            </div>
+        <div class="col-lg-4 col-6 text-right">
+            <p class="m-0">Customer Service</p>
+            <h5 class="m-0">+012 345 6789</h5>
         </div>
     </div>
-    <!-- Topbar End -->
+</div>
+<!-- Topbar End -->
+
 
 
     <!-- Navbar Start -->
@@ -229,9 +228,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Navbar End -->
 
 
+  <!-- Hero Start -->
+<div class="container-fluid bg-primary py-5 mb-5 hero-header" style="background-image: url('img/EP2.jpg'); background-size: cover; background-position: center;">
+    <div class="container py-5">
+        <div class="row justify-content-start">
+            <div class="col-lg-8 text-center text-lg-start">
+                <h1 class="display-1 text-uppercase text-primary mb-lg-4">ElitePixel</h1>
+                <h1 class="text-uppercase text-white mb-lg-4">Make Yourself Happy</h1>
+                <p class="fs-4 text-white mb-lg-4">Get ready! More awesome gaming gear products are coming!  Whether it's a mouse, keyboard, headphones, gamepad, and more.</p>
+                <div class="d-flex align-items-center justify-content-center justify-content-lg-start pt-5">
+                    
+                    <button type="button" class="btn-play" data-bs-toggle="modal"
+                       data-src="https://www.youtube.com/embed/oBS5Z9H5HhY?si=tX4ZBzIbyM9APeJm" data-bs-target="#videoModal">
+                       <i class="fas fa-play-circle fa-3x text-warning glow"></i> <!-- ไอคอน Play Circle ที่มีแสงเรือง -->
+                   </button>
+                    <h5 class="font-weight-normal text-white m-0 ms-4 d-none d-sm-block">Play Video</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+ <!-- Hero End -->
+ 
 
-    <!-- search -->
-    <div class="container-fluid pt-5 pb-3">
+
+    <!-- Featured Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5 pb-3">
+     <!-- search -->
+     <div class="container-fluid pt-5 pb-3">
         <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Recent Products</span></h2>
         <div div class="row px-xl-5">
         <h2>ผลลัพธ์การค้นหา: "<?php echo htmlspecialchars($search_query); ?>"</h2>
@@ -260,6 +285,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
     <!-- Products End -->
+        </div>
+    </div>
 
 
   
