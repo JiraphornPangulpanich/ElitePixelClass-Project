@@ -256,7 +256,7 @@
                         echo '        <div class="product-img position-relative overflow-hidden">';
                         echo '            <img class="img-fluid w-100" src="' . $imageSrc . '" alt="' . $row['Name'] . '">';
                         echo '            <div class="product-action">';
-                        echo '                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>';
+                        echo '                <a class="btn btn-outline-dark btn-square" href="add_to_cart.php?add=Iditem"><i class="fa fa-shopping-cart"></i></a>';
                         echo '                <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=' . $row['iditem'] . '"><i class="fa fa-search"></i></a>';
                         echo '            </div>';
                         echo '        </div>';
