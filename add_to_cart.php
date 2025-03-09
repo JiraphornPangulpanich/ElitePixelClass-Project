@@ -1,20 +1,28 @@
 <?php
 session_start();
-include('db_connection.php'); // ใช้การเชื่อมต่อฐานข้อมูล
+include('connectdb.php'); // เชื่อมต่อฐานข้อมูล
 
-// ตรวจสอบว่าได้ส่งค่า 'add' มาหรือไม่
+// ตรวจสอบว่าได้รับค่าจาก URL หรือไม่
 if (isset($_GET['add'])) {
-    $itemId = $_GET['add'];
+    $itemId = $_GET['add']; // ดึง Iditem จาก URL
 
-    // ตรวจสอบว่า $itemId อยู่ใน $_SESSION['cart] หรือไม่
-    if (isset($_SESSION['cart'][$itemId])) {
-        $_SESSION['cart'][$itemId] += 1;  // เพิ่มจำนวนสินค้าในตะกร้า
-    } else {
-        $_SESSION['cart'][$itemId] = 1;  // ถ้ายังไม่มีสินค้าชิ้นนี้ในตะกร้า ให้เพิ่ม
+    // ตรวจสอบว่า $_SESSION['cart'] มีค่าหรือไม่
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = []; // ถ้ายังไม่มีให้สร้างตะกร้า
     }
 
-    // รีไดเรกไปที่ cart1.php เพื่อแสดงผล
+    // ถ้ามีสินค้าตัวนี้แล้วในตะกร้า ให้เพิ่มจำนวนสินค้า
+    if (isset($_SESSION['cart'][$itemId])) {
+        $_SESSION['cart'][$itemId]++; // เพิ่มจำนวนสินค้าตัวนี้ในตะกร้า
+    } else {
+        $_SESSION['cart'][$itemId] = 1; // ถ้ายังไม่มีให้เพิ่มสินค้าใหม่
+    }
+
+    // รีไดเร็คไปยังหน้า cart1.php
     header('Location: cart1.php');
-    exit;
+    exit; // อย่าลืมใส่ exit เพื่อหยุดการทำงานของสคริปต์หลังจาก redirect
+} else {
+    // ถ้าไม่ได้ส่งค่า 'add' มา ให้แสดงข้อความ หรือทำอะไรเพิ่มเติม
+    echo "ไม่มีข้อมูลสินค้า";
 }
 ?>
