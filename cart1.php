@@ -25,36 +25,47 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        $availableQuantity = $row['Num'];
+        $availableQuantity = $row['Num']; // จำนวนสินค้าที่มีในคลัง
 
         switch ($action) {
             case 'add':
                 if (!isset($_SESSION['cart'][$itemId])) {
+                    // ถ้ายังไม่มีสินค้าในตะกร้า, เพิ่ม 1 ชิ้น
                     $_SESSION['cart'][$itemId] = 1;
-                    $availableQuantity--;
+                    $availableQuantity--; // ลดจำนวนสินค้าคงคลัง
                 } elseif ($_SESSION['cart'][$itemId] < $availableQuantity) {
+                    // ถ้ามีสินค้าในตะกร้าแล้ว และยังมีสินค้าในคลังเพียงพอ
                     $_SESSION['cart'][$itemId]++;
-                    $availableQuantity--;
+                    $availableQuantity--; // ลดจำนวนสินค้าคงคลัง
                 } else {
+                    // ถ้าสินค้าในคลังไม่พอ
                     echo "<script>alert('สินค้ามีจำนวนไม่เพียงพอในคลัง');</script>";
                 }
                 break;
             
             case 'decrease':
                 if (isset($_SESSION['cart'][$itemId]) && $_SESSION['cart'][$itemId] > 1) {
+                    // ลดจำนวนสินค้าในตะกร้า ถ้ามีมากกว่า 1
                     $_SESSION['cart'][$itemId]--;
-                    $availableQuantity++;
+                    $availableQuantity++; // เพิ่มจำนวนสินค้าคงคลัง
                 }
                 break;
             
             case 'remove':
-                unset($_SESSION['cart'][$itemId]);
-                $availableQuantity++;
+                // ลบสินค้าจากตะกร้า
+                if (isset($_SESSION['cart'][$itemId])) {
+                    $availableQuantity += $_SESSION['cart'][$itemId]; // เพิ่มจำนวนสินค้าคืน
+                    unset($_SESSION['cart'][$itemId]);
+                }
                 break;
         }
+
+        // อัปเดตจำนวนสินค้าในคลังในฐานข้อมูลหลังจากการเพิ่ม ลด หรือ ลบสินค้า
         $conn->query("UPDATE Product SET Num = '$availableQuantity' WHERE Iditem = '$itemId'");
     }
 }
+?>
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
