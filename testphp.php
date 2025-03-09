@@ -246,7 +246,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
 
     $username = $_SESSION['username']; // ดึง username จาก session
 
-
+?>
     <!-- Cart Start -->
     <div class="container-fluid">
         <div class="row px-xl-5">
@@ -402,7 +402,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
             </div>
         </div>
     </div>
-?>
+
     <!-- Cart End -->
 
     <!-- Footer Start -->
