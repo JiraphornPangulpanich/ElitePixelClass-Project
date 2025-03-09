@@ -236,29 +236,9 @@
     </div>
  </div>
  <!-- Hero End -->
- 
- <!-- Video Modal Start -->
- <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-     <div class="modal-dialog">
-         <div class="modal-content rounded-0">
-             <div class="modal-header">
-                 <h5 class="modal-title" id="exampleModalLabel">Youtube Video</h5>
-                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-             </div>
-             <div class="modal-body">
-                 <!-- 16:9 aspect ratio -->
-                 <div class="ratio ratio-16x9">
-                     <iframe class="embed-responsive-item" src="" id="video" allowfullscreen allowscriptaccess="always" allow="autoplay"></iframe>
-                 </div>
-             </div>
-         </div>
-     </div>
- </div>
- 
-    <!-- Offer End -->
 
 
-    <!-- Products Start -->
+    <!-- search -->
     <div class="container-fluid pt-5 pb-3">
         <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Recent Products</span></h2>
         <div div class="row px-xl-5">
