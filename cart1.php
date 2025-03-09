@@ -411,6 +411,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     });
 </script>
 
+
     <!-- Cart End -->
 
     <!-- Footer Start -->
