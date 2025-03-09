@@ -45,11 +45,11 @@ $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
     <link href="css/style.css" rel="stylesheet">
 
 <style>
- .button1 {
+ .bn1 {
   transition-duration: 0.4s;
 }
 
-.button1:hover {
+.bn1:hover {
   background-color: #04AA6D; /* Green */
   color: white;
 }
@@ -105,7 +105,7 @@ $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
                 <form action="search.php" method="POST">
                     <div class="input-group">
                         <input type="text" class="form-control" name="seach_query" placeholder="Search for products">
-                        <button1>test</button1>
+                        <bn1>test</bn1>
                         
                     </div>
                 </form>
