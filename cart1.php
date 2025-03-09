@@ -5,7 +5,7 @@ include('connectdb.php'); // เชื่อมต่อฐานข้อมู
 
 // ตรวจสอบว่าผู้ใช้ล็อกอินหรือไม่
 if (!isset($_SESSION['username'])) {
-    echo "กรุณาล็อกอินก่อนทำการซื้อสินค้า";
+    header('Location: index.php');;
     exit;
 }
 
