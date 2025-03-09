@@ -379,10 +379,6 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
         document.getElementById('paymentOptions').style.display = 'block';
     });
     
-    document.getElementById('codPayment').addEventListener('click', function() {
-        alert('เลือกชำระเงินปลายทางเรียบร้อย!');
-    });
-    
     document.getElementById('creditPayment').addEventListener('click', function() {
         document.getElementById('creditForm').style.display = 'block';
     });
