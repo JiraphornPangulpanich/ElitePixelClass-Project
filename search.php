@@ -228,9 +228,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Navbar End -->
 
     <!-- Featured Start -->
-    <div class="container-fluid pt-5">
+<<div class="container-fluid pt-5">
     <div class="row px-xl-5 pb-3">
-        <!-- ค้นหาสินค้า -->
+        <!-- search -->
         <div class="container-fluid pt-5 pb-3">
             <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Recent Products</span></h2>
             <div class="row px-xl-5">
@@ -238,12 +238,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <div class="row">
                     <?php
+                    // ตรวจสอบว่ามีสินค้าหรือไม่
                     if ($result->num_rows > 0) {
+                        // วนลูปแสดงสินค้าทุกตัว
                         while ($row = $result->fetch_assoc()) {
+                            // ดึงรูปจากชื่อ Iditem
                             echo '
                             <div class="col-md-3 mb-4">
                                 <div class="product-item">
-                                    <!-- ดึงรูปจาก Iditem เช่น 101.jpg -->
+                                    <!-- ดึงรูปจากโฟลเดอร์ img/ โดยใช้ Iditem เป็นชื่อไฟล์ -->
                                     <img src="img/' . $row["Iditem"] . '.jpg" class="product-img w-100">
                                     <h5>' . $row["Name"] . '</h5>
                                     <p>ราคา: ฿' . number_format($row["Price"], 2) . '</p>
@@ -252,6 +255,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </div>';
                         }
                     } else {
+                        // กรณีไม่มีสินค้า
                         echo "<p>ไม่พบสินค้า</p>";
                     }
                     ?>
@@ -260,6 +264,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 </div>
+
 
 
         </div>
