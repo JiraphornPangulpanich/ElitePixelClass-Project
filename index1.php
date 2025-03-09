@@ -52,13 +52,14 @@ $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
     <div class="container-fluid">
         <div class="row bg-secondary py-1 px-xl-5">
             <div class="col-lg-6 d-none d-lg-block">
-                
+            <div class="d-inline-flex align-items-center h-100">
+            <span class="navbar-text text-body">👤 <?php echo $fullname; ?>!</span>
+                  
             </div>
         
             <div class="col-lg-6 text-center text-lg-right">
                 <div class="d-inline-flex align-items-center">
                     <div class="btn-group">
-                    <span class="navbar-text text-body">👤 , <?php echo $fullname; ?>!</span>
                     <a class="text-body mr-3" href="Team1.php">Team</a>
                     <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
                         <div class="dropdown-menu dropdown-menu-right">
