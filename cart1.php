@@ -119,8 +119,6 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                 } else {
                     echo " <span>จำนวนสินค้าในคลังเหลือ: " . $availableQuantity . " ชิ้น</span>";
                 }
-                
-
 
                 echo "</li>";
             }
