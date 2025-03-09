@@ -1,52 +1,50 @@
 <?php
 session_start();
+include('db_connect.php');
 
-// ตรวจสอบว่าผู้ใช้คลิกปุ่ม "เพิ่มไปที่ตะกร้า"
-if(isset($_POST['add_to_cart'])){
-    $product_id = $_POST['product_id'];
-    $product_name = $_POST['product_name'];
-    $product_price = $_POST['product_price'];
-    $product_quantity = 1; // กำหนดจำนวนเริ่มต้นเป็น 1
+// ตรวจสอบว่ามีสินค้าในตะกร้าหรือไม่
+if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
+    echo "ตะกร้าสินค้าของคุณยังว่างอยู่";
+} else {
+    echo "<h2>ตะกร้าสินค้าของคุณ</h2>";
+    echo "<table border='1'>
+            <tr>
+                <th>ชื่อสินค้า</th>
+                <th>ราคาต่อหน่วย</th>
+                <th>จำนวน</th>
+                <th>ราคารวม</th>
+            </tr>";
 
-    // ตรวจสอบว่าในเซสชันมีตะกร้าหรือไม่
-    if(isset($_SESSION['cart'])){
-        // ถ้ามีแล้วให้เช็คว่ามีสินค้าในตะกร้านั้นหรือไม่
-        $cart = $_SESSION['cart'];
-        $found = false;
-        
-        // ตรวจสอบว่าในตะกร้ามีสินค้าที่ผู้ใช้เพิ่มเข้าไปหรือยัง
-        foreach($cart as $key => $item){
-            if($item['id'] == $product_id){
-                // ถ้ามีสินค้าแล้ว เพิ่มจำนวน
-                $_SESSION['cart'][$key]['quantity'] += 1;
-                $found = true;
-                break;
+    $totalPrice = 0;
+
+    foreach ($_SESSION['cart'] as $itemId => $quantity) {
+        $sql = "SELECT Name, Price FROM Product WHERE Iditem = '$itemId'";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $itemName = $row['Name'];
+                $itemPrice = $row['Price'];
+                $totalItemPrice = $itemPrice * $quantity;
+                
+                echo "<tr>
+                        <td>$itemName</td>
+                        <td>\$$itemPrice</td>
+                        <td>$quantity</td>
+                        <td>\$$totalItemPrice</td>
+                    </tr>";
+
+                $totalPrice += $totalItemPrice;
             }
         }
-
-        // ถ้ายังไม่มีสินค้าในตะกร้า ให้เพิ่มสินค้าใหม่เข้าไป
-        if(!$found){
-            $_SESSION['cart'][] = [
-                'id' => $product_id,
-                'name' => $product_name,
-                'price' => $product_price,
-                'quantity' => $product_quantity
-            ];
-        }
-    } else {
-        // ถ้ายังไม่มีตะกร้าในเซสชัน ให้สร้างใหม่
-        $_SESSION['cart'] = [
-            [
-                'id' => $product_id,
-                'name' => $product_name,
-                'price' => $product_price,
-                'quantity' => $product_quantity
-            ]
-        ];
     }
-    
-    // ไปที่หน้าตะกร้า
-    header("Location: cart.php");
-    exit();
+
+    echo "<tr>
+            <td colspan='3' style='text-align:right;'><strong>ราคารวมทั้งหมด</strong></td>
+            <td><strong>\$$totalPrice</strong></td>
+          </tr>";
+
+    echo "</table>";
+    echo "<br><a href='checkout.php'>ไปที่การชำระเงิน</a>";
 }
 ?>
