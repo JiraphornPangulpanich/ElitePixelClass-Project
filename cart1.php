@@ -1,11 +1,11 @@
 <?php
-session_start(); // เริ่มต้น session
+session_start(); // เริ่ม session
 
-// ตรวจสอบว่ามีสินค้าภายในตะกร้าใน session หรือไม่
+// ตรวจสอบว่า $_SESSION['cart'] มีข้อมูลหรือไม่
 if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     echo "<h2>สินค้าที่อยู่ในตะกร้าของคุณ</h2>";
     foreach ($_SESSION['cart'] as $itemId => $quantity) {
-        // ดึงข้อมูลสินค้า เช่น ชื่อ, ราคา, จำนวน ที่มีอยู่ในตะกร้า
+        // ดึงข้อมูลสินค้า เช่น ชื่อ, ราคา, และจำนวนจากฐานข้อมูล
         $sql = "SELECT Name, Price FROM Product WHERE Iditem = '$itemId'";
         $result = $conn->query($sql);
 

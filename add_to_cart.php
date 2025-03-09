@@ -1,23 +1,28 @@
 <?php
-session_start(); // เริ่มต้น session
+session_start(); // เริ่ม session
 
-// เช็คว่า parameter 'add' มีการส่งมาใน URL หรือไม่
+// ตรวจสอบว่าเราได้รับค่า 'add' จาก URL หรือไม่
 if (isset($_GET['add'])) {
-    $itemId = $_GET['add']; // รับค่าจาก URL ว่าเพิ่มสินค้าอะไร
+    $itemId = $_GET['add']; // รับ ID ของสินค้า
 
-    // ถ้ายังไม่มี session สำหรับตะกร้าให้สร้างขึ้น
+    // ถ้ายังไม่มีตะกร้าใน session ให้สร้างใหม่
     if (!isset($_SESSION['cart'])) {
         $_SESSION['cart'] = array(); // สร้างตะกร้าใน session
     }
 
     // เพิ่มสินค้าลงในตะกร้า
     if (isset($_SESSION['cart'][$itemId])) {
-        $_SESSION['cart'][$itemId]++; // ถ้ามีสินค้าในตะกร้าแล้วเพิ่มจำนวน
+        $_SESSION['cart'][$itemId]++; // เพิ่มจำนวนสินค้าในตะกร้า
     } else {
-        $_SESSION['cart'][$itemId] = 1; // ถ้ายังไม่มีสินค้าในตะกร้าก็เพิ่มไป 1 ชิ้น
+        $_SESSION['cart'][$itemId] = 1; // ถ้ายังไม่มีสินค้าในตะกร้า ให้เพิ่ม 1 ชิ้น
     }
 
-    // เปลี่ยนเส้นทางไปหน้า cart1.php
+    // ตรวจสอบข้อมูลในตะกร้าก่อนรีไดเรก
+    echo '<pre>';
+    print_r($_SESSION['cart']); // ตรวจสอบข้อมูลในตะกร้า
+    echo '</pre>';
+
+    // เปลี่ยนเส้นทางไปที่หน้าตะกร้า
     header('Location: cart1.php');
     exit();
 } else {
