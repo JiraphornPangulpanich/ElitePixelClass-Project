@@ -92,11 +92,15 @@
             </div>
         
             <form action="search.php" method="POST" class="search-form">
-    <div class="input-group">
-        <input type="text" name="search_query" placeholder="ค้นหาสินค้า..." class="search-input" required>
-        <button type="submit" class="search-btn">🔍 ค้นหา</button>
-    </div>
-</form>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for products">
+                        <div class="input-group-append">
+                            <span class="input-group-text bg-transparent text-primary">
+                                <i class="fa fa-search"></i>
+                            </span>
+                        </div>
+                    </div>
+            </form>
 
 
 
