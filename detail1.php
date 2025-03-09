@@ -278,43 +278,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
 
 
     <!-- Shop Detail Start -->
-    <div class="container-fluid pb-5">
-        <div class="row px-xl-5">
-            <div class="col-lg-5 mb-30">
-                <div id="product-carousel" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner bg-light">
-                    <?php
-                        if (!empty($product_images)) {
-                            foreach ($product_images as $key => $image) {
-                                $activeClass = ($key === 0) ? "active" : "";
-                                echo "
-                                <div class='carousel-item $activeClass'>
-                                    <img class='img-fluid w-100' src='$image' alt='Product Image'>
-                                </div>";
-                            }
-                        } else {
-                            echo "
-                            <div class='carousel-item active'>
-                                <img class='img-fluid w-100' src='img/no-image.jpg' alt='No Image Available'>
-                            </div>";
-                            echo "<p>No images found for product ID: $Iditem</p>"; // แสดงข้อความดีบัก
-                        }
-                        ?>
-                    </div>
-                    <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
-                        <i class="fa fa-2x fa-angle-left text-dark"></i>
-                    </a>
-                    <a class="carousel-control-next" href="#product-carousel" data-slide="next">
-                        <i class="fa fa-2x fa-angle-right text-dark"></i>
-                    </a>
-                </div>
-            </div>
-    <!-- Shop Detail Start -->
-
-
-        
-            <!-- ดึงข้อมูลสินค้า -->
-            <div class="col-lg-7 h-auto mb-30">
+    <div class="col-lg-7 h-auto mb-30">
     <div class="h-100 bg-light p-30">
         <h3 class="font-weight-semi-bold"><?php echo $product['Name']; ?></h3>
         <div class="d-flex mb-3">
@@ -330,6 +294,11 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
         <h3 class="font-weight-semi-bold mb-4">฿<?php echo $product['Price']; ?></h3>
         <p class="mb-4" style="font-size: 16px;"><?php echo $product['Detail']; ?></p>
 
+        <?php
+        // ตรวจสอบจำนวนสินค้าคงเหลือในคลัง
+        $availableQuantity = $product['Num']; // จำนวนสินค้าที่มีในฐานข้อมูล
+        ?>
+
         <div class="d-flex align-items-center mb-4 pt-2">
             <div class="input-group quantity mr-3" style="width: 130px;">
                 <div class="input-group-btn">
@@ -344,9 +313,18 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                     </button>
                 </div>
             </div>
-            <button class="btn btn-primary px-3" onclick="addToCart(<?php echo $product['Iditem']; ?>)">
-                <i class="fa fa-shopping-cart mr-1"></i> Add To Cart
-            </button>
+
+            <?php if ($availableQuantity > 0): ?>
+                <!-- ถ้าสินค้ามีในคลัง -->
+                <button class="btn btn-primary px-3" onclick="addToCart(<?php echo $product['Iditem']; ?>)">
+                    <i class="fa fa-shopping-cart mr-1"></i> Add To Cart
+                </button>
+            <?php else: ?>
+                <!-- ถ้าสินค้าหมด -->
+                <button class="btn btn-secondary px-3" disabled>
+                    <i class="fa fa-shopping-cart mr-1"></i> สินค้าหมด
+                </button>
+            <?php endif; ?>
         </div>
 
         <div class="d-flex pt-2">
@@ -389,6 +367,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
         window.location.href = 'add_to_cart.php?add=' + productId + '&quantity=' + quantity;
     }
 </script>
+
 
                     
 
