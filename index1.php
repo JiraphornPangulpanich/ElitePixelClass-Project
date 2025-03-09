@@ -44,6 +44,17 @@ $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 
+<style>
+ .button1 {
+  transition-duration: 0.4s;
+}
+
+.button1:hover {
+  background-color: #04AA6D; /* Green */
+  color: white;
+}
+</style>
+   
     
 </head>
 
