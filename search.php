@@ -227,31 +227,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
     <!-- Navbar End -->
 
-
-  <!-- Hero Start -->
-<div class="container-fluid bg-primary py-5 mb-5 hero-header" style="background-image: url('img/EP2.jpg'); background-size: cover; background-position: center;">
-    <div class="container py-5">
-        <div class="row justify-content-start">
-            <div class="col-lg-8 text-center text-lg-start">
-                <h1 class="display-1 text-uppercase text-primary mb-lg-4">ElitePixel</h1>
-                <h1 class="text-uppercase text-white mb-lg-4">Make Yourself Happy</h1>
-                <p class="fs-4 text-white mb-lg-4">Get ready! More awesome gaming gear products are coming!  Whether it's a mouse, keyboard, headphones, gamepad, and more.</p>
-                <div class="d-flex align-items-center justify-content-center justify-content-lg-start pt-5">
-                    
-                    <button type="button" class="btn-play" data-bs-toggle="modal"
-                       data-src="https://www.youtube.com/embed/oBS5Z9H5HhY?si=tX4ZBzIbyM9APeJm" data-bs-target="#videoModal">
-                       <i class="fas fa-play-circle fa-3x text-warning glow"></i> <!-- ไอคอน Play Circle ที่มีแสงเรือง -->
-                   </button>
-                    <h5 class="font-weight-normal text-white m-0 ms-4 d-none d-sm-block">Play Video</h5>
-                </div>
-            </div>
-        </div>
-    </div>
- </div>
- <!-- Hero End -->
- 
-
-
     <!-- Featured Start -->
     <div class="container-fluid pt-5">
         <div class="row px-xl-5 pb-3">
