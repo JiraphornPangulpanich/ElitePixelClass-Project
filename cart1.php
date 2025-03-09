@@ -100,6 +100,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
         } else {
             // ถ้าไม่มีสินค้าตรงกับ Iditem
             echo "<li>ไม่พบข้อมูลสินค้าที่คุณเลือก</li>";
+            echo "<a href='cart1.php?action=remove&id=$itemId' class='btn btn-danger'>ลบออกจากตะกร้า</a>";
         }
     }
     echo "</ul>"; // ปิดรายการสินค้า
