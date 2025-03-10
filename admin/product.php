@@ -51,7 +51,7 @@
                             <table id="datatablesSimple">
             <thead>
                 <tr>
-                    <th>IDItem</th>
+                    <th>IDitem</th>
                     <th>Categories</th>
                     <th>Name</th>
                     <th>Detail</th>
@@ -61,13 +61,22 @@
                 </tr>
             </thead>
             <tbody>
+            <thead>
+                <tr>
+                    <th>IDitem</th>
+                    <th>Categories</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
                 <?php
                 $sql = "select * from Product order by IDItem DESC";
                 $result = mysqli_query($conn, $sql);
                 while($row=mysqli_fetch_array($result)){
                 ?>
                 <tr>
-                    <td><?=$row['IDItem']?></td>
+                    <td><?=$row['IDitem']?></td>
                     <td><?=$row['Categories']?></td>
                     <td><?=$row['Name']?></td>
                     <td><?=$row['Detail']?></td>
