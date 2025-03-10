@@ -62,7 +62,7 @@
             </thead>
 
                 <?php
-                $sql = "select * from Product order by IDItem DESC";
+                $sql = "select * from Product order by IDitem DESC";
                 $result = mysqli_query($conn, $sql);
                 while($row=mysqli_fetch_array($result)){
                 ?>
