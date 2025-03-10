@@ -92,7 +92,7 @@ $data = mysqli_fetch_array($rs);
                                             <!-- ปุ่มแก้ไข -->
                                             <a href="editproduct.php?id=<?= $row['Iditem'] ?>" class="btn btn-warning btn-sm">แก้ไข</a>
                                             <!-- ปุ่มลบ -->
-                                            <a href="delete_product.php?id=<?= $row['Iditem'] ?>" onclick="return confirm('คุณแน่ใจว่าต้องการลบสินค้านี้?');" class="btn btn-danger btn-sm">ลบ</a>
+                                            <a href="deleteproduct.php?id=<?= $row['Iditem'] ?>" onclick="return confirm('คุณแน่ใจว่าต้องการลบสินค้านี้?');" class="btn btn-danger btn-sm">ลบ</a>
                                         </td>
                                     </tr>
                                 <?php
