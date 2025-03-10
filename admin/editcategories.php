@@ -1,28 +1,37 @@
 <?php
 include_once("condb.php");
 
-// ดึงข้อมูลหมวดหมู่มาแสดงใน form (กรณีแก้ไข)
+// ดึงข้อมูลหมวดหมู่
 if (isset($_GET['Id'])) {
-    $Id = $_GET['Id'];
+    $Id = intval($_GET['Id']);
     $sql = "SELECT * FROM Categories WHERE Id = $Id";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
+
+    if (!$row) {
+        echo "<script>alert('ไม่พบข้อมูลหมวดหมู่'); window.location='categories.php';</script>";
+        exit;
+    }
 }
 
-// อัพเดทข้อมูลเมื่อกดปุ่ม submit
+// อัพเดทข้อมูล
 if (isset($_POST['submit'])) {
-    $name = $_POST['Name'];
-    $id = $_POST['Id']; // รับ id ที่ส่งมาจาก form เพื่อระบุว่าจะอัพเดทหมวดหมู่ไหน
+    $name = mysqli_real_escape_string($conn, $_POST['Name']);
+    $id = intval($_POST['Id']); // ต้องได้ค่า Id
 
+    // ดูค่าที่จะรัน
     $sqlUpdate = "UPDATE Categories SET Name = '$name' WHERE Id = $id";
+    echo "DEBUG SQL: " . $sqlUpdate . "<br>"; // Debug ดูคำสั่ง SQL
 
+    // ลองอัพเดทจริง
     if (mysqli_query($conn, $sqlUpdate)) {
         echo "<script>alert('แก้ไขหมวดหมู่สำเร็จ'); window.location='categories.php';</script>";
     } else {
-        echo "Error updating record: " . mysqli_error($conn);
+        echo "Error updating record: " . mysqli_error($conn); // แสดง error ถ้าเกิด
     }
 }
 ?>
+
 
 
 
@@ -49,15 +58,16 @@ if (isset($_POST['submit'])) {
 <div class="container mt-5">
     <h2>แก้ไขหมวดหมู่สินค้า</h2>
     <form method="POST">
-        <input type="hidden" name="Id" value="<?= $row['Id'] ?>"> <!-- ซ่อน ID เพื่อนำไปแก้ไข -->
-        <div class="mb-3">
-            <label>ชื่อหมวดหมู่สินค้า :</label>
-            <input type="text" name="Name" class="form-control" value="<?= $row['Name'] ?>" required>
-        </div>
+    <input type="hidden" name="Id" value="<?= htmlspecialchars($row['Id']) ?>"> <!-- ซ่อน ID เพื่อนำไปแก้ไข -->
+    <div class="mb-3">
+        <label>ชื่อหมวดหมู่สินค้า :</label>
+        <input type="text" name="Name" class="form-control" value="<?= htmlspecialchars($row['Name']) ?>" required>
+    </div>
 
-        <button type="submit" name="submit" class="btn btn-primary">บันทึก</button>
-        <a href="categories.php" class="btn btn-secondary">กลับหน้าเดิม</a>
-    </form>
+    <button type="submit" name="submit" class="btn btn-primary">บันทึก</button>
+    <a href="categories.php" class="btn btn-secondary">กลับหน้าเดิม</a>
+</form>
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
