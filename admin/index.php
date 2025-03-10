@@ -1,5 +1,7 @@
 <?php
 session_start();
+include('db.php'); // เชื่อมต่อฐานข้อมูล
+
 if (!isset($_SESSION['username'])) {
     echo "<script>alert('❌ กรุณาเข้าสู่ระบบก่อน!'); window.location='login.php';</script>";
     exit();
