@@ -60,16 +60,7 @@
                     <th>Num</th>
                 </tr>
             </thead>
-            <tbody>
-            <thead>
-                <tr>
-                    <th>IDitem</th>
-                    <th>Categories</th>
-                    <th>Name</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <tbody>
+
                 <?php
                 $sql = "select * from Product order by IDItem DESC";
                 $result = mysqli_query($conn, $sql);
