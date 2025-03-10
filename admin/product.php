@@ -86,19 +86,7 @@ $data = mysqli_fetch_array($rs);
                                         <td><?= $row['Name'] ?></td>
                                         <td><?= $row['Detail'] ?></td>
                                         <td class="text-end"><?= number_format($row['Price'], 2) ?></td>
-                                        <td>
-                                            <?php
-                                                if (!empty($product_images)) {
-                                                    foreach ($product_images as $key => $image) {
-                                                        $activeClass = ($key === 0) ? "active" : "";
-                                                echo "
-                                                    <div class='carousel-item $activeClass'>
-                                                    <img class='img-fluid w-100' src='$image' alt='Product Image'>
-                                                    </div>";
-                                                    }
-                                                } 
-                                        ?></td>
-
+                                        <td><img src="<?php echo $product_images[0]; ?>" alt="Product Image" /></td>
                                         <td class="text-center"><?= $row['Num'] ?></td>
                                         <td class="text-center action-btn">
                                             <!-- ปุ่มแก้ไข -->
