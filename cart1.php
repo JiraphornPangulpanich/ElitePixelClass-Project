@@ -410,7 +410,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                         <input type="text" name="card_name" placeholder="ชื่อบนบัตร" class="form-control mb-2" required>
                         <input type="text" name="expiry" placeholder="วันหมดอายุ (MM/YY)" class="form-control mb-2" required>
                         <input type="text" name="cvv" placeholder="CVV" class="form-control mb-2" required>
-                        <button type="submit" class="btn btn-success">ชำระเงิน</button>
+                        <button type="submit" class="btn btn-success"><a href="address.php">ชำระเงิน</a> </button>
                     </form>
                 </div>
             </div>
