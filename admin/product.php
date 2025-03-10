@@ -1,5 +1,5 @@
 <?php include 'condb.php'; 
-$sql = "SELECT * FROM 'products' WHERE IDitem = '{$_GET['id']}' ";
+$sql = "SELECT * FROM 'products' WHERE Iditem = '{$_GET['id']}' ";
 $rs = mysqli_query($conn, $sql);
 $data = mysqli_fetch_array($rs); 
 ?>
@@ -64,7 +64,7 @@ $data = mysqli_fetch_array($rs);
                         <table id="datatablesSimple" class="table table-bordered table-hover">
                             <thead>
                                 <tr class="text-center">
-                                    <th>IDitem</th>
+                                    <th>Iditem</th>
                                     <th>Categories</th>
                                     <th>Name</th>
                                     <th>Detail</th>
@@ -76,12 +76,12 @@ $data = mysqli_fetch_array($rs);
                             </thead>
                             <tbody>
                                 <?php
-                                $sql = "SELECT * FROM Product ORDER BY IDitem ";
+                                $sql = "SELECT * FROM Product ORDER BY Iditem ";
                                 $result = mysqli_query($conn, $sql);
                                 while ($row = mysqli_fetch_array($result)) {
                                 ?>
                                     <tr>
-                                        <td class="text-center"><?= $row['IDitem'] ?></td>
+                                        <td class="text-center"><?= $row['Iditem'] ?></td>
                                         <td class="text-center"><?= $row['Categories'] ?></td>
                                         <td><?= $row['Name'] ?></td>
                                         <td><?= $row['Detail'] ?></td>
@@ -90,9 +90,9 @@ $data = mysqli_fetch_array($rs);
                                         <td class="text-center"><?= $row['Num'] ?></td>
                                         <td class="text-center action-btn">
                                             <!-- ปุ่มแก้ไข -->
-                                            <a href="editproduct.php?id=<?= $row['IDitem'] ?>" class="btn btn-warning btn-sm">แก้ไข</a>
+                                            <a href="editproduct.php?id=<?= $row['Iditem'] ?>" class="btn btn-warning btn-sm">แก้ไข</a>
                                             <!-- ปุ่มลบ -->
-                                            <a href="delete_product.php?id=<?= $row['IDitem'] ?>" onclick="return confirm('คุณแน่ใจว่าต้องการลบสินค้านี้?');" class="btn btn-danger btn-sm">ลบ</a>
+                                            <a href="delete_product.php?id=<?= $row['Iditem'] ?>" onclick="return confirm('คุณแน่ใจว่าต้องการลบสินค้านี้?');" class="btn btn-danger btn-sm">ลบ</a>
                                         </td>
                                     </tr>
                                 <?php
