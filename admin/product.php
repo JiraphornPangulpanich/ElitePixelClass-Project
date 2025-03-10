@@ -36,43 +36,72 @@
 
 
 
-        <div class="card-body">
-    <div style="overflow-x:auto;"> <!-- เพิ่ม div ครอบ table -->
-        <table id="datatablesSimple">
-            <thead>
-                <tr>
-                    <th>IDItem</th>
-                    <th>Categories</th>
-                    <th>Name</th>
-                    <th>Detail</th>
-                    <th>Price</th>
-                    <th>Ext</th>
-                    <th>Num</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $sql = "select * from Product order by IDItem DESC";
-                $result = mysqli_query($conn, $sql);
-                while($row=mysqli_fetch_array($result)){
-                ?>
-                <tr>
-                    <td><?=$row['IDItem']?></td>
-                    <td><?=$row['Categories']?></td>
-                    <td><?=$row['Name']?></td>
-                    <td><?=$row['Detail']?></td>
-                    <td><?=$row['Price']?></td>
-                    <td><?=$row['Ext']?></td>
-                    <td><?=$row['Num']?></td>
-                </tr>
-                <?php
-                }
-                mysqli_close($conn);
-                ?>
-            </tbody>
-        </table>
-    </div>
-</div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4 mt-4">
+                        
+                       
+                        
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                Products
+                            </div>
+                            <div class="card-body">
+                                <table id="datatablesSimple">
+                                    <thead>
+                                        <tr>
+                                        <th>IDItem</th>
+                                            <th>Categories</th>
+                                            <th>Name</th>
+                                            <th>Dtail</th>
+                                            <th>Price</th>
+                                            <th>Ext</th>
+                                            <th>Num</th>
+                                            
+                                        </tr>
+                                    </thead>
+
+                                    <tfoot>
+                                        <tr>
+                                            <th>IDItem</th>
+                                            <th>Categories</th>
+                                            <th>Name</th>
+                                            <th>Price</th>
+                                        </tr>
+                                    </tfoot>
+                                    <?php
+$sql = "select * from Product order by IDItem DESC";
+$result = mysqli_query($conn, $sql);
+while($row=mysqli_fetch_array($result)){
+
+?>
+                                    <tbody>
+                                        <tr>
+                                            <td><?=$row['IDItem']?></td>
+                                            <td><?=$row['Categories']?></td>
+                                            <td><?=$row['Name']?></td>
+                                            <td><?=$row['Detail']?></td>
+                                            <td><?=$row['Price']?></td>
+                                            <td><?=$row['Ext']?></td>
+                                            <td><?=$row['Num']?></td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                    <?php
+}
+mysqli_close($conn)
+?>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <?php include 'footer.php'; ?>
+
+               
+            </div>
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
