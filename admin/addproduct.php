@@ -10,29 +10,31 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #f5f0e1; /* Cream background */
+            background-color: #ffffff; /* All white background */
             font-family: 'Roboto', sans-serif;
+            color: #333333;
         }
         .navbar {
-            background-color: #fff5e1; /* Cream menu bar */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            background-color: #ffffff; /* Pure white navbar */
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
         }
         .navbar-brand {
-            color: #4a4a4a !important; /* Dark gray text */
+            color: #333333 !important;
+            font-weight: bold;
         }
         .tm-block {
             background: #ffffff;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
-            margin-top: 30px;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.05);
+            margin-top: 40px;
         }
         h2 {
-            color: #4a4a4a;
+            color: #333333;
             font-weight: 700;
         }
         .btn-primary {
-            background-color: #ff8a5c;
+            background-color: #333333;
             border: none;
             border-radius: 50px;
             padding: 12px 0;
@@ -40,27 +42,29 @@
             font-weight: 600;
         }
         .btn-primary:hover {
-            background-color: #f56b45;
+            background-color: #555555;
         }
         .form-control {
             border-radius: 8px;
-            border: 1px solid #ddd;
+            border: 1px solid #cccccc;
             box-shadow: none;
             padding: 10px 15px;
+            background-color: #f9f9f9;
         }
         .form-label {
             font-weight: 600;
-            color: #4a4a4a;
+            color: #333333;
         }
         .footer {
-            background-color: #fff5e1;
-            color: #4a4a4a;
+            background-color: #ffffff;
+            color: #666666;
             text-align: center;
             padding: 20px;
             margin-top: 50px;
+            border-top: 1px solid #eaeaea;
         }
         .footer a {
-            color: #ff8a5c;
+            color: #333333;
             text-decoration: none;
         }
         .footer a:hover {
@@ -73,7 +77,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-light">
         <div class="container">
-            <a class="navbar-brand" href="#"><i class="fas fa-box-open"></i> Admin Dashboard</a>
+            <a class="navbar-brand" href="#"><i class="fas fa-box-open"></i> Admin Panel</a>
         </div>
     </nav>
 
