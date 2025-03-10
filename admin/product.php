@@ -58,7 +58,7 @@ $data = mysqli_fetch_array($rs);
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <div><i class="fas fa-table me-1"></i> Products</div>
                         <!-- ปุ่มเพิ่มสินค้า -->
-                        <a href="add_product.php" class="btn-add">+ เพิ่มสินค้า</a>
+                        <a href="addproduct.php" class="btn-add">+ เพิ่มสินค้า</a>
                     </div>
                     <div class="card-body">
                         <table id="datatablesSimple" class="table table-bordered table-hover">
