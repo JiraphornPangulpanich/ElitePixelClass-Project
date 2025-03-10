@@ -190,7 +190,6 @@
                             <a href="contact1.php" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-                            
                         <a href="cart1.php" class="btn px-0 ml-3">
                                 <i class="fas fa-shopping-cart text-primary"></i>
                             </a>
@@ -206,6 +205,12 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     }
 }
 ?>
+
+<!-- ที่ส่วนของการแสดงผลบนหน้า HTML -->
+<span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">
+    <?php echo $totalItems; ?>
+</span>
+
                         </div>
                     </div>
                 </nav>
