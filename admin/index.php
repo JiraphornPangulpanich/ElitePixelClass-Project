@@ -1,12 +1,5 @@
 <?php
-session_start();
-
-// ตรวจสอบว่ามีการล็อกอินหรือไม่
-if (!isset($_SESSION['username'])) {
-    // ถ้าไม่ได้ล็อกอิน ให้กลับไปหน้า login.php
-    header("Location: login.php");
-    exit();
-}
+include("checklogin1.php");
 ?>
 
 
