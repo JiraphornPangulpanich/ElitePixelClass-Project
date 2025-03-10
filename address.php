@@ -237,7 +237,8 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
 
     <div class="container">
     <h2>แบบฟอร์มการจัดส่งสินค้า</h2>
-    <form action="#" method="post">
+    <h2>กรอกข้อมูลการจัดส่ง</h2>
+    <form action="order_summary.php" method="post"> <!-- ส่งข้อมูลไปที่ order_summary.php -->
         <!-- ชื่อผู้รับ -->
         <div class="form-group">
             <label for="name">ชื่อผู้รับ:</label>
