@@ -43,7 +43,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="product.php">สินค้าทั้งหมด</a>
                                     <a class="nav-link" href="categories.php">ประเภทสินค้า</a>
-                                    <a class="nav-link" href=".php">ข้อมูลลูกค้า</a>
+                                    <a class="nav-link" href="member.php">ข้อมูลลูกค้า</a>
                                     <a class="nav-link" href=".php">รายการสั่งซื้อ</a>
                                 </nav>
                             </div>
