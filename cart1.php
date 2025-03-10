@@ -393,46 +393,48 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                 <button id="checkoutBtn" class="btn btn-primary">ดำเนินการชำระเงิน</button>
                 <a href="index1.php" class="btn btn-secondary">เลือกซื้อสินค้าเพิ่ม</a>
             </div>
+
+            <!-- ส่วนของการชำระเงิน -->
+            <div id="paymentSection" class="payment-section mt-4 text-center" style="display: none;">
+                <h4>เลือกวิธีการชำระเงิน</h4>
+                <div class="btn-group">
+                    <a href="address.php" class="btn btn-outline-success">ชำระเงินปลายทาง</a>
+                    <button id="creditPayment" class="btn btn-outline-info">ชำระผ่านบัตรเครดิต</button>
+                </div>
+
+                <!-- ฟอร์มกรอกข้อมูลบัตรเครดิต -->
+                <div id="creditForm" class="mt-3" style="display: none;">
+                    <h5>กรอกข้อมูลบัตรเครดิต</h5>
+                    <form action="process_payment.php" method="post">
+                        <input type="text" name="card_number" placeholder="หมายเลขบัตร" class="form-control mb-2" required>
+                        <input type="text" name="card_name" placeholder="ชื่อบนบัตร" class="form-control mb-2" required>
+                        <input type="text" name="expiry" placeholder="วันหมดอายุ (MM/YY)" class="form-control mb-2" required>
+                        <input type="text" name="cvv" placeholder="CVV" class="form-control mb-2" required>
+                        <button type="submit" class="btn btn-success">ชำระเงิน</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-        <!-- ตัวเลือกการชำระเงิน -->
-        <div id="paymentOptions" class="mt-4 text-center" style="display: none;">
-        <h4>เลือกวิธีการชำระเงิน</h4>
-        <button id="codPayment" class="btn btn-outline-success">
-        <a href="address.php">ชำระเงินปลายทาง</a>
-        </button>
-        <button id="creditPayment" class="btn btn-outline-info">ชำระผ่านบัตรเครดิต</button>
-    </div>
-
-    <!-- ฟอร์มกรอกข้อมูลบัตรเครดิต -->
-    <div id="creditForm" class="mt-4" style="display: none;">
-        <h4 class="text-center">กรอกข้อมูลบัตรเครดิต</h4>
-        <form action="process_payment.php" method="post" class="text-center">
-            <input type="text" name="card_number" placeholder="หมายเลขบัตร" class="form-control mb-2" required>
-            <input type="text" name="card_name" placeholder="ชื่อบนบัตร" class="form-control mb-2" required>
-            <input type="text" name="expiry" placeholder="วันหมดอายุ (MM/YY)" class="form-control mb-2" required>
-            <input type="text" name="cvv" placeholder="CVV" class="form-control mb-2" required>
-            <button type="submit" class="btn btn-success">ชำระเงิน</button>
-        </form>
-    </div>
-</div>
-
-
-
-<?php else: ?>
+    <?php else: ?>
     <h4 class="text-center text-danger">ตะกร้าของคุณยังว่างอยู่</h4>
 <?php endif; ?>
-
 </div>
+
 <script>
-    document.getElementById('checkoutBtn').addEventListener('click', function() {
-        document.getElementById('paymentOptions').style.display = 'block';
+    document.getElementById("checkoutBtn").addEventListener("click", function () {
+        document.getElementById("paymentSection").style.display = "block";
     });
-    
-    document.getElementById('creditPayment').addEventListener('click', function() {
-        document.getElementById('creditForm').style.display = 'block';
+
+    document.getElementById("creditPayment").addEventListener("click", function () {
+        document.getElementById("creditForm").style.display = "block";
     });
 </script>
+
+
+
+
+
 
 
     <!-- Cart End -->
