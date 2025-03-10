@@ -129,7 +129,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         </div>
 
                         <button type="submit" class="btn btn-primary w-100">เพิ่มสินค้า</button>
-                        <a href="admin_dashboard.php" class="btn btn-secondary w-100 mt-2">กลับไปหน้าหลัก</a>
+                        <a href="product.php" class="btn btn-secondary w-100 mt-2">กลับไปหน้าหลัก</a>
                     </form>
                 </div>
             </div>
