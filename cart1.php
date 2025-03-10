@@ -389,8 +389,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                 </table>
             </div>
             <h4 class="text-right">ราคาทั้งหมด: <?= number_format($totalPrice, 2) ?> บาท</h4>
-            </div>
-        <!-- ตัวเลือกการชำระเงิน -->
+            <!-- ตัวเลือกการชำระเงิน -->
         <div id="paymentOptions" class="mt-4 text-center" style="display: none;">
         <h4>เลือกวิธีการชำระเงิน</h4>
         <button id="codPayment" class="btn btn-outline-success">
@@ -411,7 +410,8 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
         </form>
     </div>
         </div>
-    
+    </div>
+        
 </div>
 
 
