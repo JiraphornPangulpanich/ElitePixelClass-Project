@@ -2,11 +2,6 @@
 session_start();
 include('connectdb.php'); // เชื่อมต่อฐานข้อมูล
 
-// ตรวจสอบว่าผู้ใช้ล็อกอินหรือไม่
-if (!isset($_SESSION['username'])) {
-    echo "<script>alert('โปรดเข้าสู่ระบบเพื่อดูรายการสั่งซื้อ'); window.location='index.php';</script>";
-    exit;
-}
 
 $username = $_SESSION['username']; // ดึง username จาก session
 
