@@ -76,7 +76,7 @@ $data = mysqli_fetch_array($rs);
                             </thead>
                             <tbody>
                                 <?php
-                                $sql = "SELECT * FROM Product ORDER BY IDitem DESC";
+                                $sql = "SELECT * FROM Product ORDER BY IDitem ";
                                 $result = mysqli_query($conn, $sql);
                                 while ($row = mysqli_fetch_array($result)) {
                                 ?>
