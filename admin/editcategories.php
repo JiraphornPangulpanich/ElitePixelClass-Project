@@ -1,8 +1,7 @@
 <?php
 include 'condb.php';
 
-// รับ ID และแปลงให้เป็นตัวเลขเพื่อความปลอดภัย
-$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
 
 // ดึงข้อมูลหมวดหมู่
 $sql = "SELECT * FROM Categories WHERE id = '$id'";
