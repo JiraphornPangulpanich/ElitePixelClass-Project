@@ -8,14 +8,14 @@ if (isset($_SESSION['username'])) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'];
+    $username = $_POST['user'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM Users WHERE username='$username' AND password='$password'";
+    $sql = "SELECT * FROM admin WHERE user='$username' AND password='$password'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        $_SESSION['username'] = $username;
+        $_SESSION['user'] = $username;
         header("Location: index.php");
         exit();
     } else {
@@ -139,8 +139,8 @@ if (isset($_SESSION["Error"])) {
 
         <form method="POST">
             <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" class="form-control" required>
+                <label for="user">Username</label>
+                <input type="text" id="user" name="username" class="form-control" required>
             </div>
 
             <div class="form-group">
