@@ -2,11 +2,18 @@
 session_start();
 include 'condb.php'; // เชื่อมต่อฐานข้อมูล
 
+// ตรวจสอบว่ามีการส่งค่า ID มาหรือไม่
+if (!isset($_GET['id']) || empty($_GET['id']) || !is_numeric($_GET['id'])) {
+    echo "<script>alert('รหัสหมวดหมู่ไม่ถูกต้อง'); window.location='categories.php';</script>";
+    exit;
+}
+
+$id = intval($_GET['id']); // แปลงเป็นตัวเลข
 
 // ดึงข้อมูลหมวดหมู่
 $sql = "SELECT * FROM Categories WHERE id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("id", $id);
+$stmt->bind_param("i", $id); // เปลี่ยนจาก "id" เป็น "i"
 $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
@@ -19,17 +26,21 @@ if (!$row) {
 
 // ตรวจสอบการกดปุ่มบันทึก
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = mysqli_real_escape_string($conn, $_POST['name']); // ป้องกัน SQL Injection
+    if (isset($_POST['name']) && !empty($_POST['name'])) {
+        $name = trim($_POST['name']); // ลบช่องว่างซ้าย-ขวา
 
-    // อัพเดตข้อมูล
-    $sql_update = "UPDATE Categories SET name = ? WHERE id = ?";
-    $stmt_update = $conn->prepare($sql_update);
-    $stmt_update->bind_param("si", $name, $id);
+        // อัพเดตข้อมูล
+        $sql_update = "UPDATE Categories SET name = ? WHERE id = ?";
+        $stmt_update = $conn->prepare($sql_update);
+        $stmt_update->bind_param("si", $name, $id);
 
-    if ($stmt_update->execute()) {
-        echo "<script>alert('แก้ไขข้อมูลหมวดหมู่สำเร็จ'); window.location='categories.php';</script>";
+        if ($stmt_update->execute()) {
+            echo "<script>alert('แก้ไขข้อมูลหมวดหมู่สำเร็จ'); window.location='categories.php';</script>";
+        } else {
+            echo "<script>alert('เกิดข้อผิดพลาดในการอัปเดตข้อมูล');</script>";
+        }
     } else {
-        echo "เกิดข้อผิดพลาด: " . $conn->error;
+        echo "<script>alert('โปรดกรอกชื่อหมวดหมู่สินค้า');</script>";
     }
 }
 ?>
