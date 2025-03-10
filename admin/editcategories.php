@@ -6,7 +6,7 @@ include 'condb.php'; // เชื่อมต่อฐานข้อมูล
 // ดึงข้อมูลหมวดหมู่
 $sql = "SELECT * FROM Categories WHERE id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $id);
+$stmt->bind_param("id", $id);
 $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
