@@ -1,57 +1,54 @@
 <?php
+session_start();
 include 'condb.php';
 
-$id = $_GET['id'];
+// ตรวจสอบว่ามีการเข้าสู่ระบบหรือไม่
+if (!isset($_SESSION['username'])) {
+    echo "<script>alert('โปรดเข้าสู่ระบบเพื่อเข้าใช้งาน'); window.location='login.php';</script>";
+    exit;
+}
 
-// ดึงข้อมูลหมวดหมู่
-$sql = "SELECT * FROM Categories WHERE id = '$id'";
-$result = mysqli_query($conn, $sql);
-$row = mysqli_fetch_array($result);
+// รับค่า id จาก URL
+$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-// ถ้าไม่พบหมวดหมู่ที่ต้องการแก้ไข
+// ดึงข้อมูลหมวดหมู่จากฐานข้อมูล
+$sql = "SELECT * FROM Categories WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+
+// ถ้าไม่พบข้อมูล
 if (!$row) {
     echo "<script>alert('ไม่พบหมวดหมู่ที่ต้องการแก้ไข'); window.location='categories.php';</script>";
     exit;
 }
 
 // เช็คว่ามีการกดปุ่มบันทึกหรือไม่
-if (isset($_POST['submit'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = mysqli_real_escape_string($conn, $_POST['name']); // ป้องกัน SQL Injection
 
     // อัพเดตข้อมูลหมวดหมู่
-    $sql_update = "UPDATE Categories SET name = '$name' WHERE id = '$id'";
+    $sql_update = "UPDATE Categories SET name = ? WHERE id = ?";
+    $stmt_update = $conn->prepare($sql_update);
+    $stmt_update->bind_param("si", $name, $id);
 
-    if (mysqli_query($conn, $sql_update)) {
+    if ($stmt_update->execute()) {
         echo "<script>alert('แก้ไขข้อมูลหมวดหมู่สำเร็จ'); window.location='categories.php';</script>";
     } else {
-        echo "เกิดข้อผิดพลาด: " . mysqli_error($conn);
+        echo "<script>alert('เกิดข้อผิดพลาด: " . $conn->error . "');</script>";
     }
 }
-$sql = "SELECT * FROM Categories WHERE id = '$id'";
-echo $sql;  // เพิ่มการแสดงผลคำสั่ง SQL ที่สร้างขึ้น
-$result = mysqli_query($conn, $sql);
-$row = mysqli_fetch_array($result);
-
-$sql = "SELECT * FROM Categories WHERE id = ?";
-$stmt = mysqli_prepare($conn, $sql);
-mysqli_stmt_bind_param($stmt, "i", $id);  // 'i' แทน integer
-mysqli_stmt_execute($stmt);
-$result = mysqli_stmt_get_result($stmt);
-$row = mysqli_fetch_array($result);
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<?php include 'menu1.php'; ?>
-
+    <?php include 'menu1.php'; ?>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
     <title>แก้ไขหมวดหมู่สินค้า</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -61,10 +58,10 @@ $row = mysqli_fetch_array($result);
         <form method="POST">
             <div class="mb-3">
                 <label>ชื่อหมวดหมู่สินค้า:</label>
-                <input type="text" name="name" class="form-control" value="<?= $row['name'] ?>" required>
+                <input type="text" name="name" class="form-control" value="<?= htmlspecialchars($row['name']); ?>" required>
             </div>
 
-            <button type="submit" name="submit" class="btn btn-primary">บันทึก</button>
+            <button type="submit" class="btn btn-primary">บันทึก</button>
             <a href="categories.php" class="btn btn-secondary">กลับหน้าเดิม</a>
         </form>
     </div>
