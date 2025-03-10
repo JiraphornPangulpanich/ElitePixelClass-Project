@@ -10,12 +10,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #ffffff; /* All white background */
+            background-color: #ffffff;
             font-family: 'Roboto', sans-serif;
             color: #333333;
         }
         .navbar {
-            background-color: #ffffff; /* Pure white navbar */
+            background-color: #ffffff;
             box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
         }
         .navbar-brand {
@@ -44,16 +44,26 @@
         .btn-primary:hover {
             background-color: #555555;
         }
+        .btn-secondary {
+            background-color: #cccccc;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+        }
+        .btn-secondary:hover {
+            background-color: #bbbbbb;
+        }
         .form-control {
             border-radius: 8px;
             border: 1px solid #cccccc;
-            box-shadow: none;
             padding: 10px 15px;
             background-color: #f9f9f9;
         }
         .form-label {
             font-weight: 600;
-            color: #333333;
         }
         .footer {
             background-color: #ffffff;
@@ -75,17 +85,19 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-light">
-        <div class="container">
-            <a class="navbar-brand" href="#"><i class="fas fa-box-open"></i> Admin Panel</a>
-        </div>
-    </nav>
+
 
     <!-- Add Product Form -->
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="tm-block">
+
+                    <!-- Back Button -->
+                    <a href="admin_dashboard.php" class="btn btn-secondary mb-4">
+                        <i class="fas fa-arrow-left"></i> กลับไปหน้าเดิม
+                    </a>
+
                     <h2 class="mb-4 text-center">Add New Product</h2>
                     <form method="POST" action="add_product.php" enctype="multipart/form-data">
                         <div class="mb-3">
@@ -129,8 +141,16 @@
                             <input type="number" class="form-control" name="quantity" required>
                         </div>
 
-                        <button type="submit" class="btn btn-primary w-100"><i class="fas fa-plus-circle"></i> Add Product</button>
+                        <button type="submit" class="btn btn-primary w-100 mb-3">
+                            <i class="fas fa-plus-circle"></i> Add Product
+                        </button>
                     </form>
+
+                    <!-- Back Button (Optional if want at bottom too) -->
+                    <!-- <a href="admin_dashboard.php" class="btn btn-secondary w-100">
+                        <i class="fas fa-arrow-left"></i> กลับไปหน้าเดิม
+                    </a> -->
+
                 </div>
             </div>
         </div>
