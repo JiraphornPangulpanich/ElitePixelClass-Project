@@ -1,17 +1,15 @@
 <?php
 include 'condb.php';
 
-// รับค่า id สินค้าที่ต้องการแก้ไข
 $id = $_GET['id'];
 
-// ดึงข้อมูลสินค้าจากฐานข้อมูล
+// ดึงข้อมูลสินค้า
 $sql = "SELECT * FROM Product WHERE IDitem = '$id'";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_array($result);
 
-// ตรวจสอบว่ามีการกดปุ่มบันทึกหรือไม่
+// เช็คว่ามีการกดปุ่มบันทึกหรือยัง
 if (isset($_POST['submit'])) {
-    // รับค่าจากฟอร์ม
     $Categories = $_POST['Categories'];
     $Name = $_POST['Name'];
     $Detail = $_POST['Detail'];
@@ -30,7 +28,7 @@ if (isset($_POST['submit'])) {
                   WHERE IDitem = '$id'";
 
     if (mysqli_query($conn, $sql_update)) {
-        echo "<script>alert('แก้ไขข้อมูลเรียบร้อย'); window.location='product.php';</script>";
+        echo "<script>alert('แก้ไขข้อมูลสำเร็จ'); window.location='product.php';</script>";
     } else {
         echo "เกิดข้อผิดพลาด: " . mysqli_error($conn);
     }
@@ -39,20 +37,17 @@ if (isset($_POST['submit'])) {
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>แก้ไขสินค้า</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-
 <body>
     <div class="container mt-5">
-        <h2 class="mb-4">แก้ไขสินค้า</h2>
-
+        <h2>แก้ไขสินค้า</h2>
         <form method="POST">
             <div class="mb-3">
-                <label>หมวดหมู่สินค้า (Categories):</label>
+                <label>หมวดหมู่ (Categories):</label>
                 <input type="text" name="Categories" class="form-control" value="<?= $row['Categories'] ?>" required>
             </div>
 
@@ -62,8 +57,8 @@ if (isset($_POST['submit'])) {
             </div>
 
             <div class="mb-3">
-                <label>รายละเอียดสินค้า (Detail):</label>
-                <textarea name="Detail" class="form-control" rows="4" required><?= $row['Detail'] ?></textarea>
+                <label>รายละเอียด (Detail):</label>
+                <textarea name="Detail" class="form-control" rows="3" required><?= $row['Detail'] ?></textarea>
             </div>
 
             <div class="mb-3">
@@ -81,10 +76,9 @@ if (isset($_POST['submit'])) {
                 <input type="number" name="Num" class="form-control" value="<?= $row['Num'] ?>" required>
             </div>
 
-            <button type="submit" name="submit" class="btn btn-primary">บันทึกการแก้ไข</button>
-            <a href="product.php" class="btn btn-secondary">ยกเลิก</a>
+            <button type="submit" name="submit" class="btn btn-primary">บันทึก</button>
+            <a href="product.php" class="btn btn-secondary">กลับหน้าเดิม</a>
         </form>
     </div>
 </body>
-
 </html>
