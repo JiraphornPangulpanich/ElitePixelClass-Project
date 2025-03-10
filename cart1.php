@@ -10,23 +10,14 @@ if (!isset($_SESSION['username'])) {
 
 $username = $_SESSION['username']; // ดึง username จาก session
 
-// ตรวจสอบว่า $_SESSION['cart'] มีข้อมูลหรือไม่ ถ้าไม่มีให้ดึงข้อมูลจากฐานข้อมูล
-if (!isset($_SESSION['cart'])) {
-    $_SESSION['cart'] = [];
-
-    // ดึงข้อมูลตะกร้าจากฐานข้อมูล (ถ้ามี)
-    $sql = "SELECT Iditem, quantity FROM cart_items WHERE username = '$username'";
-    $result = mysqli_query($conn, $sql);
-    
-    while ($row = mysqli_fetch_assoc($result)) {
-        $_SESSION['cart'][$row['Iditem']] = $row['quantity'];
-    }
-}
-
 // ตรวจสอบการทำงานของการเพิ่ม ลด หรือ ลบสินค้า
 if (isset($_GET['action']) && isset($_GET['id'])) {
     $itemId = $_GET['id'];
     $action = $_GET['action'];
+
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+    }
 
     // ตรวจสอบการทำงานของแต่ละ action
     switch ($action) {
@@ -36,7 +27,7 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
             } else {
                 $_SESSION['cart'][$itemId]++;
             }
-            $sql = "INSERT INTO cart_items (username, Iditem, quantity) 
+            $sql = "INSERT INTO cart_items (username, item_id, quantity) 
                     VALUES ('$username', '$itemId', 1)
                     ON DUPLICATE KEY UPDATE quantity = quantity + 1"; 
             mysqli_query($conn, $sql);
@@ -46,7 +37,7 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
             if (isset($_SESSION['cart'][$itemId]) && $_SESSION['cart'][$itemId] > 1) {
                 $_SESSION['cart'][$itemId]--;
             }
-            $sql = "UPDATE cart_items SET quantity = quantity - 1 WHERE username = '$username' AND Iditem = '$itemId' AND quantity > 1";
+            $sql = "UPDATE cart_items SET quantity = quantity - 1 WHERE username = '$username' AND item_id = '$itemId' AND quantity > 1";
             mysqli_query($conn, $sql);
             break;
         
@@ -54,8 +45,6 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
             if (isset($_SESSION['cart'][$itemId])) {
                 unset($_SESSION['cart'][$itemId]);
             }
-            $sql = "DELETE FROM cart_items WHERE username = '$username' AND Iditem = '$itemId'";
-            mysqli_query($conn, $sql);
             break;
     }
 
@@ -63,7 +52,6 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
     header("Location: cart1.php");
     exit();
 }
-
 ?>
 
 
