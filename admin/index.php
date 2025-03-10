@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("checklogin1.php");
+include('db.php'); // เชื่อมต่อฐานข้อมูล
 
 // ตรวจสอบว่าผู้ใช้ล็อกอินหรือไม่
 if (!isset($_SESSION['username'])) {
