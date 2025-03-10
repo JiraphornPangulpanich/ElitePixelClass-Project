@@ -118,10 +118,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
 
+<?php
+session_start();
+if (isset($_SESSION["Error"])) {
+    echo '<div class="alert alert-danger text-center">' . $_SESSION["Error"] . '</div>';
+    unset($_SESSION["Error"]); // ลบข้อความแจ้งเตือนหลังจากแสดงแล้ว
+}
+?>
+
+
 <div class="login-container">
     <div class="login-box">
         <h2>Login</h2>
         <p class="text-muted">Please enter your credentials</p>
+        <form method="POST" action="checklogin1.php">
 
         <?php if (isset($error)) { ?>
             <div class="alert alert-danger"><?= $error; ?></div>
@@ -144,6 +154,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
     </div>
 </div>
+
+<script>
+    setTimeout(function () {
+        let alert = document.querySelector(".alert");
+        if (alert) {
+            alert.style.transition = "opacity 0.5s";
+            alert.style.opacity = "0";
+            setTimeout(() => alert.remove(), 500);
+        }
+    }, 3000); // 3 วินาที
+    </script>
 
 </body>
 </html>
