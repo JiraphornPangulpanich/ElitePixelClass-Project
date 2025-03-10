@@ -404,15 +404,33 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
 
                 <!-- ฟอร์มกรอกข้อมูลบัตรเครดิต -->
                 <div id="creditForm" class="mt-3" style="display: none;">
-                    <h5>กรอกข้อมูลบัตรเครดิต</h5>
-                    <form action="process_payment.php" method="post">
-                        <input type="text" name="card_number" placeholder="หมายเลขบัตร" class="form-control mb-2" required>
-                        <input type="text" name="card_name" placeholder="ชื่อบนบัตร" class="form-control mb-2" required>
-                        <input type="text" name="expiry" placeholder="วันหมดอายุ (MM/YY)" class="form-control mb-2" required>
-                        <input type="text" name="cvv" placeholder="CVV" class="form-control mb-2" required>
-                        <button type="submit" class="btn btn-success"><a href="address.php">ชำระเงิน</a> </button>
-                    </form>
-                </div>
+    <h5>กรอกข้อมูลบัตรเครดิต</h5>
+    <form id="paymentForm">
+        <input type="text" id="card_number" name="card_number" placeholder="หมายเลขบัตร" class="form-control mb-2" required>
+        <input type="text" id="card_name" name="card_name" placeholder="ชื่อบนบัตร" class="form-control mb-2" required>
+        <input type="text" id="expiry" name="expiry" placeholder="วันหมดอายุ (MM/YY)" class="form-control mb-2" required>
+        <input type="text" id="cvv" name="cvv" placeholder="CVV" class="form-control mb-2" required>
+        <button type="button" class="btn btn-success" onclick="validateForm()">ชำระเงิน</button>
+    </form>
+</div>
+
+<script>
+function validateForm() {
+    let cardNumber = document.getElementById("card_number").value.trim();
+    let cardName = document.getElementById("card_name").value.trim();
+    let expiry = document.getElementById("expiry").value.trim();
+    let cvv = document.getElementById("cvv").value.trim();
+
+    if (cardNumber === "" || cardName === "" || expiry === "" || cvv === "") {
+        alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+        return false;
+    }
+
+    // ถ้ากรอกครบ เปลี่ยนไปยังหน้า address.php
+    window.location.href = "address.php";
+}
+</script>
+
             </div>
         </div>
     </div>
