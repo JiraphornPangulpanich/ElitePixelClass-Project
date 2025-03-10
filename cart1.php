@@ -19,36 +19,55 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
         $_SESSION['cart'] = [];
     }
 
-    // ตรวจสอบการทำงานของแต่ละ action
     switch ($action) {
         case 'add':
+            // เพิ่มสินค้าในตะกร้า
             if (!isset($_SESSION['cart'][$itemId])) {
                 $_SESSION['cart'][$itemId] = 1;
             } else {
                 $_SESSION['cart'][$itemId]++;
             }
+            
+            // เพิ่มข้อมูลในฐานข้อมูล
             $sql = "INSERT INTO cart_items (username, item_id, quantity) 
                     VALUES ('$username', '$itemId', 1)
                     ON DUPLICATE KEY UPDATE quantity = quantity + 1"; 
-            mysqli_query($conn, $sql);
+            if (mysqli_query($conn, $sql)) {
+                echo "สินค้าถูกเพิ่มลงในตะกร้าเรียบร้อยแล้ว";
+            } else {
+                echo "เกิดข้อผิดพลาดในการเพิ่มสินค้าลงในตะกร้า: " . mysqli_error($conn);
+            }
             break;
-        
+
         case 'decrease':
+            // ลดจำนวนสินค้าในตะกร้า
             if (isset($_SESSION['cart'][$itemId]) && $_SESSION['cart'][$itemId] > 1) {
                 $_SESSION['cart'][$itemId]--;
             }
-            $sql = "UPDATE cart_items SET quantity = quantity - 1 WHERE username = '$username' AND item_id = '$itemId' AND quantity > 1";
-            mysqli_query($conn, $sql);
+            $sql = "UPDATE cart_items SET quantity = quantity - 1 
+                    WHERE username = '$username' AND item_id = '$itemId' AND quantity > 1";
+            if (mysqli_query($conn, $sql)) {
+                echo "จำนวนสินค้าถูกลดลงแล้ว";
+            } else {
+                echo "เกิดข้อผิดพลาดในการลดจำนวนสินค้า: " . mysqli_error($conn);
+            }
             break;
-        
+
         case 'remove':
+            // ลบสินค้าออกจากตะกร้า
             if (isset($_SESSION['cart'][$itemId])) {
                 unset($_SESSION['cart'][$itemId]);
+            }
+            $sql = "DELETE FROM cart_items WHERE username = '$username' AND item_id = '$itemId'";
+            if (mysqli_query($conn, $sql)) {
+                echo "สินค้าถูกลบออกจากตะกร้าเรียบร้อยแล้ว";
+            } else {
+                echo "เกิดข้อผิดพลาดในการลบสินค้า: " . mysqli_error($conn);
             }
             break;
     }
 
-    // หลังจากจัดการสินค้าในตะกร้าแล้ว ให้กลับไปที่หน้าตะกร้า
+    // หลังจากทำการจัดการตะกร้าแล้ว redirect ไปหน้าตะกร้า
     header("Location: cart1.php");
     exit();
 }
