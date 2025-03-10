@@ -1,32 +1,6 @@
 <?php
 session_start();
-include_once("connectdb.php");
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = trim($_POST['username']);
-    $password = trim($_POST['password']);
-
-    $sql = "SELECT * FROM user WHERE username = ?";
-    $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "s", $username);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-
-    if ($row = mysqli_fetch_assoc($result)) {
-        if (password_verify($password, $row['password'])) {
-            // เก็บข้อมูลใน Session
-            $_SESSION['username'] = $row['username'];
-            header("Location: index.php"); // เปลี่ยนเส้นทางไปยังหน้า index.php
-            exit;
-        } else {
-            $error = "Invalid username or password!";
-        }
-    } else {
-        $error = "Invalid username or password!";
-    }
-}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -105,37 +79,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 
-<<?php
-// เชื่อมต่อฐานข้อมูล
-include_once("db.php");
-
-// ตรวจสอบการส่งฟอร์ม
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = mysqli_real_escape_string($conn, $_POST['username']);
-    $password = $_POST['password']; // ไม่ต้อง escape เพราะไม่ได้ใช้ใน SQL โดยตรง
-
-    // ตรวจสอบ username ในฐานข้อมูล
-    $sql = "SELECT * FROM user WHERE username = '$username'";
-    $result = mysqli_query($conn, $sql);
-
-    if ($result && mysqli_num_rows($result) > 0) {
-        $user = mysqli_fetch_assoc($result);
-
-        // ตรวจสอบรหัสผ่าน
-        if (password_verify($password, $user['password'])) {
-            // เข้าสู่ระบบสำเร็จ
-            echo "<script>alert('Login successful! Welcome, $username.');</script>";
-            // Redirect ไปหน้า dashboard
-            header("Location: index.php");
-            exit();
-        } else {
-            // รหัสผ่านไม่ถูกต้อง
-            echo "<script>alert('Incorrect password. Please try again.');</script>";
-        }
-    } else {
-        // ไม่พบ username ในฐานข้อมูล
-        echo "<script>alert('Username not found. Please try again.');</script>";
-    }
+<?php
+if (isset($error)) {
+    echo '<div class="alert alert-danger text-center">' . $error . '</div>';
 }
 ?>
 
@@ -157,16 +103,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </div>
 
-<script>
-    setTimeout(function () {
-        let alert = document.querySelector(".alert");
-        if (alert) {
-            alert.style.transition = "opacity 0.5s";
-            alert.style.opacity = "0";
-            setTimeout(() => alert.remove(), 500);
-        }
-    }, 3000);
-</script>
 
-</body>
+<?php
+include_once("db.php");
+
+if (isset($_POST['Submit'])) {
+    $usr = mysqli_real_escape_string($conn, $_POST['usr']);
+    $pwd = $_POST['pwd'];
+    
+    // ดึงข้อมูลจากฐานข้อมูลโดยใช้ prepared statement
+    $sql = "SELECT * FROM admin WHERE a_usr = ?";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "s", $usr);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    
+    if ($row = mysqli_fetch_assoc($result)) {
+        // ตรวจสอบรหัสผ่าน
+        if (password_verify($pwd, $row['a_pwd'])) {
+            $_SESSION['s_id'] = $row['a_id'];
+            $_SESSION['s_name'] = $row['a_name'];
+            echo "<script>window.location='index.php';</script>";
+            exit();
+        } else {
+            echo "Username or Password incorrect";
+            exit();
+        }
+    } else {
+        echo "Username or Password incorrect";
+        exit();
+    }
+}
+?>
+
+    </body>
 </html>
