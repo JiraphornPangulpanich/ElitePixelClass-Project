@@ -82,7 +82,7 @@ $data = mysqli_fetch_array($rs);
                                         <td class="text-center"><?= $row['phone'] ?></td>
                                         <td class="text-center action-btn">
                                             <!-- ปุ่มแก้ไข -->
-                                            <a href="editcmember.php?id=<?= $row['id'] ?>" class="btn btn-warning btn-sm">แก้ไข</a>
+                                            <a href="editmember.php?id=<?= $row['id'] ?>" class="btn btn-warning btn-sm">แก้ไข</a>
                                             <!-- ปุ่มลบ -->
                                             <a href="deletemember.php?id=<?= $row['id'] ?>" onclick="return confirm('คุณแน่ใจว่าต้องการลบสินค้านี้?');" class="btn btn-danger btn-sm">ลบ</a>
                                         </td>
