@@ -86,13 +86,7 @@ $data = mysqli_fetch_array($rs);
                                         <td><?= $row['Name'] ?></td>
                                         <td><?= $row['Detail'] ?></td>
                                         <td class="text-end"><?= number_format($row['Price'], 2) ?></td>
-                                        <td>
-    <?php 
-    var_dump($product_images[0]); // เช็คว่ามีค่าหรือไม่
-    ?>
-    <img src="<?= htmlspecialchars($product_images[0]); ?>" alt="Product Image" width="50">
-</td>
-
+                                        <td><img src='../img/" . $table_name . "/$product_ext' alt='$product_name' style='max-width: 100px;'></td>
                                         <td class="text-center"><?= $row['Num'] ?></td>
                                         <td class="text-center action-btn">
                                             <!-- ปุ่มแก้ไข -->
