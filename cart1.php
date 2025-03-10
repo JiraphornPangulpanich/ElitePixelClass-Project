@@ -345,51 +345,55 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     }
 </style>
     <!-- Cart Start -->
-    <div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class="col-md-8"> <!-- ปรับขนาดของตะกร้า -->
-            <table class="table table-bordered text-center">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>สินค้า</th>
-                        <th>ราคา</th>
-                        <th>จำนวน</th>
-                        <th>รวม</th>
-                        <th>จัดการ</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $totalPrice = 0;
-                    foreach ($_SESSION['cart'] as $itemId => $quantity):
-                        $sql = "SELECT Name, Price FROM Product WHERE Iditem = '$itemId'";
-                        $result = $conn->query($sql);
-                        if ($row = $result->fetch_assoc()):
-                            $subtotal = $row['Price'] * $quantity;
-                            $totalPrice += $subtotal;
-                    ?>
-                    <tr>
-                        <td><?= $row['Name'] ?></td>
-                        <td><?= number_format($row['Price'], 2) ?> บาท</td>
-                        <td>
-                            <a href="cart1.php?action=decrease&id=<?= $itemId ?>" class="btn btn-warning btn-sm" 
-                                <?= $quantity <= 1 ? 'disabled' : '' ?>>-</a>
-                            <?= $quantity ?>
-                            <a href="cart1.php?action=add&id=<?= $itemId ?>" class="btn btn-success btn-sm">+</a>
-                        </td>
-                        <td><?= number_format($subtotal, 2) ?> บาท</td>
-                        <td>
-                            <a href="cart1.php?action=remove&id=<?= $itemId ?>" class="btn btn-danger btn-sm">ลบ</a>
-                        </td>
-                    </tr>
-                    <?php endif; endforeach; ?>
-                </tbody>
-            </table>
-            <h4 class="text-right">ราคาทั้งหมด: <?= number_format($totalPrice, 2) ?> บาท</h4>
-            <div class="text-center">
-                <button id="checkoutBtn" class="btn btn-primary">ดำเนินการชำระเงิน</button>
-                <a href="index1.php" class="btn btn-secondary">เลือกซื้อสินค้าเพิ่ม</a>
-            </div>
+    <?php if (!empty($_SESSION['cart'])): ?>
+    <table class="table table-bordered text-center">
+        <thead class="thead-dark">
+            <tr>
+                <th>สินค้า</th>
+                <th>ราคา</th>
+                <th>จำนวน</th>
+                <th>จำนวนสินค้าในคลัง</th> <!-- จำนวนสินค้าในคลัง -->
+                <th>รวม</th>
+                <th>จัดการ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $totalPrice = 0;
+            foreach ($_SESSION['cart'] as $itemId => $quantity):
+                $sql = "SELECT Name, Price, Num FROM Product WHERE Iditem = '$itemId'";
+                $result = $conn->query($sql);
+                if ($row = $result->fetch_assoc()):
+                    $subtotal = $row['Price'] * $quantity;
+                    $totalPrice += $subtotal;
+                    $availableQuantity = $row['Num']; // จำนวนสินค้าในคลัง
+            ?>
+            <tr>
+                <td><?= $row['Name'] ?></td>
+                <td><?= number_format($row['Price'], 2) ?> บาท</td>
+                <td>
+                    <!-- ปุ่มลดจำนวนสินค้า -->
+                    <a href="cart1.php?action=decrease&id=<?= $itemId ?>" class="btn btn-warning btn-sm" 
+                        <?= $quantity <= 1 ? 'disabled' : '' ?>>-</a>
+                    <?= $quantity ?>
+                    <!-- ปุ่มเพิ่มจำนวนสินค้า -->
+                    <a href="cart1.php?action=add&id=<?= $itemId ?>" class="btn btn-success btn-sm" 
+                        <?= $quantity >= $availableQuantity ? 'disabled' : '' ?>>+</a>
+                </td>
+                <td><?= $availableQuantity ?> ชิ้น</td> <!-- จำนวนสินค้าในคลัง -->
+                <td><?= number_format($subtotal, 2) ?> บาท</td>
+                <td>
+                    <a href="cart1.php?action=remove&id=<?= $itemId ?>" class="btn btn-danger btn-sm">ลบ</a>
+                </td>
+            </tr>
+            <?php endif; endforeach; ?>
+        </tbody>
+    </table>
+    <h4 class="text-right">ราคาทั้งหมด: <?= number_format($totalPrice, 2) ?> บาท</h4>
+    <div class="text-center">
+        <button id="checkoutBtn" class="btn btn-primary">ดำเนินการชำระเงิน</button>
+        <a href="index1.php" class="btn btn-secondary">เลือกซื้อสินค้าเพิ่ม</a>
+    </div>
     
     <!-- ตัวเลือกการชำระเงิน -->
     <div id="paymentOptions" class="mt-4 text-center" style="display: none;">
