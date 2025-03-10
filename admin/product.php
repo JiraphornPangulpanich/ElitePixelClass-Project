@@ -86,7 +86,25 @@ $data = mysqli_fetch_array($rs);
                                         <td><?= $row['Name'] ?></td>
                                         <td><?= $row['Detail'] ?></td>
                                         <td class="text-end"><?= number_format($row['Price'], 2) ?></td>
-                                        <td><img src="../img/<?php echo $table_name; ?>/<?php echo $Ext; ?>" alt="" style="max-width: 100px;"></td>
+                                        <td>
+                                            <?php
+                                                if (!empty($product_images)) {
+                                                    foreach ($product_images as $key => $image) {
+                                                        $activeClass = ($key === 0) ? "active" : "";
+                                                echo "
+                                                    <div class='carousel-item $activeClass'>
+                                                    <img class='img-fluid w-100' src='$image' alt='Product Image'>
+                                                    </div>";
+                                                    }
+                                                } else {
+                                                echo "
+                                                    <div class='carousel-item active'>
+                                                    <img class='img-fluid w-100' src='img/no-image.jpg' alt='No Image Available'>
+                                                    </div>";
+                                                echo "<p>No images found for product ID: $Iditem</p>"; // แสดงข้อความดีบัก
+                                                }
+                                        ?></td>
+                                        
                                         <td class="text-center"><?= $row['Num'] ?></td>
                                         <td class="text-center action-btn">
                                             <!-- ปุ่มแก้ไข -->
