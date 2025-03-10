@@ -2,8 +2,8 @@
 // เชื่อมต่อฐานข้อมูล
 $servername = "localhost"; // หรือ 127.0.0.1
 $username = "root"; // username ของฐานข้อมูล
-$password = ""; // password ของฐานข้อมูล (ถ้าไม่มีให้เว้นว่าง)
-$dbname = "your_database_name"; // เปลี่ยนเป็นชื่อฐานข้อมูลของคุณ
+$password = "qq123456"; // password ของฐานข้อมูล (ถ้าไม่มีให้เว้นว่าง)
+$dbname = "ElitePixel"; // เปลี่ยนเป็นชื่อฐานข้อมูลของคุณ
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
