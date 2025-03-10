@@ -1,13 +1,16 @@
 <?php
 session_start();
-include('db.php'); // เชื่อมต่อฐานข้อมูล
 
 // ตรวจสอบว่าผู้ใช้ล็อกอินหรือไม่
 if (!isset($_SESSION['username'])) {
-    echo "<script>alert('โปรดเข้าสู่ระบบเพื่อเข้าใช้งาน'); window.location='index.php';</script>";
+    // หากยังไม่ล็อกอิน ให้กลับไปที่หน้าล็อกอิน
+    echo "<script>alert('โปรดเข้าสู่ระบบก่อน'); window.location='login.php';</script>";
     exit;
 }
+
+// โค้ดที่คุณต้องการให้แสดงผลเมื่อผู้ใช้ล็อกอินแล้ว
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
