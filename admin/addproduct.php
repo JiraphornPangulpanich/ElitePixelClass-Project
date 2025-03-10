@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             if (mysqli_query($conn, $sqlInsert)) {
                 $last_id = mysqli_insert_id($conn);
                 $newFileName = $last_id . '.' . $fileExtension;
-                $uploadPath = "../images/" . $newFileName;
+                $uploadPath = "images/" . $newFileName;
 
                 if (move_uploaded_file($fileTmpPath, $uploadPath)) {
                     echo "<script>alert('เพิ่มสินค้าเรียบร้อยแล้ว'); window.location='admin_dashboard.php';</script>";
