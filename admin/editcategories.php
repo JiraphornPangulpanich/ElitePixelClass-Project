@@ -2,10 +2,10 @@
 include 'condb.php';
 
 // รับ ID และแปลงให้เป็นตัวเลขเพื่อความปลอดภัย
-$Id = isset($_GET['Id']) ? intval($_GET['Id']) : 0;
+$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 // ดึงข้อมูลหมวดหมู่
-$sql = "SELECT * FROM Categories WHERE Id = '$Id'";
+$sql = "SELECT * FROM Categories WHERE id = '$id'";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_array($result);
 
@@ -17,10 +17,10 @@ if (!$row) {
 
 // เช็คว่ามีการกดปุ่มบันทึกหรือไม่
 if (isset($_POST['submit'])) {
-    $Name = mysqli_real_escape_string($conn, $_POST['Name']); // ป้องกัน SQL Injection
+    $Name = mysqli_real_escape_string($conn, $_POST['name']); // ป้องกัน SQL Injection
 
     // อัพเดตข้อมูล
-    $sql_update = "UPDATE Categories SET Name = '$Name' WHERE Id = '$Id'";
+    $sql_update = "UPDATE Categories SET name = '$name' WHERE id = '$id'";
     
     echo $sql_update; // Debug ดู SQL
 
@@ -58,7 +58,7 @@ if (isset($_POST['submit'])) {
         <form method="POST">
           <div class="mb-3">
                 <label>ชื่อหมวดหมู่สินค้า :</label>
-                <input type="text" name="Name" class="form-control" value="<?= $row['Name'] ?>" required>
+                <input type="text" name="name" class="form-control" value="<?= $row['name'] ?>" required>
             </div>
 
            
