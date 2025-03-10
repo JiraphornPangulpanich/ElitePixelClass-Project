@@ -26,9 +26,9 @@ if (!$stmt) {
 $stmt->bind_param("i", $id); // ใช้ "i" แทน "id"
 
 if ($stmt->execute()) {
-    echo "<script>alert('ลบหมวดหมู่สำเร็จ!'); window.location='categories.php';</script>";
+    echo "<script>alert('ลบหมวดข้อมูลลูกค้าสำเร็จ!'); window.location='categories.php';</script>";
 } else {
-    echo "<script>alert('เกิดข้อผิดพลาดในการลบ: " . $stmt->error . "'); window.location='categories.php';</script>";
+    echo "<script>alert('เกิดข้อผิดพลาดในการลบ: " . $stmt->error . "'); window.location='member.php';</script>";
 }
 
 $stmt->close();
