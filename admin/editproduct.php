@@ -7,15 +7,33 @@ $id = $_GET['id'];
 $sql = "SELECT * FROM Product WHERE IDitem = '$id'";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_array($result);
+$old_image = $row['Ext']; // เก็บชื่อไฟล์รูปเดิม
 
-// เช็คว่ามีการกดปุ่มบันทึกหรือยัง
 if (isset($_POST['submit'])) {
     $Categories = $_POST['Categories'];
     $Name = $_POST['Name'];
     $Detail = $_POST['Detail'];
     $Price = $_POST['Price'];
-    $Ext = $_POST['Ext'];
     $Num = $_POST['Num'];
+
+    // ตรวจสอบว่ามีการอัปโหลดรูปใหม่หรือไม่
+    if (!empty($_FILES['image']['name'])) {
+        $target_dir = "img/";
+        $image_name = basename($_FILES["image"]["name"]);
+        $target_file = $target_dir . $image_name;
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+        // ตรวจสอบว่าเป็นไฟล์ภาพจริง
+        $check = getimagesize($_FILES["image"]["tmp_name"]);
+        if ($check !== false) {
+            move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
+        } else {
+            echo "<script>alert('Invalid image file.');</script>";
+            exit;
+        }
+    } else {
+        $image_name = $old_image; // ใช้รูปเดิมถ้าไม่ได้อัปโหลดใหม่
+    }
 
     // อัพเดตข้อมูลสินค้า
     $sql_update = "UPDATE Product SET 
@@ -23,14 +41,14 @@ if (isset($_POST['submit'])) {
                     Name = '$Name',
                     Detail = '$Detail',
                     Price = '$Price',
-                    Ext = '$Ext',
+                    Ext = '$image_name',
                     Num = '$Num'
                   WHERE IDitem = '$id'";
 
     if (mysqli_query($conn, $sql_update)) {
-        echo "<script>alert('แก้ไขข้อมูลสำเร็จ'); window.location='product.php';</script>";
+        echo "<script>alert('Updated successfully!'); window.location='product.php';</script>";
     } else {
-        echo "เกิดข้อผิดพลาด: " . mysqli_error($conn);
+        echo "Error: " . mysqli_error($conn);
     }
 }
 ?>
@@ -54,41 +72,46 @@ if (isset($_POST['submit'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container mt-5">
-        <h2>แก้ไขสินค้า</h2>
-        <form method="POST">
+<div class="container mt-5">
+        <h2 class="text-warning">Edit Product</h2>
+        <form method="POST" enctype="multipart/form-data">
             <div class="mb-3">
-                <label>หมวดหมู่ (Categories):</label>
+                <label>Categories:</label>
                 <input type="text" name="Categories" class="form-control" value="<?= $row['Categories'] ?>" required>
             </div>
 
             <div class="mb-3">
-                <label>ชื่อสินค้า (Name):</label>
+                <label>Product Name:</label>
                 <input type="text" name="Name" class="form-control" value="<?= $row['Name'] ?>" required>
             </div>
 
             <div class="mb-3">
-                <label>รายละเอียด (Detail):</label>
+                <label>Detail:</label>
                 <textarea name="Detail" class="form-control" rows="3" required><?= $row['Detail'] ?></textarea>
             </div>
 
             <div class="mb-3">
-                <label>ราคา (Price):</label>
+                <label>Price:</label>
                 <input type="number" name="Price" class="form-control" value="<?= $row['Price'] ?>" required>
             </div>
 
             <div class="mb-3">
-                <label>นามสกุลไฟล์รูป (Ext):</label>
-                <input type="text" name="Ext" class="form-control" value="<?= $row['Ext'] ?>" required>
-            </div>
-
-            <div class="mb-3">
-                <label>จำนวนสินค้า (Num):</label>
+                <label>Stock:</label>
                 <input type="number" name="Num" class="form-control" value="<?= $row['Num'] ?>" required>
             </div>
 
-            <button type="submit" name="submit" class="btn btn-primary">บันทึก</button>
-            <a href="product.php" class="btn btn-secondary">กลับหน้าเดิม</a>
+            <div class="mb-3">
+                <label>Current Image:</label><br>
+                <img src="img/<?= $row['Ext'] ?>" alt="Product Image" class="image-preview">
+            </div>
+
+            <div class="mb-3">
+                <label>Upload New Image:</label>
+                <input type="file" name="image" class="form-control" accept="image/*">
+            </div>
+
+            <button type="submit" name="submit" class="btn btn-primary">Save Changes</button>
+            <a href="product.php" class="btn btn-secondary">Back</a>
         </form>
     </div>
 
