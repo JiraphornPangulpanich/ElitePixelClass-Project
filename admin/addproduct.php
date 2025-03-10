@@ -84,12 +84,6 @@
 </head>
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-light">
-        <div class="container">
-            <a class="navbar-brand" href="#"><i class="fas fa-box-open"></i> Admin Panel</a>
-        </div>
-    </nav>
 
     <!-- Add Product Form -->
     <div class="container">
@@ -147,7 +141,7 @@
                     </form>
                     <!-- Back Button -->
                     <a href="product.php" class="btn btn-secondary  w-100 mb-3">
-                        <i class="fas fa-plus-circle"></i> กลับไปหน้าเดิม
+                        <i class=""></i> กลับไปหน้าเดิม
                     </a>
 
                     <!-- Back Button (Optional if want at bottom too) -->
