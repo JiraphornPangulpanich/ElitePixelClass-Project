@@ -14,7 +14,6 @@ if (!isset($_GET['id']) || empty($_GET['id']) || !is_numeric($_GET['id'])) {
     exit;
 }
 
-$id = intval($_GET['id']); // แปลงค่าให้เป็นตัวเลขเพื่อความปลอดภัย
 
 // ดึงข้อมูลหมวดหมู่
 $sql = "SELECT * FROM categories WHERE id = ?";
