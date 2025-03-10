@@ -2,11 +2,7 @@
 session_start();
 include 'condb.php'; // เชื่อมต่อฐานข้อมูล
 
-// ตรวจสอบว่ามีการส่งค่า ID มาหรือไม่
-if (!isset($_GET['id']) || empty($_GET['id']) || !is_numeric($_GET['id'])) {
-    echo "<script>alert('รหัสหมวดหมู่ไม่ถูกต้อง'); window.location='categories.php';</script>";
-    exit;
-}
+
 
 $id = intval($_GET['id']); // แปลงเป็นตัวเลข
 
