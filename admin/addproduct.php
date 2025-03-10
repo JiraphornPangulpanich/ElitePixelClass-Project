@@ -93,7 +93,7 @@
     </style>
 </head>
 <body>
-
+<?php include 'menu1.php'; ?>
 
     <!-- Add Product Form -->
     <div class="container">
