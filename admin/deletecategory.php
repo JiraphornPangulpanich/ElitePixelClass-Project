@@ -16,7 +16,7 @@ if (!$conn) {
 }
 
 // ลบหมวดหมู่
-$sql = "DELETE FROM categories WHERE id = ?";
+$sql = "DELETE FROM Categories WHERE id = ?";
 $stmt = $conn->prepare($sql);
 
 if (!$stmt) {
