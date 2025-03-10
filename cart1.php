@@ -346,13 +346,12 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
 </style>
     <!-- Cart Start -->
     <?php if (!empty($_SESSION['cart'])): ?>
-    <table class="table table-bordered text-center">
+    <table class="table text-center">
         <thead class="thead-dark">
             <tr>
                 <th>สินค้า</th>
                 <th>ราคา</th>
                 <th>จำนวน</th>
-                <th>จำนวนสินค้าในคลัง</th> <!-- จำนวนสินค้าในคลัง -->
                 <th>รวม</th>
                 <th>จัดการ</th>
             </tr>
@@ -361,26 +360,21 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
             <?php
             $totalPrice = 0;
             foreach ($_SESSION['cart'] as $itemId => $quantity):
-                $sql = "SELECT Name, Price, Num FROM Product WHERE Iditem = '$itemId'";
+                $sql = "SELECT Name, Price FROM Product WHERE Iditem = '$itemId'";
                 $result = $conn->query($sql);
                 if ($row = $result->fetch_assoc()):
                     $subtotal = $row['Price'] * $quantity;
                     $totalPrice += $subtotal;
-                    $availableQuantity = $row['Num']; // จำนวนสินค้าในคลัง
             ?>
             <tr>
                 <td><?= $row['Name'] ?></td>
                 <td><?= number_format($row['Price'], 2) ?> บาท</td>
                 <td>
-                    <!-- ปุ่มลดจำนวนสินค้า -->
                     <a href="cart1.php?action=decrease&id=<?= $itemId ?>" class="btn btn-warning btn-sm" 
                         <?= $quantity <= 1 ? 'disabled' : '' ?>>-</a>
                     <?= $quantity ?>
-                    <!-- ปุ่มเพิ่มจำนวนสินค้า -->
-                    <a href="cart1.php?action=add&id=<?= $itemId ?>" class="btn btn-success btn-sm" 
-                        <?= $quantity >= $availableQuantity ? 'disabled' : '' ?>>+</a>
+                    <a href="cart1.php?action=add&id=<?= $itemId ?>" class="btn btn-success btn-sm">+</a>
                 </td>
-                <td><?= $availableQuantity ?> ชิ้น</td> <!-- จำนวนสินค้าในคลัง -->
                 <td><?= number_format($subtotal, 2) ?> บาท</td>
                 <td>
                     <a href="cart1.php?action=remove&id=<?= $itemId ?>" class="btn btn-danger btn-sm">ลบ</a>
@@ -394,7 +388,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
         <button id="checkoutBtn" class="btn btn-primary">ดำเนินการชำระเงิน</button>
         <a href="index1.php" class="btn btn-secondary">เลือกซื้อสินค้าเพิ่ม</a>
     </div>
-    
+
     <!-- ตัวเลือกการชำระเงิน -->
     <div id="paymentOptions" class="mt-4 text-center" style="display: none;">
         <h4>เลือกวิธีการชำระเงิน</h4>
@@ -412,7 +406,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
             <input type="text" name="card_name" placeholder="ชื่อบนบัตร" class="form-control mb-2" required>
             <input type="text" name="expiry" placeholder="วันหมดอายุ (MM/YY)" class="form-control mb-2" required>
             <input type="text" name="cvv" placeholder="CVV" class="form-control mb-2" required>
-            <button type="submit" class="btn btn-success" ><a href="address.php">ชำระเงิน</a></button>
+            <button type="submit" class="btn btn-success">ชำระเงิน</button>
         </form>
     </div>
 <?php else: ?>
