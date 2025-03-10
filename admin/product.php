@@ -48,52 +48,40 @@
                                 Products
                             </div>
                             <div class="card-body">
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                        <th>IDItem</th>
-                                            <th>Categories</th>
-                                            <th>Name</th>
-                                            <th>Dtail</th>
-                                            <th>Price</th>
-                                            <th>Ext</th>
-                                            <th>Num</th>
-                                            
-                                        </tr>
-                                    </thead>
-
-                                    <tfoot>
-                                        <tr>
-                                            <th>IDItem</th>
-                                            <th>Categories</th>
-                                            <th>Name</th>
-                                            <th>Price</th>
-                                        </tr>
-                                    </tfoot>
-                                    <?php
-$sql = "select * from Product order by IDItem DESC";
-$result = mysqli_query($conn, $sql);
-while($row=mysqli_fetch_array($result)){
-
-?>
-                                    <tbody>
-                                        <tr>
-                                            <td><?=$row['IDItem']?></td>
-                                            <td><?=$row['Categories']?></td>
-                                            <td><?=$row['Name']?></td>
-                                            <td><?=$row['Detail']?></td>
-                                            <td><?=$row['Price']?></td>
-                                            <td><?=$row['Ext']?></td>
-                                            <td><?=$row['Num']?></td>
-                                        </tr>
-                                        
-                                    </tbody>
-
-                                </table>
-                                <?php
-}
-mysqli_close($conn)
-?>
+                            <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>IDItem</th>
+                    <th>Categories</th>
+                    <th>Name</th>
+                    <th>Detail</th>
+                    <th>Price</th>
+                    <th>Ext</th>
+                    <th>Num</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $sql = "select * from Product order by IDItem DESC";
+                $result = mysqli_query($conn, $sql);
+                while($row=mysqli_fetch_array($result)){
+                ?>
+                <tr>
+                    <td><?=$row['IDItem']?></td>
+                    <td><?=$row['Categories']?></td>
+                    <td><?=$row['Name']?></td>
+                    <td><?=$row['Detail']?></td>
+                    <td><?=$row['Price']?></td>
+                    <td><?=$row['Ext']?></td>
+                    <td><?=$row['Num']?></td>
+                </tr>
+                <?php
+                }
+                mysqli_close($conn);
+                ?>
+            </tbody>
+        </table>
+                                
                             </div>
                         </div>
                     </div>
