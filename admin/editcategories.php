@@ -4,7 +4,7 @@ include 'condb.php';
 $Id = $_GET['Id'];
 
 // ดึงข้อมูลสินค้า
-$sql = "SELECT * FROM Categories WHERE Id = '$id'";
+$sql = "SELECT * FROM Categories WHERE Id = '$Id'";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_array($result);
 
@@ -55,7 +55,7 @@ if (isset($_POST['submit'])) {
 
            
             <button type="submit" name="submit" class="btn btn-primary">บันทึก</button>
-            <a href="product.php" class="btn btn-secondary">กลับหน้าเดิม</a>
+            <a href="categories.php" class="btn btn-secondary">กลับหน้าเดิม</a>
         </form>
     </div>
 
