@@ -86,7 +86,7 @@ $data = mysqli_fetch_array($rs);
                                         <td><?= $row['Name'] ?></td>
                                         <td><?= $row['Detail'] ?></td>
                                         <td class="text-end"><?= number_format($row['Price'], 2) ?></td>
-                                        <td><img src="<?php echo $product_images[0]; ?>" alt="Product Image" /></td>
+                                        <td><img src="https://yourdomain.com/path/to/image.jpg" alt="Test Image"></td>
                                         <td class="text-center"><?= $row['Num'] ?></td>
                                         <td class="text-center action-btn">
                                             <!-- ปุ่มแก้ไข -->
