@@ -18,6 +18,17 @@ if (empty($_SESSION['cart'])) {
 
 // ดึงข้อมูลสินค้าจากตะกร้าใน session
 $itemIds = implode(',', array_keys($_SESSION['cart'])); // สร้างรายการ id ของสินค้าในตะกร้า
+
+// ตรวจสอบว่ามี itemIds หรือไม่
+if (empty($itemIds)) {
+    echo "ตะกร้าสินค้าของคุณว่างเปล่า";
+    exit;  // ถ้าไม่มี id สินค้าให้หยุดการทำงาน
+}
+
+// ตรวจสอบค่าของ $itemIds
+echo "Item IDs: " . $itemIds . "<br>"; // แสดง itemIds เพื่อการตรวจสอบ
+
+// ดึงข้อมูลจากฐานข้อมูล
 $sql = "SELECT * FROM products WHERE id IN ($itemIds)";
 $result = mysqli_query($conn, $sql);
 
