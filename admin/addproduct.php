@@ -85,7 +85,11 @@
 <body>
 
     <!-- Navbar -->
-
+    <nav class="navbar navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-box-open"></i> Admin Panel</a>
+        </div>
+    </nav>
 
     <!-- Add Product Form -->
     <div class="container">
@@ -93,10 +97,6 @@
             <div class="col-lg-8">
                 <div class="tm-block">
 
-                    <!-- Back Button -->
-                    <a href="admin_dashboard.php" class="btn btn-secondary mb-4">
-                        <i class="fas fa-arrow-left"></i> กลับไปหน้าเดิม
-                    </a>
 
                     <h2 class="mb-4 text-center">Add New Product</h2>
                     <form method="POST" action="add_product.php" enctype="multipart/form-data">
@@ -145,6 +145,10 @@
                             <i class="fas fa-plus-circle"></i> Add Product
                         </button>
                     </form>
+                    <!-- Back Button -->
+                    <a href="product.php" class="btn btn-secondary  w-100 mb-3">
+                        <i class="fas fa-plus-circle"></i> กลับไปหน้าเดิม
+                    </a>
 
                     <!-- Back Button (Optional if want at bottom too) -->
                     <!-- <a href="admin_dashboard.php" class="btn btn-secondary w-100">
