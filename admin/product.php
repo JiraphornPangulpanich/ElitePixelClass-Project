@@ -95,7 +95,7 @@ $data = mysqli_fetch_array($rs);
         if (!empty($row['Image']) && file_exists($image_path)) {
             echo "<img src='$image_path' alt='{$row['Name']}' style='max-width: 100px;'>";
         } else {
-            echo "<img src='../img/no-image.png' alt='No Image' style='max-width: 100px;'>";
+            echo "<img src='../img/no-image.jpg' alt='No Image' style='max-width: 100px;'>";
         }
     ?>
 </td>
