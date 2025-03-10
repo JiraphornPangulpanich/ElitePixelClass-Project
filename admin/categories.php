@@ -70,7 +70,7 @@ $data = mysqli_fetch_array($rs);
                             </thead>
                             <tbody>
                                 <?php
-                                $sql = "SELECT * FROM Categories ORDER BY Id DESC";
+                                $sql = "SELECT * FROM Categories ORDER BY Id ";
                                 $result = mysqli_query($conn, $sql);
                                 while ($row = mysqli_fetch_array($result)) {
                                 ?>
