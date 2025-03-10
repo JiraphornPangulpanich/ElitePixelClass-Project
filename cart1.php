@@ -4,44 +4,47 @@ include('connectdb.php'); // เชื่อมต่อฐานข้อมู
 
 // ตรวจสอบว่าผู้ใช้ล็อกอินหรือไม่
 if (!isset($_SESSION['username'])) {
-    echo "<script>alert('โปรดเข้าสู่ระบบ'); window.location='index.php';</script>";
+    echo "<script>alert('โปรดเข้าสู่ระบบเพื่อสั่งสินค้า'); window.location='index.php';</script>";
     exit;
 }
 
 $username = $_SESSION['username']; // ดึง username จาก session
 
-// ดึงข้อมูลตะกร้าสินค้า
-$sql = "SELECT Cart.product_id, Cart.quantity, Product.Name, Product.Price 
-        FROM Cart 
-        JOIN Product ON Cart.product_id = Product.Iditem 
-        WHERE Cart.username = '$username'";
+// ตรวจสอบการทำงานของการเพิ่ม ลด หรือ ลบสินค้า
+if (isset($_GET['action']) && isset($_GET['id'])) {
+    $itemId = $_GET['id'];
+    $action = $_GET['action'];
 
-$result = $conn->query($sql);
-
-$totalPrice = 0;
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $subtotal = $row['Price'] * $row['quantity'];
-        $totalPrice += $subtotal;
-        ?>
-        <tr>
-            <td><?= $row['Name'] ?></td>
-            <td><?= number_format($row['Price'], 2) ?> บาท</td>
-            <td>
-                <a href="cart_action.php?action=decrease&id=<?= $row['product_id'] ?>" class="btn btn-warning btn-sm" 
-                    <?= $row['quantity'] <= 1 ? 'disabled' : '' ?>>-</a>
-                <?= $row['quantity'] ?>
-                <a href="cart_action.php?action=add&id=<?= $row['product_id'] ?>" class="btn btn-success btn-sm">+</a>
-            </td>
-            <td><?= number_format($subtotal, 2) ?> บาท</td>
-            <td>
-                <a href="cart_action.php?action=remove&id=<?= $row['product_id'] ?>" class="btn btn-danger btn-sm">ลบ</a>
-            </td>
-        </tr>
-        <?php
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
     }
-} else {
-    echo "<tr><td colspan='5'>ตะกร้าสินค้าของคุณว่าง</td></tr>";
+
+    // ตรวจสอบการทำงานของแต่ละ action
+    switch ($action) {
+        case 'add':
+            if (!isset($_SESSION['cart'][$itemId])) {
+                $_SESSION['cart'][$itemId] = 1;
+            } else {
+                $_SESSION['cart'][$itemId]++;
+            }
+            break;
+        
+        case 'decrease':
+            if (isset($_SESSION['cart'][$itemId]) && $_SESSION['cart'][$itemId] > 1) {
+                $_SESSION['cart'][$itemId]--;
+            }
+            break;
+        
+        case 'remove':
+            if (isset($_SESSION['cart'][$itemId])) {
+                unset($_SESSION['cart'][$itemId]);
+            }
+            break;
+    }
+
+    // หลังจากจัดการสินค้าในตะกร้าแล้ว ให้กลับไปที่หน้าตะกร้า
+    header("Location: cart1.php");
+    exit();
 }
 ?>
 
