@@ -1,12 +1,5 @@
 <?php
-session_start(); // เริ่มต้น session
-
-// ตรวจสอบว่าผู้ใช้ล็อกอินแล้วหรือไม่
-if (isset($_SESSION['username'])) {
-    // หากล็อกอินแล้ว ให้รีไดเรกไปยังหน้า index.php
-    header("Location: index.php");
-    exit();
-}
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -110,7 +103,9 @@ if (isset($error)) {
     </div>
 </div>
 
+
 <?php
+session_start();
 include 'db.php'; // เชื่อมต่อฐานข้อมูล
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -142,5 +137,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-</body>
+
+    </body>
 </html>

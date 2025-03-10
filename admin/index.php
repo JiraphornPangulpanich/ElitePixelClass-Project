@@ -1,12 +1,14 @@
 <?php
-session_start(); // เริ่มต้น session
+session_start();
 
 // ตรวจสอบว่าผู้ใช้ล็อกอินหรือไม่
 if (!isset($_SESSION['username'])) {
-    // หากไม่ล็อกอิน ให้ redirect ไปยังหน้า login
+    // หากยังไม่ล็อกอิน ให้กลับไปที่หน้าล็อกอิน
     echo "<script>alert('โปรดเข้าสู่ระบบก่อน'); window.location='login.php';</script>";
-    exit();
+    exit;
 }
+
+// โค้ดที่คุณต้องการให้แสดงผลเมื่อผู้ใช้ล็อกอินแล้ว
 ?>
 
 
