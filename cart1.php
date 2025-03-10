@@ -328,31 +328,39 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        $totalPrice = 0;
-                        foreach ($_SESSION['cart'] as $itemId => $quantity):
-                            $sql = "SELECT Name, Price FROM Product WHERE Iditem = '$itemId'";
-                            $result = $conn->query($sql);
-                            if ($row = $result->fetch_assoc()):
-                                $subtotal = $row['Price'] * $quantity;
-                                $totalPrice += $subtotal;
-                        ?>
-                        <tr>
-                            <td><?= $row['Name'] ?></td>
-                            <td><?= number_format($row['Price'], 2) ?> บาท</td>
-                            <td>
-                                <a href="cart1.php?action=decrease&id=<?= $itemId ?>" class="btn btn-warning btn-sm" 
-                                    <?= $quantity <= 1 ? 'disabled' : '' ?>>-</a>
-                                <?= $quantity ?>
-                                <a href="cart1.php?action=add&id=<?= $itemId ?>" class="btn btn-success btn-sm">+</a>
-                            </td>
-                            <td><?= number_format($subtotal, 2) ?> บาท</td>
-                            <td>
-                                <a href="cart1.php?action=remove&id=<?= $itemId ?>" class="btn btn-danger btn-sm">ลบ</a>
-                            </td>
-                        </tr>
-                        <?php endif; endforeach; ?>
-                    </tbody>
+    <?php
+    $totalPrice = 0;
+    foreach ($_SESSION['cart'] as $itemId => $quantity):
+        // ดึงข้อมูลสินค้าและจำนวนคงเหลือในคลัง
+        $sql = "SELECT Name, Price, Num FROM Product WHERE Iditem = '$itemId'";
+        $result = $conn->query($sql);
+        if ($row = $result->fetch_assoc()):
+            $availableQuantity = $row['Num']; // จำนวนสินค้าคงคลัง
+            $subtotal = $row['Price'] * $quantity;
+            $totalPrice += $subtotal;
+    ?>
+    <tr>
+        <td><?= $row['Name'] ?></td>
+        <td><?= number_format($row['Price'], 2) ?> บาท</td>
+        <td>
+            <!-- ปุ่มลด -->
+            <a href="cart1.php?action=decrease&id=<?= $itemId ?>" class="btn btn-warning btn-sm" 
+                <?= $quantity <= 1 ? 'disabled' : '' ?>>-</a>
+            
+            <?= $quantity ?>
+            
+            <!-- ปุ่มเพิ่ม -->
+            <a href="cart1.php?action=add&id=<?= $itemId ?>" class="btn btn-success btn-sm"
+                <?= $quantity >= $availableQuantity ? 'style="display: none;"' : '' ?>>+</a>
+        </td>
+        <td><?= number_format($subtotal, 2) ?> บาท</td>
+        <td>
+            <a href="cart1.php?action=remove&id=<?= $itemId ?>" class="btn btn-danger btn-sm">ลบ</a>
+        </td>
+    </tr>
+    <?php endif; endforeach; ?>
+</tbody>
+
                 </table>
             </div>
             <h4 class="text-right">ราคาทั้งหมด: <?= number_format($totalPrice, 2) ?> บาท</h4>
