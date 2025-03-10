@@ -1,18 +1,13 @@
 <?php
 session_start();
-include 'db.php';
-
-if (isset($_SESSION['username'])) {
-    header("Location: index.php");
-    exit();
-}
+include 'db.php'; // เชื่อมต่อฐานข้อมูล
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // ใช้ Prepared Statements เพื่อป้องกัน SQL Injection
-    $stmt = $conn->prepare("SELECT * FROM admin WHERE user = ?");
+    // ตรวจสอบว่ามี username ในฐานข้อมูลหรือไม่
+    $stmt = $conn->prepare("SELECT id, user, password FROM admin WHERE user = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -20,20 +15,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         
-        // ตรวจสอบรหัสผ่านแบบ Hash
-        if (password_verify($password, $row['password'])) {
-            $_SESSION['user'] = $row['user'];
-            $_SESSION['name'] = $row['name']; // ดึงชื่อจากฐานข้อมูล
-            header("Location: index.php");
+        // ตรวจสอบรหัสผ่าน (หากเก็บรหัสเป็น plain text ให้เปลี่ยนเป็น password_verify)
+        if (password_verify($password, $row['password'])) { 
+            $_SESSION['username'] = $row['user'];
+            $_SESSION['user_id'] = $row['id'];
+
+            echo "<script>alert('✅ เข้าสู่ระบบสำเร็จ'); window.location='index.php';</script>";
             exit();
         } else {
-            $error = "Invalid username or password!";
+            echo "<script>alert('❌ รหัสผ่านไม่ถูกต้อง'); window.location='login.php';</script>";
         }
     } else {
-        $error = "Invalid username or password!";
+        echo "<script>alert('❌ ไม่พบชื่อผู้ใช้ในระบบ'); window.location='login.php';</script>";
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
