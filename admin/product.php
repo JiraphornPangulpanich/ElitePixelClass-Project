@@ -88,11 +88,12 @@ while($row=mysqli_fetch_array($result)){
                                         </tr>
                                         
                                     </tbody>
-                                    <?php
+
+                                </table>
+                                <?php
 }
 mysqli_close($conn)
 ?>
-                                </table>
                             </div>
                         </div>
                     </div>
