@@ -16,8 +16,9 @@ if (empty($_SESSION['cart'])) {
     exit;  // ถ้าไม่มีสินค้าจะหยุดการทำงาน
 }
 
-// ดึงข้อมูลสินค้าจากตะกร้าใน session
-$itemIds = implode(',', array_keys($_SESSION['cart'])); // สร้างรายการ id ของสินค้าในตะกร้า
+// แปลง id ให้เป็น integer เพื่อความถูกต้อง
+$itemIds = implode(',', array_map('intval', array_keys($_SESSION['cart'])));
+
 
 // ตรวจสอบว่ามี itemIds หรือไม่
 if (empty($itemIds)) {
@@ -25,8 +26,18 @@ if (empty($itemIds)) {
     exit;  // ถ้าไม่มี id สินค้าให้หยุดการทำงาน
 }
 
-// ตรวจสอบค่าของ $itemIds
-echo "Item IDs: " . $itemIds . "<br>"; // แสดง itemIds เพื่อการตรวจสอบ
+// แปลง id ให้เป็น integer เพื่อความถูกต้อง
+$itemIds = implode(',', array_map('intval', array_keys($_SESSION['cart'])));
+
+
+
+// ตรวจสอบค่าของ itemIds
+$itemIds = implode(',', array_keys($_SESSION['cart'])); // สร้างรายการ id ของสินค้าในตะกร้า
+echo "Item IDs: " . $itemIds; // ตรวจสอบค่าของ $itemIds
+
+$sql = "SELECT * FROM products WHERE id IN ($itemIds)";
+echo "SQL Query: " . $sql; // ตรวจสอบคำสั่ง SQL ที่จะรัน
+บ
 
 // ดึงข้อมูลจากฐานข้อมูล
 $sql = "SELECT * FROM products WHERE id IN ($itemIds)";
