@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         if (in_array($fileExtension, $allowedExtensions)) {
             // INSERT ข้อมูล
-            $sqlInsert = "INSERT INTO products (Categories, Name, Detail, Price, Num, Ext) 
+            $sqlInsert = "INSERT INTO product (Categories, Name, Detail, Price, Num, Ext) 
                           VALUES ($category, '$product_name', '$description', $price, $quantity, '$fileExtension')";
 
             if (mysqli_query($conn, $sqlInsert)) {
