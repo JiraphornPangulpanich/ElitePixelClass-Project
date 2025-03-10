@@ -77,7 +77,7 @@ $data = mysqli_fetch_array($rs);
                                     <tr>
                                         <td class="text-center"><?= $row['Id'] ?></td>
                                         <td class="text-center"><?= $row['name'] ?></td>
-                                        
+                                        <td class="text-center action-btn">
                                             <!-- ปุ่มแก้ไข -->
                                             <a href="editcategories.php?id=<?= $row['Id'] ?>" class="btn btn-warning btn-sm">แก้ไข</a>
                                             <!-- ปุ่มลบ -->
