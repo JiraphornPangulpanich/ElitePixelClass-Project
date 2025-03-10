@@ -1,12 +1,13 @@
 <?php
 session_start();
-include('db.php'); // เชื่อมต่อฐานข้อมูล
-
-// ตรวจสอบว่าผู้ใช้ล็อกอินหรือไม่
 if (!isset($_SESSION['username'])) {
-    echo "<script>alert('โปรดเข้าสู่ระบบเพื่อเข้าใช้งาน'); window.location='index.php';</script>";
+    header("Location: login.php"); // เปลี่ยนเส้นทางไปยังหน้า login
     exit;
 }
+?>
+<?php
+// ตรวจสอบหน้าปัจจุบัน
+$currentPage = basename($_SERVER['PHP_SELF']); // ได้ชื่อไฟล์ เช่น 'index.php' หรือ 'products.php'
 ?>
 
 <!DOCTYPE html>
