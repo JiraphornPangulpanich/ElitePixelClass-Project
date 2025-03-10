@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
 </head>
 <body style="background-color: #fff;">
+<?php include 'menu1.php'; ?>
 
 <div class="container mt-5">
     <div class="row justify-content-center">
