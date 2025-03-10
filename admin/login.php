@@ -8,16 +8,26 @@ if (isset($_SESSION['username'])) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['user'];
+    $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM admin WHERE user='$username' AND password='$password'";
-    $result = $conn->query($sql);
+    // ใช้ Prepared Statements เพื่อป้องกัน SQL Injection
+    $stmt = $conn->prepare("SELECT * FROM admin WHERE user = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        $_SESSION['user'] = $username;
-        header("Location: index.php");
-        exit();
+        $row = $result->fetch_assoc();
+        
+        // ตรวจสอบรหัสผ่านแบบ Hash
+        if (password_verify($password, $row['password'])) {
+            $_SESSION['user'] = $username;
+            header("Location: index.php");
+            exit();
+        } else {
+            $error = "Invalid username or password!";
+        }
     } else {
         $error = "Invalid username or password!";
     }
@@ -32,15 +42,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Login | ElitePixel</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
-        /* 🎨 Color Theme */
         :root {
             --yellow: #FFC107;
             --gray-dark: #333;
             --gray-light: #666;
             --white: #fff;
         }
-
-        /* 🔹 Body Styles */
         body {
             background-color: var(--gray-dark);
             font-family: 'Arial', sans-serif;
@@ -49,8 +56,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             align-items: center;
             height: 100vh;
         }
-
-        /* 🔹 Login Box */
         .login-container {
             background-color: var(--white);
             padding: 40px;
@@ -59,27 +64,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             width: 350px;
             text-align: center;
         }
-
         .login-box h2 {
             color: var(--yellow);
             margin-bottom: 10px;
         }
-
         .text-muted {
             color: var(--gray-light);
         }
-
-        /* 🔹 Form Inputs */
         .form-group {
             text-align: left;
             margin-bottom: 15px;
         }
-
         .form-group label {
             font-weight: bold;
             color: var(--gray-dark);
         }
-
         .form-control {
             width: 100%;
             padding: 10px;
@@ -87,8 +86,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             border-radius: 6px;
             font-size: 16px;
         }
-
-        /* 🔹 Login Button */
         .btn-yellow {
             background-color: var(--yellow);
             color: var(--gray-dark);
@@ -99,18 +96,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             font-size: 18px;
             transition: 0.3s;
         }
-
         .btn-yellow:hover {
             background-color: #e0a800;
         }
-
-        /* 🔹 Register Link */
         p a {
             color: var(--yellow);
             font-weight: bold;
             text-decoration: none;
         }
-
         p a:hover {
             text-decoration: underline;
         }
@@ -119,38 +112,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 
 <?php
-session_start();
-if (isset($_SESSION["Error"])) {
-    echo '<div class="alert alert-danger text-center">' . $_SESSION["Error"] . '</div>';
-    unset($_SESSION["Error"]); // ลบข้อความแจ้งเตือนหลังจากแสดงแล้ว
+if (isset($error)) {
+    echo '<div class="alert alert-danger text-center">' . $error . '</div>';
 }
 ?>
-
 
 <div class="login-container">
     <div class="login-box">
         <h2>Login</h2>
         <p class="text-muted">Please enter your credentials</p>
-        <form method="POST" action="checklogin1.php">
-
-        <?php if (isset($error)) { ?>
-            <div class="alert alert-danger"><?= $error; ?></div>
-        <?php } ?>
-
         <form method="POST">
             <div class="form-group">
-                <label for="user">Username</label>
-                <input type="text" id="user" name="username" class="form-control" required>
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" class="form-control" required>
             </div>
-
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" class="form-control" required>
             </div>
-
             <button type="submit" class="btn btn-yellow btn-block">Login</button>
-
-            
         </form>
     </div>
 </div>
@@ -163,8 +143,8 @@ if (isset($_SESSION["Error"])) {
             alert.style.opacity = "0";
             setTimeout(() => alert.remove(), 500);
         }
-    }, 3000); // 3 วินาที
-    </script>
+    }, 3000);
+</script>
 
 </body>
 </html>
