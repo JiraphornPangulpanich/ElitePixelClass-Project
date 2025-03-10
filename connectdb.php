@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "";
-$dbname = "elitepixel";
+$password = "qq123456";
+$dbname = "ElitePixel";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
