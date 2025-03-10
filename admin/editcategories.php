@@ -2,9 +2,9 @@
 include_once("condb.php");
 
 // ดึงข้อมูลหมวดหมู่มาแสดงใน form (กรณีแก้ไข)
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $sql = "SELECT * FROM categories WHERE id = $id";
+if (isset($_GET['Id'])) {
+    $Id = $_GET['Id'];
+    $sql = "SELECT * FROM Categories WHERE Id = $Id";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
 }
@@ -12,9 +12,9 @@ if (isset($_GET['id'])) {
 // อัพเดทข้อมูลเมื่อกดปุ่ม submit
 if (isset($_POST['submit'])) {
     $name = $_POST['Name'];
-    $id = $_POST['id']; // รับ id ที่ส่งมาจาก form เพื่อระบุว่าจะอัพเดทหมวดหมู่ไหน
+    $id = $_POST['Id']; // รับ id ที่ส่งมาจาก form เพื่อระบุว่าจะอัพเดทหมวดหมู่ไหน
 
-    $sqlUpdate = "UPDATE categories SET Name = '$name' WHERE id = $id";
+    $sqlUpdate = "UPDATE Categories SET Name = '$name' WHERE Id = $id";
 
     if (mysqli_query($conn, $sqlUpdate)) {
         echo "<script>alert('แก้ไขหมวดหมู่สำเร็จ'); window.location='categories.php';</script>";
@@ -49,7 +49,7 @@ if (isset($_POST['submit'])) {
 <div class="container mt-5">
     <h2>แก้ไขหมวดหมู่สินค้า</h2>
     <form method="POST">
-        <input type="hidden" name="id" value="<?= $row['id'] ?>"> <!-- ซ่อน ID เพื่อนำไปแก้ไข -->
+        <input type="hidden" name="Id" value="<?= $row['Id'] ?>"> <!-- ซ่อน ID เพื่อนำไปแก้ไข -->
         <div class="mb-3">
             <label>ชื่อหมวดหมู่สินค้า :</label>
             <input type="text" name="Name" class="form-control" value="<?= $row['Name'] ?>" required>
