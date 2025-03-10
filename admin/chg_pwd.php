@@ -8,7 +8,6 @@
 <body>
 <form method="post" action="">
     <input type="text" name="username" placeholder="ชื่อผู้ใช้ (Username)" required>
-    <input type="password" name="current_password" placeholder="รหัสผ่านเดิม" required>
     <input type="password" name="new_password" placeholder="รหัสผ่านใหม่" required>
     <input type="password" name="confirm_password" placeholder="ยืนยันรหัสผ่านใหม่" required>
     <button type="submit">เปลี่ยนรหัสผ่าน</button>
@@ -19,24 +18,17 @@ include_once("db.php"); // เชื่อมต่อฐานข้อมู�
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
-    $current_password = $_POST['current_password'];
     $new_password = $_POST['new_password'];
     $confirm_password = $_POST['confirm_password'];
 
-    // ดึงข้อมูลรหัสผ่านเก่าจากฐานข้อมูล
-    $stmt = $conn->prepare("SELECT password FROM admin WHERE user = ?");
+    // ตรวจสอบว่ามี username นี้ในระบบหรือไม่
+    $stmt = $conn->prepare("SELECT id FROM admin WHERE user = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $stmt->store_result();
 
     if ($stmt->num_rows > 0) {
-        $stmt->bind_result($hashed_password);
-        $stmt->fetch();
-
-        // ตรวจสอบรหัสผ่านเดิม
-        if (!password_verify($current_password, $hashed_password)) {
-            echo "<script>alert('❌ รหัสผ่านเดิมไม่ถูกต้อง');</script>";
-        } elseif ($new_password !== $confirm_password) {
+        if ($new_password !== $confirm_password) {
             echo "<script>alert('❌ รหัสผ่านใหม่ไม่ตรงกัน');</script>";
         } else {
             // เข้ารหัสรหัสผ่านใหม่
