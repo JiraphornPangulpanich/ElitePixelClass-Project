@@ -3,7 +3,7 @@ session_start();
 include 'condb.php'; // เชื่อมต่อฐานข้อมูล
 
 // ตรวจสอบว่ามี iditem ถูกส่งมาหรือไม่
-if (!isset($_GET['Iditem']) || empty($_GET['Iditem']) || !is_numeric($_GET['Iditem'])) {
+if (!isset($_GET['id']) || empty($_GET['id']) || !is_numeric($_GET['id'])) {
     echo "<script>alert('รหัสสินค้าไม่ถูกต้อง'); window.location='products.php';</script>";
     exit;
 }
