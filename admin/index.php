@@ -1,12 +1,14 @@
 <?php
 session_start();
-include('db.php'); // เชื่อมต่อฐานข้อมูล
 
+// ตรวจสอบว่ามีการล็อกอินหรือไม่
 if (!isset($_SESSION['username'])) {
-    echo "<script>alert('❌ กรุณาเข้าสู่ระบบก่อน!'); window.location='login.php';</script>";
+    // ถ้าไม่ได้ล็อกอิน ให้กลับไปหน้า login.php
+    header("Location: login.php");
     exit();
 }
 ?>
+
 
 
 <!DOCTYPE html>
