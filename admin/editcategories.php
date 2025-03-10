@@ -27,6 +27,18 @@ if (isset($_POST['submit'])) {
         echo "เกิดข้อผิดพลาด: " . mysqli_error($conn);
     }
 }
+$sql = "SELECT * FROM Categories WHERE id = '$id'";
+echo $sql;  // เพิ่มการแสดงผลคำสั่ง SQL ที่สร้างขึ้น
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_array($result);
+
+$sql = "SELECT * FROM Categories WHERE id = ?";
+$stmt = mysqli_prepare($conn, $sql);
+mysqli_stmt_bind_param($stmt, "i", $id);  // 'i' แทน integer
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+$row = mysqli_fetch_array($result);
+
 ?>
 
 <!DOCTYPE html>
