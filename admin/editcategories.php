@@ -1,30 +1,31 @@
 <?php
 include 'condb.php';
 
+// ตรวจสอบว่ามี ID ที่รับมาหรือไม่
 $Id = $_GET['Id'];
 
-// ดึงข้อมูลสินค้า
+// ดึงข้อมูลหมวดหมู่
 $sql = "SELECT * FROM Categories WHERE Id = '$Id'";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_array($result);
 
-// เช็คว่ามีการกดปุ่มบันทึกหรือยัง
+// เช็คว่ามีการกดปุ่มบันทึกหรือไม่
 if (isset($_POST['submit'])) {
-    $Name = $_POST['Name'];
+    $Name = mysqli_real_escape_string($conn, $_POST['Name']); // ป้องกัน SQL Injection
 
-
-    // อัพเดตข้อมูลสินค้า
+    // อัพเดตข้อมูลหมวดหมู่
     $sql_update = "UPDATE Categories SET 
-                    Name = '$Name',
+                    Name = '$Name'
                   WHERE Id = '$Id'";
 
     if (mysqli_query($conn, $sql_update)) {
-        echo "<script>alert('แก้ไขข้อมูลสำเร็จ'); window.location='product.php';</script>";
+        echo "<script>alert('แก้ไขข้อมูลสำเร็จ'); window.location='categories.php';</script>";
     } else {
         echo "เกิดข้อผิดพลาด: " . mysqli_error($conn);
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
