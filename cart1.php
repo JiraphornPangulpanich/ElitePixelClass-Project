@@ -389,10 +389,6 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                 </table>
             </div>
             <h4 class="text-right">ราคาทั้งหมด: <?= number_format($totalPrice, 2) ?> บาท</h4>
-            <div class="text-center">
-                <button id="checkoutBtn" class="btn btn-primary">ดำเนินการชำระเงิน</button>
-                <a href="index1.php" class="btn btn-secondary">เลือกซื้อสินค้าเพิ่ม</a>
-            </div>
         </div>
     </div>
         <!-- ตัวเลือกการชำระเงิน -->
