@@ -292,18 +292,27 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     </div>
     <!-- Breadcrumb End -->
 <?php
-    session_start();
-    include('connectdb.php'); // เชื่อมต่อฐานข้อมูล
+session_start();
+include('connectdb.php'); // เชื่อมต่อฐานข้อมูล
 
-    // ตรวจสอบว่าผู้ใช้ล็อกอินหรือไม่
-    if (!isset($_SESSION['username'])) {
-    header('Location: index.php');
-    echo "<script>alert('โปรดเข้าสู่ระบบเพื่อสั่งสินค้า');</script>";
+// ตรวจสอบว่าผู้ใช้ล็อกอินหรือไม่
+if (!isset($_SESSION['username'])) {
+    echo "<script>alert('โปรดเข้าสู่ระบบเพื่อสั่งสินค้า'); window.location='index.php';</script>";
     exit;
+}
+
+$username = $_SESSION['username']; // ดึง username จาก session
+
+// ดึงข้อมูลตะกร้าจากฐานข้อมูล
+$sql = "SELECT item_id, quantity FROM cart_items WHERE username = '$username'";
+$result = mysqli_query($conn, $sql);
+if (mysqli_num_rows($result) > 0) {
+    // ถ้ามีการบันทึกข้อมูลตะกร้าจากฐานข้อมูล
+    $_SESSION['cart'] = []; // รีเซ็ตตะกร้าสินค้าใน session
+    while ($row = mysqli_fetch_assoc($result)) {
+        $_SESSION['cart'][$row['item_id']] = $row['quantity'];
     }
-
-    $username = $_SESSION['username']; // ดึง username จาก session
-
+}
 ?>
 
 <style>
