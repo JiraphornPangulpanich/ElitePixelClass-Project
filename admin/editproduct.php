@@ -110,10 +110,7 @@ if (isset($_POST['submit'])) {
     ?>
             </div>
 
-            <div class="mb-3">
-                <label>Upload New Image:</label>
-                <input type="file" name="image" class="form-control" accept="image/*">
-            </div>
+           
 
             <button type="submit" name="submit" class="btn btn-primary">Save Changes</button>
             <a href="product.php" class="btn btn-secondary">Back</a>
