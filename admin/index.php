@@ -1,7 +1,12 @@
 <?php
-include("checklogin1.php");
-?>
+session_start();
+include('connectdb.php'); // เชื่อมต่อฐานข้อมูล
 
+// ตรวจสอบว่าผู้ใช้ล็อกอินหรือไม่
+if (!isset($_SESSION['username'])) {
+    echo "<script>alert('โปรดเข้าสู่ระบบเพื่อเข้าใช้งาน'); window.location='index.php';</script>";
+    exit;
+}
 
 
 <!DOCTYPE html>
