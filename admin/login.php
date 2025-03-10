@@ -1,32 +1,28 @@
 <?php
 session_start();
-include 'db.php'; // เชื่อมต่อฐานข้อมูล
+include_once("connectdb.php");
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
 
-    // ตรวจสอบว่ามี username ในฐานข้อมูลหรือไม่
-    $stmt = $conn->prepare("SELECT id, user, password FROM admin WHERE user = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $sql = "SELECT * FROM user WHERE username = ?";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "s", $username);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
 
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        
-        // ตรวจสอบรหัสผ่าน (หากเก็บรหัสเป็น plain text ให้เปลี่ยนเป็น password_verify)
-        if (password_verify($password, $row['password'])) { 
-            $_SESSION['username'] = $row['user'];
-            $_SESSION['user_id'] = $row['id'];
-
-            echo "<script>alert('✅ เข้าสู่ระบบสำเร็จ'); window.location='index.php';</script>";
-            exit();
+    if ($row = mysqli_fetch_assoc($result)) {
+        if (password_verify($password, $row['password'])) {
+            // เก็บข้อมูลใน Session
+            $_SESSION['username'] = $row['username'];
+            header("Location: index.php"); // เปลี่ยนเส้นทางไปยังหน้า index.php
+            exit;
         } else {
-            echo "<script>alert('❌ รหัสผ่านไม่ถูกต้อง'); window.location='login.php';</script>";
+            $error = "Invalid username or password!";
         }
     } else {
-        echo "<script>alert('❌ ไม่พบชื่อผู้ใช้ในระบบ'); window.location='login.php';</script>";
+        $error = "Invalid username or password!";
     }
 }
 ?>
@@ -109,9 +105,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
 
-<?php
-if (isset($error)) {
-    echo '<div class="alert alert-danger text-center">' . $error . '</div>';
+<<?php
+// เชื่อมต่อฐานข้อมูล
+include_once("db.php");
+
+// ตรวจสอบการส่งฟอร์ม
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = mysqli_real_escape_string($conn, $_POST['username']);
+    $password = $_POST['password']; // ไม่ต้อง escape เพราะไม่ได้ใช้ใน SQL โดยตรง
+
+    // ตรวจสอบ username ในฐานข้อมูล
+    $sql = "SELECT * FROM user WHERE username = '$username'";
+    $result = mysqli_query($conn, $sql);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $user = mysqli_fetch_assoc($result);
+
+        // ตรวจสอบรหัสผ่าน
+        if (password_verify($password, $user['password'])) {
+            // เข้าสู่ระบบสำเร็จ
+            echo "<script>alert('Login successful! Welcome, $username.');</script>";
+            // Redirect ไปหน้า dashboard
+            header("Location: index.php");
+            exit();
+        } else {
+            // รหัสผ่านไม่ถูกต้อง
+            echo "<script>alert('Incorrect password. Please try again.');</script>";
+        }
+    } else {
+        // ไม่พบ username ในฐานข้อมูล
+        echo "<script>alert('Username not found. Please try again.');</script>";
+    }
 }
 ?>
 
