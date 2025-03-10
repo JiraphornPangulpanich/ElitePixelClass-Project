@@ -2,7 +2,21 @@
 include_once("condb.php");
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $category = $_POST['category'];
+    // สมมติว่าคุณ map หมวดหมู่เป็นตัวเลขก่อน
+    $category_name = $_POST['category'];
+    $categories_map = [
+        'Keyboard' => 1,
+        'Gaming Laptop' => 2,
+        'Mouse' => 3,
+        'Gaming Chair' => 4,
+        'Gaming Mic' => 5,
+        'Joy Stick & Console' => 6,
+        'Speaker' => 7,
+        'Screen' => 8,
+        'Earphones' => 9
+    ];
+    $category = $categories_map[$category_name]; // แปลงชื่อเป็นเลข id
+
     $product_name = $_POST['product_name'];
     $description = $_POST['description'];
     $price = $_POST['price'];
@@ -16,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         if (in_array($fileExtension, $allowedExtensions)) {
             // INSERT ข้อมูล
-            $sqlInsert = "INSERT INTO product (Categories, Name, Detail, Price, Num, Ext) 
+            $sqlInsert = "INSERT INTO Product (Categories, Name, Detail, Price, Num, Ext) 
                           VALUES ($category, '$product_name', '$description', $price, $quantity, '$fileExtension')";
 
             if (mysqli_query($conn, $sqlInsert)) {
@@ -41,6 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 ?>
+
 
 
 
