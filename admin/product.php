@@ -1,3 +1,5 @@
+<?php include 'condb.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -32,35 +34,47 @@
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
+                                        <th>IDItem</th>
+                                            <th>Categories</th>
                                             <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>Dtail</th>
+                                            <th>Price</th>
+                                            <th>Ext</th>
+                                            <th>Num</th>
+                                            
                                         </tr>
                                     </thead>
+
                                     <tfoot>
                                         <tr>
+                                            <th>IDItem</th>
+                                            <th>Categories</th>
                                             <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>Price</th>
                                         </tr>
                                     </tfoot>
+                                    <?php
+$sql = "select * from Product order by IDItem DESC";
+$result = mysqli_query($conn, $sql);
+while($row=mysqli_fetch_array($result)){
+
+?>
                                     <tbody>
                                         <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
+                                            <td><?=$row['IDItem']?></td>
+                                            <td><?=$row['Categories']?></td>
+                                            <td><?=$row['Name']?></td>
+                                            <td><?=$row['Detail']?></td>
+                                            <td><?=$row['Price']?></td>
+                                            <td><?=$row['Ext']?></td>
+                                            <td><?=$row['Num']?></td>
                                         </tr>
                                         
                                     </tbody>
+                                    <?php
+}
+mysqli_close($conn)
+?>
                                 </table>
                             </div>
                         </div>
