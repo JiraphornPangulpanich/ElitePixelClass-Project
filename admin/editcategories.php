@@ -2,21 +2,9 @@
 session_start();
 include 'condb.php'; // เชื่อมต่อฐานข้อมูล
 
-// ตรวจสอบว่าผู้ใช้ล็อกอินหรือไม่
-if (!isset($_SESSION['username'])) {
-    echo "<script>alert('โปรดเข้าสู่ระบบก่อน!'); window.location='login.php';</script>";
-    exit;
-}
-
-// ตรวจสอบว่า id ถูกส่งมาหรือไม่
-if (!isset($_GET['id']) || empty($_GET['id']) || !is_numeric($_GET['id'])) {
-    echo "<script>alert('รหัสหมวดหมู่ไม่ถูกต้อง'); window.location='categories.php';</script>";
-    exit;
-}
-
 
 // ดึงข้อมูลหมวดหมู่
-$sql = "SELECT * FROM categories WHERE id = ?";
+$sql = "SELECT * FROM Categories WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $id);
 $stmt->execute();
@@ -34,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = mysqli_real_escape_string($conn, $_POST['name']); // ป้องกัน SQL Injection
 
     // อัพเดตข้อมูล
-    $sql_update = "UPDATE categories SET name = ? WHERE id = ?";
+    $sql_update = "UPDATE Categories SET name = ? WHERE id = ?";
     $stmt_update = $conn->prepare($sql_update);
     $stmt_update->bind_param("si", $name, $id);
 
