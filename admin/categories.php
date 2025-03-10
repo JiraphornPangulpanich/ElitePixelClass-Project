@@ -1,5 +1,5 @@
 <?php include 'condb.php'; 
-$sql = "SELECT * FROM 'Categories' WHERE Id = '{$_GET['id']}' ";
+$sql = "SELECT * FROM 'Categories' WHERE id = '{$_GET['id']}' ";
 $rs = mysqli_query($conn, $sql);
 $data = mysqli_fetch_array($rs); 
 ?>
@@ -70,12 +70,12 @@ $data = mysqli_fetch_array($rs);
                             </thead>
                             <tbody>
                                 <?php
-                                $sql = "SELECT * FROM Categories ORDER BY Id ";
+                                $sql = "SELECT * FROM Categories ORDER BY id ";
                                 $result = mysqli_query($conn, $sql);
                                 while ($row = mysqli_fetch_array($result)) {
                                 ?>
                                     <tr>
-                                        <td class="text-center"><?= $row['Id'] ?></td>
+                                        <td class="text-center"><?= $row['id'] ?></td>
                                         <td class="text-center"><?= $row['name'] ?></td>
                                         <td class="text-center action-btn">
                                             <!-- ปุ่มแก้ไข -->
