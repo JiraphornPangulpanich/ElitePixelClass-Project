@@ -9,6 +9,11 @@ if (isset($_GET['add'])) {
     // ตรวจสอบว่า $_SESSION['cart'] มีค่าหรือไม่
     if (!isset($_SESSION['cart'])) {
         $_SESSION['cart'] = []; // ถ้ายังไม่มีให้สร้างตะกร้า
+        $username = $_SESSION['username']; // ดึง username จาก session
+        $sql = "INSERT INTO cart_items (username, item_id, quantity) 
+            VALUES ('$username', '$itemId', 1)
+            ON DUPLICATE KEY UPDATE quantity = quantity + 1"; 
+    mysqli_query($conn, $sql);
     }
 
     // ถ้ามีสินค้าตัวนี้แล้วในตะกร้า ให้เพิ่มจำนวนสินค้า
