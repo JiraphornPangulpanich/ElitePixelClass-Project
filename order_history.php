@@ -1,3 +1,22 @@
+<?php
+session_start();
+include('connectdb.php'); // เชื่อมต่อฐานข้อมูล
+
+// ตรวจสอบว่าผู้ใช้ล็อกอินหรือไม่
+if (!isset($_SESSION['username'])) {
+    echo "<script>alert('โปรดเข้าสู่ระบบเพื่อดูรายการสั่งซื้อ'); window.location='index.php';</script>";
+    exit;
+}
+
+$username = $_SESSION['username']; // ดึง username จาก session
+
+// ดึงรายการสั่งซื้อของผู้ใช้
+$sql = "SELECT * FROM orders WHERE Username = ? ORDER BY OrderDate DESC";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$result = $stmt->get_result();
+?>
 
 
 <!DOCTYPE html>
@@ -5,7 +24,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>MultiShop - Online Shop Website Template</title>
+    <title>Order</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -35,7 +54,9 @@
         <div class="col-lg-6 d-none d-lg-block">
             <div class="d-inline-flex align-items-center h-100">
                 <?php 
-                session_start(); // เริ่ม session
+                if (session_status() == PHP_SESSION_NONE) {
+                    session_start(); // เริ่ม session ถ้าหากยังไม่ได้เริ่ม
+                } // เริ่ม session
 
                 // ตรวจสอบว่า session มีข้อมูลของผู้ใช้หรือไม่
                 if (isset($_SESSION["firstname"]) && isset($_SESSION["lastname"])) {
@@ -187,7 +208,6 @@
                             <a href="index1.php" class="nav-item nav-link active">Home</a>
                             <a href="shop.php" class="nav-item nav-link">Shop</a>
                             <a href="order_history.php" class="nav-item nav-link">Order</a>
-
                             
                             <a href="contact1.php" class="nav-item nav-link">Contact</a>
                         </div>
@@ -231,7 +251,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
             <div class="col-12">
                 <nav class="breadcrumb bg-light mb-30">
                     <a class="breadcrumb-item text-dark" href="index1.php">Home</a>
-                    <a class="breadcrumb-item text-dark" href="shop.php">Shop</a>
+                    <a class="breadcrumb-item text-dark" href="order_history.php">Order</a>
                     
                 </nav>
             </div>
@@ -240,101 +260,48 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     <!-- Breadcrumb End -->
 
 
-    <div class="container-fluid">
-    <div class="row px-xl-5 justify-content-center">
-        <div class="col-lg-9 col-md-8">
-            <div class="row">
-                <?php
-                include_once("connectdb.php");
+    <div class="container">
+    <h2>ประวัติการสั่งซื้อ</h2>
 
-                // กำหนดจำนวนสินค้าต่อหน้า
-                $items_per_page = 9;
+    <?php if ($result->num_rows > 0): ?>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>หมายเลขคำสั่งซื้อ</th>
+                    <th>วันที่สั่งซื้อ</th>
+                    <th>ยอดรวม</th>
+                    <th>สถานะ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($order = $result->fetch_assoc()): ?>
+                <tr>
+                    <td>#<?php echo htmlspecialchars($order['OrderID']); ?></td>
+                    <td><?php echo date("d/m/Y H:i:s", strtotime($order['OrderDate'])); ?></td>
+                    <td><?php echo number_format($order['TotalAmount'], 2); ?> บาท</td>
+                    <td class="center-flex">
+    <?php 
+    // แสดงสถานะหรือแสดง 'รอการจัดส่ง' หากสถานะยังไม่ได้ตั้งค่า
+    $status = isset($order['Status']) ? $order['Status'] : 'รอการจัดส่ง'; 
+    
+    // แสดงสถานะ
+    echo htmlspecialchars($status); 
 
-                // ตรวจสอบหน้าปัจจุบันจาก query string
-                $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-                $offset = ($page - 1) * $items_per_page;
+ 
+    ?>
+</td>
 
-                // ดึงสินค้าตามหน้าปัจจุบัน
-                $sql = "SELECT iditem, Categories, Name, Price FROM Product ORDER BY Name LIMIT $items_per_page OFFSET $offset";
-                $result = mysqli_query($conn, $sql);
 
-                if (!$result) {
-                    die("คำสั่งล้มเหลว: " . mysqli_error($conn));
-                }
+                </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+    <?php else: ?>
+        <p>คุณยังไม่มีรายการสั่งซื้อ</p>
+    <?php endif; ?>
 
-                if (mysqli_num_rows($result) == 0) {
-                    echo "<p class='text-center'>ไม่มีสินค้าในฐานข้อมูล</p>";
-                } else {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        // ค้นหารูปภาพของสินค้า
-                        $imagePattern = 'img/' . $row['iditem'] . '.*';
-                        $imageFiles = glob($imagePattern);
-                        $imageSrc = !empty($imageFiles) ? $imageFiles[0] : 'img/default.jpg';
-
-                        echo '<div class="col-lg-4 col-md-6 col-sm-12 pb-4">'; // สร้างแต่ละสินค้าที่แสดง
-                        echo '    <div class="product-item bg-light mb-4 p-3">';
-                        echo '        <div class="product-img position-relative overflow-hidden">';
-                        echo '            <img class="img-fluid w-100" src="' . $imageSrc . '" alt="' . $row['Name'] . '">';
-                        echo '            <div class="product-action">';
-                        echo '                <a class="btn btn-outline-dark btn-square" href="add_to_cart.php?add=' . $row['iditem'] . '"><i class="fa fa-shopping-cart"></i></a>';
-                        echo '                <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=' . $row['iditem'] . '"><i class="fa fa-search"></i></a>';
-                        echo '            </div>';
-                        echo '        </div>';
-                        echo '        <div class="text-center py-4">';
-                        echo '            <a class="h6 text-decoration-none text-truncate" href="detail1.php?Iditem=' . $row['iditem'] . '">' . $row['Name'] . '</a>';
-                        echo '            <div class="d-flex align-items-center justify-content-center mt-2">';
-                        echo '                <h5>$' . $row['Price'] . '</h5>';
-                        echo '            </div>';
-                        echo '        </div>';
-                        echo '    </div>';
-                        echo '</div>';
-                    }
-                }
-
-                mysqli_free_result($result);
-
-                // คำนวณจำนวนหน้าทั้งหมด
-                $sql_total = "SELECT COUNT(*) AS total FROM Product";
-                $result_total = mysqli_query($conn, $sql_total);
-                $row_total = mysqli_fetch_assoc($result_total);
-                $total_pages = ceil($row_total['total'] / $items_per_page);
-
-                mysqli_free_result($result_total);
-                mysqli_close($conn);
-                ?>
-            </div>
-
-            <!-- Pagination -->
-            <nav>
-                <ul class="pagination justify-content-center">
-                    <!-- ปุ่มย้อนกลับ -->
-                    <li class="page-item <?= ($page <= 1) ? 'disabled' : ''; ?>">
-                        <a class="page-link" href="?page=<?= $page - 1; ?>">
-                            <i class="fa fa-angle-left"></i> ย้อนกลับ
-                        </a>
-                    </li>
-
-                    <!-- ตัวเลขหน้า -->
-                    <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
-                        <li class="page-item <?= ($i == $page) ? 'active' : ''; ?>">
-                            <a class="page-link" href="?page=<?= $i; ?>"><?= $i; ?></a>
-                        </li>
-                    <?php endfor; ?>
-
-                    <!-- ปุ่มหน้าถัดไป -->
-                    <li class="page-item <?= ($page >= $total_pages) ? 'disabled' : ''; ?>">
-                        <a class="page-link" href="?page=<?= $page + 1; ?>">
-                            ถัดไป <i class="fa fa-angle-right"></i>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </div>
+    <a href="index1.php" class="btn btn-primary">กลับไปหน้าหลัก</a>
 </div>
-
-
-
 
     
 

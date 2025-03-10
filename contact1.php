@@ -185,7 +185,8 @@
                         <div class="navbar-nav mr-auto py-0">
                             <a href="index1.php" class="nav-item nav-link active">Home</a>
                             <a href="shop.php" class="nav-item nav-link">Shop</a>
-                            
+                            <a href="order_history.php" class="nav-item nav-link">Order</a>
+
                             
                             <a href="contact1.php" class="nav-item nav-link">Contact</a>
                         </div>
@@ -194,7 +195,9 @@
                                 <i class="fas fa-shopping-cart text-primary"></i>
                             </a>
                         <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 include('connectdb.php'); // เชื่อมต่อฐานข้อมูล
 
 // คำนวณจำนวนสินค้าทั้งหมดในตะกร้า

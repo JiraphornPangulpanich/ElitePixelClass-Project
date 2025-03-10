@@ -1,11 +1,18 @@
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>MultiShop - Online Shop Website Template</title>
+    <title> Edit_Profile </title>
+    
+   
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -26,22 +33,28 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+   
+    
 </head>
 
 <body>
  <!-- Topbar Start -->
- <div class="container-fluid">
+<div class="container-fluid">
     <div class="row bg-secondary py-1 px-xl-5">
         <div class="col-lg-6 d-none d-lg-block">
             <div class="d-inline-flex align-items-center h-100">
                 <?php 
-                session_start(); // เริ่ม session
+                if (session_status() == PHP_SESSION_NONE) {
+                    session_start();  // เริ่ม session ถ้ายังไม่ได้เริ่ม
+                }
 
                 // ตรวจสอบว่า session มีข้อมูลของผู้ใช้หรือไม่
                 if (isset($_SESSION["firstname"]) && isset($_SESSION["lastname"])) {
                     // ถ้ามีข้อมูลใน session แสดงชื่อเต็ม
                     $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
                     echo '<span class="navbar-text text-body">👤 ' . $fullname . '!</span>';
+                    
                 } else {
                     // ถ้าไม่มีข้อมูลใน session แสดงข้อความ "โปรดเข้าสู่ระบบ"
                     echo '<span class="navbar-text text-body">โปรดเข้าสู่ระบบ</span>';
@@ -50,13 +63,33 @@
             </div>    
         </div>
 
+
+
+        
         <div class="col-lg-6 text-center text-lg-right">
             <div class="d-inline-flex align-items-center">
                 <a class="dropdown-item" href="Team1.php">Team</a>
                 <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="index.php">Sign in</a>
-                        <a class="dropdown-item" href="logout.php">Logout</a>
+                    <?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();  // เริ่ม session ถ้ายังไม่ได้เริ่ม
+}
+  // เริ่ม session
+
+// ตรวจสอบว่า session มีข้อมูลของผู้ใช้หรือไม่
+if (isset($_SESSION["id"])) {
+    $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
+    $user_id = $_SESSION["id"]; // เก็บค่า id จาก session
+
+    echo "<a href='edit_profile.php?id=" . $user_id . "'><center> Edit Profile</center></a>";
+} else {
+    
+}
+?>
+                    
+                        <a class="dropdown-item" href="index.php"><center>Sign in</center></a>
+                        <a class="dropdown-item" href="logout.php"><center>Logout</center></a>
                     </div>
             </div>
         </div>
@@ -139,7 +172,7 @@
 </style>
 
         </div>
-
+        
         <div class="col-lg-4 col-6 text-right">
             <p class="m-0">Customer Service</p>
             <h5 class="m-0">+012 345 6789</h5>
@@ -150,7 +183,7 @@
 
 
 
-
+    <!-- Navbar Start -->
     <div class="container-fluid bg-dark mb-30">
         <div class="row px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
@@ -187,12 +220,10 @@
                             <a href="index1.php" class="nav-item nav-link active">Home</a>
                             <a href="shop.php" class="nav-item nav-link">Shop</a>
                             <a href="order_history.php" class="nav-item nav-link">Order</a>
-
                             
                             <a href="contact1.php" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-                            
                         <a href="cart1.php" class="btn px-0 ml-3">
                                 <i class="fas fa-shopping-cart text-primary"></i>
                             </a>
@@ -216,6 +247,8 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     <?php echo $totalItems; ?>
 </span>
 
+
+                           
                         </div>
                     </div>
                 </nav>
@@ -225,175 +258,132 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     <!-- Navbar End -->
 
 
-    <!-- Breadcrumb Start -->
-    <div class="container-fluid">
-        <div class="row px-xl-5">
-            <div class="col-12">
-                <nav class="breadcrumb bg-light mb-30">
-                    <a class="breadcrumb-item text-dark" href="index1.php">Home</a>
-                    <a class="breadcrumb-item text-dark" href="shop.php">Shop</a>
-                    
-                </nav>
-            </div>
+    <?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();  // เริ่ม session ถ้ายังไม่ได้เริ่ม
+}
+include('connectdb.php'); // เชื่อมต่อฐานข้อมูล
+
+// รับ id จาก URL
+$id = $_GET['id']; 
+
+// ดึงข้อมูลสมาชิกตาม id
+$sql = "SELECT * FROM member WHERE id = '$id'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // ถ้ามีข้อมูลสมาชิก
+    $row = $result->fetch_assoc();
+    $id = $row['id'];
+    $username = $row['username']; // แก้ไขให้ดึงข้อมูล username มา
+    $firstname = $row['firstname'];
+    $lastname = $row['lastname'];
+    $phone = $row['phone'];
+} else {
+    echo "No record found!";
+}
+?>
+
+
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">แก้ไขข้อมูลส่วนตัว</h2>
+
+    <form action="update.php" method="POST">
+        <input type="hidden" name="id" value="<?php echo $id; ?>">
+
+        <div class="mb-3">
+            <label for="username" class="form-label">Username:</label>
+            <input type="text" id="username" name="username" class="form-control" value="<?php echo $username; ?>" readonly>
         </div>
-    </div>
-    <!-- Breadcrumb End -->
 
-
-    <div class="container-fluid">
-    <div class="row px-xl-5 justify-content-center">
-        <div class="col-lg-9 col-md-8">
-            <div class="row">
-                <?php
-                include_once("connectdb.php");
-
-                // กำหนดจำนวนสินค้าต่อหน้า
-                $items_per_page = 9;
-
-                // ตรวจสอบหน้าปัจจุบันจาก query string
-                $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-                $offset = ($page - 1) * $items_per_page;
-
-                // ดึงสินค้าตามหน้าปัจจุบัน
-                $sql = "SELECT iditem, Categories, Name, Price FROM Product ORDER BY Name LIMIT $items_per_page OFFSET $offset";
-                $result = mysqli_query($conn, $sql);
-
-                if (!$result) {
-                    die("คำสั่งล้มเหลว: " . mysqli_error($conn));
-                }
-
-                if (mysqli_num_rows($result) == 0) {
-                    echo "<p class='text-center'>ไม่มีสินค้าในฐานข้อมูล</p>";
-                } else {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        // ค้นหารูปภาพของสินค้า
-                        $imagePattern = 'img/' . $row['iditem'] . '.*';
-                        $imageFiles = glob($imagePattern);
-                        $imageSrc = !empty($imageFiles) ? $imageFiles[0] : 'img/default.jpg';
-
-                        echo '<div class="col-lg-4 col-md-6 col-sm-12 pb-4">'; // สร้างแต่ละสินค้าที่แสดง
-                        echo '    <div class="product-item bg-light mb-4 p-3">';
-                        echo '        <div class="product-img position-relative overflow-hidden">';
-                        echo '            <img class="img-fluid w-100" src="' . $imageSrc . '" alt="' . $row['Name'] . '">';
-                        echo '            <div class="product-action">';
-                        echo '                <a class="btn btn-outline-dark btn-square" href="add_to_cart.php?add=' . $row['iditem'] . '"><i class="fa fa-shopping-cart"></i></a>';
-                        echo '                <a class="btn btn-outline-dark btn-square" href="detail1.php?Iditem=' . $row['iditem'] . '"><i class="fa fa-search"></i></a>';
-                        echo '            </div>';
-                        echo '        </div>';
-                        echo '        <div class="text-center py-4">';
-                        echo '            <a class="h6 text-decoration-none text-truncate" href="detail1.php?Iditem=' . $row['iditem'] . '">' . $row['Name'] . '</a>';
-                        echo '            <div class="d-flex align-items-center justify-content-center mt-2">';
-                        echo '                <h5>$' . $row['Price'] . '</h5>';
-                        echo '            </div>';
-                        echo '        </div>';
-                        echo '    </div>';
-                        echo '</div>';
-                    }
-                }
-
-                mysqli_free_result($result);
-
-                // คำนวณจำนวนหน้าทั้งหมด
-                $sql_total = "SELECT COUNT(*) AS total FROM Product";
-                $result_total = mysqli_query($conn, $sql_total);
-                $row_total = mysqli_fetch_assoc($result_total);
-                $total_pages = ceil($row_total['total'] / $items_per_page);
-
-                mysqli_free_result($result_total);
-                mysqli_close($conn);
-                ?>
-            </div>
-
-            <!-- Pagination -->
-            <nav>
-                <ul class="pagination justify-content-center">
-                    <!-- ปุ่มย้อนกลับ -->
-                    <li class="page-item <?= ($page <= 1) ? 'disabled' : ''; ?>">
-                        <a class="page-link" href="?page=<?= $page - 1; ?>">
-                            <i class="fa fa-angle-left"></i> ย้อนกลับ
-                        </a>
-                    </li>
-
-                    <!-- ตัวเลขหน้า -->
-                    <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
-                        <li class="page-item <?= ($i == $page) ? 'active' : ''; ?>">
-                            <a class="page-link" href="?page=<?= $i; ?>"><?= $i; ?></a>
-                        </li>
-                    <?php endfor; ?>
-
-                    <!-- ปุ่มหน้าถัดไป -->
-                    <li class="page-item <?= ($page >= $total_pages) ? 'disabled' : ''; ?>">
-                        <a class="page-link" href="?page=<?= $page + 1; ?>">
-                            ถัดไป <i class="fa fa-angle-right"></i>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+        <div class="mb-3">
+            <label for="firstname" class="form-label">First Name:</label>
+            <input type="text" id="firstname" name="firstname" class="form-control" value="<?php echo $firstname; ?>">
         </div>
-    </div>
+
+        <div class="mb-3">
+            <label for="lastname" class="form-label">Last Name:</label>
+            <input type="text" id="lastname" name="lastname" class="form-control" value="<?php echo $lastname; ?>">
+        </div>
+
+        <div class="mb-3">
+            <label for="phone" class="form-label">Phone:</label>
+            <input type="text" id="phone" name="phone" class="form-control" value="<?php echo $phone; ?>">
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <a href="index1.php" class="btn btn-secondary">ย้อนกลับ</a>
+        </div>
+    </form>
 </div>
 
 
+<?php
+$conn->close();
+?>
 
 
-    
 
-<!-- Footer Start -->
-<footer class="container-fluid bg-dark text-secondary mt-5 pt-5">
-    <div class="row px-xl-5 pt-5">
-        <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
-            <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
-            <p class="mb-4">If you have any questions or if your product has any problems, please contact us immediately within 48 hours.</p>
-            <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, Mahasarakham, moja</p>
-            <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>ElitePixel@example.com</p>
-            <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
-        </div>
-        <div class="col-lg-8 col-md-12">
-            <div class="row">
-                <div class="col-md-4 mb-5">
-                    <h5 class="text-secondary text-uppercase mb-4">Quick Shop</h5>
-                    <div class="d-flex flex-column justify-content-start">
-                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-                        <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-5">
-                    <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
-                    <div class="d-flex flex-column justify-content-start">
-                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-                        <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-5">
-                    <h5 class="text-secondary text-uppercase mb-4">Newsletter</h5>
-                    <p>Please contact us as soon as possible.</p>
-                    <form action="">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Your Email Address">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary">Sign Up</button>
-                            </div>
+
+
+
+  
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-secondary mt-5 pt-5">
+        <div class="row px-xl-5 pt-5">
+            <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
+                <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
+                <p class="mb-4">If you have any questions or if your product has any problems, please contact us immediately within 48 hours.</p>
+                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, Mahasarakham, moja</p>
+                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>ElitePixel@example.com</p>
+                <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
+            </div>
+            <div class="col-lg-8 col-md-12">
+                <div class="row">
+                    <div class="col-md-4 mb-5">
+                        <h5 class="text-secondary text-uppercase mb-4">Quick Shop</h5>
+                        <div class="d-flex flex-column justify-content-start">
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
+                            <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                         </div>
-                    </form>
-                    <h6 class="text-secondary text-uppercase mt-4 mb-3">Follow Us</h6>
-                    <div class="d-flex">
-                        <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a class="btn btn-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <div class="col-md-4 mb-5">
+                        <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
+                        <div class="d-flex flex-column justify-content-start">
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                            <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
+                            <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-5">
+                        <h5 class="text-secondary text-uppercase mb-4">Newsletter</h5>
+                        <p>Please contact us as soon as possible.</p>
+                        <form action="">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Your Email Address">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary">Sign Up</button>
+                                </div>
+                            </div>
+                        </form>
+                        <h6 class="text-secondary text-uppercase mt-4 mb-3">Follow Us</h6>
+                        <div class="d-flex">
+                            <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        
     </div>
-</footer>
-<!-- Footer End -->
-
-
-
-
     <!-- Footer End -->
 
 
@@ -413,6 +403,9 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    
+    
 </body>
 
 </html>

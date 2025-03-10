@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,13 +45,16 @@
         <div class="col-lg-6 d-none d-lg-block">
             <div class="d-inline-flex align-items-center h-100">
                 <?php 
-                session_start(); // เริ่ม session
+                if (session_status() == PHP_SESSION_NONE) {
+                    session_start();  // เริ่ม session ถ้ายังไม่ได้เริ่ม
+                }
 
                 // ตรวจสอบว่า session มีข้อมูลของผู้ใช้หรือไม่
                 if (isset($_SESSION["firstname"]) && isset($_SESSION["lastname"])) {
                     // ถ้ามีข้อมูลใน session แสดงชื่อเต็ม
                     $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
                     echo '<span class="navbar-text text-body">👤 ' . $fullname . '!</span>';
+                    
                 } else {
                     // ถ้าไม่มีข้อมูลใน session แสดงข้อความ "โปรดเข้าสู่ระบบ"
                     echo '<span class="navbar-text text-body">โปรดเข้าสู่ระบบ</span>';
@@ -59,13 +63,33 @@
             </div>    
         </div>
 
+
+
+        
         <div class="col-lg-6 text-center text-lg-right">
             <div class="d-inline-flex align-items-center">
                 <a class="dropdown-item" href="Team1.php">Team</a>
                 <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="index.php">Sign in</a>
-                        <a class="dropdown-item" href="logout.php">Logout</a>
+                    <?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();  // เริ่ม session ถ้ายังไม่ได้เริ่ม
+}
+  // เริ่ม session
+
+// ตรวจสอบว่า session มีข้อมูลของผู้ใช้หรือไม่
+if (isset($_SESSION["id"])) {
+    $fullname = $_SESSION["firstname"] . " " . $_SESSION["lastname"];
+    $user_id = $_SESSION["id"]; // เก็บค่า id จาก session
+
+    echo "<a href='edit_profile.php?id=" . $user_id . "'><center> Edit Profile</center></a>";
+} else {
+    
+}
+?>
+                    
+                        <a class="dropdown-item" href="index.php"><center>Sign in</center></a>
+                        <a class="dropdown-item" href="logout.php"><center>Logout</center></a>
                     </div>
             </div>
         </div>
@@ -148,7 +172,7 @@
 </style>
 
         </div>
-
+        
         <div class="col-lg-4 col-6 text-right">
             <p class="m-0">Customer Service</p>
             <h5 class="m-0">+012 345 6789</h5>
@@ -195,7 +219,7 @@
                         <div class="navbar-nav mr-auto py-0">
                             <a href="index1.php" class="nav-item nav-link active">Home</a>
                             <a href="shop.php" class="nav-item nav-link">Shop</a>
-                            
+                            <a href="order_history.php" class="nav-item nav-link">Order</a>
                             
                             <a href="contact1.php" class="nav-item nav-link">Contact</a>
                         </div>
@@ -204,7 +228,9 @@
                                 <i class="fas fa-shopping-cart text-primary"></i>
                             </a>
                         <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 include('connectdb.php'); // เชื่อมต่อฐานข้อมูล
 
 // คำนวณจำนวนสินค้าทั้งหมดในตะกร้า
@@ -221,7 +247,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
     <?php echo $totalItems; ?>
 </span>
 
-                        
+
                            
                         </div>
                     </div>

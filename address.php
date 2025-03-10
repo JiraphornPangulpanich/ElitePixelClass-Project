@@ -192,7 +192,9 @@
                                 <i class="fas fa-shopping-cart text-primary"></i>
                             </a>
                         <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 include('connectdb.php'); // เชื่อมต่อฐานข้อมูล
 
 // คำนวณจำนวนสินค้าทั้งหมดในตะกร้า

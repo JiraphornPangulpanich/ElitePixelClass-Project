@@ -32,39 +32,42 @@
 <body>
 
 <?php
-session_start();
+session_start();  // เริ่ม session
+
+// ตรวจสอบว่ามีข้อความผิดพลาดใน session หรือไม่
 if (isset($_SESSION["Error"])) {
-    echo '<div class="alert alert-danger text-center">' . $_SESSION["Error"] . '</div>';
+    echo '<div class="alert alert-danger text-center" id="error-alert">' . $_SESSION["Error"] . '</div>';
     unset($_SESSION["Error"]); // ลบข้อความแจ้งเตือนหลังจากแสดงแล้ว
 }
 ?>
 
-    <div class="login-container">
-        <h3 class="text-center">Log In</h3>
-        <form method="POST" action="checklogin.php">
-            <div class="mb-3">
-                <label class="form-label">Username</label>
-                <input type="text" class="form-control" name="username" id="username" required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Password</label>
-                <input type="password" class="form-control" name="password" id="password" required>
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Login</button>
-        </form>
-        <p class="text-center mt-3">Don't have an account? <a href="singup.php">Sign Up</a></p>
-    </div>
+<div class="login-container">
+    <h3 class="text-center">Log In</h3>
+    <form method="POST" action="checklogin.php">
+        <div class="mb-3">
+            <label class="form-label">Username</label>
+            <input type="text" class="form-control" name="username" id="username" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" name="password" id="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+    </form>
+    <p class="text-center mt-3">Don't have an account? <a href="singup.php">Sign Up</a></p>
+</div>
 
-    <script>
-    setTimeout(function () {
-        let alert = document.querySelector(".alert");
-        if (alert) {
-            alert.style.transition = "opacity 0.5s";
-            alert.style.opacity = "0";
-            setTimeout(() => alert.remove(), 500);
-        }
-    }, 3000); // 3 วินาที
-    </script>
+<script>
+// ตั้งเวลาให้ข้อความผิดพลาดหายไปหลังจาก 3 วินาที
+setTimeout(function () {
+    let alert = document.getElementById("error-alert"); // เข้าถึงข้อความผิดพลาดโดยใช้ id
+    if (alert) {
+        alert.style.transition = "opacity 0.5s"; // เพิ่ม transition ให้ข้อความค่อยๆ หายไป
+        alert.style.opacity = "0"; // ทำให้ข้อความหาย
+        setTimeout(() => alert.remove(), 500); // ลบ element หลังจากทำให้ opacity เป็น 0
+    }
+}, 3000); // 3 วินาที
+</script>
 
 
 </body>

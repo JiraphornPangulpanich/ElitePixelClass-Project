@@ -110,7 +110,9 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
         <div class="col-lg-6 d-none d-lg-block">
             <div class="d-inline-flex align-items-center h-100">
                 <?php 
-                session_start(); // เริ่ม session
+                if (session_status() == PHP_SESSION_NONE) {
+                    session_start();
+                } // เริ่ม session
 
                 // ตรวจสอบว่า session มีข้อมูลของผู้ใช้หรือไม่
                 if (isset($_SESSION["firstname"]) && isset($_SESSION["lastname"])) {
@@ -261,7 +263,7 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
                         <div class="navbar-nav mr-auto py-0">
                             <a href="index1.php" class="nav-item nav-link active">Home</a>
                             <a href="shop.php" class="nav-item nav-link">Shop</a>
-                            
+                            <a href="order_history.php" class="nav-item nav-link">Order</a>
                             
                             <a href="contact1.php" class="nav-item nav-link">Contact</a>
                         </div>
@@ -270,7 +272,9 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
                                 <i class="fas fa-shopping-cart text-primary"></i>
                             </a>
                         <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 include('connectdb.php'); // เชื่อมต่อฐานข้อมูล
 
 // คำนวณจำนวนสินค้าทั้งหมดในตะกร้า
@@ -310,31 +314,8 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
         </div>
     </div>
     <!-- Breadcrumb End -->
-<?php
-session_start();
-include('connectdb.php'); // เชื่อมต่อฐานข้อมูล
 
-// ตรวจสอบว่าผู้ใช้ล็อกอินหรือไม่
-if (!isset($_SESSION['username'])) {
-    echo "<script>alert('โปรดเข้าสู่ระบบเพื่อสั่งสินค้า'); window.location='index.php';</script>";
-    exit;
-}
-
-$username = $_SESSION['username']; // ดึง username จาก session
-
-// ดึงข้อมูลตะกร้าจากฐานข้อมูล
-$sql = "SELECT item_id, quantity FROM cart_items WHERE username = '$username'";
-$result = mysqli_query($conn, $sql);
-if (mysqli_num_rows($result) > 0) {
-    // ถ้ามีการบันทึกข้อมูลตะกร้าจากฐานข้อมูล
-    $_SESSION['cart'] = []; // รีเซ็ตตะกร้าสินค้าใน session
-    while ($row = mysqli_fetch_assoc($result)) {
-        $_SESSION['cart'][$row['item_id']] = $row['quantity'];
-    }
-}
-?>
-
-<style>
+    <style>
     /* ป้องกันไม่ให้มีขีดเส้นใต้ในลิงก์ */
     #codPayment a, #creditPayment a {
         text-decoration: none;
@@ -345,8 +326,84 @@ if (mysqli_num_rows($result) > 0) {
         text-decoration: none;
     }
 </style>
-    <!-- Cart Start -->
-    <?php if (!empty($_SESSION['cart'])): ?>
+
+
+
+
+<?php
+// เริ่ม session
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+include('connectdb.php'); // เชื่อมต่อฐานข้อมูล
+
+// ตรวจสอบว่าผู้ใช้ล็อกอินหรือไม่
+if (!isset($_SESSION['username'])) {
+    echo "<script>alert('โปรดเข้าสู่ระบบเพื่อดำเนินการ'); window.location='index.php';</script>";
+    exit;
+}
+
+$username = $_SESSION['username']; // ดึง username จาก session
+
+// ตรวจสอบว่ามี action ที่ถูกส่งมาหรือไม่
+if (isset($_GET['action']) && isset($_GET['id'])) {
+    $itemId = intval($_GET['id']); // แปลงให้เป็น integer ป้องกัน SQL Injection
+    $action = $_GET['action'];
+
+    // คำสั่ง SQL ตรวจสอบจำนวนสินค้าคงเหลือ
+    $sql = "SELECT Num FROM Product WHERE Iditem = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $itemId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    $availableQuantity = $row ? $row['Num'] : 0;
+    $stmt->close();
+
+    // ดึงข้อมูลจาก session cart ถ้ายังไม่มีให้สร้างใหม่
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+    }
+
+    switch ($action) {
+        case 'add': // เพิ่มสินค้า
+            if (!isset($_SESSION['cart'][$itemId])) {
+                $_SESSION['cart'][$itemId] = 1;
+            } elseif ($_SESSION['cart'][$itemId] < $availableQuantity) {
+                $_SESSION['cart'][$itemId]++;
+            }
+            break;
+
+        case 'decrease': // ลดจำนวนสินค้า
+            if (isset($_SESSION['cart'][$itemId]) && $_SESSION['cart'][$itemId] > 1) {
+                $_SESSION['cart'][$itemId]--;
+            }
+            break;
+
+        case 'remove': // ลบสินค้าออกจากตะกร้า
+            unset($_SESSION['cart'][$itemId]);
+            break;
+    }
+
+    // อัปเดตฐานข้อมูล `cart_items`
+    // ลบข้อมูลตะกร้าเดิมของผู้ใช้ก่อน แล้วใส่ค่าล่าสุดลงไป
+    $conn->query("DELETE FROM cart_items WHERE username = '$username'");
+
+    $stmt = $conn->prepare("INSERT INTO cart_items (username, item_id, quantity) VALUES (?, ?, ?)");
+    foreach ($_SESSION['cart'] as $itemId => $quantity) {
+        $stmt->bind_param("sii", $username, $itemId, $quantity);
+        $stmt->execute();
+    }
+    $stmt->close();
+}
+
+// กลับไปที่หน้าตะกร้าสินค้า
+
+?>
+
+
+<?php if (!empty($_SESSION['cart'])): ?>
         <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -362,6 +419,7 @@ if (mysqli_num_rows($result) > 0) {
                         </tr>
                     </thead>
                     <tbody>
+<tbody>
     <?php
     $totalPrice = 0;
     foreach ($_SESSION['cart'] as $itemId => $quantity):
@@ -393,11 +451,18 @@ if (mysqli_num_rows($result) > 0) {
         </td>
     </tr>
     <?php endif; endforeach; ?>
+
+    <!-- แสดงยอดรวม -->
+    <tr>
+        <td colspan="3" style="text-align: right;">ยอดรวม</td>
+        <td><?= number_format($totalPrice, 2) ?> บาท</td>
+        <td></td>
+    </tr>
 </tbody>
+
 
                 </table>
             </div>
-            <h4 class="text-right">ราคาทั้งหมด: <?= number_format($totalPrice, 2) ?> บาท</h4>
             <div class="text-center">
                 <button id="checkoutBtn" class="btn btn-primary">ดำเนินการชำระเงิน</button>
                 <a href="index1.php" class="btn btn-secondary">เลือกซื้อสินค้าเพิ่ม</a>
@@ -457,6 +522,7 @@ function validateForm() {
         document.getElementById("creditForm").style.display = "block";
     });
 </script>
+
 
 
 
