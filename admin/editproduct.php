@@ -102,7 +102,12 @@ if (isset($_POST['submit'])) {
 
             <div class="mb-3">
                 <label>Current Image:</label><br>
-                <img src="img/<?= $row['Ext'] ?>" alt="Product Image" class="image-preview">
+                <?php 
+        $id = $row['Iditem']; // ดึง ID ของสินค้า
+        $image_path = glob("img/$id.*")[0] ?? "img/no-image.png"; // ค้นหาภาพที่ชื่อขึ้นต้นด้วย ID เช่น 101.1.jpg
+
+        echo "<img src='$image_path' alt='Product Image' style='max-width: 100px;'>";
+    ?>
             </div>
 
             <div class="mb-3">
