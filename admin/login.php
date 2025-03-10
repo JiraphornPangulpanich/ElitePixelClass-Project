@@ -105,36 +105,38 @@ if (isset($error)) {
 
 
 <?php
-include_once("db.php");
+session_start();
+include 'db.php'; // เชื่อมต่อฐานข้อมูล
 
-if (isset($_POST['Submit'])) {
-    $usr = mysqli_real_escape_string($conn, $_POST['usr']);
-    $pwd = $_POST['pwd'];
-    
-    // ดึงข้อมูลจากฐานข้อมูลโดยใช้ prepared statement
-    $sql = "SELECT * FROM admin WHERE a_usr = ?";
-    $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "s", $usr);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-    
-    if ($row = mysqli_fetch_assoc($result)) {
-        // ตรวจสอบรหัสผ่าน
-        if (password_verify($pwd, $row['a_pwd'])) {
-            $_SESSION['s_id'] = $row['a_id'];
-            $_SESSION['s_name'] = $row['a_name'];
-            echo "<script>window.location='index.php';</script>";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    // ตรวจสอบว่ามี username ในฐานข้อมูลหรือไม่
+    $stmt = $conn->prepare("SELECT id, user, password FROM admin WHERE user = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        
+        // ตรวจสอบรหัสผ่าน (หากเก็บรหัสเป็น plain text ให้เปลี่ยนเป็น password_verify)
+        if (password_verify($password, $row['password'])) { 
+            $_SESSION['username'] = $row['user'];
+            $_SESSION['user_id'] = $row['id'];
+
+            echo "<script>alert('✅ เข้าสู่ระบบสำเร็จ'); window.location='index.php';</script>";
             exit();
         } else {
-            echo "Username or Password incorrect";
-            exit();
+            echo "<script>alert('❌ รหัสผ่านไม่ถูกต้อง'); window.location='login.php';</script>";
         }
     } else {
-        echo "Username or Password incorrect";
-        exit();
+        echo "<script>alert('❌ ไม่พบชื่อผู้ใช้ในระบบ'); window.location='login.php';</script>";
     }
 }
 ?>
+
 
     </body>
 </html>
