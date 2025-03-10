@@ -10,14 +10,27 @@ if (!isset($_GET['id']) || empty($_GET['id']) || !is_numeric($_GET['id'])) {
 
 $id = intval($_GET['id']); // แปลงเป็นตัวเลข
 
+// ตรวจสอบการเชื่อมต่อฐานข้อมูล
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
 // ลบหมวดหมู่
 $sql = "DELETE FROM categories WHERE id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("id", $id);
+
+if (!$stmt) {
+    die("Prepare failed: " . $conn->error);
+}
+
+$stmt->bind_param("i", $id); // ใช้ "i" แทน "id"
 
 if ($stmt->execute()) {
     echo "<script>alert('ลบหมวดหมู่สำเร็จ!'); window.location='categories.php';</script>";
 } else {
-    echo "<script>alert('เกิดข้อผิดพลาดในการลบ'); window.location='categories.php';</script>";
+    echo "<script>alert('เกิดข้อผิดพลาดในการลบ: " . $stmt->error . "'); window.location='categories.php';</script>";
 }
+
+$stmt->close();
+$conn->close();
 ?>
