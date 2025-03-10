@@ -14,7 +14,7 @@
 </form>
     
 <?php
-include_once("../connectdb.php");
+include_once("db.php");
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user_id = $_POST['buser_id'];
     //$user_id = $_SESSION['buser_id']; // รับ user_id จาก session
