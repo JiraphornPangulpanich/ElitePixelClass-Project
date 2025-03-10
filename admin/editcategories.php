@@ -1,22 +1,28 @@
 <?php
 include 'condb.php';
 
-// ตรวจสอบว่ามี ID ที่รับมาหรือไม่
-$Id = $_GET['Id'];
+// รับ ID และแปลงให้เป็นตัวเลขเพื่อความปลอดภัย
+$Id = isset($_GET['Id']) ? intval($_GET['Id']) : 0;
 
 // ดึงข้อมูลหมวดหมู่
 $sql = "SELECT * FROM Categories WHERE Id = '$Id'";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_array($result);
 
+// ถ้าเจอข้อมูลหมวดหมู่
+if (!$row) {
+    echo "<script>alert('ไม่พบหมวดหมู่ที่ต้องการแก้ไข'); window.location='categories.php';</script>";
+    exit;
+}
+
 // เช็คว่ามีการกดปุ่มบันทึกหรือไม่
 if (isset($_POST['submit'])) {
     $Name = mysqli_real_escape_string($conn, $_POST['Name']); // ป้องกัน SQL Injection
 
-    // อัพเดตข้อมูลหมวดหมู่
-    $sql_update = "UPDATE Categories SET 
-                    Name = '$Name'
-                  WHERE Id = '$Id'";
+    // อัพเดตข้อมูล
+    $sql_update = "UPDATE Categories SET Name = '$Name' WHERE Id = '$Id'";
+    
+    echo $sql_update; // Debug ดู SQL
 
     if (mysqli_query($conn, $sql_update)) {
         echo "<script>alert('แก้ไขข้อมูลสำเร็จ'); window.location='categories.php';</script>";
@@ -25,6 +31,7 @@ if (isset($_POST['submit'])) {
     }
 }
 ?>
+
 
 
 <!DOCTYPE html>
