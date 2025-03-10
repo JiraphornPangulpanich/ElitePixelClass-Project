@@ -96,15 +96,9 @@ $data = mysqli_fetch_array($rs);
                                                     <img class='img-fluid w-100' src='$image' alt='Product Image'>
                                                     </div>";
                                                     }
-                                                } else {
-                                                echo "
-                                                    <div class='carousel-item active'>
-                                                    <img class='img-fluid w-100' src='img/no-image.jpg' alt='No Image Available'>
-                                                    </div>";
-                                                echo "<p>No images found for product ID: $Iditem</p>"; // แสดงข้อความดีบัก
-                                                }
+                                                } 
                                         ?></td>
-                                        
+
                                         <td class="text-center"><?= $row['Num'] ?></td>
                                         <td class="text-center action-btn">
                                             <!-- ปุ่มแก้ไข -->
