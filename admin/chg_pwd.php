@@ -7,7 +7,7 @@
 
 <body>
 <form method="post" action="">
-    <input type="text" name="buser_id" placeholder="รหัสผู้ใช้ (User ID)" required>
+    <input type="text" name="username" placeholder="ชื่อผู้ใช้ (Username)" required>
     <input type="password" name="current_password" placeholder="รหัสผ่านเดิม" required>
     <input type="password" name="new_password" placeholder="รหัสผ่านใหม่" required>
     <input type="password" name="confirm_password" placeholder="ยืนยันรหัสผ่านใหม่" required>
@@ -15,17 +15,17 @@
 </form>
 
 <?php
-include_once("db.php");
+include_once("db.php"); // เชื่อมต่อฐานข้อมูล
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $user_id = $_POST['buser_id'];
+    $username = $_POST['username'];
     $current_password = $_POST['current_password'];
     $new_password = $_POST['new_password'];
     $confirm_password = $_POST['confirm_password'];
 
     // ดึงข้อมูลรหัสผ่านเก่าจากฐานข้อมูล
-    $stmt = $conn->prepare("SELECT password FROM admin WHERE id = ?");
-    $stmt->bind_param("i", $user_id);
+    $stmt = $conn->prepare("SELECT password FROM admin WHERE user = ?");
+    $stmt->bind_param("s", $username);
     $stmt->execute();
     $stmt->store_result();
 
@@ -34,24 +34,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->fetch();
 
         // ตรวจสอบรหัสผ่านเดิม
-        if ($current_password !== $hashed_password) { // *** ต้องแก้เป็น `password_verify()` ถ้ามีการเข้ารหัส ***
-            echo "<script>alert('รหัสผ่านเดิมไม่ถูกต้อง');</script>";
+        if (!password_verify($current_password, $hashed_password)) {
+            echo "<script>alert('❌ รหัสผ่านเดิมไม่ถูกต้อง');</script>";
         } elseif ($new_password !== $confirm_password) {
-            echo "<script>alert('รหัสผ่านใหม่ไม่ตรงกัน');</script>";
+            echo "<script>alert('❌ รหัสผ่านใหม่ไม่ตรงกัน');</script>";
         } else {
             // เข้ารหัสรหัสผ่านใหม่
-            $update_stmt = $conn->prepare("UPDATE admin SET password = ? WHERE id = ?");
-            $update_stmt->bind_param("si", $new_password, $user_id);
+            $new_hashed = password_hash($new_password, PASSWORD_DEFAULT);
+            $update_stmt = $conn->prepare("UPDATE admin SET password = ? WHERE user = ?");
+            $update_stmt->bind_param("ss", $new_hashed, $username);
             $update_stmt->execute();
 
             if ($update_stmt->affected_rows > 0) {
-                echo "<script>alert('เปลี่ยนรหัสผ่านสำเร็จ');</script>";
+                echo "<script>alert('✅ เปลี่ยนรหัสผ่านสำเร็จ');</script>";
             } else {
-                echo "<script>alert('ไม่สามารถเปลี่ยนรหัสผ่านได้');</script>";
+                echo "<script>alert('⚠️ ไม่สามารถเปลี่ยนรหัสผ่านได้');</script>";
             }
         }
     } else {
-        echo "<script>alert('ไม่พบผู้ใช้ในระบบ');</script>";
+        echo "<script>alert('❌ ไม่พบชื่อผู้ใช้ในระบบ');</script>";
     }
 }
 ?>
