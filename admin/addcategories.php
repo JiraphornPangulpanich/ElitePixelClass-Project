@@ -32,7 +32,7 @@
 
                        
                         <button type="submit" class="btn btn-primary w-100">เพิ่มหมวดหมู่สินค้า</button>
-                        <a href="admin_dashboard.php" class="btn btn-secondary w-100 mt-2">กลับไปหน้าหลัก</a>
+                        <a href="categories.php" class="btn btn-secondary w-100 mt-2">กลับไปหน้าหลัก</a>
                     </form>
                 </div>
             </div>
