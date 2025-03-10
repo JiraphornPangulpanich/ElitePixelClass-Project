@@ -86,7 +86,20 @@ $data = mysqli_fetch_array($rs);
                                         <td><?= $row['Name'] ?></td>
                                         <td><?= $row['Detail'] ?></td>
                                         <td class="text-end"><?= number_format($row['Price'], 2) ?></td>
-                                        <td><img src='../img/" . $table_name . "/$product_ext' alt='$product_name' style='max-width: 100px;'></td>
+                                        <td>
+    <?php 
+        // กำหนดพาธรูป
+        $image_path = "../img/" . $row['Categories'] . "/" . $row['Image'];
+
+        // ตรวจสอบว่ารูปภาพมีอยู่จริงหรือไม่
+        if (!empty($row['Image']) && file_exists($image_path)) {
+            echo "<img src='$image_path' alt='{$row['Name']}' style='max-width: 100px;'>";
+        } else {
+            echo "<img src='../img/no-image.png' alt='No Image' style='max-width: 100px;'>";
+        }
+    ?>
+</td>
+ฟ
                                         <td class="text-center"><?= $row['Num'] ?></td>
                                         <td class="text-center action-btn">
                                             <!-- ปุ่มแก้ไข -->
