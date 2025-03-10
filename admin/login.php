@@ -1,5 +1,38 @@
 <?php
 session_start();
+include 'db.php';
+
+if (isset($_SESSION['username'])) {
+    header("Location: index.php");
+    exit();
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    // ใช้ Prepared Statements เพื่อป้องกัน SQL Injection
+    $stmt = $conn->prepare("SELECT * FROM admin WHERE user = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        
+        // ตรวจสอบรหัสผ่านแบบ Hash
+        if (password_verify($password, $row['password'])) {
+            $_SESSION['user'] = $row['user'];
+            $_SESSION['name'] = $row['name']; // ดึงชื่อจากฐานข้อมูล
+            header("Location: index.php");
+            exit();
+        } else {
+            $error = "Invalid username or password!";
+        }
+    } else {
+        $error = "Invalid username or password!";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -103,38 +136,16 @@ if (isset($error)) {
     </div>
 </div>
 
-
-<?php
-include_once("db.php");
-
-if (isset($_POST['Submit'])) {
-    $usr = mysqli_real_escape_string($conn, $_POST['usr']);
-    $pwd = $_POST['pwd'];
-    
-    // ดึงข้อมูลจากฐานข้อมูลโดยใช้ prepared statement
-    $sql = "SELECT * FROM admin WHERE a_usr = ?";
-    $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "s", $usr);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-    
-    if ($row = mysqli_fetch_assoc($result)) {
-        // ตรวจสอบรหัสผ่าน
-        if (password_verify($pwd, $row['a_pwd'])) {
-            $_SESSION['s_id'] = $row['a_id'];
-            $_SESSION['s_name'] = $row['a_name'];
-            echo "<script>window.location='index.php';</script>";
-            exit();
-        } else {
-            echo "Username or Password incorrect";
-            exit();
+<script>
+    setTimeout(function () {
+        let alert = document.querySelector(".alert");
+        if (alert) {
+            alert.style.transition = "opacity 0.5s";
+            alert.style.opacity = "0";
+            setTimeout(() => alert.remove(), 500);
         }
-    } else {
-        echo "Username or Password incorrect";
-        exit();
-    }
-}
-?>
+    }, 3000);
+</script>
 
-    </body>
+</body>
 </html>
