@@ -86,7 +86,7 @@ $data = mysqli_fetch_array($rs);
                                         <td><?= $row['Name'] ?></td>
                                         <td><?= $row['Detail'] ?></td>
                                         <td class="text-end"><?= number_format($row['Price'], 2) ?></td>
-                                        <td><img src='" . $table_name . "/$Ext' alt='' style='max-width: 100px;'></td>
+                                        <td><img src="' . $imageSrc . '" alt="' . $row['Name'] . '" style='max-width: 100px;'></td>
                                         <td class="text-center"><?= $row['Num'] ?></td>
                                         <td class="text-center action-btn">
                                             <!-- ปุ่มแก้ไข -->
