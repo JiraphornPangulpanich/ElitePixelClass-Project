@@ -33,7 +33,9 @@
     <body class="sb-nav-fixed">
         <?php include 'menu1.php'; ?>
 
-
+<!-- ปุ่มเพิ่มสินค้า -->
+<a href="add_product.php" style="padding: 8px 12px; background-color: green; color: white; text-decoration: none; border-radius: 4px;">+ เพิ่มสินค้า</a>
+<br><br>
 
 
             <div id="layoutSidenav_content">
@@ -74,7 +76,14 @@
                     <td><?=$row['Price']?></td>
                     <td><?=$row['Ext']?></td>
                     <td><?=$row['Num']?></td>
+                    <td>
+                <!-- ปุ่มแก้ไข -->
+                <a href="edit_product.php?id=<?= $row['IDItem'] ?>" style="padding: 4px 8px; background-color: orange; color: white; text-decoration: none; border-radius: 4px;">แก้ไข</a>
+                <!-- ปุ่มลบ -->
+                <a href="delete_product.php?id=<?= $row['IDItem'] ?>" onclick="return confirm('คุณแน่ใจว่าต้องการลบสินค้านี้?');" style="padding: 4px 8px; background-color: red; color: white; text-decoration: none; border-radius: 4px;">ลบ</a>
+            </td>
                 </tr>
+
                 <?php
                 }
                 mysqli_close($conn);
