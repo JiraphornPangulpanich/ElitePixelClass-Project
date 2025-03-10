@@ -10,10 +10,23 @@ if (!isset($_SESSION['username'])) {
 
 $username = $_SESSION['username']; // ดึง username จาก session
 
+// ตรวจสอบว่าในตะกร้ามีสินค้า
+if (empty($_SESSION['cart'])) {
+    echo "<p>ตะกร้าสินค้าของคุณว่างเปล่า</p>";
+    exit;  // ถ้าไม่มีสินค้าจะหยุดการทำงาน
+}
+
 // ดึงข้อมูลสินค้าจากตะกร้าใน session
 $itemIds = implode(',', array_keys($_SESSION['cart'])); // สร้างรายการ id ของสินค้าในตะกร้า
 $sql = "SELECT * FROM products WHERE id IN ($itemIds)";
 $result = mysqli_query($conn, $sql);
+
+// ตรวจสอบว่ามีสินค้าที่ตรงกับรายการในตะกร้าหรือไม่
+if (mysqli_num_rows($result) == 0) {
+    echo "<p>ไม่พบสินค้าที่คุณสั่งซื้อในฐานข้อมูล</p>";
+    exit;
+}
+
 $items = [];
 while ($row = mysqli_fetch_assoc($result)) {
     $items[] = $row;
@@ -48,32 +61,26 @@ $shipping_method = $_POST['shipping-method'];
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($items as $item): ?>
-                <?php
-                    $itemId = $item['id'];
-                    $quantity = $_SESSION['cart'][$itemId];
-                    $totalPrice = $item['price'] * $quantity;
-                ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($item['name']); ?></td>
-                    <td><?php echo number_format($item['price'], 2); ?> บาท</td>
-                    <td><?php echo $quantity; ?></td>
-                    <td><?php echo number_format($totalPrice, 2); ?> บาท</td>
-                </tr>
+            <?php 
+            $totalAmount = 0;
+            foreach ($items as $item): 
+                $itemId = $item['id'];
+                $quantity = $_SESSION['cart'][$itemId];
+                $totalPrice = $item['price'] * $quantity;
+                $totalAmount += $totalPrice;
+            ?>
+            <tr>
+                <td><?php echo htmlspecialchars($item['name']); ?></td>
+                <td><?php echo number_format($item['price'], 2); ?> บาท</td>
+                <td><?php echo $quantity; ?></td>
+                <td><?php echo number_format($totalPrice, 2); ?> บาท</td>
+            </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
 
     <hr>
-    <h4><strong>ยอดรวม: </strong><?php 
-        $totalAmount = 0;
-        foreach ($items as $item) {
-            $itemId = $item['id'];
-            $quantity = $_SESSION['cart'][$itemId];
-            $totalAmount += $item['price'] * $quantity;
-        }
-        echo number_format($totalAmount, 2);
-    ?> บาท</h4>
+    <h4><strong>ยอดรวม: </strong><?php echo number_format($totalAmount, 2); ?> บาท</h4>
     
     <p>ขอบคุณสำหรับการสั่งซื้อสินค้าจากเรา!</p>
 </div>
