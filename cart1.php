@@ -22,23 +22,23 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
     // ตรวจสอบการทำงานของแต่ละ action
     switch ($action) {
         case 'add':
-            // บันทึกข้อมูลลงในฐานข้อมูล (ถ้ายังไม่มีข้อมูลในตาราง)
-            $sql = "INSERT INTO cart_items (username, item_id, quantity) 
-                    VALUES ('$username', '$itemId', 1)
-                    ON DUPLICATE KEY UPDATE quantity = quantity + 1"; 
-            mysqli_query($conn, $sql);
+            if (!isset($_SESSION['cart'][$itemId])) {
+                $_SESSION['cart'][$itemId] = 1;
+            } else {
+                $_SESSION['cart'][$itemId]++;
+            }
             break;
-
+        
         case 'decrease':
-            // ลดจำนวนสินค้า
-            $sql = "UPDATE cart_items SET quantity = quantity - 1 WHERE username = '$username' AND item_id = '$itemId' AND quantity > 1";
-            mysqli_query($conn, $sql);
+            if (isset($_SESSION['cart'][$itemId]) && $_SESSION['cart'][$itemId] > 1) {
+                $_SESSION['cart'][$itemId]--;
+            }
             break;
-
+        
         case 'remove':
-            // ลบสินค้าออกจากตะกร้า
-            $sql = "DELETE FROM cart_items WHERE username = '$username' AND item_id = '$itemId'";
-            mysqli_query($conn, $sql);
+            if (isset($_SESSION['cart'][$itemId])) {
+                unset($_SESSION['cart'][$itemId]);
+            }
             break;
     }
 
