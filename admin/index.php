@@ -7,7 +7,7 @@ if (!isset($_SESSION['username'])) {
     echo "<script>alert('โปรดเข้าสู่ระบบเพื่อเข้าใช้งาน'); window.location='index.php';</script>";
     exit;
 }
-
+?>
 
 <!DOCTYPE html>
 <html lang="en">
