@@ -1,4 +1,8 @@
-<?php include 'condb.php'; ?>
+<?php include 'condb.php'; 
+$sql = "SELECT * FROM 'products' WHERE IDitem = '{$_GET['id']}' ";
+$rs = mysqli_query($conn, $sql);
+$data = mysqli_fetch_array($rs); 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
